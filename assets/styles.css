@@ -1,0 +1,73 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #093d71;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.button, button {
+  border: none;
+  background-color: #3498db;
+  color: #fff;
+  padding: 0.5em 1em;
+  margin: 2px;
+}
+
+button:hover,
+button:focus {
+  background-color: #093d71;
+}
+
+.app {
+  padding: 0.5em;
+}
+
+.router-link-active{
+  background-color: ButtonShadow;
+}
+
+/* tabs */
+/* todo: needs improvement */
+.nav-tabs {
+  display: flex;
+  flex-flow: row wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.nav-tabs li {
+  border: 1px solid #ddd;
+  border-radius: 5px 5px 0 0;
+  flex: 1 1 30%;
+}
+
+.nav-tabs li a {
+  padding: 5px 10px;
+  display: block;
+  text-align: center;
+  color: #093d71;
+  text-decoration: none;
+  font-size: 0.75rem;
+  height: 100%;
+}
+
+.nav-tabs li:hover a,
+.nav-tabs li a:focus,
+.nav-tabs li a.active {
+  background: #ddd;
+}
+.tab-pane {
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+

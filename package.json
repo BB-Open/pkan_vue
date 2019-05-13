@@ -1,0 +1,24 @@
+{
+  "name": "pkan",
+  "version": "1.0.0",
+  "description": "A vue frontend for pkan",
+  "author": "sandra",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "date-fns": "^1.30.1",
+    "nuxt": "^2.4.0",
+    "nuxt-log": "^0.1.0",
+    "vue-socket.io": "^3.0.7",
+    "vue-static": "0.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
