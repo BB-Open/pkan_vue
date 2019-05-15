@@ -72,3 +72,11 @@ export function hour_format(value1, value2) {
   res += minutes2.toString();
   return res
 }
+
+export function remove_element_from_array(array, value) {
+  var index = array.indexOf(value);
+  if (index > -1) {
+    array.splice(index, 1);
+  }
+  return array
+}

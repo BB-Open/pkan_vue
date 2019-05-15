@@ -11,6 +11,9 @@
         class="button"
         type="button">Get new Number from Socket
       </button>
+      <search-selector :options="search_options_test" :title="title_test">
+
+      </search-selector>
     </template>
   </base-view>
 </template>
@@ -18,11 +21,13 @@
 <script>
   import BaseView from '../components/BaseView';
   import SocketPromise from '../components/mixins/SocketPromise';
+  import SearchSelector from '../components/controls/SearchSelector';
 
   export default {
     name: 'Search',
     components: {
-      BaseView
+      BaseView,
+      SearchSelector
     },
     mixins: [
       SocketPromise
@@ -32,6 +37,11 @@
         text: 'Text',
         namespace: 'Search',
         number: 0,
+        title_test: 'Test Widget',
+        search_options_test: {
+          values: ['ABC', 'DEF', 'GHI', 'Blubblah', 'Hallo Welt', 'Test me', 'No Problem'],
+          number_displayed: 4,
+        },
       }
     },
     mounted() {
