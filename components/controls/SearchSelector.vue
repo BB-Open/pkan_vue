@@ -6,6 +6,8 @@
                        @change="checkbox_changed(item)">
         {{ item}}
       </b-form-checkbox>
+      <p>Check False: {{ data_store[item].check_false }}</p>
+      <p>Check: {{ data_store[item].check }}</p>
     </div>
 
     <!--this is just for seeing some results-->
