@@ -51,7 +51,8 @@ export default {
   */
   plugins: [
     './plugins/vue_static',
-    './plugins/vue_socket_io'
+    './plugins/vue_socket_io',
+    './plugins/event_bus'
   ],
 
   /*
