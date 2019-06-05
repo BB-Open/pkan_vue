@@ -35,7 +35,6 @@
 </template>
 
 <script>
-  import BFormCheckbox from 'bootstrap-vue/es/components/form-checkbox/form-checkbox'
   import {remove_element_from_array} from '../mixins/utils';
 
   // todo, this is just an viewable prototype, has to be included to States and Backend and Eventhandling
@@ -43,7 +42,6 @@
     name: 'SearchSelector',
     props: ['title', 'options'],
     components: {
-      BFormCheckbox,
     },
     data() {
       return {

@@ -11,7 +11,6 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "bootstrap-vue": "^2.0.0-rc.20",
     "cross-env": "^5.2.0",
     "date-fns": "^1.30.1",
     "nuxt": "^2.4.0",
