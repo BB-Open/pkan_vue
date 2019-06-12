@@ -60,7 +60,11 @@ export default {
   */
   modules: [
     ['nuxt-log', logOptions],
+    '@nuxtjs/axios',
   ],
+  axios: {
+    // proxyHeaders: false
+  },
 
   /*
   ** Build configuration

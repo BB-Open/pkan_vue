@@ -3,6 +3,7 @@
     <nuxt-link class="router-link" to="/startpage">Startseite</nuxt-link>
     <nuxt-link class="router-link" to="/search">Suche</nuxt-link>
     <nuxt-link class="router-link" to="/impressum">Impressum</nuxt-link>
+    <nuxt-link class="router-link" to="/plonepages">Plone Pages</nuxt-link>
   </div>
     
 </template>
