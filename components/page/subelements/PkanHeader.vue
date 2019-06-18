@@ -35,7 +35,7 @@
     background-color: #C73C35;
     color: #fff;
     white-space: nowrap;
-    text-align: center;
+    text-align: left;
   }
 
   .logo {
