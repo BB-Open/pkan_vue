@@ -1,9 +1,7 @@
 <template>
   <base-view :namespace="namespace">
-    <template slot="heading">
-      <h1>{{ this.namespace }}</h1>
-    </template>
     <template slot="content">
+      <h1>{{ this.namespace }}</h1>
       <p>Prototype</p>
       <p>{{ number }}</p>
       <button
@@ -19,9 +17,9 @@
 </template>
 
 <script>
-  import BaseView from '../components/BaseView';
-  import SocketPromise from '../components/mixins/SocketPromise';
-  import SearchSelector from '../components/controls/SearchSelector';
+  import BaseView from '../../components/page/BaseView';
+  import SocketPromise from '../../components/mixins/SocketPromise';
+  import SearchSelector from '../../components/controls/SearchSelector';
 
   export default {
     name: 'Search',

@@ -44,6 +44,7 @@ export default {
   ** Global CSS
   */
   css: [
+    'assets/styles.css'
   ],
 
   /*

@@ -1,34 +1,38 @@
 <template>
   <base-view :namespace="namespace">
-    <template slot="heading">
-      <h1>{{ this.namespace }}</h1>
-    </template>
     <template slot="content">
-      <p>Coming Soon</p>
-      <li v-for="item in this.result.items">
-        <NuxtLink :to="'/plonepages/'+item.UID">
-          {{ item.title }}
-        </NuxtLink>
-      </li>
+      <plonepage></plonepage>
+      <h1>{{ item.title }}</h1>
+      <h2>{{ item.description}}</h2>
+      <p>This is test content. Will be replaced.</p>
+      <div v-html="item.text.data"></div>
     </template>
   </base-view>
 </template>
 
 <script>
-  import BaseView from '../../components/BaseView';
+  import BaseView from '../../components/page/BaseView';
   import {PLONE_URL} from "../../components/config";
+  import Plonepage from "../../components/page/plone/plonepage";
 
   export default {
-    name: 'PlonePages',
     components: {
+      Plonepage,
       BaseView
     },
     data() {
       return {
-        namespace: 'PlonePages',
+        namespace: 'Blog ID',
         result: {},
         token_res: null,
-        data_url: PLONE_URL + '/Plone/@search?portal_type=Document&fullobjects=1',
+        item: {
+          title: '',
+          description: '',
+          text: {
+            data: ''
+          }
+        },
+        data_url: PLONE_URL + '/Plone/@entity?fullobjects=1&UID=',
         login_url: PLONE_URL + '/Plone/@login'
       }
     },
@@ -42,14 +46,15 @@
       get_data() {
         // todo: this is not nice
         let $this = this;
+        let uid = this.$route.params.id;
         if (this.token_res === null) {
           this.login().then(function (res) {
             $this.token_res = res;
             $this.$log.debug(res);
-            $this.request_pages($this.data_url)
+            $this.request_pages($this.data_url + uid)
           });
         } else {
-          this.request_pages(this.data_url)
+          this.request_pages(this.data_url + uid)
         }
       },
       async request_pages(url) {
@@ -59,6 +64,8 @@
         this.$axios.setHeader('Access-Control-Allow-Origin', '*', ['get']);
         this.$axios.setHeader('Authorization', 'Bearer ' + this.token_res);
         this.result = await this.$axios.$get(url);
+        this.item = this.result.items[0];
+        this.$log.debug(this.item);
         this.$forceUpdate()
       },
 

@@ -12,7 +12,7 @@
 
 
     <div>
-    <button @click="show_more = !show_more" v-if="additional_values.length > 0">
+    <button @click="show_more = !show_more" v-if="additional_values.length > 0" class="button">
       <template v-if="!show_more">ᐁ Show More</template>
       <template v-if="show_more">ᐃ Hide</template>
     </button>
@@ -135,10 +135,6 @@
 
   .button_remove {
     background-color: #e50018;
-  }
-
-  .criteria_buttons {
-
   }
 
 </style>
