@@ -25,7 +25,7 @@
     },
     data() {
       return {
-        namespace: 'Publisher Detail',
+        namespace: 'publisher Detail',
       }
     },
   }

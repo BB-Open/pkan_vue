@@ -4,7 +4,6 @@
       <plonepage></plonepage>
       <h1>{{ item.title }}</h1>
       <h2>{{ item.description}}</h2>
-      <p>This is test content. Will be replaced.</p>
       <div v-html="item.text.data"></div>
     </template>
   </base-view>
@@ -22,7 +21,7 @@
     },
     data() {
       return {
-        namespace: 'Blog ID',
+        namespace: 'blog ID',
         result: {},
         item: {
           title: '',

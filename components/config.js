@@ -13,7 +13,7 @@ export const PATHS_FOR_SHARING = {
   'Sparql': '/entity/sparql',
   'Accessibility': '/accessibility',
   'Contact': '/contact',
-  'DataProtection': '/dataprotection',
+  'DataProtection': '/data_protection',
   'FAQ': '/faq',
   'DetailSearch': '/search/detailsearch'
 };

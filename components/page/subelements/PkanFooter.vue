@@ -9,7 +9,7 @@
       <div class="footer-line-text"><span>2019 | Land Brandenburg</span></div>
       <div class="footer-line-links"><nuxt-link to="/accessibility">Barrierefreiheit</nuxt-link>
         |
-        <nuxt-link to="/dataprotection">Datenschutz</nuxt-link>
+        <nuxt-link to="/data_protection">Datenschutz</nuxt-link>
         |
         <nuxt-link to="/impressum">Impressum</nuxt-link>
         |

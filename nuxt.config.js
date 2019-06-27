@@ -15,11 +15,10 @@ const logOptions = {
   separator: '|',
   // optional : defaults to false if not specified
   showConsoleColors: false
-}
+};
 
 export default {
   mode: 'spa',
-
   /*
   ** Headers of the page
   */
