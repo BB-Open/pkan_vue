@@ -10,11 +10,11 @@
 </template>
 
 <script>
-  import PkanMenu from './subelements/PkanMenu';
-  import Breadcrumb from "./subelements/Breadcrumb";
-  import SearchField from "../controls/SearchField";
-  import PkanFooter from "./subelements/PkanFooter";
-  import PkanHeader from "./subelements/PkanHeader";
+  import PkanMenu from '../subelements/PkanMenu';
+  import Breadcrumb from "../subelements/Breadcrumb";
+  import SearchField from "../../controls/SearchField";
+  import PkanFooter from "../subelements/PkanFooter";
+  import PkanHeader from "../subelements/PkanHeader";
 
   export default {
     name: 'BaseView',

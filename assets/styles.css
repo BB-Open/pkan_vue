@@ -29,6 +29,22 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #C73C35;
 }
 
+.box{
+  background-color: #eee;
+  min-width: 250px;
+  padding: 5px;
+  text-align: center;
+}
+
+.box_area {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
 
 
 

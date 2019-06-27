@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import BaseView from '../../components/page/BaseView';
+  import BaseView from '../../components/page/views/BaseView';
   import SocketPromise from '../../components/mixins/SocketPromise';
   import SearchSelector from '../../components/controls/SearchSelector';
 

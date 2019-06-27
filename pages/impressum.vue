@@ -1,30 +1,21 @@
 <template>
   <base-view :namespace="namespace">
     <template slot="content">
-      <h1>Impressum</h1>
-      <plonepage></plonepage>
+      <plonepage_search portal_type="Document" sort_on="created" sort_order="reverse" tag="impressum"></plonepage_search>
     </template>
   </base-view>
 </template>
 
 <script>
-
-  import BaseView from '../components/page/BaseView';
-  import plonepage from "../components/page/plone/plonepage";
+  import BaseView from "../components/page/views/BaseView";
+  import plonepage_search from "../components/page/plone/plonepage_search";
 
   export default {
-    name: 'Impressum',
+    name: "Impressum",
     components: {
       BaseView,
-      plonepage
+      plonepage_search
     },
-    data() {
-      return {
-        text: 'Text',
-        namespace: 'Impressum'
-      }
-    }
-
   }
 </script>
 

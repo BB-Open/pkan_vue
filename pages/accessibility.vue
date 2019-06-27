@@ -1,21 +1,20 @@
 <template>
   <base-view :namespace="namespace">
     <template slot="content">
-      <h1>Barrierefreiheit</h1>
-      <plonepage></plonepage>
+      <plonepage_search portal_type="Document" sort_on="created" sort_order="reverse" tag="accessibility"></plonepage_search>
     </template>
   </base-view>
 </template>
 
 <script>
-  import BaseView from '../components/page/BaseView';
-  import plonepage from "../components/page/plone/plonepage";
+  import BaseView from "../components/page/views/BaseView";
+  import plonepage_search from "../components/page/plone/plonepage_search";
 
   export default {
     name: "Accessibility",
     components: {
       BaseView,
-      plonepage
+      plonepage_search
     },
   }
 </script>

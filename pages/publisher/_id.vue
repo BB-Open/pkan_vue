@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import BaseView from '../../components/page/BaseView';
+  import BaseView from '../../components/page/views/BaseView';
   import {PLONE_URL} from "../../components/config";
   import publisher from "../../components/page/plone/publisher";
   import Entitydetail from "../../components/page/entity/entitydetail";
