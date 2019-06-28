@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace">
+  <base-view :namespace="namespace" :breadcrumb="breadcrumb" :ignore_last_title="true">
     <template slot="content">
       <publisher :uid="get_data()"></publisher>
       <entitydetail></entitydetail>
@@ -23,7 +23,8 @@
     },
     data() {
       return {
-        namespace: 'publisher Detail',
+        namespace: 'Publisher Detail',
+        breadcrumb: 'Publisher'
       }
     },
     methods: {

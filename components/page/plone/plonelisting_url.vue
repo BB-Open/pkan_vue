@@ -26,7 +26,6 @@
     mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
-      this.$store.ep_commit('GlobalState', 'currentView', this.namespace);
       this.generate_data_url();
       this.get_data();
     },

@@ -8,6 +8,7 @@
 
 <script>
   import {PLONE_URL} from "../../config";
+  import {EV} from "../../events";
 
   export default {
     name: "plonepage_uid",
@@ -29,7 +30,6 @@
     mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
-      this.$store.ep_commit('GlobalState', 'currentView', this.namespace);
       this.generate_data_url();
       this.get_data();
     },
@@ -52,6 +52,8 @@
         this.$axios.setHeader('Access-Control-Allow-Origin', '*', ['get']);
         this.result = await this.$axios.$get(url);
         this.item = this.result.items[0];
+        this.$store.ep_commit('BreadCrumb', 'last_title', this.item.title);
+        this.$EventBus.$emit(EV.BREADCRUMB_CHANGED, {});
         this.$forceUpdate()
       },
     },

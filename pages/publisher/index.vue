@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace">
+  <base-view :namespace="namespace" :breadcrumb="namespace">
     <template slot="content">
       <h1>Datenbereitsteller</h1>
       <plonelisting_url portal_type="PublisherCard" view_url="publisher" sort_on="sortable_title" style_class="box_area" element_style_class="box"></plonelisting_url>
@@ -22,6 +22,10 @@
       return {
         namespace: 'Publisher',
       }
+    },
+    mounted() {
+      // Force the initialization
+      this.$log.debug(this.namespace + ' mounted');
     },
 
   }

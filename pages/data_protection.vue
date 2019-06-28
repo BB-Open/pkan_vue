@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace">
+  <base-view :namespace="namespace" :breadcrumb="namespace">
     <template slot="content">
       <plonepage_search portal_type="Document" sort_on="created" sort_order="reverse" tag="data_protection"></plonepage_search>
     </template>
@@ -15,6 +15,15 @@
     components: {
       BaseView,
       plonepage_search
+    },
+    data() {
+      return {
+        namespace: 'DataProtection',
+      }
+    },
+    mounted() {
+      // Force the initialization
+      this.$log.debug(this.namespace + ' mounted');
     },
   }
 </script>

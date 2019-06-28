@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace">
+  <base-view :namespace="namespace" :breadcrumb="namespace">
     <template slot="content">
       <p>Coming Soon</p>
     </template>
@@ -8,9 +8,6 @@
 
 <script>
   import BaseView from '../../components/page/views/BaseView';
-  import {PLONE_URL} from "../../components/config";
-  import Entitydetail from "../../components/page/entity/entitydetail";
-  import Sparqlnetworking from "../../components/page/entity/sparqlnetworking";
 
   export default {
     components: {
@@ -22,6 +19,8 @@
       }
     },
     mounted() {
+      // Force the initialization
+      this.$log.debug(this.namespace + ' mounted');
     },
 
   }

@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace">
+  <base-view :namespace="namespace" :breadcrumb="namespace">
     <template slot="content">
       <h1>Fragen und Antworten</h1>
       <plonelisting_url portal_type="Document" view_url="blog" sort_on="sortable_title" sort_order="ascending" tag="faq"></plonelisting_url>
@@ -19,7 +19,7 @@
     },
     data() {
       return {
-        namespace: 'Blog',
+        namespace: 'FAQ',
       }
     },
     mounted() {

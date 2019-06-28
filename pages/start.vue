@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace">
+  <base-view :namespace="namespace" :breadcrumb="breadcrumb">
     <template slot="content">
       <plonepage_search portal_type="Document" sort_on="created" sort_order="reverse" tag="landing"></plonepage_search>
       <div class="link-collection box_area">
@@ -31,9 +31,14 @@
     data() {
       return {
         text: 'Text',
-        namespace: 'Start'
+        namespace: 'Start',
+        breadcrumb: null
       }
-    }
+    },
+    mounted() {
+      // Force the initialization
+      this.$log.debug(this.namespace + ' mounted');
+    },
 
   }
 </script>

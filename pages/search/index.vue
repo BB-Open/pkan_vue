@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace">
+  <base-view :namespace="namespace" :breadcrumb="namespace">
     <template slot="content">
       <h1>{{ this.namespace }}</h1>
       <p>Prototype</p>
@@ -45,7 +45,6 @@
     mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
-      this.$store.ep_commit('GlobalState', 'currentView', this.namespace);
     },
     methods: {
       handle_click() {

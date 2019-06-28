@@ -4,7 +4,6 @@
 
 <script>
   import {dateStr2dateTime, str2FloatTuple} from '../components/mixins/utils';
-  import {DEFAULT_URL, PATHS_FOR_SHARING} from '../components/config';
 
   export default {
     name: 'Landing',
@@ -18,9 +17,7 @@
         let query = this.$route.query;
 
         let date_fields = [];
-        let str_fields = [
-          'currentView',
-        ];
+        let str_fields = [];
         let int_fields = [];
         let tuple_float_fields = [];
 
@@ -49,14 +46,7 @@
             this.$store.ep_commit('GlobalState', field, value);
           }
         }, this);
-        let selected_view = this.$store.state['GlobalState']['currentView'];
 
-        // Redirect to real view and choose default view.
-        if (selected_view === null) {
-          this.$router.push(DEFAULT_URL);
-        } else {
-          this.$router.push(PATHS_FOR_SHARING[selected_view]);
-        }
 
       }
     }

@@ -10,11 +10,10 @@
 </template>
 
 <script>
-  import PkanMenu from '../subelements/PkanMenu';
-  import Breadcrumb from "../subelements/Breadcrumb";
   import SearchField from "../../controls/SearchField";
   import PkanFooter from "../subelements/PkanFooter";
   import PkanHeader from "../subelements/PkanHeader";
+  import {EV} from "../../events";
 
   export default {
     name: 'BaseView',
@@ -23,7 +22,16 @@
       SearchField,
       PkanFooter
     },
-    props: ['namespace'],
+    props: ['namespace', 'breadcrumb', 'ignore_last_title'],
+    mounted() {
+      // Force the initialization
+      this.$log.debug(this.namespace + ' mounted');
+      this.$store.ep_commit('BreadCrumb', 'currentView', this.breadcrumb);
+      if (this.ignore_last_title === undefined){
+        this.$store.ep_commit('BreadCrumb', 'last_title', null)
+      };
+      this.$EventBus.$emit(EV.BREADCRUMB_CHANGED, {});
+    },
   }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace">
+  <base-view :namespace="namespace" :breadcrumb="breadcrumb" :ignore_last_title="true">
     <template slot="content">
       <entitydetail></entitydetail>
       <sparqlnetworking></sparqlnetworking>
@@ -9,7 +9,6 @@
 
 <script>
   import BaseView from '../../components/page/views/BaseView';
-  import {PLONE_URL} from "../../components/config";
   import Entitydetail from "../../components/page/entity/entitydetail";
   import Sparqlnetworking from "../../components/page/entity/sparqlnetworking";
 
@@ -22,6 +21,7 @@
     data() {
       return {
         namespace: 'Entity',
+        breadcrumb: 'DetailSearch',
       }
     },
     mounted() {

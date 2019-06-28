@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace">
+  <base-view :namespace="namespace" :breadcrumb="breadcrumb" :ignore_last_title="true">
     <template slot="content">
       <plonepage_uid :uid="get_data()"></plonepage_uid>
     </template>
@@ -19,12 +19,12 @@
     data() {
       return {
         namespace: 'UID View',
+        breadcrumb: 'Blog'
       }
     },
     mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
-      this.$store.ep_commit('GlobalState', 'currentView', this.namespace);
     },
     methods: {
       get_data() {
