@@ -8,13 +8,14 @@
 </template>
 
 <script>
-  import BaseView from '../../components/page/views/BaseView';
-  import Plonelisting from "../../components/page/plone/plonelisting_url";
+
+  import plonelisting_url from "../../components/page/plone/plonelisting_url";
+  import BaseView from "../../components/page/views/BaseView";
 
   export default {
     name: 'PlonePages',
     components: {
-      Plonelisting,
+      plonelisting_url,
       BaseView
     },
     data() {

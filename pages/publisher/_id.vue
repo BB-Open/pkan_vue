@@ -1,8 +1,7 @@
 <template>
   <base-view :namespace="namespace">
     <template slot="content">
-      <h1>Publisher XY</h1>
-      <publisher></publisher>
+      <publisher :uid="get_data()"></publisher>
       <entitydetail></entitydetail>
       <sparqlnetworking></sparqlnetworking>
     </template>
@@ -11,7 +10,6 @@
 
 <script>
   import BaseView from '../../components/page/views/BaseView';
-  import {PLONE_URL} from "../../components/config";
   import publisher from "../../components/page/plone/publisher";
   import Entitydetail from "../../components/page/entity/entitydetail";
   import Sparqlnetworking from "../../components/page/entity/sparqlnetworking";
@@ -27,6 +25,12 @@
       return {
         namespace: 'publisher Detail',
       }
+    },
+    methods: {
+      get_data() {
+        return this.$route.params.id;
+
+      },
     },
   }
 </script>

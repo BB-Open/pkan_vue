@@ -2,7 +2,9 @@
   <div :class="style_class">
 
   <div v-for="item in this.result.items" :class="element_style_class">
-    <div class="element_title">{{ item.title }}</div> <div class="element_description">{{ item.description }}</div>
+    <div class="element_title">{{ item.title }}</div>
+    <div class="element_logo" v-if="item.logo"><img :src="item.logo.download"/></div>
+    <div class="element_description">{{ item.description }}</div>
     <NuxtLink :to="get_nuxt_link(item.UID)">[Mehr]</NuxtLink>
   </div>
   </div>
@@ -75,6 +77,10 @@
 
   .element_title {
     font-weight: bold;
+  }
+
+  .element_logo img {
+    max-width: 100px;
   }
 
 </style>
