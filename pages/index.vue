@@ -47,6 +47,8 @@
           }
         }, this);
 
+        // Redirect to real view and choose default view.
+        this.$router.push(DEFAULT_URL);
 
       }
     }
