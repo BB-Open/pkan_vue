@@ -1,7 +1,7 @@
 <template>
   <div :class="namespace">
     <pkan-header></pkan-header>
-    <search-field></search-field>
+    <search-field property="keywords" store_namespace="Search" :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view" rows="1" button_label="Suchen"></search-field>
     <div class="content">
       <slot name="content"></slot>
     </div>
@@ -14,6 +14,7 @@
   import PkanFooter from "../subelements/PkanFooter";
   import PkanHeader from "../subelements/PkanHeader";
   import {EV} from "../../events";
+  import {SEARCH_URL} from "../../config";
 
   export default {
     name: 'BaseView',
@@ -22,7 +23,13 @@
       SearchField,
       PkanFooter
     },
-    props: ['namespace', 'breadcrumb', 'ignore_last_title'],
+    props: ['namespace', 'breadcrumb', 'ignore_last_title', 'search_initial'],
+    data() {
+      return {
+        placeholder: 'In den Datensätzen suchen',
+        next_view: SEARCH_URL,
+      }
+    },
     mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');

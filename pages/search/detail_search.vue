@@ -1,31 +1,19 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="namespace">
-    <template slot="content">
-      <p>Coming Soon</p>
-    </template>
-  </base-view>
+  <search-base-view namespace="DetailSearch"></search-base-view>
 </template>
 
 <script>
-  import BaseView from '../../components/page/views/BaseView';
+  import SearchBaseView from "../../components/page/views/SearchBaseView";
 
   export default {
     components: {
-      BaseView
-    },
-    data() {
-      return {
-        namespace: 'DetailSearch',
-      }
-    },
-    mounted() {
-      // Force the initialization
-      this.$log.debug(this.namespace + ' mounted');
+      SearchBaseView,
     },
 
   }
 </script>
 
 <style scoped>
+
 
 </style>

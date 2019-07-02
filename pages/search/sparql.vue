@@ -1,31 +1,36 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="namespace">
-    <template slot="content">
-      <p>Coming Soon</p>
+  <search-base-view namespace="Sparql">
+    <template slot="additional_widget">
+      <search-field property="sparql" store_namespace="Search" :initial_value="this.search_initial()" :place_holder="placeholder" :next_view="next_view" rows="4" button_label="Abfrage senden"></search-field>
     </template>
-  </base-view>
+  </search-base-view>
 </template>
 
 <script>
-  import BaseView from '../../components/page/views/BaseView';
+  import SearchBaseView from "../../components/page/views/SearchBaseView";
+  import {SPARQL_URL} from "../../components/config";
+  import SearchField from "../../components/controls/SearchField";
 
   export default {
     components: {
-      BaseView
+      SearchBaseView,
+      SearchField,
     },
     data() {
       return {
-        namespace: 'Sparql',
+        placeholder: 'SPARQL Query',
+        next_view: SPARQL_URL,
       }
     },
-    mounted() {
-      // Force the initialization
-      this.$log.debug(this.namespace + ' mounted');
+    methods: {
+      search_initial() {
+        return this.$store.state['Search']['sparql'];
+      },
     },
-
   }
 </script>
 
 <style scoped>
+
 
 </style>
