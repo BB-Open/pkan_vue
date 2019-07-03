@@ -1,4 +1,4 @@
-export const WEBSOCKET_URL = 'https://flask.datenadler.de';
+export const WEBSOCKET_URL = 'http://localhost:5000/';
 
 export const PLONE_URL = 'https://new.datenadler.de/Plone';
 
