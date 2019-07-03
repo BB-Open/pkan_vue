@@ -11,7 +11,6 @@
   import BaseView from '../../components/page/views/BaseView';
   import Entitydetail from "../../components/page/entity/entitydetail";
   import Sparqlnetworking from "../../components/page/entity/sparqlnetworking";
-  import {SEARCH_URL} from "../../components/config";
 
   export default {
     components: {
