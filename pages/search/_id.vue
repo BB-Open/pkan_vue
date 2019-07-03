@@ -23,7 +23,7 @@
       return {
         namespace: 'Entity',
         breadcrumb: 'DetailSearch',
-        view_url: '/search'
+        view_url: 'search'
       }
     },
     mounted() {
