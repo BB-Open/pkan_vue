@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import {PLONE_URL} from "../../config";
+  import {PLONE_URL} from "../../configs/server_settings";
 
   export default {
     name: "plonelisting",
@@ -31,7 +31,7 @@
     },
     methods: {
       get_nuxt_link(uid) {
-        return '/' + this.view_url + '/' + uid
+        return this.view_url + '/' + uid
       },
       get_data() {
         this.request_pages(this.data_url)

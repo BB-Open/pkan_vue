@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import {EV} from "../events";
+  import {EV} from "../configs/events";
 
   export default {
     name: "ControlsOverView",

@@ -13,8 +13,8 @@
   import SearchField from "../../controls/SearchField";
   import PkanFooter from "../subelements/PkanFooter";
   import PkanHeader from "../subelements/PkanHeader";
-  import {EV} from "../../events";
-  import {SEARCH_URL} from "../../config";
+  import {EV} from "../../configs/events";
+  import {DETAIL_SEARCH_URL} from "../../configs/routing";
 
   export default {
     name: 'BaseView',
@@ -27,7 +27,7 @@
     data() {
       return {
         placeholder: 'In den Datensätzen suchen',
-        next_view: SEARCH_URL,
+        next_view: DETAIL_SEARCH_URL,
       }
     },
     mounted() {

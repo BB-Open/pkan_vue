@@ -27,7 +27,8 @@
 <script>
   import BaseView from '../../components/page/views/BaseView';
   import SocketPromise from '../../components/mixins/SocketPromise';
-  import {SEARCH_URL} from "../../components/config";
+  import {DETAIL_SEARCH_URL} from "../../components/configs/routing";
+  import {REQUEST_VOCAB} from "../../components/configs/socket";
 
   export default {
     name: 'Search',
@@ -52,14 +53,14 @@
     methods: {
       get_vocab_ordering() {
         let request = Object.assign({}, {vocab: 'ordering'});
-        return this.sendPromise('request_vocab', request)
+        return this.sendPromise(REQUEST_VOCAB, request)
           .then(
             this.handle_result_ordering.bind(this)
           )
       },
       get_vocab_category() {
         let request = Object.assign({}, {vocab: 'category'});
-        return this.sendPromise('request_vocab', request)
+        return this.sendPromise(REQUEST_VOCAB, request)
           .then(
             this.handle_result_category.bind(this)
           )
@@ -74,7 +75,7 @@
       },
       handle_click_order(value) {
         this.$store.ep_commit('Search', 'order_by', value);
-        this.$router.push(SEARCH_URL);
+        this.$router.push(DETAIL_SEARCH_URL);
       },
       handle_click_cat(value) {
         let value_clean = {
@@ -82,7 +83,7 @@
           'value_neg': []
         };
         this.$store.ep_commit('Search', 'category', value_clean);
-        this.$router.push(SEARCH_URL);
+        this.$router.push(DETAIL_SEARCH_URL);
       }
     }
 

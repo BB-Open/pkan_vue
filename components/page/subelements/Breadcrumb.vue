@@ -11,8 +11,8 @@
 </template>
 
 <script>
-  import {PATHS_FOR_BREADCRUMB, TITLES_FOR_BREADCRUMB} from "../../config";
-  import {EV} from "../../events";
+  import {EV} from "../../configs/events";
+  import {PATHS_FOR_BREADCRUMB, TITLES_FOR_BREADCRUMB} from "../../configs/routing";
 
   export default {
     name: "Breadcrumb",

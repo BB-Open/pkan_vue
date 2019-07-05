@@ -1,0 +1,13 @@
+export const PLONE_INDEX_CREATED = 'created';
+export const PLONE_INDEX_TITLE = 'sortable_title';
+export const PLONE_REVERSE_ORDERING = 'reverse';
+export const PLONE_ASC_ORDERING = 'ascending';
+export const PLONE_TAG_BLOG = 'blog';
+export const PLONE_PT_DOCUMENT = 'Document';
+export const PLONE_PT_PUBLISHER_CARD = 'PublisherCard';
+export const PLONE_TAG_LANDING = 'landing';
+export const PLONE_TAG_IMPRESSUM = 'impressum';
+export const PLONE_TAG_FAQ = 'faq';
+export const PLONE_TAG_DATA_PROTECTION = 'data_protection';
+export const PLONE_TAG_CONTACT = 'contact';
+export const PLONE_TAG_ACCESS='accessibility';

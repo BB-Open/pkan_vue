@@ -6,11 +6,12 @@
 </template>
 
 <script>
-    import SocketPromise from "../mixins/SocketPromise";
-    import bFormSelect from 'bootstrap-vue/es/components/form-select/form-select';
-    import {EV} from "../events";
+  import SocketPromise from "../mixins/SocketPromise";
+  import bFormSelect from 'bootstrap-vue/es/components/form-select/form-select';
+  import {EV} from "../configs/events";
+  import {REQUEST_VOCAB} from "../configs/socket";
 
-    export default {
+  export default {
         name: "Ordering",
       components: {
         bFormSelect,
@@ -31,8 +32,7 @@
             this.$EventBus.$emit(EV.CHANGED_SEARCH_TERMS, selected);
           },
           get() {
-            let value = this.$store.state[this.namespace][this.property];
-            return value;
+            return this.$store.state[this.namespace][this.property];
           }
         }
       },
@@ -48,7 +48,7 @@
       methods: {
         get_vocab_ordering() {
           let request = Object.assign({}, {vocab: 'ordering'});
-          return this.sendPromise('request_vocab', request)
+          return this.sendPromise(REQUEST_VOCAB, request)
             .then(
               this.handle_result_ordering.bind(this)
             )

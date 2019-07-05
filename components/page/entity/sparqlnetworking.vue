@@ -11,6 +11,7 @@
 
 <script>
   import SocketPromise from "../../mixins/SocketPromise";
+  import {REQUEST_RELATED} from "../../configs/socket";
 
     export default {
       name: "sparqlnetworking",
@@ -29,11 +30,11 @@
       },
       methods: {
         get_nuxt_link(id) {
-          return '/' + this.view_url + '/' + id
+          return this.view_url + '/' + id
         },
         get_data() {
           let request = Object.assign({}, {id: this.id});
-          return this.sendPromise('request_related_items', request)
+          return this.sendPromise(REQUEST_RELATED, request)
             .then(
               this.handle_result.bind(this)
             )

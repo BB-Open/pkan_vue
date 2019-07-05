@@ -15,7 +15,7 @@
           <div class="additional_widget">
             <slot name="additional_widget"></slot>
           </div>
-          <div class="results"><search_results namespace="Search" view_url="search"></search_results></div>
+          <div class="results"><search_results namespace="Search" :view_url="view_url"></search_results></div>
         </div>
       </div>
     </template>
@@ -29,7 +29,8 @@
   import BaseView from "./BaseView";
   import SearchSelector from "../../controls/SearchSelector";
   import ControlsOverView from "../../controls/ControlsOverView";
-  import {EV} from "../../events";
+  import {EV} from "../../configs/events";
+  import {SEARCH_URL} from "../../configs/routing";
 
   export default {
     components: {
@@ -44,8 +45,9 @@
       return {
         category_options: {
           vocab_name: 'category',
-          number_displayed: 4,
-        }
+          number_displayed: 4
+        },
+        view_url: SEARCH_URL,
       }
     },
     mounted() {

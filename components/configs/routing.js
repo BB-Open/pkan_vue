@@ -1,13 +1,9 @@
-export const WEBSOCKET_URL = 'https://flask.datenadler.de';
-
-export const PLONE_URL = 'https://new.datenadler.de/Plone';
-
 export const DEFAULT_URL = '/start';
-
-export const SEARCH_URL = '/search/detail_search';
-
+export const DETAIL_SEARCH_URL = '/search/detail_search';
 export const SPARQL_URL = '/search/sparql';
-
+export const BLOG_URL = '/blog';
+export const PUBLISHER_URL = '/publisher';
+export const SEARCH_URL = '/search';
 export const PATHS_FOR_BREADCRUMB = {
   'Start': '/start',
   'Search': '/search',
@@ -21,7 +17,6 @@ export const PATHS_FOR_BREADCRUMB = {
   'FAQ': '/faq',
   'DetailSearch': '/search/detail_search'
 };
-
 export const TITLES_FOR_BREADCRUMB = {
   'Start': 'Startseite',
   'Search': 'Einfache Suche',

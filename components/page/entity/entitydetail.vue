@@ -13,7 +13,8 @@
 
 <script>
   import SocketPromise from "../../mixins/SocketPromise";
-  import {EV} from "../../events";
+  import {EV} from "../../configs/events";
+  import {REQUEST_ITEM_DETAIL} from "../../configs/socket";
 
   export default {
     name: "sparqlnetworking",
@@ -34,11 +35,11 @@
     },
     methods: {
       get_nuxt_link(id) {
-        return '/' + this.view_url + '/' + id
+        return this.view_url + '/' + id
       },
       get_data() {
         let request = Object.assign({}, {id: this.id});
-        return this.sendPromise('request_items_detail', request)
+        return this.sendPromise(REQUEST_ITEM_DETAIL, request)
           .then(
             this.handle_result.bind(this)
           )

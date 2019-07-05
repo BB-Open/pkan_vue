@@ -14,8 +14,8 @@
 </template>
 
 <script>
-  import {PLONE_URL} from "../../config";
-  import {EV} from "../../events";
+  import {EV} from "../../configs/events";
+  import {PLONE_URL} from "../../configs/server_settings";
 
   export default {
     name: "plonepage_uid",

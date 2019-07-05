@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import {PLONE_URL} from "../../config";
+  import {PLONE_URL} from "../../configs/server_settings";
 
   export default {
     name: "plonepage_search",

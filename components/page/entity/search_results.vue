@@ -11,7 +11,8 @@
 
 <script>
     import SocketPromise from "../../mixins/SocketPromise";
-    import {EV} from "../../events";
+    import {EV} from "../../configs/events";
+    import {REQUEST_SEARCH_RESULTS} from "../../configs/socket";
 
     export default {
         name: "search_results",
@@ -31,11 +32,11 @@
       },
       methods: {
         get_nuxt_link(id) {
-          return '/' + this.view_url + '/' + id
+          return this.view_url + '/' + id
         },
         get_data() {
           let request = Object.assign({}, this.$store.getters[this.namespace + '/search']);
-          return this.sendPromise('request_search_results', request)
+          return this.sendPromise(REQUEST_SEARCH_RESULTS, request)
             .then(
               this.handle_result.bind(this)
             )

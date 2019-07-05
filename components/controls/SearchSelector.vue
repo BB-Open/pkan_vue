@@ -30,8 +30,9 @@
 
 <script>
   import {remove_element_from_array} from '../mixins/utils';
-  import {EV} from "../events";
+  import {EV} from "../configs/events";
   import SocketPromise from '../../components/mixins/SocketPromise';
+  import {REQUEST_VOCAB} from "../configs/socket";
 
 
   // todo, this is just an viewable prototype, has to be included to States and Backend and Eventhandling
@@ -182,7 +183,7 @@
       },
       get_vocab() {
         let request = Object.assign({}, {vocab: this.options.vocab_name});
-        return this.sendPromise('request_vocab', request)
+        return this.sendPromise(REQUEST_VOCAB, request)
           .then(
             this.handle_result_vocab.bind(this)
           )

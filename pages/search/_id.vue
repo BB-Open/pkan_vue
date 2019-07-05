@@ -11,6 +11,7 @@
   import BaseView from '../../components/page/views/BaseView';
   import Entitydetail from "../../components/page/entity/entitydetail";
   import Sparqlnetworking from "../../components/page/entity/sparqlnetworking";
+  import {SEARCH_URL} from "../../components/configs/routing";
 
   export default {
     components: {
@@ -22,7 +23,7 @@
       return {
         namespace: 'Entity',
         breadcrumb: 'DetailSearch',
-        view_url: 'search'
+        view_url: SEARCH_URL,
       }
     },
     mounted() {

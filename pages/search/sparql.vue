@@ -8,8 +8,8 @@
 
 <script>
   import SearchBaseView from "../../components/page/views/SearchBaseView";
-  import {SPARQL_URL} from "../../components/config";
   import SearchField from "../../components/controls/SearchField";
+  import {SPARQL_URL} from "../../components/configs/routing";
 
   export default {
     components: {

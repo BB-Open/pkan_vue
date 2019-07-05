@@ -4,7 +4,7 @@
 
 <script>
   import {dateStr2dateTime, str2FloatTuple} from '../components/mixins/utils';
-  import {DEFAULT_URL} from "../components/config";
+  import {DEFAULT_URL} from "../components/configs/routing";
 
   export default {
     name: 'Landing',
