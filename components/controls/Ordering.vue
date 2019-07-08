@@ -1,7 +1,7 @@
 <template>
   <div class="select">
-    <h3>Sortieren nach:</h3>
-    <b-form-select v-model="selected" :options="vocab_ordering" class="mb-3" :key="namespace + property + 'select'"/>
+    <label>Sortieren nach:<br/>
+    <b-form-select v-model="selected" :options="vocab_ordering" class="mb-3" :key="namespace + property + 'select'"/></label>
   </div>
 </template>
 

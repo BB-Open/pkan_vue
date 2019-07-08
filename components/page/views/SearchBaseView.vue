@@ -11,6 +11,7 @@
           <search-selector title="Kategorie" store_namespace="Search" property="category" :options="category_options"></search-selector>
         </div>
         <div class="content">
+          <h1>Suche</h1>
           <div class="controls_overview"><controls-over-view></controls-over-view><ordering></ordering></div>
           <div class="additional_widget">
             <slot name="additional_widget"></slot>

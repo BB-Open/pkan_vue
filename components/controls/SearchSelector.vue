@@ -1,7 +1,7 @@
 <template>
   <div class="SearchSelector">
-    <h2>{{ title }}</h2>
-    <input type="text" v-model="search_string" placeholder="Kriterien durchsuchen" @change="filter_criteria">
+    <label>{{ title }}:<br/>
+    <input type="text" v-model="search_string" placeholder="Kriterien durchsuchen" @change="filter_criteria"></label>
     <div class="criteria_buttons">
       <button v-for="item in display_values" @click="button_clicked(item)"
               v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove}">

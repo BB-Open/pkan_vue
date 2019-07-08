@@ -1,12 +1,12 @@
 <template>
-  <div class="menu">
+  <nav class="menu" aria-label="site">
     <nuxt-link class="router-link" to="/start">Start</nuxt-link>
     <nuxt-link class="router-link" to="/search">Einfache Suche</nuxt-link>
     <nuxt-link class="router-link" to="/search/sparql">SPARQL</nuxt-link>
     <nuxt-link class="router-link" to="/publisher">Datenbereitsteller</nuxt-link>
     <nuxt-link class="router-link" to="/faq">Fragen und Antworten</nuxt-link>
     <nuxt-link class="router-link" to="/blog">Blog</nuxt-link>
-  </div>
+  </nav>
     
 </template>
 

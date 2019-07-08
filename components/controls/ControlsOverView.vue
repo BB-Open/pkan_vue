@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Aktuelle Suche:</h3>
+    <h2>Aktuelle Suche:</h2>
     <div class="box_area">
       <div v-for="item in display_green" class="green search_box">{{item}}</div>
       <div v-for="item in display_red" class="red search_box">{{item}}</div>

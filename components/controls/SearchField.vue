@@ -1,12 +1,13 @@
 <template>
-  <div class="textsearch">
+  <label class="textsearch">
+    <div class="textsearch_label">{{label}}</div>
     <textarea class="textsearch_area" v-model="search_string" :placeholder="place_holder" :rows="rows"></textarea>
     <button
       @click="filter_criteria()"
       class="button textsearch_button"
       type="button">{{button_label}}
     </button>
-  </div>
+  </label>
 </template>
 
 <script>
@@ -14,7 +15,7 @@
 
   export default {
     name: 'SearchField',
-    props: ['property', 'initial_value', 'place_holder', 'store_namespace', 'next_view', 'rows', 'button_label'],
+    props: ['property', 'initial_value', 'place_holder', 'store_namespace', 'next_view', 'rows', 'button_label', 'label'],
     components: {},
     data() {
       return {
@@ -70,11 +71,16 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 
+  .textsearch_label {
+    width: 100%;
   }
 
   .textsearch_area {
-    width: 80%;
+    width: 75%;
     padding: 0.5em 1em;
     margin: 2px;
     min-width: 400px;
@@ -83,6 +89,7 @@
   .textsearch_button {
     width: 20%;
     min-width: 50px;
+    vertical-align: center;
   }
 
 </style>

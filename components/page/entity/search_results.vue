@@ -1,6 +1,6 @@
 <template>
   <div :class="style_class">
-    <h3>Suchergebnisse:</h3>
+    <h2>Suchergebnisse:</h2>
     <div v-for="item in this.result" :class="element_style_class">
       <div class="element_title">{{ item.title }}</div>
       <div class="element_description">{{ item.description }}</div>

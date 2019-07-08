@@ -3,10 +3,10 @@
     <div class="header-line">Datenadler Land Brandenburg</div>
     <div class="logo-container">
       <div class="logo logo-left">
-        <img src="../../../assets/brandenburg-logo.png"/>
+        <img src="../../../assets/brandenburg-logo.png" alt="Logo Brandenburg"/>
       </div>
       <div class="logo logo-right">
-        <img src="../../../assets/datenadler-logo.png"/>
+        <img src="../../../assets/datenadler-logo.png" alt="Logo Datenadler"/>
       </div>
     </div>
     <pkan-menu></pkan-menu>
