@@ -18,7 +18,7 @@
 <script>
   import {EV} from "../../configs/events";
   import {PLONE_URL} from "../../configs/server_settings";
-  import {BLOG_URL} from "../../configs/routing";
+  import {BLOG_URL, SEARCH_URL} from "../../configs/routing";
   import entitydetail from "../entity/entitydetail";
   import sparqlnetworking from "../entity/sparqlnetworking";
 
@@ -40,7 +40,7 @@
           text:  '',
           sparql_identifier: '',
         },
-        view_url: BLOG_URL,
+        view_url: SEARCH_URL,
       }
     },
     mounted() {
