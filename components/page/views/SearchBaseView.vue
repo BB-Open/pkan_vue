@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="namespace" :search_initial="this.search_initial()">
+  <base-view :namespace="namespace" :breadcrumb="namespace" :search_initial="this.search_initial()" :display_info_column="this.display_info_column">
     <template slot="content">
       <div class="detail_search">
         <div class="controls">
@@ -12,10 +12,11 @@
         </div>
         <div class="content">
           <h1>Suche</h1>
-          <div class="controls_overview"><controls-over-view></controls-over-view><ordering></ordering></div>
           <div class="additional_widget">
             <slot name="additional_widget"></slot>
           </div>
+          <div class="controls_overview"><controls-over-view></controls-over-view><ordering></ordering></div>
+
           <div class="results"><search_results namespace="Search" :view_url="view_url"></search_results></div>
         </div>
       </div>
@@ -41,7 +42,7 @@
       SearchSelector,
       ControlsOverView,
     },
-    props: ['namespace'],
+    props: ['namespace', 'display_info_column'],
     data() {
       return {
         category_options: {

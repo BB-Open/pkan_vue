@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="breadcrumb" :ignore_last_title="true">
+  <base-view :namespace="namespace" :breadcrumb="breadcrumb" :ignore_last_title="true" :display_info_column="true">
     <template slot="content">
       <entitydetail :id="get_data()" :view_url="view_url" ></entitydetail>
       <sparqlnetworking :id="get_data()" :view_url="view_url"></sparqlnetworking>

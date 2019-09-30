@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="breadcrumb" :ignore_last_title="true">
+  <base-view :namespace="namespace" :breadcrumb="breadcrumb" :ignore_last_title="true" :display_info_column="true">
     <template slot="content">
       <publisher :uid="get_data()"></publisher>
     </template>

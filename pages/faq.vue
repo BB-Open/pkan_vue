@@ -1,8 +1,7 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="namespace">
+  <base-view :namespace="namespace" :breadcrumb="namespace" :display_info_column="true">
     <template slot="content">
-      <h1>Fragen und Antworten</h1>
-      <plonelisting_url :view_url="view_url" :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order" :tag="tag"></plonelisting_url>
+      <plonepage_search :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order" :tag="tag"></plonepage_search>
     </template>
   </base-view>
 </template>
@@ -17,17 +16,17 @@
     PLONE_ASC_ORDERING,
     PLONE_TAG_FAQ
   } from "../components/configs/plone_keywords";
+  import plonepage_search from "../components/page/plone/plonepage_search";
 
   export default {
     name: 'Blog',
     components: {
-      plonelisting_url,
+      plonepage_search,
       BaseView
     },
     data() {
       return {
         namespace: 'FAQ',
-        view_url: BLOG_URL,
         portal_type: PLONE_PT_DOCUMENT,
         sort_on: PLONE_INDEX_TITLE,
         sort_order: PLONE_ASC_ORDERING,

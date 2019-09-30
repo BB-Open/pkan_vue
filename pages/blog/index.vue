@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="namespace">
+  <base-view :namespace="namespace" :breadcrumb="namespace" :display_info_column="true">
     <template slot="content">
       <h1>{{ this.namespace }}</h1>
       <plonelisting_url :view_url="view_url" :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order" :tag="tag"></plonelisting_url>

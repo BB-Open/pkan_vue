@@ -76,6 +76,24 @@ hr {
   padding-right: 5px;
 }
 
+.twocolumncontent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.info_column {
+  width: 19%;
+  padding: 2px;
+  background-color: #eeeeee;
+}
+
+.main_content {
+  width: 79%;
+}
+
 
 
 

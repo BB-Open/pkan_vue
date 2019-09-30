@@ -1,9 +1,9 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="namespace">
+  <base-view :namespace="namespace" :breadcrumb="namespace" :display_search="true" :display_info_column="true">
     <template slot="content">
       <h1>Einfache Suche</h1>
-      <vocab-box vocab="ordering" :clean_value="false" search_field="order_by"></vocab-box>
-      <vocab-box vocab="category" :clean_value="true" search_field="category"></vocab-box>
+      <vocab-box vocab_name="ordering" :clean_value="false" search_field="order_by"></vocab-box>
+      <vocab-box vocab_name="category" :clean_value="true" search_field="category"></vocab-box>
     </template>
   </base-view>
 </template>

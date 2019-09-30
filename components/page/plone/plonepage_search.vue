@@ -1,8 +1,8 @@
 <template>
   <div>
-  <h1>{{ item.title }}</h1>
-  <h2 v-if="item.description">{{ item.description}}</h2>
-  <div v-html="item.text.data" v-if="item.text" :class="content_class"></div>
+    <h1 v-if="this.display_title">{{ item.title }}</h1>
+    <h2 v-if="item.description">{{ item.description}}</h2>
+    <div v-html="item.text.data" v-if="item.text" :class="content_class"></div>
   </div>
 </template>
 
@@ -11,7 +11,18 @@
 
   export default {
     name: "plonepage_search",
-    props: ['portal_type', 'sort_on', 'tag', 'element_style_class', 'sort_order', 'content_class'],
+    props: {
+      'portal_type': String,
+      'sort_on': String,
+      'tag': String,
+      'element_style_class': String,
+      'sort_order': String,
+      'content_class': String,
+      'display_title': {
+        type: Boolean,
+        default: true
+      }
+    },
     data() {
       return {
         namespace: 'Blog',
@@ -76,7 +87,6 @@
 </script>
 
 <style scoped>
-
 
 
 </style>
