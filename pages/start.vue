@@ -1,14 +1,10 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="breadcrumb">
+  <base-view :namespace="namespace" :breadcrumb="breadcrumb" :display_search="true">
     <template slot="content">
-      <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag"></plonepage_search>
-      <div class="link-collection box_area">
-        <nuxt-link class="box" to="/faq">Fragen und Antworten</nuxt-link>
-        <nuxt-link class="box" to="/search">Einfache Suche</nuxt-link>
-        <nuxt-link class="box" to="/search/sparql">SPARQL</nuxt-link>
-        <nuxt-link class="box" to="/publisher">Datenbereitsteller</nuxt-link>
-        <nuxt-link class="box" to="/contact">Kontakt</nuxt-link>
-      </div>
+      <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag" content_class="twocolumnsgrey"></plonepage_search>
+      <h2>Unsere Kategorien:</h2>
+      <vocab-box vocab="category" :clean_value="true" search_field="category"></vocab-box>
+
       <h2>Die Neuesten Blogbeiträge:</h2>
       <plonelisting_url :portal_type="pt" :view_url="view_url" :sort_on="sort_on" :sort_order="sort_order" max_number="3" :tag="tag" style_class="box_area" element_style_class="box" >
       </plonelisting_url>
@@ -27,13 +23,15 @@
     PLONE_PT_DOCUMENT,
     PLONE_REVERSE_ORDERING
   } from "../components/configs/plone_keywords";
+  import VocabBox from "../components/controls/VocabBox";
 
   export default {
     name: 'Start',
     components: {
       BaseView,
       plonepage_search,
-      plonelisting_url
+      plonelisting_url,
+      VocabBox,
     },
     data() {
       return {

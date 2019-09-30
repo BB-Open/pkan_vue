@@ -55,7 +55,11 @@
         },
         handle_result_ordering(data) {
           // read result from request
-          this.vocab_ordering = data.vocab;
+          this.vocab_ordering = [];
+          data.vocab.forEach(function (field) {
+            this.vocab_ordering.push(field.text)
+          }, this);
+
         },
       }
     }

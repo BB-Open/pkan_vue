@@ -190,7 +190,10 @@
       },
       handle_result_vocab(data) {
         // read result from request
-        this.vocab = data.vocab;
+        this.vocab = [];
+        data.vocab.forEach(function (field) {
+          this.vocab.push(field.text)
+        }, this);
 
         this.set_values_for_widget();
       },

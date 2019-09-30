@@ -12,7 +12,6 @@ export const PATHS_FOR_BREADCRUMB = {
   'Publisher': '/publisher',
   'Sparql': '/search/sparql',
   'Accessibility': '/accessibility',
-  'Contact': '/contact',
   'DataProtection': '/data_protection',
   'FAQ': '/faq',
   'DetailSearch': '/search/detail_search'

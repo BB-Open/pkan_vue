@@ -1,11 +1,13 @@
 <template>
+  <div class="body_content">
   <div :class="namespace">
     <pkan-header></pkan-header>
-    <search-field property="keywords" store_namespace="Search" :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view" rows="1" button_label="Suchen"></search-field>
+    <search-field v-if="this.display_search" property="keywords" store_namespace="Search" :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view" rows="1" button_label="Suchen"></search-field>
     <div class="content">
       <slot name="content"></slot>
     </div>
     <pkan-footer></pkan-footer>
+  </div>
   </div>
 </template>
 
@@ -23,7 +25,7 @@
       SearchField,
       PkanFooter
     },
-    props: ['namespace', 'breadcrumb', 'ignore_last_title', 'search_initial'],
+    props: ['namespace', 'breadcrumb', 'ignore_last_title', 'search_initial', 'display_left_column', "display_search"],
     data() {
       return {
         placeholder: 'In den Datensätzen suchen',

@@ -2,24 +2,8 @@
   <base-view :namespace="namespace" :breadcrumb="namespace">
     <template slot="content">
       <h1>Einfache Suche</h1>
-      <div class="ordering box_area">
-        <div v-for="item in this.vocab_ordering" class="box">
-          <button
-            @click="handle_click_order(item)"
-            class="button"
-            type="button">{{item}}
-          </button>
-        </div>
-      </div>
-      <div class="category box_area">
-        <div v-for="item in this.vocab_category" class="box">
-          <button
-            @click="handle_click_cat(item)"
-            class="button"
-            type="button">{{item}}
-          </button>
-        </div>
-      </div>
+      <vocab-box vocab="ordering" :clean_value="false" search_field="order_by"></vocab-box>
+      <vocab-box vocab="category" :clean_value="true" search_field="category"></vocab-box>
     </template>
   </base-view>
 </template>
@@ -29,63 +13,19 @@
   import SocketPromise from '../../components/mixins/SocketPromise';
   import {DETAIL_SEARCH_URL} from "../../components/configs/routing";
   import {REQUEST_VOCAB} from "../../components/configs/socket";
+  import VocabBox from "../../components/controls/VocabBox";
 
   export default {
     name: 'Search',
     components: {
       BaseView,
+      VocabBox,
     },
-    mixins: [
-      SocketPromise
-    ],
     data() {
       return {
-        vocab_ordering: [],
-        vocab_category:[],
         namespace: 'Search',
       }
     },
-    mounted() {
-      // Force the initialization
-      this.get_vocab_ordering();
-      this.get_vocab_category()
-    },
-    methods: {
-      get_vocab_ordering() {
-        let request = Object.assign({}, {vocab: 'ordering'});
-        return this.sendPromise(REQUEST_VOCAB, request)
-          .then(
-            this.handle_result_ordering.bind(this)
-          )
-      },
-      get_vocab_category() {
-        let request = Object.assign({}, {vocab: 'category'});
-        return this.sendPromise(REQUEST_VOCAB, request)
-          .then(
-            this.handle_result_category.bind(this)
-          )
-      },
-      handle_result_ordering(data) {
-        // read result from request
-        this.vocab_ordering = data.vocab;
-      },
-      handle_result_category(data) {
-        // read result from request
-        this.vocab_category = data.vocab;
-      },
-      handle_click_order(value) {
-        this.$store.ep_commit('Search', 'order_by', value);
-        this.$router.push(DETAIL_SEARCH_URL);
-      },
-      handle_click_cat(value) {
-        let value_clean = {
-          'value_pos': [value],
-          'value_neg': []
-        };
-        this.$store.ep_commit('Search', 'category', value_clean);
-        this.$router.push(DETAIL_SEARCH_URL);
-      }
-    }
 
   }
 </script>
