@@ -1,7 +1,7 @@
 <template>
   <base-view :namespace="namespace" :breadcrumb="breadcrumb" :display_search="true">
     <template slot="content">
-      <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag" content_class="twocolumnsgrey"></plonepage_search>
+      <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag" content_class="columnsgrey"></plonepage_search>
       <h2>Unsere Kategorien:</h2>
       <vocab-box vocab_name="category" :clean_value="true" search_field="category"></vocab-box>
 

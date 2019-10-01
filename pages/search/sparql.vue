@@ -8,7 +8,7 @@
 
 <script>
   import SearchBaseView from "../../components/page/views/SearchBaseView";
-  import SearchField from "../../components/controls/SearchField";
+  import SearchField from "../../components/controls/SearchFieldMultiline";
   import {SPARQL_URL} from "../../components/configs/routing";
 
   export default {

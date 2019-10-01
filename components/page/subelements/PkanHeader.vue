@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="header-line">Datenadler Land Brandenburg</div>
-    <div class="logo-container">
+    <div class="logo-container content_container">
       <div class="logo logo-left">
         <img src="../../../assets/brandenburg-logo.png" alt="Logo Brandenburg"/>
       </div>
@@ -9,9 +9,12 @@
         <img src="../../../assets/datenadler-logo.png" alt="Logo Datenadler"/>
       </div>
     </div>
-    <pkan-menu></pkan-menu>
-    <hr/>
-    <breadcrumb></breadcrumb>
+    <div class="header_content content_container">
+      <pkan-menu></pkan-menu>
+      <hr/>
+      <breadcrumb></breadcrumb>
+    </div>
+
   </div>
 </template>
 

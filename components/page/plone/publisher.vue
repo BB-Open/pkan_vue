@@ -67,7 +67,6 @@
         this.$axios.setHeader('Access-Control-Allow-Origin', '*', ['get']);
         this.result = await this.$axios.$get(url);
         this.item = this.result.items[0];
-        debugger;
         this.$store.ep_commit('BreadCrumb', 'last_title', this.item.title);
         this.$EventBus.$emit(EV.BREADCRUMB_CHANGED, {});
         this.$forceUpdate()

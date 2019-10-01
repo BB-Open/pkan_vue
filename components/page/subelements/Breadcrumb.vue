@@ -1,4 +1,5 @@
 <template>
+  <div class="breadcrumb">
   <p><span class="describer">Sie sind hier: </span> <span v-for="item in breadcrumb_elements">
       <span v-if="item in breadcrumb_clear">
         <span v-if="item !== 'Start'">&#62;&#62;</span>
@@ -8,6 +9,7 @@
     </span>
 
   </p>
+  </div>
 </template>
 
 <script>
@@ -73,5 +75,10 @@
 <style scoped>
   .describer {
     color: #C73C35;
+    font-weight: bold;
+  }
+
+  .breadcrumb {
+    font-size: 0.8125rem;
   }
 </style>

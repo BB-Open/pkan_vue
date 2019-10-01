@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <div class="footercontent">
+    <div class="footercontent content_container">
     <breadcrumb></breadcrumb>
     <div class="footerbox">
       <div class="footerelement">
@@ -9,11 +9,11 @@
         <a href="https://www.dcat-ap.de/" title="Metadatenmodell DCAT-AP.de">
           DCAT-AP.de
         </a>
-        <hr/>
+        <hr class="hidesmallscreen"/>
         <a href="https://www.govdata.de/" title="Bund-Länder-Portal GovData">
           GovData.de
         </a>
-        <hr/>
+        <hr class="hidesmallscreen"/>
         <a href="https://www.dcat-ap.de/" title="Open-Data-Portal für Europa">
           EuropeanDataportal.eu
         </a>
@@ -24,7 +24,7 @@
         <a href="https://github.com/BB-Open/pkan.dcatapde" title="Github Repositorium">
           PKAN
         </a><i class="fa fa-github"></i>
-        <hr/>
+        <hr class="hidesmallscreen"/>
         <a href="http://plone.com/" title="Plone Content-Management">
           Plone CMS
         </a>
@@ -35,7 +35,7 @@
         <a href="http://www.brandenburg.de" target="_blank" title="Link zum Landesportal Brandenburg">
           Landesportal Brandenburg
         </a>
-        <hr/>
+        <hr class="hidesmallscreen"/>
         <a href="http://service.brandenburg.de" target="_blank" title="Link zum Serviceportal Brandenburg">
           Serviceportal Brandenburg
         </a>
@@ -44,7 +44,7 @@
     </div>
     </div>
     <div class="footer-line">
-      <div class="footer-line-text"><span>2019 | Land Brandenburg</span></div>
+      <div class="footer-line-text hidesmallscreen"><span>2019 | Land Brandenburg</span></div>
       <div class="footer-line-links"><nuxt-link to="/accessibility">Barrierefreiheit</nuxt-link>
         |
         <nuxt-link to="/data_protection">Datenschutz</nuxt-link>
@@ -101,6 +101,19 @@
     color: #fff;
     white-space: nowrap;
     text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .footerbox {
+      display: block;
+    }
+    .footerelement {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    .footerelement a {
+      display: block;
+    }
   }
 
 </style>

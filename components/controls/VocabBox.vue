@@ -48,7 +48,6 @@
           this.vocab = data.vocab;
         },
         handle_click(value) {
-          debugger;
           let value_clean;
           if (this.clean_value === true) {
             value_clean = {

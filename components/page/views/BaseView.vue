@@ -2,16 +2,19 @@
   <div class="body_content">
   <div :class="namespace">
     <pkan-header></pkan-header>
-     <div class="twocolumncontent" v-if="display_info_column">
-      <div class="main_content">
+     <div class="twocolumncontent content_container" v-if="display_info_column">
+       <div class="info_column_top info_column">
+         <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag" :display_title="false"></plonepage_search>
+       </div>
+      <div class="main_content ">
         <search-field v-if="this.display_search" property="keywords" store_namespace="Search" :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view" rows="1" button_label="Suchen"></search-field>
         <slot name="content"></slot>
       </div>
-      <div class="info_column">
+      <div class="info_column_right info_column">
         <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag" :display_title="false"></plonepage_search>
       </div>
     </div>
-    <div class="" v-if="!display_info_column">
+    <div class="content_container" v-if="!display_info_column">
       <search-field v-if="this.display_search" property="keywords" store_namespace="Search" :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view" rows="1" button_label="Suchen"></search-field>
       <slot name="content"></slot>
     </div>
@@ -21,7 +24,7 @@
 </template>
 
 <script>
-  import SearchField from "../../controls/SearchField";
+  import SearchField from "../../controls/SearchFieldSingleLine";
   import PkanFooter from "../subelements/PkanFooter";
   import PkanHeader from "../subelements/PkanHeader";
   import {EV} from "../../configs/events";

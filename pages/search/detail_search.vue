@@ -8,7 +8,7 @@
 
 <script>
   import SearchBaseView from "../../components/page/views/SearchBaseView";
-  import SearchField from "../../components/controls/SearchField";
+  import SearchField from "../../components/controls/SearchFieldSingleLine";
   import {DETAIL_SEARCH_URL} from "../../components/configs/routing";
 
 
