@@ -83,22 +83,32 @@
             p = item['predicate'];
             o = item['object'];
             if (o instanceof rdf.Literal && s.nominalValue === this.id && (o.language === 'de' || o.language === null)) {
+              // basic fields
+
+              // get label from flask
               this.handle_label(p);
+
+              // set field
               this.result_fields.push({
                   'field': p.nominalValue,
                   'value': o.valueOf()
                 }
               )
+            } else if (o instanceof rdf.NamedNode && s instanceof rdf.NamedNode && p instanceof rdf.NamedNode && o.nominalValue === this.id) {
+              // related objects where o is our object
+              this.handle_netork_id(s.nominalValue)
+
+            } else if (o instanceof rdf.NamedNode && s instanceof rdf.NamedNode && p instanceof rdf.NamedNode && s.nominalValue === this.id) {
+              // related objects where s is our objects
+              this.handle_netork_id(o.nominalValue)
+
+            } else if (o instanceof rdf.NamedNode && s instanceof rdf.NamedNode && p instanceof rdf.NamedNode && p.nominalValue === this.id) {
+              // related objects where p is our objects
+              this.handle_netork_id(o.nominalValue);
+              this.handle_netork_id(s.nominalValue)
+
             } else {
-              // s is id, o is type
-              this.handle_label(o);
-              this.result_networking[s.nominalValue] = {
-                'title': '',
-                'description': '',
-                'type': o.nominalValue,
-                'id': s.nominalValue,
-              };
-              this.get_object_title_description(s.nominalValue)
+              // additional sparql not directly related to our object
             }
           }, this)
       },
@@ -124,18 +134,30 @@
           return field
         }
       },
-      get_object_title_description(id){
+      get_object_title_description(id) {
         let request = Object.assign({}, {'id': id});
         return this.sendPromise(REQUEST_ITEM_TITLE_DESC, request)
           .then(
             this.handle_result_object_title_desc.bind(this)
           )
       },
-      handle_result_object_title_desc(data){
+      handle_result_object_title_desc(data) {
         let id = data.id
         this.result_networking[id]['title'] = data.title;
         this.result_networking[id]['description'] = data.description;
+        this.result_networking[id]['type'] = data.type;
         this.$forceUpdate()
+      },
+      handle_netork_id(id) {
+        // set default values
+        this.result_networking[id] = {
+          'title': id,
+          'description': '',
+          'type': '',
+          'id': id,
+        };
+        // load infos from flask and replace default values
+        this.get_object_title_description(id)
       }
 
 
