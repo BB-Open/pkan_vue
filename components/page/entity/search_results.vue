@@ -32,7 +32,7 @@
       },
       methods: {
         get_nuxt_link(id) {
-          return this.view_url + '/' + id
+          return this.view_url + '/' + encodeURIComponent(id)
         },
         get_data() {
           let request = Object.assign({}, this.$store.getters[this.namespace + '/search']);
