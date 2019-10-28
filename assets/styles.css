@@ -10,6 +10,7 @@ body {
   margin: 0;
   background-color: #fafafa;
   padding: 1px;
+  text-rendering: optimizeLegibility;
 }
 
 .body_content {
