@@ -45,7 +45,7 @@
     </div>
     <div class="footer-line">
       <div class="footer-line-text hidesmallscreen"><span>2019 | Land Brandenburg</span></div>
-      <div class="footer-line-links"><nuxt-link to="/accessibility">Barrierefreiheit</nuxt-link>
+      <div class="footer-line-left"><nuxt-link to="/accessibility">Barrierefreiheit</nuxt-link>
         |
         <nuxt-link to="/data_protection">Datenschutz</nuxt-link>
         |
@@ -121,6 +121,8 @@
     padding-right: 30px;
   }
 
+
+
   @media (max-width: 640px) {
     .footerbox {
       display: block;
@@ -132,6 +134,15 @@
     .footerelement a {
       display: block;
     }
+
+    .footer-line-left {
+      white-space: normal;
+    }
+
+    .footer-line {
+      height: auto;
+    }
+
   }
 
 </style>

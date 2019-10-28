@@ -147,6 +147,7 @@ a:hover, a:active, a:focus {
 }
 
 @media (max-width: 640px) {
+
   .info_column_right {
     display: none;
   }
@@ -177,6 +178,10 @@ a:hover, a:active, a:focus {
 
   .columnsgrey {
     column-count: 1;
+  }
+
+  .menu {
+    padding-left: 0;
   }
 }
 

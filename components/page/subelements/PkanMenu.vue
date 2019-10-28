@@ -3,16 +3,20 @@
     <div class="icon_box">
     <button @click="button_clicked()"
             class="icon"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                              width="25" height="25"
+                              width="24" height="24"
                               viewBox="0 0 172 172"
-                              style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#c73c35"><path d="M86,9.83625l-79.12,43.16125v108.6825h158.24v-108.6825zM127.28,123.84h-82.56v-6.88h82.56zM127.28,103.2h-82.56v-6.88h82.56zM127.28,82.56h-82.56v-6.88h82.56z"></path></g></g></svg>
-
+                              style=" fill:#000000;"><g transform=""><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="#c73c35"></path><g fill="#ffffff"><path d="M14.33333,35.83333v14.33333h143.33333v-14.33333zM14.33333,78.83333v14.33333h143.33333v-14.33333zM14.33333,121.83333v14.33333h143.33333v-14.33333z"></path></g></g></g></svg>
     </button><p>Hauptmenü</p></div>
     <nuxt-link class="router-link" to="/start">Start</nuxt-link>
+    <hr class="hidebigscreen"/>
     <nuxt-link class="router-link" to="/search">Einfache Suche</nuxt-link>
+    <hr class="hidebigscreen"/>
     <nuxt-link class="router-link" to="/search/sparql">SPARQL</nuxt-link>
+    <hr class="hidebigscreen"/>
     <nuxt-link class="router-link" to="/publisher">Datenbereitsteller</nuxt-link>
+    <hr class="hidebigscreen"/>
     <nuxt-link class="router-link" to="/faq">Fragen und Antworten</nuxt-link>
+    <hr class="hidebigscreen"/>
     <nuxt-link class="router-link" to="/blog">Blog</nuxt-link>
 
   </nav>
@@ -32,7 +36,7 @@
           if (this.menu_class === 'menu content_container') {
             this.menu_class += ' responsive'
           } else {
-            this.menu_class = 'menu'
+            this.menu_class = 'menu content_container'
           }
         }
 
@@ -73,6 +77,10 @@
     display: none;
   }
 
+  .hidebigscreen {
+    display: none;
+  }
+
   @media (max-width: 640px) {
     .menu .icon_box {
       width: 100%;
@@ -105,6 +113,11 @@
       display: block;
       text-align: left;
     }
+
+    .menu.responsive .hidebigscreen {
+      display: block;
+    }
+
     .router-link {
       padding-left: 0;
       padding-right: 0;

@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="header_content content_container">
-      <pkan-menu></pkan-menu>
+      <pkan-menu ></pkan-menu>
       <hr/>
       <breadcrumb></breadcrumb>
     </div>
