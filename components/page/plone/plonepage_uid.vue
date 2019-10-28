@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>{{ item.title }}</h1>
+    <h2 class="publish_date" v-if="item.date_text">{{item.date_text}}</h2>
     <h2 v-if="item.description">{{ item.description}}</h2>
     <div v-html="item.text.data" v-if="item.text"></div>
   </div>
@@ -9,10 +10,19 @@
 <script>
   import {EV} from "../../configs/events";
   import {PLONE_URL} from "../../configs/server_settings";
+  import {format_plone_date} from "../../mixins/utils";
 
   export default {
     name: "plonepage_uid",
-    props: ['uid'],
+    props: {
+      'uid': String,
+      'display_date':
+        {
+          type: Boolean,
+          default:
+            false
+        }
+    },
     data() {
       return {
         namespace: 'Blog',
@@ -52,6 +62,9 @@
         this.$axios.setHeader('Access-Control-Allow-Origin', '*', ['get']);
         this.result = await this.$axios.$get(url);
         this.item = this.result.items[0];
+        if (this.display_date) {
+          this.item.date_text = 'Veröffentlicht am ' + format_plone_date(this.item.effective);
+        }
         this.$store.ep_commit('BreadCrumb', 'last_title', this.item.title);
         this.$EventBus.$emit(EV.BREADCRUMB_CHANGED, {});
         this.$forceUpdate()
@@ -61,7 +74,8 @@
 </script>
 
 <style scoped>
-
-
+  .publish_date {
+    font-style: italic;
+  }
 
 </style>

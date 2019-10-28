@@ -80,3 +80,7 @@ export function remove_element_from_array(array, value) {
   }
   return array
 }
+
+export function format_plone_date(date_string) {
+  return date_string.split('T')[0]
+}
