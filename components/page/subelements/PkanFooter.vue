@@ -4,39 +4,39 @@
     <breadcrumb></breadcrumb>
     <div class="footerbox">
       <div class="footerelement">
-        <p>Open Data</p>
+        <p class="footerelementtitle">Open Data</p>
         <hr/>
-        <a href="https://www.dcat-ap.de/" title="Metadatenmodell DCAT-AP.de">
+        <a class="footerelementlink" href="https://www.dcat-ap.de/" title="Metadatenmodell DCAT-AP.de">
           DCAT-AP.de
         </a>
         <hr class="hidesmallscreen"/>
-        <a href="https://www.govdata.de/" title="Bund-Länder-Portal GovData">
+        <a class="footerelementlink" href="https://www.govdata.de/" title="Bund-Länder-Portal GovData">
           GovData.de
         </a>
         <hr class="hidesmallscreen"/>
-        <a href="https://www.dcat-ap.de/" title="Open-Data-Portal für Europa">
+        <a class="footerelementlink" href="https://www.dcat-ap.de/" title="Open-Data-Portal für Europa">
           EuropeanDataportal.eu
         </a>
       </div>
       <div class="footerelement">
-        <p>Open Source</p>
+        <p class="footerelementtitle">Open Source</p>
         <hr/>
-        <a href="https://github.com/BB-Open/pkan.dcatapde" title="Github Repositorium">
+        <a class="footerelementlink" href="https://github.com/BB-Open/pkan.dcatapde" title="Github Repositorium">
           PKAN
         </a><i class="fa fa-github"></i>
         <hr class="hidesmallscreen"/>
-        <a href="http://plone.com/" title="Plone Content-Management">
+        <a class="footerelementlink" href="http://plone.com/" title="Plone Content-Management">
           Plone CMS
         </a>
       </div>
       <div class="footerelement">
-        <p>Service</p>
+        <p class="footerelementtitle">Service</p>
         <hr/>
-        <a href="http://www.brandenburg.de" target="_blank" title="Link zum Landesportal Brandenburg">
+        <a class="footerelementlink" href="http://www.brandenburg.de" target="_blank" title="Link zum Landesportal Brandenburg">
           Landesportal Brandenburg
         </a>
         <hr class="hidesmallscreen"/>
-        <a href="http://service.brandenburg.de" target="_blank" title="Link zum Serviceportal Brandenburg">
+        <a class="footerelementlink" href="http://service.brandenburg.de" target="_blank" title="Link zum Serviceportal Brandenburg">
           Serviceportal Brandenburg
         </a>
 
@@ -72,7 +72,8 @@
   }
 
   .footercontent {
-    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   .footer-line a {
     color: white;
@@ -83,15 +84,30 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
-    padding: 5px;
+  }
+  .footercontent .breadcrumb {
+    padding: 15px;
+  }
+
+  .footerbox {
   }
 
   .footerelement {
-    width: 30%;
+    width: 33%;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 16px;
   }
 
-  .footerelement p {
+  .footerelement .footerelementtitle {
     font-style: italic;
+    margin-bottom: .5rem;
+    line-height: 1.4;
+  }
+
+  .footerelement .footerelementlink {
+    margin-bottom: 1rem;
+    line-height: 30px;
   }
 
   .footer-line {
@@ -101,6 +117,8 @@
     color: #fff;
     white-space: nowrap;
     text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 
   @media (max-width: 640px) {
