@@ -81,4 +81,8 @@
   .breadcrumb {
     font-size: 0.8125rem;
   }
+
+  .breadcrumb p {
+    margin-bottom: 0;
+  }
 </style>

@@ -11,7 +11,7 @@
         <slot name="content"></slot>
       </div>
       <div class="info_column_right info_column">
-        <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag" :display_title="false"></plonepage_search>
+        <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="side_tag" :display_title="false"></plonepage_search>
       </div>
     </div>
     <div class="content_container" v-if="!display_info_column">
@@ -34,7 +34,7 @@
     PLONE_INDEX_CREATED,
     PLONE_PT_DOCUMENT,
     PLONE_REVERSE_ORDERING,
-    PLONE_TAG_BLOG, PLONE_TAG_LANDING
+    PLONE_TAG_BLOG, PLONE_TAG_LANDING, PLONE_TAG_SIDETEXT
   } from "../../configs/plone_keywords";
 
   export default {
@@ -55,6 +55,7 @@
         tag: PLONE_TAG_BLOG,
         pt: PLONE_PT_DOCUMENT,
         landing_tag: PLONE_TAG_LANDING,
+        side_tag: PLONE_TAG_SIDETEXT,
       }
     },
     mounted() {

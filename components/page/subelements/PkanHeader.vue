@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="header-line">Datenadler Land Brandenburg</div>
+    <div class="header-line">DatenAdler Brandenburg</div>
     <div class="logo-container content_container">
       <div class="logo logo-left">
         <img src="../../../assets/brandenburg-logo.png" alt="Logo Brandenburg"/>
@@ -57,6 +57,20 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+  }
+
+  .header_content {
+    padding-bottom: 0;
+  }
+
+  .header_content .breadcrumb {
+    padding-top: 30px;
+    padding-bottom: 3px;
+  }
+
+  .header-line {
+    padding-left: 30px;
+    padding-right: 30px;
   }
 
 </style>
