@@ -43,7 +43,8 @@ export default {
   ** Global CSS
   */
   css: [
-    'assets/styles.css'
+    'assets/styles.css',
+    'assets/plone_styles.css'
   ],
 
   /*
