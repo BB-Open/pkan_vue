@@ -245,19 +245,34 @@ input {
 
   .columnsgrey {
     column-count: 1;
+    padding: 5px;
+  }
+
+  .columnsgrey p {
+    padding-right: 5px;
+    padding-left: 5px;
   }
 
   .menu {
     padding-left: 0;
   }
 
+  .box_area {
+    margin: -5px;
+  }
+
   .box{
     background-color: #fafafa;
     min-width: auto;
-    width: 25%;
+    width: 30%;
     text-align: center;
     border: 1px solid #eeeeee;
-    margin: 15px;
+    margin: 5px;
+  }
+
+  .content_container {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 

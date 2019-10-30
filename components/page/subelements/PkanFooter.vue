@@ -145,6 +145,8 @@
     .footerelement {
       width: 100%;
       margin-bottom: 15px;
+      padding-right: 5px;
+      padding-left: 5px;
     }
     .footerelement a {
       display: block;
@@ -156,6 +158,8 @@
 
     .footer-line {
       height: auto;
+      padding-right: 10px;
+      padding-left: 10px;
     }
 
     .footerelement .footerelementlink {
@@ -163,6 +167,13 @@
       line-height: 30px;
     }
 
+    .footercontent {
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+    .footercontent .breadcrumb {
+      padding: 5px;
+    }
 
   }
 

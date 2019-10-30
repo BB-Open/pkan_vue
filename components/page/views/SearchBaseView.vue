@@ -93,7 +93,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    max-width: 70%
+    width: 70%
   }
   .detail_search, .controls_overview {
     display: flex;
@@ -112,6 +112,17 @@
 
   .results {
     width: 100%;
+  }
+
+  @media (max-width: 640px) {
+    .controls {
+      width: 35%;
+      padding-left: 5px;
+    }
+
+    .content {
+      width: 65%;
+    }
   }
 
 </style>

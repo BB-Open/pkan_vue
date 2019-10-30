@@ -75,4 +75,18 @@
     padding-right: 30px;
   }
 
+
+  @media (max-width: 640px) {
+    .header_content .breadcrumb {
+      padding-top: 10px;
+      padding-bottom: 3px;
+    }
+
+    .header-line {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+
+
 </style>

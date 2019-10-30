@@ -116,6 +116,8 @@
     .menu {
       display: flex;
       flex-direction: column;
+      padding-left: 0px;
+      padding-right: 0px;
     }
 
     .menu .router-link {

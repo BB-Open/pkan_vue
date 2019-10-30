@@ -117,4 +117,10 @@
     padding-left: 0px;
   }
 
+  @media (max-width: 640px) {
+    .search_box {
+      margin-left: 5px;
+    }
+  }
+
 </style>
