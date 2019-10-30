@@ -77,6 +77,21 @@
   }
   .footer-line a {
     color: white;
+    text-decoration: unset;
+  }
+
+  .footer-line a:hover, .footer-line a:active, .footer-line a:focus {
+    /*todo*/
+  }
+
+  .footerelement a {
+    color: black;
+    text-decoration: unset;
+  }
+
+  .footerelement a:hover, .footerelement a:active, .footerelement a:focus {
+    /*todo*/
+    color: #C73C35;
   }
 
   .footerbox, .footer-line {
@@ -142,6 +157,12 @@
     .footer-line {
       height: auto;
     }
+
+    .footerelement .footerelementlink {
+      margin-bottom: auto;
+      line-height: 30px;
+    }
+
 
   }
 

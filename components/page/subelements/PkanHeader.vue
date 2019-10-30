@@ -45,11 +45,13 @@
     margin-top: auto;
     margin-bottom: auto;
     height: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .logo img {
     max-width: 200px;
-    max-height: 100px;
+    max-height: 90px;
   }
 
   .logo-container {

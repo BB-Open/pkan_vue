@@ -2,14 +2,7 @@
   <base-view :namespace="namespace" :breadcrumb="namespace" :search_initial="this.search_initial()" :display_info_column="this.display_info_column">
     <template slot="content">
       <div class="detail_search">
-        <div class="controls">
-          <button
-            @click="remove_all()"
-            class="button"
-            type="button">Remove all
-          </button>
-          <search-selector title="Kategorie" store_namespace="Search" property="category" :options="category_options"></search-selector>
-        </div>
+
         <div class="content">
           <h1>Suche</h1>
           <div class="additional_widget">
@@ -18,6 +11,15 @@
           <div class="controls_overview"><controls-over-view></controls-over-view><ordering></ordering></div>
 
           <div class="results"><search_results namespace="Search" :view_url="view_url"></search_results></div>
+        </div>
+        <div class="controls">
+          <h1>Kriterien</h1>
+          <button
+            @click="remove_all()"
+            class="button"
+            type="button">Remove all
+          </button>
+          <search-selector title="Kategorie" store_namespace="Search" property="category" :options="category_options"></search-selector>
         </div>
       </div>
     </template>
@@ -91,7 +93,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 100%
+    max-width: 70%
   }
   .detail_search, .controls_overview {
     display: flex;
@@ -102,8 +104,14 @@
   .controls_overview {
     justify-content: space-between;
   }
+
   .controls {
-    width: 300px;
+    width: 30%;
+    padding-left: 15px;
+  }
+
+  .results {
+    width: 100%;
   }
 
 </style>

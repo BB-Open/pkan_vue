@@ -3,9 +3,9 @@
     <div v-for="item in this.vocab" class="box">
       <button
         @click="handle_click(item.text)"
-        class="lightbutton button"
+        class="lightbutton button vocabbutton"
         type="button">
-        <img :src="item.icon" v-if="item.icon"><br v-if="item.icon"/>
+        <i :class="item.icon_class + ' bb-ifa hidesmallscreen'" v-if="item.icon_class"/><br v-if="item.icon_class" class="hidesmallscreen"/>
         {{item.text}}
       </button>
     </div>
@@ -65,5 +65,11 @@
 </script>
 
 <style scoped>
+
+  .vocabbutton {
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+  }
 
 </style>

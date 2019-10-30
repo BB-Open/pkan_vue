@@ -70,4 +70,12 @@
     padding-left: 10px;
     padding-right: 10px;
   }
+
+  .select label {
+    font-size: 1rem;
+  }
+
+  .select label select {
+    font-size: 1rem;
+  }
 </style>

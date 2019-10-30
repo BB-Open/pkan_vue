@@ -4,10 +4,6 @@
       <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag" content_class="columnsgrey"></plonepage_search>
       <h2>Unsere Kategorien:</h2>
       <vocab-box vocab_name="category" :clean_value="true" search_field="category"></vocab-box>
-
-      <h2>Die Neuesten Blogbeiträge:</h2>
-      <plonelisting_url :portal_type="pt" :view_url="view_url" :sort_on="sort_on" :sort_order="sort_order" max_number="3" :tag="tag" style_class="box_area" element_style_class="box" :display_date="true">
-      </plonelisting_url>
     </template>
   </base-view>
 </template>

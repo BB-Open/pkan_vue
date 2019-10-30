@@ -17,7 +17,7 @@ export const PATHS_FOR_BREADCRUMB = {
   'DetailSearch': '/search/detail_search'
 };
 export const TITLES_FOR_BREADCRUMB = {
-  'Start': 'Startseite',
+  'Start': 'Start',
   'Search': 'Einfache Suche',
   'Impressum': 'Impressum',
   'Blog': 'Blog',
@@ -26,6 +26,6 @@ export const TITLES_FOR_BREADCRUMB = {
   'Accessibility': 'Barrierefreiheit',
   'Contact': 'Kontakt',
   'DataProtection': 'Datenschutz',
-  'FAQ': 'Fragen und Antworten',
+  'FAQ': 'Antworten',
   'DetailSearch': 'Detailsuche'
 };

@@ -107,7 +107,8 @@
   }
 
   .search_box {
-    padding: 10px;
+    margin-left: 10px;
+    padding: 5px;
   }
 
   .box_area {

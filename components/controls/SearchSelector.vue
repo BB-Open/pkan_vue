@@ -215,4 +215,24 @@
     background-color: #e50018;
   }
 
+  .SearchSelector {
+    padding-top: 8px;
+  }
+
+  .SearchSelector label {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .SearchSelector input {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: 100%;
+  }
+
+  .criteria_buttons {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
 </style>

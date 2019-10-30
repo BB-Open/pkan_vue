@@ -1,5 +1,5 @@
 <template>
-  <search-base-view namespace="Sparql" :display_info_column="true">
+  <search-base-view namespace="Sparql" :display_info_column="false">
     <template slot="additional_widget">
       <search-field property="sparql" store_namespace="Search" :initial_value="this.search_initial()" :place_holder="placeholder" :next_view="next_view" rows="4" button_label="Abfrage senden" label="SPARQL Abfrage:"></search-field>
     </template>
