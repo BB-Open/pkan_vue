@@ -273,7 +273,7 @@ input {
   .bb-ifa {
     color: #C73C35;
     display: inline-block;
-    font: normal normal normal 50px/1 FontAwesome;
+    font: normal normal normal 35px/1 FontAwesome;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
