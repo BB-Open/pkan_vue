@@ -264,10 +264,20 @@ input {
   .box{
     background-color: #fafafa;
     min-width: auto;
-    width: 30%;
+    width: 100%;
     text-align: center;
     border: 1px solid #eeeeee;
     margin: 5px;
+  }
+
+  .bb-ifa {
+    color: #C73C35;
+    display: inline-block;
+    font: normal normal normal 50px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-bottom: 0px;
   }
 
   .content_container {

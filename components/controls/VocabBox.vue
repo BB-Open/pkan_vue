@@ -5,8 +5,9 @@
         @click="handle_click(item.text)"
         class="lightbutton button vocabbutton"
         type="button">
-        <i :class="item.icon_class + ' bb-ifa hidesmallscreen'" v-if="item.icon_class"/><br v-if="item.icon_class" class="hidesmallscreen"/>
-        {{item.text}}
+        <div class="category_label">
+        <div class="category_icon"><i :class="item.icon_class + ' bb-ifa'" v-if="item.icon_class"/><br v-if="item.icon_class" class="hidesmallscreen"/></div>
+        <div class="category_text">{{item.text}}</div></div>
       </button>
     </div>
   </div>
@@ -70,6 +71,23 @@
     width: 100%;
     height: 100%;
     padding: 15px;
+  }
+  @media (max-width: 640px) {
+  .category_label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .category_icon {
+    width: 10%;
+  }
+
+  .category_text {
+    width: 80%;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
   }
 
 </style>
