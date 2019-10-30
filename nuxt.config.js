@@ -44,7 +44,8 @@ export default {
   */
   css: [
     'assets/styles.css',
-    'assets/plone_styles.css'
+    'assets/plone_styles.css',
+    'assets/font_awesome/font-awesome.min.css'
   ],
 
   /*

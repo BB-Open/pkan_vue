@@ -22,8 +22,8 @@
         <p class="footerelementtitle">Open Source</p>
         <hr/>
         <a class="footerelementlink" href="https://github.com/BB-Open/pkan.dcatapde" title="Github Repositorium">
-          PKAN
-        </a><i class="fa fa-github"></i>
+          PKAN <i class="fa fa-github"></i>
+        </a>
         <hr class="hidesmallscreen"/>
         <a class="footerelementlink" href="http://plone.com/" title="Plone Content-Management">
           Plone CMS
@@ -144,7 +144,7 @@
     }
     .footerelement {
       width: 100%;
-      margin-bottom: 15px;
+      margin-bottom: 5px;
       padding-right: 5px;
       padding-left: 5px;
     }
