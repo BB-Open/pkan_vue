@@ -2,7 +2,7 @@
   <div class="category box_area">
     <div v-for="item in this.vocab" class="box">
       <button
-        @click="handle_click(item.text)"
+        @click="handle_click(item.id)"
         class="lightbutton button vocabbutton"
         type="button">
         <div class="category_label">

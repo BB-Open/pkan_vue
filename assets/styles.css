@@ -277,7 +277,7 @@ input {
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    padding-bottom: 0px;
+    padding-bottom: 0;
   }
 
   .content_container {

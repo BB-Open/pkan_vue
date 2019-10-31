@@ -10,6 +10,8 @@
 
 <script>
   import {EV} from "../configs/events";
+  import {REQUEST_VOCAB} from "../configs/socket";
+  import SocketPromise from "../mixins/SocketPromise";
 
   export default {
     name: "ControlsOverView",
@@ -20,18 +22,39 @@
         search_selector_fields: ['category'],
         raw_fields: ['sparql'],
         display_green: [],
-        display_red: []
+        display_red: [],
+        vocab_terms: {},
+        vocabs_to_request: ['category']
       }
     },
+    mixins: [
+      SocketPromise
+    ],
 
     mounted() {
       // Force the initialization
+      this.request_vocabs();
       this.init_events();
       this.reload_widget()
     },
     methods: {
       reload_widget() {
         this.set_values_for_widget()
+      },
+      request_vocabs() {
+        this.vocabs_to_request.forEach(function (item) {
+          let request = Object.assign({}, {vocab: item});
+          return this.sendPromise(REQUEST_VOCAB, request)
+            .then(
+              this.handle_result_vocab.bind(this)
+            )
+        }, this)
+      },
+      handle_result_vocab(data){
+        data.vocab.forEach(function (field) {
+          this.vocab_terms[field.id] = field.text
+        }, this);
+        this.reload_widget()
       },
       set_values_for_widget() {
         this.display_green = [];
@@ -69,12 +92,18 @@
           let green = value.value_pos;
           let red = value.value_neg;
           green.forEach(function (str) {
-            this.display_green.push(str)
+            this.display_green.push(this.term_to_str(str))
           }, this);
           red.forEach(function (str) {
-            this.display_red.push(str)
+            this.display_red.push(this.term_to_str(str))
           }, this);
         }
+      },
+      term_to_str(str){
+        if (str in this.vocab_terms) {
+          return this.vocab_terms[str]
+        }
+        return str
       },
       init_events() {
         this.$EventBus.$on(EV.RESET_SEARCH_TERMS, () => {

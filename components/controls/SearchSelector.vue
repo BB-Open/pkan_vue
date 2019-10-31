@@ -5,12 +5,12 @@
     <div class="criteria_buttons">
       <button v-for="item in display_values" @click="button_clicked(item)"
               v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove}">
-        {{ item }}
+        {{ data_store[item].text }}
       </button>
       <button v-for="item in additional_values" @click="button_clicked(item)"
               v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove}"
               v-if="show_more || data_store[item].check_add || data_store[item].check_remove">
-        {{ item}}
+        {{ data_store[item].text }}
       </button>
     </div>
 
@@ -46,7 +46,7 @@
     data() {
       return {
         values: [],
-        vocab: [],
+        vocab: {},
         data_store: {},
         number_displayed: 8,
         values_stored:
@@ -110,9 +110,12 @@
       set_values_for_widget() {
         let value_neg = this.values_stored.value_neg;
         let value_pos = this.values_stored.value_pos;
+
+
         if (this.vocab !== undefined) {
-          this.values = this.vocab;
-          this.vocab.forEach(
+          let vocab_keys = Object.keys(this.vocab);
+          this.values = vocab_keys;
+          vocab_keys.forEach(
             function (item) {
               if (value_neg.includes(item)) {
                 this.data_store[item] = {
@@ -129,6 +132,8 @@
                 check_add: false,
                 check_remove: false,
               }};
+
+              this.data_store[item].text = this.vocab[item]
             }, this)
         }
         this.display_values = this.values.slice(0, this.number_displayed);
@@ -190,9 +195,9 @@
       },
       handle_result_vocab(data) {
         // read result from request
-        this.vocab = [];
+        this.vocab = {};
         data.vocab.forEach(function (field) {
-          this.vocab.push(field.text)
+          this.vocab[field.id] = field.text
         }, this);
 
         this.set_values_for_widget();

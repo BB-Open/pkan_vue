@@ -57,7 +57,10 @@
           // read result from request
           this.vocab_ordering = [];
           data.vocab.forEach(function (field) {
-            this.vocab_ordering.push(field.text)
+            this.vocab_ordering.push({
+              value: field.id,
+              text: field.text
+            })
           }, this);
 
         },
