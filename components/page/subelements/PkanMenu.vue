@@ -32,6 +32,12 @@
     <nuxt-link class="router-link" to="/search">Einfache Suche</nuxt-link>
     <hr class="hidebigscreen"/>
     <nuxt-link class="router-link" to="/search/sparql">SPARQL</nuxt-link>
+    <hr class="hidebigscreen"/>
+    <nuxt-link to="/accessibility" class="router-link hidebigscreen">Barrierefreiheit</nuxt-link>
+    <hr class="hidebigscreen"/>
+    <nuxt-link to="/data_protection" class="router-link hidebigscreen">Datenschutz</nuxt-link>
+    <hr class="hidebigscreen"/>
+    <nuxt-link to="/impressum" class="router-link hidebigscreen">Impressum</nuxt-link>
 
 
   </nav>

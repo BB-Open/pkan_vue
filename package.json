@@ -18,6 +18,7 @@
     "nuxt": "^2.4.0",
     "nuxt-log": "^0.1.0",
     "rdf": "^4.1.0",
+    "vue-infinite-scroll": "^2.0.2",
     "vue-socket.io": "^3.0.7",
     "vue-static": "0.0.5"
   },

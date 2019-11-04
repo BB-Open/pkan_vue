@@ -84,3 +84,14 @@ export function remove_element_from_array(array, value) {
 export function format_plone_date(date_string) {
   return date_string.split('T')[0]
 }
+
+export function removeSelfClosingTags(html) {
+  // this is ugly but we need it to clean plone html
+  var split = html.split("/>");
+  var newHtml = "";
+  for (var i = 0; i < split.length - 1;i++) {
+    var edsplit = split[i].split("<");
+    newHtml += split[i] + "></" + edsplit[edsplit.length - 1].split(" ")[0] + ">";
+  }
+  return newHtml + split[split.length-1];
+}

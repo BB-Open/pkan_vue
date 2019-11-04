@@ -10,7 +10,8 @@
           </div>
           <div class="controls_overview"><controls-over-view></controls-over-view><ordering></ordering></div>
 
-          <div class="results"><search_results namespace="Search" :view_url="view_url"></search_results></div>
+          <div class="results hidesmallscreen"><search_results namespace="Search" :view_url="view_url"></search_results></div>
+          <div class="results hidebigscreen"><search_results_mobile namespace="Search" :view_url="view_url"></search_results_mobile></div>
         </div>
         <div class="controls">
           <h1>Kriterien</h1>
@@ -35,11 +36,13 @@
   import ControlsOverView from "../../controls/ControlsOverView";
   import {EV} from "../../configs/events";
   import {SEARCH_URL} from "../../configs/routing";
+  import search_results_mobile from "../entity/search_results_mobile";
 
   export default {
     components: {
       Ordering,
       search_results,
+      search_results_mobile,
       BaseView,
       SearchSelector,
       ControlsOverView,

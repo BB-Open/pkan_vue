@@ -3,14 +3,14 @@
     <h1>{{ item.title }}</h1>
     <h2 class="publish_date" v-if="item.date_text">{{item.date_text}}</h2>
     <h2 v-if="item.description">{{ item.description}}</h2>
-    <div v-html="item.text.data" v-if="item.text"></div>
+    <div v-html="removeSelfClosingTags(item.text.data)" v-if="item.text"></div>
   </div>
 </template>
 
 <script>
   import {EV} from "../../configs/events";
   import {PLONE_URL} from "../../configs/server_settings";
-  import {format_plone_date} from "../../mixins/utils";
+  import {format_plone_date, removeSelfClosingTags} from "../../mixins/utils";
 
   export default {
     name: "plonepage_uid",
@@ -46,6 +46,9 @@
     methods: {
       get_data() {
         this.request_pages(this.data_url)
+      },
+      removeSelfClosingTags(html) {
+        return removeSelfClosingTags(html)
       },
       generate_data_url() {
         this.data_url = this.base_data_url;

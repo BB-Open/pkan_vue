@@ -54,7 +54,8 @@ export default {
   plugins: [
     './plugins/vue_static',
     './plugins/vue_socket_io',
-    './plugins/event_bus'
+    './plugins/event_bus',
+    './plugins/infinite_scroll',
   ],
 
   /*

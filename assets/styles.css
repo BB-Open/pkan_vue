@@ -213,6 +213,104 @@ input {
   font-size: 1rem;
 }
 
+.hidebigscreen {
+  display: none;
+}
+
+/*Pagination*/
+
+.pagination {
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: 10px 10px;
+  color: #C73C35;
+  background-color: #fff;
+  border: 1px solid #eeeeee;
+}
+
+.page-link:hover {
+  z-index: 2;
+  color: #C73C35;
+  text-decoration: none;
+  background-color: #eeeeee;
+  border-color: #eeeeee;
+}
+
+.page-link:focus {
+  z-index: 2;
+  outline: 0;
+  box-shadow: 0 0 0 0 #C73C35;
+}
+
+.page-item:first-child .page-link {
+  margin-left: 0;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.page-item:last-child .page-link {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #C73C35;
+  border-color: #C73C35;
+}
+
+.page-item.disabled .page-link {
+  pointer-events: none;
+  cursor: auto;
+  background-color: #fff;
+  border-color: #eeeeee;
+}
+
+.pagination-lg .page-link {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.pagination-lg .page-item:first-child .page-link {
+  border-top-left-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
+}
+
+.pagination-lg .page-item:last-child .page-link {
+  border-top-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+}
+
+.pagination-sm .page-link {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.pagination-sm .page-item:first-child .page-link {
+  border-top-left-radius: 0.2rem;
+  border-bottom-left-radius: 0.2rem;
+}
+
+.pagination-sm .page-item:last-child .page-link {
+  border-top-right-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+}
+
 @media (max-width: 640px) {
 
   .info_column_right {
@@ -232,6 +330,10 @@ input {
 
   .hidesmallscreen {
     display: none;
+  }
+
+  .hidebigscreen {
+    display: block;
   }
 
   body {

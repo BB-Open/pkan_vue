@@ -2,12 +2,13 @@
   <div>
     <h1 v-if="this.display_title">{{ item.title }}</h1>
     <h2 v-if="item.description">{{ item.description}}</h2>
-    <div v-html="item.text.data" v-if="item.text" :class="content_class"></div>
+    <div v-html="removeSelfClosingTags(item.text.data)" v-if="item.text" :class="content_class"></div>
   </div>
 </template>
 
 <script>
   import {PLONE_URL} from "../../configs/server_settings";
+  import {removeSelfClosingTags} from "../../mixins/utils";
 
   export default {
     name: "plonepage_search",
@@ -70,6 +71,9 @@
 
         this.$log.debug(this.data_url + ' requested');
       },
+      removeSelfClosingTags(html) {
+        return removeSelfClosingTags(html)
+      },
       async request_pages(url) {
 
         this.$axios.setHeader('Content-Type', 'application/json', ['get']);
@@ -78,6 +82,7 @@
         this.result = await this.$axios.$get(url);
         if (this.result.items[0] !== undefined) {
           this.item = this.result.items[0];
+          debugger;
         }
 
         this.$forceUpdate()
