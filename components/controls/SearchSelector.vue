@@ -19,7 +19,7 @@
       <button @click="show_more = !show_more" v-if="additional_values.length > 0" class="button">
         <template v-if="!show_more">ᐁ Mehr</template>
         <template v-if="show_more">ᐃ Weniger</template>
-      </button><br/>
+      </button><br v-if="additional_values.length > 0"/>
       <button @click="reset_button" class="button">
         <template>Zurück setzen</template>
       </button>
