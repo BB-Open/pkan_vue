@@ -20,7 +20,12 @@
             class="button"
             type="button">Remove all
           </button>
+          <search-selector title="Dateiformat" store_namespace="Search" property="file_format" :options="file_format_options"></search-selector>
+          <search-selector title="Datenbereitsteller" store_namespace="Search" property="publisher" :options="publisher_options"></search-selector>
           <search-selector title="Kategorie" store_namespace="Search" property="category" :options="category_options"></search-selector>
+          <search-selector title="Lizens" store_namespace="Search" property="license" :options="license_options"></search-selector>
+          <pkan_datepicker label="Letzte Änderung:" namespace="Search" property="last_change"></pkan_datepicker>
+          <search-selector title="Stichworte" store_namespace="Search" property="keywords" :options="keywords_options"></search-selector>
         </div>
       </div>
     </template>
@@ -37,6 +42,7 @@
   import {EV} from "../../configs/events";
   import {SEARCH_URL} from "../../configs/routing";
   import search_results_mobile from "../entity/search_results_mobile";
+  import pkan_datepicker from "../../controls/DatePicker";
 
   export default {
     components: {
@@ -46,14 +52,32 @@
       BaseView,
       SearchSelector,
       ControlsOverView,
+      pkan_datepicker,
     },
     props: ['namespace', 'display_info_column'],
     data() {
       return {
         category_options: {
           vocab_name: 'category',
-          number_displayed: 4
+          number_displayed: 3
         },
+        file_format_options: {
+          vocab_name: 'file_format',
+          number_displayed: 3
+        },
+        publisher_options: {
+          vocab_name: 'publisher',
+          number_displayed: 3
+        },
+        license_options: {
+          vocab_name: 'license',
+          number_displayed: 3
+        },
+        keywords_options: {
+          vocab_name: 'keywords',
+          number_displayed: 3
+        },
+        search_selector_fields: ['category', 'file_format', 'publisher', 'license', 'keywords'],
         view_url: SEARCH_URL,
       }
     },
@@ -63,16 +87,19 @@
     },
     methods: {
       search_initial() {
-        return this.$store.state['Search']['keywords'];
+        return this.$store.state['Search']['textline_keywords'];
       },
       remove_all() {
-        // todo
-        this.$store.ep_commit('Search', 'keywords', '');
+        this.$store.ep_commit('Search', 'textline_keywords', '');
         this.$store.ep_commit('Search', 'sparql', '');
-        this.$store.ep_commit('Search', 'category', {
-          'value_pos': [],
-          'value_neg': []
-        },);
+        this.search_selector_fields.forEach(function (field) {
+          this.$store.ep_commit('Search', field, {
+            'value_pos': [],
+            'value_neg': []
+          },);
+        }, this);
+        this.$store.ep_commit('Search', 'last_change', [null, null]);
+
         this.update_page()
       },
       update_page() {

@@ -223,7 +223,7 @@ input {
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: flex-start;
   padding-left: 0;
   list-style: none;
   border-radius: 0.25rem;
@@ -309,6 +309,32 @@ input {
 .pagination-sm .page-item:last-child .page-link {
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
+}
+
+/*Date Picker*/
+
+.vdp-datepicker, .vdp-datepicker input {
+  width: 100%;
+}
+
+.vdp-datepicker__calendar {
+  float: right;
+  position: relative !important;
+}
+
+.date_input {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  width: 100%;
+}
+
+.vdp-datepicker__calendar .cell.selected {
+  background: #C73C35 !important;
+  color: white !important;
+}
+
+.vdp-datepicker__calendar .cell:not(.blank):not(.disabled).day:hover, .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).month:hover, .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).year:hover {
+  border: 1px solid #C73C35 !important;
 }
 
 @media (max-width: 640px) {

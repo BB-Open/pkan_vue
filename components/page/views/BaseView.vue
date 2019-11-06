@@ -7,7 +7,7 @@
          <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag" :display_title="false"></plonepage_search>
        </div>
       <div class="main_content ">
-        <search-field v-if="this.display_search" property="keywords" store_namespace="Search" :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view" rows="1" button_label="Suchen"></search-field>
+        <search-field v-if="this.display_search" property="textline_keywords" store_namespace="Search" :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view" rows="1" button_label="Suchen"></search-field>
         <slot name="content"></slot>
       </div>
       <div class="info_column_right info_column">
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="content_container" v-if="!display_info_column">
-      <search-field v-if="this.display_search" property="keywords" store_namespace="Search" :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view" rows="1" button_label="Suchen"></search-field>
+      <search-field v-if="this.display_search" property="textline_keywords" store_namespace="Search" :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view" rows="1" button_label="Suchen"></search-field>
       <slot name="content"></slot>
     </div>
     <pkan-footer></pkan-footer>

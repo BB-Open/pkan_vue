@@ -12,19 +12,21 @@
   import {EV} from "../configs/events";
   import {REQUEST_VOCAB} from "../configs/socket";
   import SocketPromise from "../mixins/SocketPromise";
+  import {dateTime2dateStr} from "../mixins/utils";
 
   export default {
     name: "ControlsOverView",
     data() {
       return {
         namespace: 'Search',
-        keyword_fields: ['keywords'],
-        search_selector_fields: ['category'],
-        raw_fields: ['sparql'],
+        keyword_fields: ['textline_keywords'],
+        search_selector_fields: ['category', 'file_format', 'publisher', 'license', 'keywords'],
+        raw_fields: ['sparql', ],
+        date_range_fields: ['last_change'],
         display_green: [],
         display_red: [],
         vocab_terms: {},
-        vocabs_to_request: ['category']
+        vocabs_to_request: ['category', 'file_format', 'publisher', 'license', 'keywords']
       }
     },
     mixins: [
@@ -62,6 +64,9 @@
         this.keyword_fields.forEach(function (field) {
           this.add_strings(field)
         }, this);
+        this.date_range_fields.forEach(function (field){
+          this.add_date_range(field)
+        }, this);
         this.search_selector_fields.forEach(function (field) {
           this.add_fields(field)
         }, this);
@@ -98,6 +103,24 @@
             this.display_red.push(this.term_to_str(str))
           }, this);
         }
+      },
+      add_date_range(field){
+        let value = this.$store.state[this.namespace][field];
+        let start = value[0];
+        let end = value[1];
+        let res = '';
+        if (start !== null && start !== undefined) {
+          start = dateTime2dateStr(start);
+          res = res + 'Von: ' + start + ' '
+        }
+        if (end !== null && end !== undefined) {
+          end = dateTime2dateStr(end);
+          res = res + 'Bis: ' + end;
+        }
+        if (res !== '') {
+          this.display_green.push(res)
+        }
+
       },
       term_to_str(str){
         if (str in this.vocab_terms) {
