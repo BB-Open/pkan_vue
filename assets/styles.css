@@ -223,7 +223,7 @@ input {
 .pagination {
   display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-start;
   padding-left: 0;
   list-style: none;
@@ -240,7 +240,7 @@ input {
 .page-link {
   position: relative;
   display: block;
-  padding: 10px 10px;
+  padding: 10px 5px;
   color: #C73C35;
   background-color: #fff;
   border: 1px solid #eeeeee;
