@@ -232,6 +232,11 @@ input {
   padding-bottom: 15px;
 }
 
+.flex-fill {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
 .page-link {
   position: relative;
   display: block;
@@ -239,6 +244,7 @@ input {
   color: #C73C35;
   background-color: #fff;
   border: 1px solid #eeeeee;
+  text-align: center;
 }
 
 .page-link:hover {
@@ -252,6 +258,8 @@ input {
 .page-link:focus {
   z-index: 2;
   outline: 0;
+  color: #C73C35;
+  background-color: #eeeeee;
   box-shadow: 0 0 0 0 #C73C35;
 }
 
