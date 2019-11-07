@@ -38,9 +38,6 @@ export const mutations = {
   set_license(state, data) {
     state.license = data
   },
-  set_keywords(state, data) {
-    state.keywords = data
-  },
   set_category(state, data) {
     state.category = data
   },
@@ -76,7 +73,6 @@ export const getters = {
       category: state.category,
       publisher: state.publisher,
       license: state.license,
-      keywords: state.keywords,
       order_by: state.order_by,
       sparql: state.sparql,
       batch_start: state.batch_start,

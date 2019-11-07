@@ -7,14 +7,14 @@
 
 <script>
   import SocketPromise from "../mixins/SocketPromise";
-  import bFormSelect from 'bootstrap-vue/es/components/form-select/form-select';
+  import {BFormSelect} from 'bootstrap-vue/src/components/form-select/form-select';
   import {EV} from "../configs/events";
   import {REQUEST_VOCAB} from "../configs/socket";
 
   export default {
         name: "Ordering",
       components: {
-        bFormSelect,
+        BFormSelect,
 
       },
       data() {

@@ -82,7 +82,6 @@
         this.result = await this.$axios.$get(url);
         if (this.result.items[0] !== undefined) {
           this.item = this.result.items[0];
-          debugger;
         }
 
         this.$forceUpdate()

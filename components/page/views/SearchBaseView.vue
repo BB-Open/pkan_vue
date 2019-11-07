@@ -18,14 +18,13 @@
           <button
             @click="remove_all()"
             class="button"
-            type="button">Remove all
+            type="button">Alle zurück setzen
           </button>
           <search-selector title="Dateiformat" store_namespace="Search" property="file_format" :options="file_format_options"></search-selector>
           <search-selector title="Datenbereitsteller" store_namespace="Search" property="publisher" :options="publisher_options"></search-selector>
           <search-selector title="Kategorie" store_namespace="Search" property="category" :options="category_options"></search-selector>
           <search-selector title="Lizens" store_namespace="Search" property="license" :options="license_options"></search-selector>
           <pkan_datepicker label="Letzte Änderung:" namespace="Search" property="last_change"></pkan_datepicker>
-          <search-selector title="Stichworte" store_namespace="Search" property="keywords" :options="keywords_options"></search-selector>
         </div>
       </div>
     </template>
@@ -73,11 +72,7 @@
           vocab_name: 'license',
           number_displayed: 3
         },
-        keywords_options: {
-          vocab_name: 'keywords',
-          number_displayed: 3
-        },
-        search_selector_fields: ['category', 'file_format', 'publisher', 'license', 'keywords'],
+        search_selector_fields: ['category', 'file_format', 'publisher', 'license'],
         view_url: SEARCH_URL,
       }
     },

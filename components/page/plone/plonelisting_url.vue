@@ -2,11 +2,13 @@
   <div :class="style_class">
 
     <div v-for="item in this.result.items" :class="element_style_class">
-      <div class="element_title">{{ item.title }}</div>
-      <div class="element_date" v-if="item.date_text">{{ item.date_text }}</div>
-      <div class="element_logo" v-if="item.logo"><img :src="item.logo.download" :alt="item.title + ' Logo'"/></div>
-      <div class="element_description">{{ item.description }}</div>
-      <NuxtLink :to="get_nuxt_link(item.UID)">[Mehr]</NuxtLink>
+      <div class="plone_listing_element">
+        <div class="element_title">{{ item.title }}</div>
+        <div class="element_date" v-if="item.date_text">{{ item.date_text }}</div>
+        <div class="element_logo" v-if="item.logo"><img :src="item.logo.download" :alt="item.title + ' Logo'"/></div>
+        <div class="element_description">{{ item.description }}</div>
+        <NuxtLink :to="get_nuxt_link(item.UID)">[Mehr]</NuxtLink>
+      </div>
     </div>
   </div>
 </template>
@@ -114,6 +116,16 @@
 
   .element_date {
     font-style: italic;
+  }
+
+  .plone_listing_element {
+    padding: 15px;
+  }
+
+  @media (max-width: 640px) {
+    .plone_listing_element {
+      padding: 5px;
+    }
   }
 
 </style>

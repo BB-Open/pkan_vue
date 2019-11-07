@@ -84,7 +84,7 @@
   }
 
   .breadcrumb a:hover, .breadcrumb a:active, .breadcrumb a:focus {
-    /*todo*/
+    background-color: unset;
     color: #C73C35;
   }
 

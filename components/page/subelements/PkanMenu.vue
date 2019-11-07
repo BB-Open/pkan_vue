@@ -6,13 +6,13 @@
         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
              width="24" height="24"
              viewBox="0 0 172 172"
-             style=" fill:#000000;">
+             style=" fill:#C73C35;">
           <g transform="">
             <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
                stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
-               font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-              <path d="M0,172v-172h172v172z" fill="#c73c35"></path>
-              <g fill="#ffffff">
+               font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal" >
+              <path d="M0,172v-172h172v172z" fill="white"></path>
+              <g fill="#c73c35">
                 <path
                   d="M14.33333,35.83333v14.33333h143.33333v-14.33333zM14.33333,78.83333v14.33333h143.33333v-14.33333zM14.33333,121.83333v14.33333h143.33333v-14.33333z"></path>
               </g>
@@ -109,6 +109,11 @@
       float: left;
       position: relative;
       display: block;
+      background-color: #C73C35;
+    }
+
+    .menu .icon_box button {
+      background-color: #C73C35;
     }
 
     .menu .icon_box p {
@@ -117,13 +122,22 @@
       left: 30px;
       margin: 2px;
       padding: 1px;
+      background-color: #C73C35;
+      color: white;
     }
 
     .menu {
       display: flex;
       flex-direction: column;
-      padding-left: 0px;
-      padding-right: 0px;
+      padding-left: 0;
+      padding-right: 0;
+      position: fixed;
+      z-index: 2;
+      left: 0;
+      top: 0;
+      width: 100%;
+      padding-bottom: 5px;
+      background-color: white;
     }
 
     .menu .router-link {

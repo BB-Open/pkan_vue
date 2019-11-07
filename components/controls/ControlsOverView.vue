@@ -20,13 +20,13 @@
       return {
         namespace: 'Search',
         keyword_fields: ['textline_keywords'],
-        search_selector_fields: ['category', 'file_format', 'publisher', 'license', 'keywords'],
+        search_selector_fields: ['category', 'file_format', 'publisher', 'license'],
         raw_fields: ['sparql', ],
         date_range_fields: ['last_change'],
         display_green: [],
         display_red: [],
         vocab_terms: {},
-        vocabs_to_request: ['category', 'file_format', 'publisher', 'license', 'keywords']
+        vocabs_to_request: ['category', 'file_format', 'publisher', 'license']
       }
     },
     mixins: [

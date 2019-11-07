@@ -81,7 +81,8 @@
   }
 
   .footer-line a:hover, .footer-line a:active, .footer-line a:focus {
-    /*todo*/
+    color: black;
+    background-color: #FFCC00;
   }
 
   .footerelement a {
@@ -90,8 +91,8 @@
   }
 
   .footerelement a:hover, .footerelement a:active, .footerelement a:focus {
-    /*todo*/
     color: #C73C35;
+    background-color: unset;
   }
 
   .footerbox, .footer-line {

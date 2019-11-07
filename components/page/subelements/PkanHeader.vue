@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="header-line">DatenAdler Brandenburg</div>
+    <div class="header-line hidesmallscreen">DatenAdler Brandenburg</div>
     <div class="logo-container content_container">
       <div class="logo logo-left">
         <img src="../../../assets/brandenburg-logo.png" alt="Logo Brandenburg"/>
@@ -85,6 +85,10 @@
     .header-line {
       padding-left: 10px;
       padding-right: 10px;
+    }
+
+    .logo-container {
+      margin-top: 30px;
     }
   }
 

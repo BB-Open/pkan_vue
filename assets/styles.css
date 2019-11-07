@@ -172,7 +172,8 @@ a, a:visited {
 }
 
 a:hover, a:active, a:focus {
-  /*todo*/
+  color: black;
+  background-color: #FFCC00;
 }
 
 .bb-ifa {
