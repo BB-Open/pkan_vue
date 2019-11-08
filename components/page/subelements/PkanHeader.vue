@@ -2,11 +2,11 @@
   <div class="header">
     <div class="header-line hidesmallscreen">DatenAdler Brandenburg</div>
     <div class="logo-container content_container">
-      <div class="logo logo-left"><a href="https://www.brandenburg.de" title="Link zum Landesportal Brandenburg">
+      <div class="logo logo-left"><a class="image-link" href="https://www.brandenburg.de" title="Link zum Landesportal Brandenburg">
         <img src="../../../assets/brandenburg-logo.png" alt="Logo Brandenburg"/></a>
       </div>
-      <div class="logo logo-right"><a :href="my_url" title="Zur Startseite"></a>
-        <img src="../../../assets/datenadler-logo.png" alt="Logo Datenadler"/>
+      <div class="logo logo-right"><a class="image-link" :href="my_url" title="Zur Startseite">
+        <img src="../../../assets/datenadler-logo.png" alt="Logo Datenadler"/></a>
       </div>
     </div>
     <div class="header_content content_container">
@@ -79,6 +79,11 @@
   .header-line {
     padding-left: 30px;
     padding-right: 30px;
+  }
+
+  .image-link:hover, .image-link:focus, .image-link {
+    background-color: unset;
+    color: unset;
   }
 
 
