@@ -4,23 +4,25 @@
     <input type="text" v-model="search_string" placeholder="Kriterien durchsuchen" @change="filter_criteria"></label>
     <div class="criteria_buttons">
       <button v-for="item in display_values" @click="button_clicked(item)"
-              v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove}">
-        {{ data_store[item].text }}
+              v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove, criteria_button_unselected: !data_store[item].check_remove && !data_store[item].check_add}"
+              v-bind:alt="get_item_alt(item)">
+        <span v-if="data_store[item].check_add">Ausgewählt: </span><span v-if="data_store[item].check_remove">Ausgenommen: </span>{{ data_store[item].text }}
       </button>
       <button v-for="item in additional_values" @click="button_clicked(item)"
-              v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove}"
-              v-if="show_more || data_store[item].check_add || data_store[item].check_remove">
+              v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove, criteria_button_unselected: !data_store[item].check_remove && !data_store[item].check_add}"
+              v-if="show_more || data_store[item].check_add || data_store[item].check_remove"
+              v-bind:alt="get_item_alt(item)">
         {{ data_store[item].text }}
       </button>
     </div>
 
 
     <div>
-      <button @click="show_more = !show_more" v-if="additional_values.length > 0" class="button">
+      <button @click="show_more = !show_more" v-if="additional_values.length > 0" class="selectorbutton">
         <template v-if="!show_more">ᐁ Mehr</template>
         <template v-if="show_more">ᐃ Weniger</template>
       </button><br v-if="additional_values.length > 0"/>
-      <button @click="reset_button" class="button">
+      <button @click="reset_button" class="selectorbutton">
         <template>Zurück setzen</template>
       </button>
     </div>
@@ -112,10 +114,8 @@
         let value_pos = this.values_stored.value_pos;
 
 
-        if (this.vocab !== undefined) {
-          let vocab_keys = Object.keys(this.vocab);
-          this.values = vocab_keys;
-          vocab_keys.forEach(
+        if (this.values !== undefined) {
+          this.values.forEach(
             function (item) {
               if (value_neg.includes(item)) {
                 this.data_store[item] = {
@@ -141,12 +141,13 @@
         this.$forceUpdate()
       },
       filter_criteria() {
+        let vocab_keys = Object.keys(this.vocab);
         if (this.search_string === '' || this.search_string === undefined) {
-          this.values = this.vocab
+          this.values = vocab_keys;
         } else {
           let search = this.search_string.toLowerCase();
           this.values = [];
-          this.vocab.forEach(
+          vocab_keys.forEach(
             function (item) {
               let compare = item.toLowerCase();
               let store = this.data_store[item];
@@ -175,6 +176,7 @@
 
       reload_widget(){
         this.init_values();
+        this.values = Object.keys(this.vocab);
         this.set_values_for_widget()
       },
       init_values() {
@@ -199,9 +201,17 @@
         data.vocab.forEach(function (field) {
           this.vocab[field.id] = field.text
         }, this);
-
+        this.values = Object.keys(this.vocab);
         this.set_values_for_widget();
       },
+      get_item_alt(item) {
+        if (this.data_store[item].check_add) {
+          return 'In Suche aufgenommen'
+        } else if (this.data_store[item].check_remove) {
+          return 'Von Suche ausgenommen'
+        }
+        return ''
+      }
 
     },
     beforeDestroy: function () {
@@ -213,11 +223,15 @@
 <style scoped>
 
   .button_add {
-    background-color: #4CAF50;
+    background-color: #ffffff;
+    color: #161616;
+    border: 2px solid #99CC66;
   }
 
   .button_remove {
-    background-color: #e50018;
+    background-color: #ffffff;
+    color: #161616;
+    border: 2px solid #C73C35;
   }
 
   .SearchSelector {
@@ -238,6 +252,22 @@
   .criteria_buttons {
     padding-top: 8px;
     padding-bottom: 8px;
+  }
+
+  .criteria_button_unselected {
+    background-color: white;
+    color: #161616;
+    border: 2px solid #C0C0C0;
+  }
+
+  .criteria_button_unselected:hover,
+  .criteria_button_unselected:focus,
+  .button_add:hover,
+  .button_add:focus,
+  .button_remove:hover,
+  .button_remove:focus {
+    color: #161616;
+    background-color: #eeeeee;
   }
 
 </style>

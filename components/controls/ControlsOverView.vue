@@ -2,8 +2,8 @@
   <div>
     <h2>Aktuelle Suche:</h2>
     <div class="box_area">
-      <div v-for="item in display_green" class="green search_box">{{item}}</div>
-      <div v-for="item in display_red" class="red search_box">{{item}}</div>
+      <div v-for="item in display_green" class="green search_box">Ausgewählt: {{item}}</div>
+      <div v-for="item in display_red" class="red search_box">Ausgenommen: {{item}}</div>
     </div>
   </div>
 </template>
@@ -151,11 +151,15 @@
 
 <style scoped>
   .green {
-    background-color: #4CAF50;
+    background-color: #ffffff;
+    color: #161616;
+    border: 2px solid #99CC66;
   }
 
   .red {
-    background-color: #e50018;
+    background-color: #ffffff;
+    color: #161616;
+    border: 2px solid #C73C35;
   }
 
   .search_box {

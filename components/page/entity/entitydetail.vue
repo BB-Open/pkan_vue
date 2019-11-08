@@ -11,7 +11,7 @@
     <div v-for="item in this.result_networking" :class="element_style_class">
       <div class="element_title">{{ get_label(item.type)}}: {{ item.title }}</div>
       <div class="element_description">{{ item.description }}</div>
-      <NuxtLink :to="get_nuxt_link(item.id)">[Mehr]</NuxtLink>
+      <NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink>
     </div>
   </div>
 </template>

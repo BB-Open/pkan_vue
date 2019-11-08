@@ -7,7 +7,7 @@
         <div class="element_date" v-if="item.date_text">{{ item.date_text }}</div>
         <div class="element_logo" v-if="item.logo"><img :src="item.logo.download" :alt="item.title + ' Logo'"/></div>
         <div class="element_description">{{ item.description }}</div>
-        <NuxtLink :to="get_nuxt_link(item.UID)">[Mehr]</NuxtLink>
+        <NuxtLink :to="get_nuxt_link(item.UID)">Weiterlesen</NuxtLink>
       </div>
     </div>
   </div>

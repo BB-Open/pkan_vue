@@ -79,7 +79,7 @@
   }
 
   .breadcrumb a {
-    color: black;
+    color: #161616;
     text-decoration: unset;
   }
 

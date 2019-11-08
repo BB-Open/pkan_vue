@@ -5,7 +5,7 @@
       <div v-for="item in this.result" :class="element_style_class">
         <div class="element_title">{{ item.type}}: {{ item.title }}</div>
         <div class="element_description">{{ item.description }}</div>
-        <NuxtLink :to="get_nuxt_link(item.id)">[Mehr]</NuxtLink>
+        <NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink>
       </div>
     </div>
   </div>

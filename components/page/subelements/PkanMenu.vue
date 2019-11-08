@@ -38,8 +38,6 @@
     <nuxt-link to="/data_protection" class="router-link hidebigscreen">Datenschutz</nuxt-link>
     <hr class="hidebigscreen"/>
     <nuxt-link to="/impressum" class="router-link hidebigscreen">Impressum</nuxt-link>
-
-
   </nav>
 
 </template>
@@ -81,7 +79,7 @@
     margin: 2px;
     text-align: center;
     text-decoration: none;
-    color: #000000;
+    color: #161616;
   }
 
   .router-link:hover,
@@ -101,6 +99,11 @@
 
   .hidebigscreen {
     display: none;
+  }
+
+  .content_container {
+    margin-right: -16px;
+    padding-right: 0;
   }
 
   @media (max-width: 640px) {
@@ -155,6 +158,7 @@
       float: none;
       display: block;
       text-align: left;
+      padding-left: 5px;
     }
 
     .menu.responsive .hidebigscreen {

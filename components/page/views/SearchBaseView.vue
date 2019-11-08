@@ -17,7 +17,7 @@
           <h1>Kriterien</h1>
           <button
             @click="remove_all()"
-            class="button"
+            class="selectorbutton"
             type="button">Alle zurück setzen
           </button>
           <search-selector title="Dateiformat" store_namespace="Search" property="file_format" :options="file_format_options"></search-selector>

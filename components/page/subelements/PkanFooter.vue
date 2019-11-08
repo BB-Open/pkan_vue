@@ -81,12 +81,12 @@
   }
 
   .footer-line a:hover, .footer-line a:active, .footer-line a:focus {
-    color: black;
+    color: #161616;
     background-color: #FFCC00;
   }
 
   .footerelement a {
-    color: black;
+    color: #161616;
     text-decoration: unset;
   }
 
