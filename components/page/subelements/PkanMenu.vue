@@ -20,7 +20,7 @@
           </g>
         </svg>
       </button>
-      <p>Hauptmenü</p></div>
+      <p>DatenAdler.de</p></div>
     <nuxt-link class="router-link" to="/start">Start</nuxt-link>
     <hr class="hidebigscreen"/>
     <nuxt-link class="router-link" to="/faq">Antworten</nuxt-link>
