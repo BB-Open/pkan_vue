@@ -2,6 +2,9 @@
   <div :class="style_class">
     <h1>{{title}}</h1>
     <p>{{description}}</p>
+    <a :href="id">Originallink aufrufen</a>
+    <h2>Download:</h2>
+    <download-control :id="id"></download-control>
     <h2>Felder:</h2>
     <div v-for="item in this.result_fields" :class="element_style_class">
       <div class="element_title">{{ get_label(item.field) }}:</div>
@@ -21,9 +24,11 @@
   import {EV} from "../../configs/events";
   import {REQUEST_ITEM_DETAIL, REQUEST_ITEM_TITLE_DESC, REQUEST_LABEL} from "../../configs/socket";
   import * as rdf from "rdf";
+  import DownloadControl from "../../controls/DownloadControl";
 
   export default {
     name: "sparqlnetworking",
+    components: {DownloadControl},
     props: ['id', 'view_url', 'element_style_class', 'style_class',],
     data() {
       return {
