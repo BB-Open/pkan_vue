@@ -2,7 +2,7 @@
   <div :class="style_class">
     <h2>Suchergebnisse:</h2>
     <b-pagination
-      v-model="selected"
+      v-model="pagination_page"
       :total-rows="rows"
       :per-page="perPage"
       first-text="Erste"
@@ -18,7 +18,7 @@
       <NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink>
     </div>
     <b-pagination
-      v-model="selected"
+      v-model="pagination_page"
       :total-rows="rows"
       :per-page="perPage"
       first-text="Erste"
@@ -49,11 +49,11 @@
         }
       },
       computed: {
-        selected: {
-          set(selected) {
-            this.$store.ep_commit(this.namespace, this.property_end, selected);
-            this.$store.ep_commit(this.namespace, this.property_start, selected - 1);
-            this.$EventBus.$emit(EV.CHANGED_BATCH, selected);
+        pagination_page: {
+          set(pagination_page) {
+            this.$store.ep_commit(this.namespace, this.property_end, pagination_page);
+            this.$store.ep_commit(this.namespace, this.property_start, pagination_page - 1);
+            this.$EventBus.$emit(EV.CHANGED_BATCH, pagination_page);
           },
           get() {
             return this.$store.state[this.namespace][this.property_end];
