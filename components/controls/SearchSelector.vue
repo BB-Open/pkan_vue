@@ -149,8 +149,8 @@
           this.values = [];
           vocab_keys.forEach(
             function (item) {
-              let compare = item.toLowerCase();
               let store = this.data_store[item];
+              let compare = store.text.toLowerCase();
               if (compare.includes(search)) {
                 this.values.push(item)
               } else if (store.check_remove || store.check_add) {
