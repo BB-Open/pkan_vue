@@ -1,4 +1,4 @@
 export const WEBSOCKET_URL = 'https://flask.datenadler.de';
-export const PLONE_URL = 'https://new.datenadler.de/Plone';
+export const PLONE_URL = 'https://backend.datenadler.de';
 export const MY_URL = 'https://frontend.datenadler.de';
 export const RDF_DOWNLOAD_URL = WEBSOCKET_URL + '/download';
