@@ -59,7 +59,13 @@
         // retrieve the transaction_id from the response
         // and call the resolve function of the promise with the response
         let resolve = this.$static.requests.get(response.transaction_id);
-        resolve(response);
+        try {
+          resolve(response);
+        } catch (e) {
+          console.log(e.message);
+          console.log(e.stack)
+        }
+
         this.$static.requests.delete(response.transaction_id);
       }
     }
