@@ -17,10 +17,6 @@ export const state = () => ({
     'value_pos': [],
     'value_neg': []
   },
-  keywords: {
-    'value_pos': [],
-    'value_neg': []
-  },
   order_by: null,
   last_change: [null, null],
   sparql: '',

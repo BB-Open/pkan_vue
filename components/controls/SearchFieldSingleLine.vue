@@ -67,17 +67,21 @@
         }
       },
       load_value_from_state() {
+        debugger;
         this.search_string = this.$store.state[this.store_namespace][this.property]
       },
       init_events() {
         this.$EventBus.$on(EV.RESET_SEARCH_TERMS, () => {
           this.$log.debug('reset field from state');
+          debugger;
           this.load_value_from_state()
         });
       },
       save() {
+        debugger;
         this.$store.ep_commit(this.store_namespace, this.property, this.search_string);
         this.$EventBus.$emit(EV.CHANGED_SEARCH_TERMS, {});
+        this.load_value_from_state();
       }
 
     },
