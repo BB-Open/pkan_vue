@@ -1,7 +1,7 @@
 <template>
   <div class="picker">
     <div class="DateSelector">
-      <lable>{{ this.label }}</lable><br/>
+      <label>{{ this.label }}</label><br/>
       <label>Von: </label>
       <datepicker v-model="value_start" placeholder="Datum wählen" :key="namespace + property + 'datepicker_start'" :monday-first="true" :language="lang" input-class="date_input" calender-class="calender_input" :format="format"></datepicker><label>Bis:</label>
       <datepicker v-model="value_end" placeholder="Datum wählen" :key="namespace + property + 'datepicker_end'" :monday-first="true" :language="lang" input-class="date_input" calender-class="calender_input" :format="format"></datepicker>

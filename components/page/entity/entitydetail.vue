@@ -172,4 +172,8 @@
 
 <style scoped>
 
+  .element_description {
+    font-style: italic;
+  }
+
 </style>
