@@ -10,9 +10,6 @@
 
 <script>
   import BaseView from '../../components/page/views/BaseView';
-  import SocketPromise from '../../components/mixins/SocketPromise';
-  import {DETAIL_SEARCH_URL} from "../../components/configs/routing";
-  import {REQUEST_VOCAB} from "../../components/configs/socket";
   import VocabBox from "../../components/controls/VocabBox";
 
   export default {
