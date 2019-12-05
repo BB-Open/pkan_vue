@@ -57,3 +57,12 @@ export function removeSelfClosingTags(html) {
   }
   return newHtml + split[split.length-1];
 }
+
+export function get_tag_for_namespace(obj) {
+  let tag = obj.$vnode.tag;
+  if (tag === undefined) {
+    return ''
+  }
+  tag = tag.replace('-', '');
+  return tag
+}
