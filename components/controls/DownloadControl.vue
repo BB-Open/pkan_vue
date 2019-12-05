@@ -86,4 +86,9 @@
     clear: both;
     padding-top: 8px;
   }
+
+  .mb-3 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
 </style>

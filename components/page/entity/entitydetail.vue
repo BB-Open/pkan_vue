@@ -7,14 +7,14 @@
     <download-control :id="id"></download-control>
     <h2>Felder:</h2>
     <div v-for="item in this.result_fields" :class="element_style_class">
-      <div class="element_title">{{ get_label(item.field) }}:</div>
-      <div>{{item.value}}</div>
+      <p class="element_title">{{ get_label(item.field) }}:</p>
+      <p class="element_description">{{item.value}}</p>
     </div>
     <h2>Vernetzung:</h2>
     <div v-for="item in this.result_networking" :class="element_style_class">
-      <div class="element_title">{{ get_label(item.type)}}: {{ item.title }}</div>
-      <div class="element_description">{{ item.description }}</div>
-      <NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink>
+      <p class="element_title">{{ get_label(item.type)}}: {{ item.title }}</p>
+      <p class="element_description">{{ item.description }}</p>
+      <p><NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink></p>
     </div>
   </div>
 </template>
@@ -172,8 +172,12 @@
 
 <style scoped>
 
-  .element_description {
-    font-style: italic;
+  .element_title, .element_description {
+    margin-bottom: 0;
+  }
+
+  .element_title {
+    font-weight: bold;
   }
 
 </style>

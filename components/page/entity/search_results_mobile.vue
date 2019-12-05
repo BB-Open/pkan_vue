@@ -3,9 +3,9 @@
     <h2>Suchergebnisse:</h2>
     <div v-infinite-scroll="load_more" infinite-scroll-disabled="busy" :infinite-scroll-distance="perPage">
       <div v-for="item in this.result" :class="element_style_class">
-        <div class="element_title">{{ item.type}}: {{ item.title }}</div>
-        <div class="element_description">{{ item.description }}</div>
-        <NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink>
+        <p class="element_title">{{ item.type}}: {{ item.title }}</p>
+        <p class="element_description">{{ item.description }}</p>
+        <p><NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink></p>
       </div>
     </div>
   </div>
@@ -118,6 +118,10 @@
 </script>
 
 <style scoped>
+
+  .element_title, .element_description {
+    margin-bottom: 0;
+  }
 
   .element_title {
     font-weight: bold;

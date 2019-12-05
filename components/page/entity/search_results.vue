@@ -13,9 +13,9 @@
     ></b-pagination>
 
     <div v-for="item in this.result" :class="element_style_class">
-      <div class="element_title">{{ item.type}}: {{ item.title }}</div>
-      <div class="element_description">{{ item.description }}</div>
-      <NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink>
+      <p class="element_title">{{ item.type}}: {{ item.title }}</p>
+      <p class="element_description">{{ item.description }}</p>
+      <p><NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink></p>
     </div>
     <b-pagination
       v-model="pagination_page"
@@ -118,6 +118,10 @@
 
   .element_logo img {
     max-width: 100px;
+  }
+
+  .element_title, .element_description {
+    margin-bottom: 0;
   }
 
 </style>
