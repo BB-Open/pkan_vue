@@ -30,7 +30,7 @@
     "nodemon": "^1.19.4"
   },
   "browserslist": [
-    "> 1%",
+    "> 0.25%",
     "last 2 versions",
     "not ie <= 8"
   ]
