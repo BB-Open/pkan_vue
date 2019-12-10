@@ -1,10 +1,12 @@
 <template>
   <div class="category box_area">
     <div v-for="item in this.vocab" class="box">
+      <!--todo: replace with a-tag, handle_click works to-->
       <button
         @click="handle_click(item.id)"
         class="lightbutton button vocabbutton"
         type="button">
+        <!-- todo: no div in button, use span -->
         <div class="category_label">
         <div class="category_icon"><i :class="item.icon_class + ' bb-ifa'" v-if="item.icon_class"/><br v-if="item.icon_class" class="hidesmallscreen"/></div>
         <div class="category_text">{{item.text}}</div></div>
