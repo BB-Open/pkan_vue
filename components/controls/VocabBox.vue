@@ -1,6 +1,6 @@
 <template>
   <div class="category box_area">
-    <div v-for="item in this.vocab" class="box">
+    <div v-for="item in this.vocab" class="box" :key="item.id">
       <!--todo: replace with a-tag, handle_click works to-->
       <button
         @click="handle_click(item.id)"
