@@ -21,7 +21,7 @@
         namespace: 'Search',
         keyword_fields: ['textline_keywords'],
         search_selector_fields: ['category', 'file_format', 'publisher', 'license'],
-        raw_fields: ['sparql', ],
+        raw_fields: ['sparql',],
         date_range_fields: ['last_change'],
         display_green: [],
         display_red: [],
@@ -52,7 +52,7 @@
             )
         }, this)
       },
-      handle_result_vocab(data){
+      handle_result_vocab(data) {
         data.vocab.forEach(function (field) {
           this.vocab_terms[field.id] = field.text
         }, this);
@@ -64,7 +64,7 @@
         this.keyword_fields.forEach(function (field) {
           this.add_strings(field)
         }, this);
-        this.date_range_fields.forEach(function (field){
+        this.date_range_fields.forEach(function (field) {
           this.add_date_range(field)
         }, this);
         this.search_selector_fields.forEach(function (field) {
@@ -87,7 +87,7 @@
         let value = this.$store.state[this.namespace][field];
 
         if (value !== "" && value !== undefined && value !== null) {
-          this.display_green.push(field +': ' +value)
+          this.display_green.push(field + ': ' + value)
         }
       },
 
@@ -104,7 +104,7 @@
           }, this);
         }
       },
-      add_date_range(field){
+      add_date_range(field) {
         let value = this.$store.state[this.namespace][field];
         let start = value[0];
         let end = value[1];
@@ -122,7 +122,7 @@
         }
 
       },
-      term_to_str(str){
+      term_to_str(str) {
         if (str in this.vocab_terms) {
           return this.vocab_terms[str]
         }

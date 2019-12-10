@@ -31,7 +31,7 @@
   import {EV} from "../configs/events";
 
   export default {
-    name: 'SearchField',
+    name: 'SearchFieldMulitline',
     props: ['property', 'initial_value', 'place_holder', 'store_namespace', 'next_view', 'rows', 'button_label', 'label'],
     components: {},
     data() {

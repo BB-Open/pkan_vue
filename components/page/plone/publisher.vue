@@ -17,11 +17,11 @@
 <script>
   import {EV} from "../../configs/events";
   import {PLONE_URL} from "../../configs/server_settings";
-  import {BLOG_URL, SEARCH_URL} from "../../configs/routing";
+  import {SEARCH_URL} from "../../configs/routing";
   import entitydetail from "../entity/entitydetail";
 
   export default {
-    name: "plonepage_uid",
+    name: "publisher",
     props: ['uid'],
     components: {
       entitydetail,
@@ -34,7 +34,7 @@
         item: {
           title: '',
           description: '',
-          text:  '',
+          text: '',
           sparql_identifier: '',
         },
         view_url: SEARCH_URL,

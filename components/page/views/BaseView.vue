@@ -1,27 +1,32 @@
 <template>
   <div class="body_content">
-  <div :class="namespace">
-    <pkan-header></pkan-header>
-     <div class="twocolumncontent content_container" v-if="display_info_column">
-      <div class="main_content ">
-        <search-field v-if="this.display_search" property="textline_keywords" store_namespace="Search" :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view" rows="1" button_label="Suchen"></search-field>
+    <div :class="namespace">
+      <pkan-header></pkan-header>
+      <div class="twocolumncontent content_container" v-if="display_info_column">
+        <div class="main_content ">
+          <search-field-single-line v-if="this.display_search" property="textline_keywords" store_namespace="Search"
+                                    :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
+                                    rows="1" button_label="Suchen"></search-field-single-line>
+          <slot name="content"></slot>
+        </div>
+        <div class="info_column_right info_column">
+          <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="side_tag"
+                            :display_title="false"></plonepage_search>
+        </div>
+      </div>
+      <div class="content_container" v-if="!display_info_column">
+        <search-field-single-line v-if="this.display_search" property="textline_keywords" store_namespace="Search"
+                                  :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
+                                  rows="1" button_label="Suchen"></search-field-single-line>
         <slot name="content"></slot>
       </div>
-      <div class="info_column_right info_column">
-        <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="side_tag" :display_title="false"></plonepage_search>
-      </div>
+      <pkan-footer></pkan-footer>
     </div>
-    <div class="content_container" v-if="!display_info_column">
-      <search-field v-if="this.display_search" property="textline_keywords" store_namespace="Search" :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view" rows="1" button_label="Suchen"></search-field>
-      <slot name="content"></slot>
-    </div>
-    <pkan-footer></pkan-footer>
-  </div>
   </div>
 </template>
 
 <script>
-  import SearchField from "../../controls/SearchFieldSingleLine";
+  import SearchFieldSingleLine from "../../controls/SearchFieldSingleLine";
   import PkanFooter from "../subelements/PkanFooter";
   import PkanHeader from "../subelements/PkanHeader";
   import {EV} from "../../configs/events";
@@ -38,7 +43,7 @@
     name: 'BaseView',
     components: {
       PkanHeader,
-      SearchField,
+      SearchFieldSingleLine,
       PkanFooter,
       plonepage_search,
     },
@@ -59,9 +64,10 @@
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
       this.$store.ep_commit('BreadCrumb', 'currentView', this.breadcrumb);
-      if (this.ignore_last_title === undefined){
+      if (this.ignore_last_title === undefined) {
         this.$store.ep_commit('BreadCrumb', 'last_title', null)
-      };
+      }
+      ;
       this.$EventBus.$emit(EV.BREADCRUMB_CHANGED, {});
     },
   }

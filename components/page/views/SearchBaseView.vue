@@ -1,5 +1,6 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="namespace" :search_initial="this.search_initial()" :display_info_column="this.display_info_column">
+  <base-view :namespace="namespace" :breadcrumb="namespace" :search_initial="this.search_initial()"
+             :display_info_column="this.display_info_column">
     <template slot="content">
       <div class="detail_search">
 
@@ -8,10 +9,18 @@
           <div class="additional_widget">
             <slot name="additional_widget"></slot>
           </div>
-          <div class="controls_overview"><controls-over-view></controls-over-view><ordering></ordering></div>
+          <div class="controls_overview">
+            <controls-over-view></controls-over-view>
+            <ordering></ordering>
+          </div>
 
-          <div class="results hidesmallscreen"><search_results namespace="Search" :view_url="view_url" v-if="$mq === 'screen'"></search_results></div>
-          <div class="results hidebigscreen"><search_results_mobile namespace="Search" :view_url="view_url" v-if="$mq === 'mobile'"></search_results_mobile></div>
+          <div class="results hidesmallscreen">
+            <search_results namespace="Search" :view_url="view_url" v-if="$mq === 'screen'"></search_results>
+          </div>
+          <div class="results hidebigscreen">
+            <search_results_mobile namespace="Search" :view_url="view_url"
+                                   v-if="$mq === 'mobile'"></search_results_mobile>
+          </div>
         </div>
         <div class="controls">
           <h1>Kriterien</h1>
@@ -20,11 +29,15 @@
             class="selectorbutton"
             type="button">Alle zurück setzen
           </button>
-          <search-selector title="Dateiformat" store_namespace="Search" property="file_format" :options="file_format_options"></search-selector>
-          <search-selector title="Datenbereitsteller" store_namespace="Search" property="publisher" :options="publisher_options"></search-selector>
-          <search-selector title="Kategorie" store_namespace="Search" property="category" :options="category_options"></search-selector>
-          <search-selector title="Lizens" store_namespace="Search" property="license" :options="license_options"></search-selector>
-          <pkan_datepicker label="Letzte Änderung:" namespace="Search" property="last_change"></pkan_datepicker>
+          <search-selector title="Dateiformat" store_namespace="Search" property="file_format"
+                           :options="file_format_options"></search-selector>
+          <search-selector title="Datenbereitsteller" store_namespace="Search" property="publisher"
+                           :options="publisher_options"></search-selector>
+          <search-selector title="Kategorie" store_namespace="Search" property="category"
+                           :options="category_options"></search-selector>
+          <search-selector title="Lizens" store_namespace="Search" property="license"
+                           :options="license_options"></search-selector>
+          <date-picker label="Letzte Änderung:" namespace="Search" property="last_change"></date-picker>
         </div>
       </div>
     </template>
@@ -41,10 +54,11 @@
   import {EV} from "../../configs/events";
   import {SEARCH_URL} from "../../configs/routing";
   import search_results_mobile from "../entity/search_results_mobile";
-  import pkan_datepicker from "../../controls/DatePicker";
+  import DatePicker from "../../controls/DatePicker";
 
   export default {
     components: {
+      DatePicker,
       Ordering,
       search_results,
       search_results_mobile,
@@ -105,7 +119,7 @@
     },
     beforeDestroy: function () {
       // clear for next search when we leave search namespace
-      if (!this.$router.currentRoute.fullPath.includes('search')){
+      if (!this.$router.currentRoute.fullPath.includes('search')) {
         this.remove_all()
       }
 
@@ -121,12 +135,14 @@
     flex-wrap: wrap;
     width: 70%
   }
+
   .detail_search, .controls_overview {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
   }
+
   .controls_overview {
     justify-content: space-between;
   }

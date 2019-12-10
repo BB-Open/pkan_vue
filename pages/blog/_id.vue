@@ -12,6 +12,7 @@
   import BaseView from "../../components/page/views/BaseView";
 
   export default {
+    name: 'Blogdetail',
     components: {
       plonepage_uid,
       BaseView

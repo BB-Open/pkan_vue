@@ -11,6 +11,7 @@
   import publisher from "../../components/page/plone/publisher";
 
   export default {
+    name: 'PublisherDetail',
     components: {
       BaseView,
       publisher

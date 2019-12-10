@@ -2,7 +2,8 @@
   <base-view :namespace="namespace" :breadcrumb="namespace" :display_info_column="true">
     <template slot="content">
       <h1>{{ this.namespace }}</h1>
-      <plonelisting_url :view_url="view_url" :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order" :tag="tag" :display_date="true"></plonelisting_url>
+      <plonelisting_url :view_url="view_url" :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order"
+                        :tag="tag" :display_date="true"></plonelisting_url>
 
     </template>
   </base-view>
@@ -39,8 +40,7 @@
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
     },
-    methods: {
-    }
+    methods: {}
 
   }
 </script>

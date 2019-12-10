@@ -2,7 +2,8 @@
   <div class="header">
     <div class="header-line hidesmallscreen">DatenAdler Brandenburg</div>
     <div class="logo-container content_container">
-      <div class="logo logo-left"><a class="image-link" href="https://www.brandenburg.de" title="Link zum Landesportal Brandenburg">
+      <div class="logo logo-left"><a class="image-link" href="https://www.brandenburg.de"
+                                     title="Link zum Landesportal Brandenburg">
         <img src="../../../assets/brandenburg-logo.png" alt="Logo Brandenburg"/></a>
       </div>
       <div class="logo logo-right"><a class="image-link" :href="my_url" title="Zur Startseite">
@@ -10,7 +11,7 @@
       </div>
     </div>
     <div class="header_content content_container">
-      <pkan-menu ></pkan-menu>
+      <pkan-menu></pkan-menu>
       <hr/>
       <breadcrumb></breadcrumb>
     </div>
@@ -19,22 +20,22 @@
 </template>
 
 <script>
-    import PkanMenu from "./PkanMenu";
-    import Breadcrumb from "./Breadcrumb";
-    import {MY_URL} from "../../configs/server_settings";
+  import PkanMenu from "./PkanMenu";
+  import Breadcrumb from "./Breadcrumb";
+  import {MY_URL} from "../../configs/server_settings";
 
-    export default {
-        name: "PkanHeader",
-      components: {
-        PkanMenu,
-        Breadcrumb
-      },
-      data() {
-        return {
-          my_url: MY_URL,
-        }
-      },
-    }
+  export default {
+    name: "PkanHeader",
+    components: {
+      PkanMenu,
+      Breadcrumb
+    },
+    data() {
+      return {
+        my_url: MY_URL,
+      }
+    },
+  }
 </script>
 
 <style scoped>

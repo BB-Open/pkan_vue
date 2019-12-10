@@ -1,12 +1,13 @@
 <template>
   <div class="SearchSelector">
     <label>{{ title }}:<br/>
-    <input type="text" v-model="search_string" placeholder="Kriterien durchsuchen" @change="filter_criteria"></label>
+      <input type="text" v-model="search_string" placeholder="Kriterien durchsuchen" @change="filter_criteria"></label>
     <div class="criteria_buttons">
       <button v-for="item in display_values" @click="button_clicked(item)"
               v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove, criteria_button_unselected: !data_store[item].check_remove && !data_store[item].check_add}"
               v-bind:alt="get_item_alt(item)">
-        <span v-if="data_store[item].check_add">Ausgewählt: </span><span v-if="data_store[item].check_remove">Ausgenommen: </span>{{ data_store[item].text }}
+        <span v-if="data_store[item].check_add">Ausgewählt: </span><span v-if="data_store[item].check_remove">Ausgenommen: </span>{{
+        data_store[item].text }}
       </button>
       <button v-for="item in additional_values" @click="button_clicked(item)"
               v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove, criteria_button_unselected: !data_store[item].check_remove && !data_store[item].check_add}"
@@ -21,7 +22,8 @@
       <button @click="show_more = !show_more" v-if="additional_values.length > 0" class="selectorbutton">
         <template v-if="!show_more">ᐁ Mehr</template>
         <template v-if="show_more">ᐃ Weniger</template>
-      </button><br v-if="additional_values.length > 0"/>
+      </button>
+      <br v-if="additional_values.length > 0"/>
       <button @click="reset_button" class="selectorbutton">
         <template>Zurück setzen</template>
       </button>
@@ -122,16 +124,18 @@
                   check_add: false,
                   check_remove: true,
                 };
-              } else if (value_pos.includes(item)){
+              } else if (value_pos.includes(item)) {
                 this.data_store[item] = {
                   check_add: true,
                   check_remove: false,
                 };
               } else {
-              this.data_store[item] = {
-                check_add: false,
-                check_remove: false,
-              }};
+                this.data_store[item] = {
+                  check_add: false,
+                  check_remove: false,
+                }
+              }
+              ;
 
               this.data_store[item].text = this.vocab[item]
             }, this)
@@ -160,7 +164,7 @@
         }
         this.set_values_for_widget()
       },
-      reset_button(){
+      reset_button() {
         this.values_stored = {
           value_pos: [],
           value_neg: []
@@ -169,12 +173,12 @@
         this.save();
         this.reload_widget()
       },
-      save(){
+      save() {
         this.$store.ep_commit(this.store_namespace, this.property, this.values_stored);
         this.$EventBus.$emit(EV.CHANGED_SEARCH_TERMS, {});
       },
 
-      reload_widget(){
+      reload_widget() {
         this.init_values();
         this.values = Object.keys(this.vocab);
         this.set_values_for_widget()

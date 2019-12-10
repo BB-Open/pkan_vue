@@ -5,7 +5,9 @@
       <div v-for="item in this.result" :class="element_style_class">
         <p class="element_title">{{ item.type}}: {{ item.title }}</p>
         <p class="element_description">{{ item.description }}</p>
-        <p><NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink></p>
+        <p>
+          <NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink>
+        </p>
       </div>
     </div>
   </div>
@@ -18,7 +20,7 @@
   import {BPagination} from 'bootstrap-vue'
 
   export default {
-    name: "search_results",
+    name: "search_results_mobile",
     props: ['view_url', 'element_style_class', 'style_class', 'namespace'],
     data() {
       return {

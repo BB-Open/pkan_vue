@@ -1,5 +1,3 @@
-
-
 <script>
   import {v1} from 'uuid'
   import {get_tag_for_namespace} from "./utils";
@@ -24,7 +22,7 @@
         let tag = get_tag_for_namespace(this);
         let namespace_name = 'namespaces_' + tag;
         let requests_name = 'requests_' + tag;
-        
+
         let request = {
           namespace: namespace,
           params: params,
@@ -46,7 +44,7 @@
           }
           // send the request
           try {
-            if (this.$static[requests_name].has(request.transaction_id)){
+            if (this.$static[requests_name].has(request.transaction_id)) {
               this.$log.debug('Transaction ID already in use: ' + request.transaction_id)
             }
             this.$static[requests_name].set(request.transaction_id, resolve);

@@ -2,7 +2,8 @@
   <base-view :namespace="namespace" :breadcrumb="namespace" :display_info_column="true">
     <template slot="content">
       <h1>Datenbereitsteller</h1>
-      <plonelisting_url :portal_type="portal_type" :view_url="view_url" :sort_on="sort_on" style_class="box_area" element_style_class="box"></plonelisting_url>
+      <plonelisting_url :portal_type="portal_type" :view_url="view_url" :sort_on="sort_on" style_class="box_area"
+                        element_style_class="box"></plonelisting_url>
     </template>
   </base-view>
 </template>
@@ -15,7 +16,7 @@
   import {PLONE_INDEX_TITLE, PLONE_PT_PUBLISHER_CARD} from "../../components/configs/plone_keywords";
 
   export default {
-    name: 'PlonePages',
+    name: 'Publisher',
     components: {
       plonelisting_url,
       BaseView

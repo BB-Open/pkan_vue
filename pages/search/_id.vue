@@ -1,19 +1,20 @@
 <template>
   <base-view :namespace="namespace" :breadcrumb="breadcrumb" :ignore_last_title="true" :display_info_column="true">
     <template slot="content">
-      <entitydetail :id="get_data()" :view_url="view_url" ></entitydetail>
+      <entitydetail :id="get_data()" :view_url="view_url"></entitydetail>
     </template>
   </base-view>
 </template>
 
 <script>
   import BaseView from '../../components/page/views/BaseView';
-  import Entitydetail from "../../components/page/entity/entitydetail";
+  import entitydetail from "../../components/page/entity/entitydetail";
   import {SEARCH_URL} from "../../components/configs/routing";
 
   export default {
+    name: 'SearchDetail',
     components: {
-      Entitydetail,
+      entitydetail,
       BaseView
     },
     data() {

@@ -18,7 +18,7 @@
   import {format_plone_date} from "../../mixins/utils";
 
   export default {
-    name: "plonelisting",
+    name: "plonelisting_url",
     props: {
       'portal_type': String,
       'max_number': String,
@@ -96,7 +96,7 @@
               item.date_text = 'Veröffentlicht am ' + format_plone_date(item.effective);
             }, this)
         }
-          this.$forceUpdate()
+        this.$forceUpdate()
       }
       ,
     }

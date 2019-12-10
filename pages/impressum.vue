@@ -1,7 +1,8 @@
 <template>
   <base-view :namespace="namespace" :breadcrumb="namespace" :display_info_column="true">
     <template slot="content">
-      <plonepage_search :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order" :tag="tag"></plonepage_search>
+      <plonepage_search :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order"
+                        :tag="tag"></plonepage_search>
     </template>
   </base-view>
 </template>

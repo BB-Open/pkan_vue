@@ -1,4 +1,4 @@
-import {endOfDay, format, startOfDay,isSameDay,} from 'date-fns'
+import {endOfDay, format, startOfDay, isSameDay,} from 'date-fns'
 
 export const DATE_FORMAT = 'YYYY-MM-DD';
 
@@ -6,7 +6,7 @@ export const DATE_FORMAT = 'YYYY-MM-DD';
 export const DATE_DISPLAY_FORMAT = 'yyyy-MM-dd';
 
 export function datetoUTC(dateTime) {
-  var utc =  new Date(dateTime.getUTCFullYear(), dateTime.getUTCMonth(), dateTime.getUTCDate(),
+  var utc = new Date(dateTime.getUTCFullYear(), dateTime.getUTCMonth(), dateTime.getUTCDate(),
     dateTime.getUTCHours(), dateTime.getUTCMinutes(), dateTime.getUTCSeconds());
 
   return utc;
@@ -51,11 +51,11 @@ export function removeSelfClosingTags(html) {
   // this is ugly but we need it to clean plone html
   var split = html.split("/>");
   var newHtml = "";
-  for (var i = 0; i < split.length - 1;i++) {
+  for (var i = 0; i < split.length - 1; i++) {
     var edsplit = split[i].split("<");
     newHtml += split[i] + "></" + edsplit[edsplit.length - 1].split(" ")[0] + ">";
   }
-  return newHtml + split[split.length-1];
+  return newHtml + split[split.length - 1];
 }
 
 export function get_tag_for_namespace(obj) {

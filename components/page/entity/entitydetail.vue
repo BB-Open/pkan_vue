@@ -14,7 +14,9 @@
     <div v-for="item in this.result_networking" :class="element_style_class">
       <p class="element_title">{{ get_label(item.type)}}: {{ item.title }}</p>
       <p class="element_description">{{ item.description }}</p>
-      <p><NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink></p>
+      <p>
+        <NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink>
+      </p>
     </div>
   </div>
 </template>
@@ -27,7 +29,7 @@
   import DownloadControl from "../../controls/DownloadControl";
 
   export default {
-    name: "sparqlnetworking",
+    name: "entitydetail",
     components: {DownloadControl},
     props: ['id', 'view_url', 'element_style_class', 'style_class',],
     data() {
