@@ -65,7 +65,6 @@
       BaseView,
       SearchSelector,
       ControlsOverView,
-      pkan_datepicker,
     },
     name: 'SearchBaseView',
     props: ['namespace', 'display_info_column'],
