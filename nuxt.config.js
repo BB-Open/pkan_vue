@@ -74,7 +74,7 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {},
-    transpile: ["vue-socket.io"],
+    transpile: ["vue-socket.io", "bootstrap-vue"],
     babel: {
       presets: [
         [
