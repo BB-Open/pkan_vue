@@ -19,7 +19,10 @@ export const state = () => ({
   },
   order_by: null,
   last_change: [null, null],
-  sparql: '',
+  sparql: 'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
+    'SELECT DISTINCT ?id WHERE {\n' +
+    '  ?id a dcat:Dataset .\n' +
+    '}',
   batch_start: 0,
   batch_end: 1
 });
@@ -70,10 +73,16 @@ export const getters = {
       publisher: state.publisher,
       license: state.license,
       order_by: state.order_by,
-      sparql: state.sparql,
       batch_start: state.batch_start,
       batch_end: state.batch_end,
       last_change: state.last_change
+    }
+  },
+  search_sparql: function (state) {
+    return {
+      sparql: state.sparql,
+      batch_start: state.batch_start,
+      batch_end: state.batch_end,
     }
   }
 };

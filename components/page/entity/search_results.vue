@@ -1,5 +1,6 @@
 <template>
   <div :class="style_class">
+    <div class="error" v-if="error">{{error}}</div>
     <h2>Suchergebnisse:</h2>
     <b-pagination
       v-model="pagination_page"
@@ -35,12 +36,12 @@
 <script>
   import SocketPromise from "../../mixins/SocketPromise";
   import {EV} from "../../configs/events";
-  import {BATCH_SIZE, REQUEST_SEARCH_RESULTS} from "../../configs/socket";
+  import {BATCH_SIZE, REQUEST_SEARCH_RESULTS, REQUEST_SEARCH_RESULTS_SPARQL} from "../../configs/socket";
   import {BPagination} from 'bootstrap-vue'
 
   export default {
     name: "search_results",
-    props: ['view_url', 'element_style_class', 'style_class', 'namespace'],
+    props: ['view_url', 'element_style_class', 'style_class', 'namespace', 'request'],
     data() {
       return {
         result: [],
@@ -48,6 +49,7 @@
         perPage: BATCH_SIZE,
         property_end: 'batch_end',
         property_start: 'batch_start',
+        error: null,
       }
     },
     computed: {
@@ -79,15 +81,23 @@
         return this.view_url + '/' + encodeURIComponent(id)
       },
       get_data() {
-        let request = Object.assign({}, this.$store.getters[this.namespace + '/search']);
-        return this.sendPromise(REQUEST_SEARCH_RESULTS, request)
-          .then(
-            this.handle_result.bind(this)
-          )
+        if (this.request === REQUEST_SEARCH_RESULTS){
+          let request = Object.assign({}, this.$store.getters[this.namespace + '/search']);
+          return this.sendPromise(REQUEST_SEARCH_RESULTS, request)
+            .then(
+              this.handle_result.bind(this)
+            )} else if (this.request === REQUEST_SEARCH_RESULTS_SPARQL) {
+          let request = Object.assign({}, this.$store.getters[this.namespace + '/search_sparql']);
+          return this.sendPromise(REQUEST_SEARCH_RESULTS_SPARQL, request)
+            .then(
+              this.handle_result.bind(this)
+            )
+          }
       },
       handle_result(data) {
         this.result = data.results;
         this.rows = data.number_results;
+        this.error = data.error;
         this.$forceUpdate()
       },
       init_events() {
@@ -101,7 +111,6 @@
           this.get_data()
         });
       }
-
 
     },
     beforeDestroy: function () {
@@ -124,6 +133,11 @@
 
   .element_title, .element_description {
     margin-bottom: 0;
+  }
+
+  .error {
+    color: #C73C35;
+    font-weight: bold;
   }
 
 </style>

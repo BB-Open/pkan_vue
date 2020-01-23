@@ -1,5 +1,6 @@
 <template>
   <div :class="style_class">
+    <div class="error" v-if="error">{{error}}</div>
     <h2>Suchergebnisse:</h2>
     <div v-infinite-scroll="load_more" infinite-scroll-disabled="busy" :infinite-scroll-distance="perPage">
       <div v-for="item in this.result" :class="element_style_class">
@@ -16,12 +17,12 @@
 <script>
   import SocketPromise from "../../mixins/SocketPromise";
   import {EV} from "../../configs/events";
-  import {BATCH_SIZE, REQUEST_SEARCH_RESULTS} from "../../configs/socket";
+  import {BATCH_SIZE, REQUEST_SEARCH_RESULTS, REQUEST_SEARCH_RESULTS_SPARQL} from "../../configs/socket";
   import {BPagination} from 'bootstrap-vue'
 
   export default {
     name: "search_results_mobile",
-    props: ['view_url', 'element_style_class', 'style_class', 'namespace'],
+    props: ['view_url', 'element_style_class', 'style_class', 'namespace', 'request'],
     data() {
       return {
         result: [],
@@ -31,6 +32,7 @@
         max_batch_loaded: 0,
         property_end: 'batch_end',
         property_start: 'batch_start',
+        error: null,
       }
     },
     computed: {
@@ -80,16 +82,25 @@
       },
 
       get_data() {
-        let request = Object.assign({}, this.$store.getters[this.namespace + '/search']);
-        return this.sendPromise(REQUEST_SEARCH_RESULTS, request)
-          .then(
-            this.handle_result.bind(this)
-          )
+        if (this.request === REQUEST_SEARCH_RESULTS){
+          let request = Object.assign({}, this.$store.getters[this.namespace + '/search']);
+          return this.sendPromise(REQUEST_SEARCH_RESULTS, request)
+            .then(
+              this.handle_result.bind(this)
+            )}
+        else if (this.request === REQUEST_SEARCH_RESULTS_SPARQL) {
+          let request = Object.assign({}, this.$store.getters[this.namespace + '/search_sparql']);
+          return this.sendPromise(REQUEST_SEARCH_RESULTS_SPARQL, request)
+            .then(
+              this.handle_result.bind(this)
+            )}
       },
       handle_result(data) {
         this.result_batches[data.batch_start] = data.results;
         this.rows = data.number_results;
         this.result = this.get_display_result();
+        debugger;
+        this.error = data.error;
         this.$forceUpdate()
       },
       init_events() {

@@ -9,10 +9,7 @@
           <div class="additional_widget">
             <slot name="additional_widget"></slot>
           </div>
-          <div class="controls_overview">
-            <controls-over-view></controls-over-view>
-            <ordering></ordering>
-          </div>
+
 
           <div class="results hidesmallscreen">
             <search_results namespace="Search" :view_url="view_url" v-if="$mq === 'screen'" :request="request"></search_results>
@@ -22,23 +19,6 @@
                                    v-if="$mq === 'mobile'"></search_results_mobile>
           </div>
         </div>
-        <div class="controls">
-          <h1>Kriterien</h1>
-          <button
-            @click="remove_all()"
-            class="selectorbutton"
-            type="button">Alle zurück setzen
-          </button>
-          <search-selector title="Dateiformat" store_namespace="Search" property="file_format"
-                           :options="file_format_options"></search-selector>
-          <search-selector title="Datenbereitsteller" store_namespace="Search" property="publisher"
-                           :options="publisher_options"></search-selector>
-          <search-selector title="Kategorie" store_namespace="Search" property="category"
-                           :options="category_options"></search-selector>
-          <search-selector title="Lizens" store_namespace="Search" property="license"
-                           :options="license_options"></search-selector>
-          <date-picker label="Letzte Änderung:" namespace="Search" property="last_change"></date-picker>
-        </div>
       </div>
     </template>
   </base-view>
@@ -46,28 +26,24 @@
 
 <script>
 
-  import Ordering from "../../controls/Ordering";
   import search_results from "../entity/search_results";
   import BaseView from "./BaseView";
   import SearchSelector from "../../controls/SearchSelector";
-  import ControlsOverView from "../../controls/ControlsOverView";
   import {EV} from "../../configs/events";
   import {SEARCH_URL} from "../../configs/routing";
   import search_results_mobile from "../entity/search_results_mobile";
   import DatePicker from "../../controls/DatePicker";
-  import {REQUEST_SEARCH_RESULTS} from "../../configs/socket";
+  import {REQUEST_SEARCH_RESULTS_SPARQL} from "../../configs/socket";
 
   export default {
     components: {
       DatePicker,
-      Ordering,
       search_results,
       search_results_mobile,
       BaseView,
       SearchSelector,
-      ControlsOverView,
     },
-    name: 'SearchBaseView',
+    name: 'SparqlSearchBaseView',
     props: ['namespace', 'display_info_column'],
     data() {
       return {
@@ -89,7 +65,7 @@
         },
         search_selector_fields: ['category', 'file_format', 'publisher', 'license'],
         view_url: SEARCH_URL,
-        request: REQUEST_SEARCH_RESULTS,
+        request: REQUEST_SEARCH_RESULTS_SPARQL,
       }
     },
     mounted() {
@@ -102,6 +78,10 @@
       },
       remove_all() {
         this.$store.ep_commit('Search', 'textline_keywords', '');
+        this.$store.ep_commit('Search', 'sparql', 'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
+          'SELECT DISTINCT ?id WHERE {\n' +
+          '  ?id a dcat:Dataset .\n' +
+          '}');
         this.search_selector_fields.forEach(function (field) {
           this.$store.ep_commit('Search', field, {
             'value_pos': [],
@@ -120,11 +100,7 @@
     beforeDestroy: function () {
       // clear for next search when we leave search namespace
       if (!this.$router.currentRoute.fullPath.includes('search')) {
-        this.remove_all();
-        this.$store.ep_commit('Search', 'sparql', 'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
-          'SELECT DISTINCT ?id WHERE {\n' +
-          '  ?id a dcat:Dataset .\n' +
-          '}');
+        this.remove_all()
       }
 
     },
@@ -137,7 +113,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 70%
+    width: 100%
   }
 
   .detail_search, .controls_overview {
@@ -150,12 +126,6 @@
   .controls_overview {
     justify-content: space-between;
   }
-
-  .controls {
-    width: 30%;
-    padding-left: 15px;
-  }
-
   .results {
     width: 100%;
   }

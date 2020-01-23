@@ -21,7 +21,7 @@
         namespace: 'Search',
         keyword_fields: ['textline_keywords'],
         search_selector_fields: ['category', 'file_format', 'publisher', 'license'],
-        raw_fields: ['sparql',],
+        raw_fields: [],
         date_range_fields: ['last_change'],
         display_green: [],
         display_red: [],
