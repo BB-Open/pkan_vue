@@ -97,7 +97,11 @@
       handle_result(data) {
         this.result = data.results;
         this.rows = data.number_results;
-        this.error = data.error;
+        if (data.response_code === 400) {
+          this.error = data.error_message;
+        } else {
+          this.error = ''
+        }
         this.$forceUpdate()
       },
       init_events() {

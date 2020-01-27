@@ -71,15 +71,19 @@
 
         this.sockets.unsubscribe(response.namespace);
 
+        if (response.response_code === 500) {
+          alert(response.error_message)
+        } else {
+
         // retrieve the transaction_id from the response
         // and call the resolve function of the promise with the response
-        let resolve = this.$static[requests_name].get(response.transaction_id);
-        try {
-          resolve(response);
-        } catch (e) {
-          console.log(e.message);
-          console.log(e.stack)
-        }
+          let resolve = this.$static[requests_name].get(response.transaction_id);
+          try {
+            resolve(response);
+          } catch (e) {
+            console.log(e.message);
+            console.log(e.stack)
+          }}
 
         this.$static[requests_name].delete(response.transaction_id);
       }

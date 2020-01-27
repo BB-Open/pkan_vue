@@ -82,25 +82,29 @@
       },
 
       get_data() {
-        if (this.request === REQUEST_SEARCH_RESULTS){
+        if (this.request === REQUEST_SEARCH_RESULTS) {
           let request = Object.assign({}, this.$store.getters[this.namespace + '/search']);
           return this.sendPromise(REQUEST_SEARCH_RESULTS, request)
             .then(
               this.handle_result.bind(this)
-            )}
-        else if (this.request === REQUEST_SEARCH_RESULTS_SPARQL) {
+            )
+        } else if (this.request === REQUEST_SEARCH_RESULTS_SPARQL) {
           let request = Object.assign({}, this.$store.getters[this.namespace + '/search_sparql']);
           return this.sendPromise(REQUEST_SEARCH_RESULTS_SPARQL, request)
             .then(
               this.handle_result.bind(this)
-            )}
+            )
+        }
       },
       handle_result(data) {
         this.result_batches[data.batch_start] = data.results;
         this.rows = data.number_results;
         this.result = this.get_display_result();
-        debugger;
-        this.error = data.error;
+        if (data.response_code === 400) {
+          this.error = data.error_message;
+        } else {
+          this.error = ''
+        }
         this.$forceUpdate()
       },
       init_events() {
