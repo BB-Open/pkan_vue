@@ -16,6 +16,7 @@
 <script>
   import {PLONE_URL} from "../../configs/server_settings";
   import {format_plone_date} from "../../mixins/utils";
+  import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
 
   export default {
     name: "plonelisting_url",
@@ -89,7 +90,14 @@
         this.$axios.setHeader('Content-Type', 'application/json', ['get']);
         this.$axios.setHeader('Accept', 'application/json', ['get']);
         this.$axios.setHeader('Access-Control-Allow-Origin', '*', ['get']);
-        this.result = await this.$axios.$get(url);
+        try {
+          this.result = await this.$axios.$get(url);
+        } catch (e) {
+          console.log(e.message);
+          console.log(e.stack);
+          alert(PLONE_UNREACHABLE_MESSAGE);
+          return
+        }
         if (this.display_date) {
           this.result.items.forEach(
             function (item) {

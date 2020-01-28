@@ -9,6 +9,7 @@
 <script>
   import {PLONE_URL} from "../../configs/server_settings";
   import {removeSelfClosingTags} from "../../mixins/utils";
+  import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
 
   export default {
     name: "plonepage_search",
@@ -79,7 +80,14 @@
         this.$axios.setHeader('Content-Type', 'application/json', ['get']);
         this.$axios.setHeader('Accept', 'application/json', ['get']);
         this.$axios.setHeader('Access-Control-Allow-Origin', '*', ['get']);
-        this.result = await this.$axios.$get(url);
+        try {
+          this.result = await this.$axios.$get(url);
+        } catch (e) {
+          console.log(e.message);
+          console.log(e.stack);
+          alert(PLONE_UNREACHABLE_MESSAGE);
+          return
+        }
         if (this.result.items[0] !== undefined) {
           this.item = this.result.items[0];
         }
