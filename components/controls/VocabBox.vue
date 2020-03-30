@@ -2,17 +2,16 @@
   <div class="category box_area">
     <div v-for="item in this.vocab" class="box" :key="item.id">
       <!--todo: replace with a-tag, handle_click works to-->
-      <button
+      <a
         @click="handle_click(item.id)"
-        class="lightbutton button vocabbutton"
-        type="button">
+        class="lightbutton button vocabbutton">
         <!-- todo: no div in button, use span -->
         <div class="category_label">
           <div class="category_icon"><i :class="item.icon_class + ' bb-ifa'" v-if="item.icon_class"/><br
             v-if="item.icon_class" class="hidesmallscreen"/></div>
           <div class="category_text">{{item.text}}</div>
         </div>
-      </button>
+      </a>
     </div>
   </div>
 </template>
@@ -78,6 +77,19 @@
     height: 100%;
     padding: 15px;
   }
+
+  a.vocabbutton {
+    text-decoration: none;
+    display:block;
+    height:100%;
+    width: 100%;
+  }
+
+  a.vocabbutton:hover, a.vocabbutton:focus {
+    background-color: #C73C35;
+    color: #fff;
+  }
+
 
   @media (max-width: 640px) {
     .category_label {

@@ -353,6 +353,10 @@ input {
   border: 1px solid #C73C35 !important;
 }
 
+.hidden_help_text {
+  display: none;
+}
+
 @media (max-width: 640px) {
 
   .info_column_right {

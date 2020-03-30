@@ -6,7 +6,7 @@
         <div class="main_content ">
           <search-field-single-line v-if="this.display_search" property="textline_keywords" store_namespace="Search"
                                     :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
-                                    rows="1" button_label="Suchen"></search-field-single-line>
+                                    rows="1" button_label="Suchen" :hidden_label="placeholder"></search-field-single-line>
           <slot name="content"></slot>
         </div>
         <div class="info_column_right info_column">
@@ -17,7 +17,7 @@
       <div class="content_container" v-if="!display_info_column">
         <search-field-single-line v-if="this.display_search" property="textline_keywords" store_namespace="Search"
                                   :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
-                                  rows="1" button_label="Suchen"></search-field-single-line>
+                                  rows="1" button_label="Suchen" :hidden_label="placeholder"></search-field-single-line>
         <slot name="content"></slot>
       </div>
       <pkan-footer></pkan-footer>

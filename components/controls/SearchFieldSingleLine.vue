@@ -1,6 +1,7 @@
 <template>
   <label class="textsearch">
-    <div class="textsearch_label">{{label}}</div>
+    <div class="textsearch_label" v-if="label">{{label}}</div>
+    <div class="hidden_help_text" v-if="hidden_label">{{hidden_label}}</div>
     <input type="text" v-model="search_string" :placeholder="place_holder" v-on:keyup.enter="filter_criteria"
            class="single_line_edit">
     <div class="input_button">
@@ -8,6 +9,7 @@
         @click="filter_criteria()"
         class="button textsearch_button"
         type="button" :title="button_label">
+        <span class="hidden_help_text">Suchen</span>
         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
              width="30" height="30"
              viewBox="0 0 172 172"
@@ -33,7 +35,7 @@
 
   export default {
     name: 'SearchFieldSingleLine',
-    props: ['property', 'initial_value', 'place_holder', 'store_namespace', 'next_view', 'rows', 'button_label', 'label'],
+    props: ['property', 'initial_value', 'place_holder', 'store_namespace', 'next_view', 'rows', 'button_label', 'label', 'hidden_label'],
     components: {},
     data() {
       return {
@@ -95,6 +97,8 @@
   .textsearch_label {
     width: 100%;
   }
+
+
 
   .single_line_edit {
     margin: 0;
