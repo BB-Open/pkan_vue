@@ -11,7 +11,7 @@
           <g transform="">
             <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
                stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
-               font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+               font-family="none" font-weight="normal" font-size="none" text-anchor="start" style="mix-blend-mode: normal">
               <path d="M0,172v-172h172v172z" fill="white"></path>
               <g fill="#c73c35">
                 <path
@@ -22,23 +22,43 @@
         </svg>
       </button>
       <p>DatenAdler.de</p></div>
-    <nuxt-link class="router-link" to="/start">Start</nuxt-link>
-    <hr class="hidebigscreen"/>
-    <nuxt-link class="router-link" to="/faq">Antworten</nuxt-link>
-    <hr class="hidebigscreen"/>
-    <nuxt-link class="router-link" to="/blog">Blog</nuxt-link>
-    <hr class="hidebigscreen"/>
-    <nuxt-link class="router-link" to="/publisher">Datenbereitsteller</nuxt-link>
-    <hr class="hidebigscreen"/>
-    <nuxt-link class="router-link" to="/search">Einfache Suche</nuxt-link>
-    <hr class="hidebigscreen"/>
-    <nuxt-link class="router-link" to="/search/sparql">SPARQL</nuxt-link>
-    <hr class="hidebigscreen"/>
-    <nuxt-link to="/accessibility" class="router-link hidebigscreen">Barrierefreiheit</nuxt-link>
-    <hr class="hidebigscreen"/>
-    <nuxt-link to="/data_protection" class="router-link hidebigscreen">Datenschutz</nuxt-link>
-    <hr class="hidebigscreen"/>
-    <nuxt-link to="/impressum" class="router-link hidebigscreen">Impressum</nuxt-link>
+    <ul>
+      <li>
+        <nuxt-link class="router-link" to="/start">Start</nuxt-link>
+        <hr class="hidebigscreen"/>
+      </li>
+      <li>
+        <nuxt-link class="router-link" to="/faq">Antworten</nuxt-link>
+        <hr class="hidebigscreen"/>
+      </li>
+      <li>
+        <nuxt-link class="router-link" to="/blog">Blog</nuxt-link>
+        <hr class="hidebigscreen"/>
+      </li>
+      <li>
+        <nuxt-link class="router-link" to="/publisher">Datenbereitsteller</nuxt-link>
+        <hr class="hidebigscreen"/>
+      </li>
+      <li>
+        <nuxt-link class="router-link" to="/search">Einfache Suche</nuxt-link>
+        <hr class="hidebigscreen"/>
+      </li>
+      <li>
+        <nuxt-link class="router-link" to="/search/sparql">SPARQL</nuxt-link>
+        <hr class="hidebigscreen"/>
+      </li>
+      <li>
+        <nuxt-link to="/accessibility" class="router-link hidebigscreen">Barrierefreiheit</nuxt-link>
+        <hr class="hidebigscreen"/>
+      </li>
+      <li>
+        <nuxt-link to="/data_protection" class="router-link hidebigscreen">Datenschutz</nuxt-link>
+        <hr class="hidebigscreen"/>
+      </li>
+      <li>
+        <nuxt-link to="/impressum" class="router-link hidebigscreen">Impressum</nuxt-link>
+      </li>
+    </ul>
   </nav>
 
 </template>
@@ -65,11 +85,15 @@
 </script>
 
 <style scoped>
-  .menu {
+  ul {
     display: flex;
     flex-flow: row wrap;
     margin: 0 -2px 0 -2px;
     justify-content: flex-end;
+  }
+
+  ul li {
+    list-style-type: none;
   }
 
   .router-link {
