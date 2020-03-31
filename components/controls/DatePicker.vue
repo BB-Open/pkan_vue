@@ -2,15 +2,15 @@
   <div class="picker">
     <div class="DateSelector">
       <label>{{ this.label }}</label><br/>
-      <label>Von: </label>
-      <datepicker v-model="value_start" placeholder="Datum wählen" :key="namespace + property + 'datepicker_start'"
+      <label for="start_input">Von: </label>
+      <datepicker v-model="value_start" :placeholder="'Datum wählen ' + format" :key="namespace + property + 'datepicker_start'"
                   :monday-first="true" :language="lang" input-class="date_input" calender-class="calender_input"
-                  :format="format"></datepicker>
-      <label>Bis:</label>
-      <datepicker v-model="value_end" placeholder="Datum wählen" :key="namespace + property + 'datepicker_end'"
+                  :format="format" :typeable="true" id="start_input"></datepicker>
+      <label for="end_input">Bis:</label>
+      <datepicker v-model="value_end" :placeholder="'Datum wählen ' + format" :key="namespace + property + 'datepicker_end'"
                   :monday-first="true" :language="lang" input-class="date_input" calender-class="calender_input"
-                  :format="format"></datepicker>
-      <button type="button" class="button" @click="reset()">Zurück setzen</button>
+                  :format="format" :typeable="true" id="end_input"></datepicker>
+      <button type="button" class="button" @click="reset()" aria-label="Hier setzen sie die Datumsfelder zurück.">Zurück setzen</button>
     </div>
   </div>
 </template>

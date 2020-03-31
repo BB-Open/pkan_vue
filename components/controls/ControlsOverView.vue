@@ -1,9 +1,12 @@
 <template>
   <div>
     <h2>Aktuelle Suche:</h2>
-    <div class="box_area">
+    <div class="box_area" v-if="display_green.length || display_red.length">
       <div v-for="item in display_green" class="green search_box">Ausgewählt: {{item}}</div>
       <div v-for="item in display_red" class="red search_box">Ausgenommen: {{item}}</div>
+    </div>
+    <div v-if="!display_red.length && !display_green.length">
+      <p>Hier werden Ihre Suchparameter dargestellt.</p>
     </div>
   </div>
 </template>
