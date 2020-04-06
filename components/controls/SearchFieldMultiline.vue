@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <form>
     <label class="textsearch">
       <div class="textsearch_label">{{label}}</div>
       <textarea class="textsearch_area" v-model="search_string" :placeholder="place_holder" :rows="rows"></textarea>
@@ -29,7 +29,7 @@
 
     </label>
     <div class="help">{{help}}</div>
-  </div>
+  </form>
 </template>
 
 <script>

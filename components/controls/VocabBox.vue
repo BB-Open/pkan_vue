@@ -1,17 +1,19 @@
 <template>
   <div class="category box_area">
-    <div v-for="item in this.vocab" class="box" :key="item.id">
-      <!--todo: replace with a-tag, handle_click works to-->
+    <div v-for="item in vocab" class="box" :key="item.id" v-if="vocab.length">
       <a
+        tabindex="0"
         @click="handle_click(item.id)"
         class="lightbutton button vocabbutton">
-        <!-- todo: no div in button, use span -->
-        <div class="category_label">
-          <div class="category_icon"><i :class="item.icon_class + ' bb-ifa'" v-if="item.icon_class"/><br
+        <span class="category_label">
+          <div span="category_icon"><i :aria-label="'Icon für ' + item.text" :class="item.icon_class + ' bb-ifa'" v-if="item.icon_class"/><br
             v-if="item.icon_class" class="hidesmallscreen"/></div>
-          <div class="category_text">{{item.text}}</div>
-        </div>
+          <div span="category_text">{{item.text}}</div>
+        </span>
       </a>
+    </div>
+    <div v-if="!vocab.length" class="content_container">
+      <p>Hier wird eine Auswahl von Verlinkungen vom Server geladen.</p>
     </div>
   </div>
 </template>

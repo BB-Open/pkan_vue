@@ -1,17 +1,17 @@
 <template>
   <div class="download_section">
     <div class="download_controls_container">
-      <div class="file_select">
-        <label>Dateiformat:<br/>
+      <form class="file_select">
+        <label aria-label="Wählen sie ein Dateiformat für den Download">Dateiformat:<br/>
           <b-form-select v-model="file_format" :options="vocab_format" class="mb-3" key="format_select"/>
         </label>
-        <label>Download Art:<br/>
+        <label aria-label="Wählen sie aus, wie die Daten ausgewählt werden sollen.">Download Art:<br/>
           <b-form-select v-model="download_type" :options="vocab_type" class="mb-3" key="download_type_select"/>
         </label>
-        <label v-if="this.download_type=='graph'">Anzahl der Schritte:<br/>
+        <label v-if="this.download_type=='graph'" aria-label="Wählen Sie aus, wie viele Unterelemente des Graphen ausgewählt werden sollen.">Anzahl der Schritte:<br/>
           <b-form-select v-model="count" :options="vocab_count" class="mb-3" key="count_select"/>
         </label>
-      </div>
+      </form>
     </div>
     <div class="download_url_container">
       <a :href="download_url">Daten herunterladen</a>
@@ -27,7 +27,6 @@
     name: "DownloadControl",
     components: {
       BFormSelect,
-
     },
     props: ['id'],
     data() {

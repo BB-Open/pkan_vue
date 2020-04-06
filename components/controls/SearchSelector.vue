@@ -1,7 +1,7 @@
 <template>
-  <div class="SearchSelector">
+  <form class="SearchSelector">
     <label>{{ title }}:<br/>
-      <input type="text" v-model="search_string" placeholder="Kriterien durchsuchen" @change="filter_criteria"></label>
+      <input type="text" v-model="search_string" :placeholder="title + ' durchsuchen'" @change="filter_criteria"></label>
     <div class="criteria_buttons">
       <button v-for="item in display_values" @click="button_clicked(item)"
               v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove, criteria_button_unselected: !data_store[item].check_remove && !data_store[item].check_add}"
@@ -24,12 +24,12 @@
         <template v-if="show_more">ᐃ Weniger</template>
       </button>
       <br v-if="additional_values.length > 0"/>
-      <button @click="reset_button" class="selectorbutton">
+      <button @click="reset_button" class="selectorbutton" :aria-label="'Für ' + title">
         <template>Zurück setzen</template>
       </button>
     </div>
     <!--this is just for seeing some results-->
-  </div>
+  </form>
 </template>
 
 <script>
