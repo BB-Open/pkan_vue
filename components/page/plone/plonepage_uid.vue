@@ -30,10 +30,10 @@
         result: {},
         base_data_url: PLONE_URL + '/@search?fullobjects=1',
         item: {
-          title: '',
-          description: '',
+          title: 'Titel wird geladen.',
+          description: 'Beschreibung wird geladen.',
           text: {
-            data: ''
+            data: 'Text wird geladen.'
           }
         },
       }

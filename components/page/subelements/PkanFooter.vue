@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <footer class="footer">
     <div class="footercontent content_container">
       <breadcrumb></breadcrumb>
       <div class="footerbox">
@@ -56,7 +56,7 @@
       </div>
 
     </div>
-  </div>
+  </footer>
 </template>
 
 <script>

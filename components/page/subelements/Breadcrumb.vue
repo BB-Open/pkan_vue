@@ -1,5 +1,5 @@
 <template>
-  <div class="breadcrumb">
+  <div class="breadcrumb" aria-label="Pfadangabe">
     <p><span class="describer">Sie sind hier: </span> <span v-for="item in breadcrumb_elements">
       <span v-if="item in breadcrumb_clear">
         <span v-if="item !== 'Start'"> <i class="fa fa-caret-right"></i> </span>

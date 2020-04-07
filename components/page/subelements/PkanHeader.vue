@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <header class="header">
     <div class="header-line hidesmallscreen">DatenAdler Brandenburg</div>
     <div class="logo-container content_container">
       <div class="logo logo-left"><a class="image-link" href="https://www.brandenburg.de"
@@ -16,7 +16,7 @@
       <breadcrumb></breadcrumb>
     </div>
 
-  </div>
+  </header>
 </template>
 
 <script>

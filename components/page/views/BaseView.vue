@@ -2,7 +2,7 @@
   <div class="body_content">
     <div :class="namespace">
       <pkan-header></pkan-header>
-      <div class="twocolumncontent content_container" v-if="display_info_column">
+      <main class="twocolumncontent content_container" v-if="display_info_column">
         <div class="main_content ">
           <form><search-field-single-line v-if="this.display_search" property="textline_keywords" store_namespace="Search"
                                     :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
@@ -13,13 +13,13 @@
           <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="side_tag"
                             :display_title="false"></plonepage_search>
         </div>
-      </div>
-      <div class="content_container" v-if="!display_info_column">
+      </main>
+      <main class="content_container" v-if="!display_info_column">
         <form><search-field-single-line v-if="this.display_search" property="textline_keywords" store_namespace="Search"
                                   :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
                                   rows="1" button_label="Suchen" :hidden_label="placeholder"></search-field-single-line></form>
         <slot name="content"></slot>
-      </div>
+      </main>
       <pkan-footer></pkan-footer>
     </div>
   </div>

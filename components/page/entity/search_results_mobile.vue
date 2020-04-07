@@ -3,13 +3,18 @@
     <div class="error" v-if="error">{{error}}</div>
     <h2>Suchergebnisse:</h2>
     <div v-infinite-scroll="load_more" infinite-scroll-disabled="busy" :infinite-scroll-distance="perPage">
-      <div v-for="item in this.result" :class="element_style_class">
-        <p class="element_title">{{ item.type}}: {{ item.title }}</p>
-        <p class="element_description">{{ item.description }}</p>
-        <p>
-          <NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink>
-        </p>
-      </div>
+      <ul class="nobull">
+        <li v-for="item in result" :class="element_style_class">
+          <p class="element_title">{{ item.type}}: {{ item.title }}</p>
+          <p class="element_description">{{ item.description }}</p>
+          <p>
+            <NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink>
+          </p>
+        </li>
+        <li v-if="!result.length">
+          <p>Es wurden keine Suchergebnisse gefunden.</p>
+        </li>
+      </ul>
     </div>
   </div>
 </template>

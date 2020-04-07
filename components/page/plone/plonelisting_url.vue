@@ -1,7 +1,8 @@
 <template>
+  <div>
   <div :class="style_class">
 
-    <div v-for="item in this.result.items" :class="element_style_class">
+    <div v-for="item in this.result.items" :class="element_style_class" v-if="result.items.length">
       <div class="plone_listing_element">
         <div class="element_title">{{ item.title }}</div>
         <div class="element_date" v-if="item.date_text">{{ item.date_text }}</div>
@@ -10,6 +11,11 @@
         <NuxtLink :to="get_nuxt_link(item.UID)">Weiterlesen</NuxtLink>
       </div>
     </div>
+
+  </div>
+  <div v-if="!result.items.length">
+    <p>Es sind keine Inhalte verfügbar oder diese werden noch geladen.</p>
+  </div>
   </div>
 </template>
 
@@ -39,7 +45,9 @@
     data() {
       return {
         namespace: 'Blog',
-        result: {},
+        result: {
+          items: []
+        },
         base_data_url: PLONE_URL + '/@search?fullobjects=1',
       }
     }

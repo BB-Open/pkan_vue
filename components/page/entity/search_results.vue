@@ -13,13 +13,18 @@
       align="fill"
     ></b-pagination>
 
-    <div v-for="item in this.result" :class="element_style_class">
-      <p class="element_title">{{ item.type}}: {{ item.title }}</p>
-      <p class="element_description">{{ item.description }}</p>
-      <p>
-        <NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink>
-      </p>
-    </div>
+    <ul class="nobull">
+      <li v-for="item in result" :class="element_style_class" v-if="result.length">
+        <p class="element_title">{{ item.type}}: {{ item.title }}</p>
+        <p class="element_description">{{ item.description }}</p>
+        <p>
+          <NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink>
+        </p>
+      </li>
+      <li v-if="!result.length">
+        <p>Es wurden keine Suchergebnisse gefunden.</p>
+      </li>
+    </ul>
     <b-pagination
       v-model="pagination_page"
       :total-rows="rows"
@@ -81,18 +86,19 @@
         return this.view_url + '/' + encodeURIComponent(id)
       },
       get_data() {
-        if (this.request === REQUEST_SEARCH_RESULTS){
+        if (this.request === REQUEST_SEARCH_RESULTS) {
           let request = Object.assign({}, this.$store.getters[this.namespace + '/search']);
           return this.sendPromise(REQUEST_SEARCH_RESULTS, request)
             .then(
               this.handle_result.bind(this)
-            )} else if (this.request === REQUEST_SEARCH_RESULTS_SPARQL) {
+            )
+        } else if (this.request === REQUEST_SEARCH_RESULTS_SPARQL) {
           let request = Object.assign({}, this.$store.getters[this.namespace + '/search_sparql']);
           return this.sendPromise(REQUEST_SEARCH_RESULTS_SPARQL, request)
             .then(
               this.handle_result.bind(this)
             )
-          }
+        }
       },
       handle_result(data) {
         this.result = data.results;

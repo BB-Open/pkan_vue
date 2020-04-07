@@ -6,17 +6,23 @@
     <h2>Download:</h2>
     <download-control :id="id"></download-control>
     <h2>Felder:</h2>
-    <div v-for="item in this.result_fields" :class="element_style_class">
+    <div v-for="item in result_fields" :class="element_style_class" v-if="result_fields.length">
       <p class="element_title">{{ get_label(item.field) }}:</p>
       <p class="element_description">{{item.value}}</p>
     </div>
+    <div v-if="!result_fields.length">
+      <p>Es wurden keine Felder gefunden oder diese werden noch geladen.</p>
+    </div>
     <h2>Vernetzung:</h2>
-    <div v-for="item in this.result_networking" :class="element_style_class">
+    <div v-for="item in result_networking" :class="element_style_class" v-if="result_networking.length">
       <p class="element_title">{{ get_label(item.type)}}: {{ item.title }}</p>
       <p class="element_description">{{ item.description }}</p>
       <p>
         <NuxtLink :to="get_nuxt_link(item.id)">Weiterlesen</NuxtLink>
       </p>
+    </div>
+    <div v-if="!result_networking.length">
+      <p>Es wurden keine vernetzten Elemente gefunden oder diese werden noch geladen.</p>
     </div>
   </div>
 </template>
@@ -38,8 +44,8 @@
         labels: {},
         result_networking: {},
         result_ttl: '',
-        title: '',
-        description: ''
+        title: 'Titel wird geladen',
+        description: 'Beschreibung wird geladen'
       }
     },
     mixins: [

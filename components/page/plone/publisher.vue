@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="box_area">
+    <div class="box_area plone_box_area">
       <div class="text_area">
         <h1>{{ item.title }}</h1>
 
@@ -33,9 +33,9 @@
         result: {},
         base_data_url: PLONE_URL + '/@search?fullobjects=1',
         item: {
-          title: '',
-          description: '',
-          text: '',
+          title: 'Titel wird geladen.',
+          description: 'Beschreibung wird geladen.',
+          text: 'Text wird geladen.',
           sparql_identifier: '',
         },
         view_url: SEARCH_URL,
@@ -86,8 +86,9 @@
     max-width: 150px;
   }
 
-  .box_area {
-    padding: 0px;
+  .plone_box_area {
+    padding: 0;
+    margin: 0;
   }
 
 </style>

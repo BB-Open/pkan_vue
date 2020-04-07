@@ -225,6 +225,11 @@ input {
   display: none;
 }
 
+.nobull {
+  list-style-type: none;
+  padding: 0;
+}
+
 /*Pagination*/
 
 .pagination {
