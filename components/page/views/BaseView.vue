@@ -1,10 +1,12 @@
 <template>
   <div class="body_content">
     <div :class="namespace">
+      <a href="#maincontent" class="hidden_help_text">Weiter zum Hauptteil der Seite</a>
       <pkan-header></pkan-header>
-      <main class="twocolumncontent content_container" v-if="display_info_column">
+      <main class="twocolumncontent content_container" v-if="display_info_column" id="maincontent">
+        <pkan-status></pkan-status>
         <div class="main_content ">
-          <form><search-field-single-line v-if="this.display_search" property="textline_keywords" store_namespace="Search"
+          <form v-if="this.display_search"><search-field-single-line property="textline_keywords" store_namespace="Search"
                                     :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
                                     rows="1" button_label="Suchen" :hidden_label="placeholder"></search-field-single-line></form>
           <slot name="content"></slot>
@@ -15,7 +17,8 @@
         </div>
       </main>
       <main class="content_container" v-if="!display_info_column">
-        <form><search-field-single-line v-if="this.display_search" property="textline_keywords" store_namespace="Search"
+        <pkan-status></pkan-status>
+        <form v-if="this.display_search"><search-field-single-line property="textline_keywords" store_namespace="Search"
                                   :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
                                   rows="1" button_label="Suchen" :hidden_label="placeholder"></search-field-single-line></form>
         <slot name="content"></slot>
@@ -38,6 +41,8 @@
     PLONE_REVERSE_ORDERING,
     PLONE_TAG_BLOG, PLONE_TAG_LANDING, PLONE_TAG_SIDETEXT
   } from "../../configs/plone_keywords";
+  import PkanStatus from "../subelements/PkanStatus";
+  import {set_error_message} from "../../mixins/utils";
 
   export default {
     name: 'BaseView',
@@ -46,6 +51,7 @@
       SearchFieldSingleLine,
       PkanFooter,
       plonepage_search,
+      PkanStatus,
     },
     props: ['namespace', 'breadcrumb', 'ignore_last_title', 'search_initial', 'display_info_column', "display_search"],
     data() {
@@ -62,6 +68,7 @@
     },
     mounted() {
       // Force the initialization
+      set_error_message(this, '');
       this.$log.debug(this.namespace + ' mounted');
       this.$store.ep_commit('BreadCrumb', 'currentView', this.breadcrumb);
       if (this.ignore_last_title === undefined) {

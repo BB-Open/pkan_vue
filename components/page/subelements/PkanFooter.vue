@@ -3,42 +3,44 @@
     <div class="footercontent content_container">
       <breadcrumb></breadcrumb>
       <div class="footerbox">
+        <h2 class="hidden_help_text">Weiterführende Informationen</h2>
         <div class="footerelement">
-          <p class="footerelementtitle">Open Data</p>
+          <h3 class="footerelementtitle">Open Data</h3>
           <hr/>
-          <a class="footerelementlink" href="https://www.dcat-ap.de/" title="Metadatenmodell DCAT-AP.de">
+          <a class="footerelementlink" href="https://www.dcat-ap.de/"><span class="hidden_help_text">Metadatenmodell </span>
             DCAT-AP.de
           </a>
           <hr class="hidesmallscreen"/>
-          <a class="footerelementlink" href="https://www.govdata.de/" title="Bund-Länder-Portal GovData">
+          <a class="footerelementlink" href="https://www.govdata.de/"><span class="hidden_help_text">Bund-Länder-Portal </span>
             GovData.de
           </a>
           <hr class="hidesmallscreen"/>
-          <a class="footerelementlink" href="https://www.dcat-ap.de/" title="Open-Data-Portal für Europa">
+          <a class="footerelementlink" href="https://www.dcat-ap.de/"><span class="hidden_help_text">Open-Data-Portal für Europa: </span>
             EuropeanDataportal.eu
           </a>
         </div>
         <div class="footerelement">
-          <p class="footerelementtitle">Open Source</p>
+          <h3 class="footerelementtitle">Open Source</h3>
           <hr/>
-          <a class="footerelementlink" href="https://github.com/BB-Open/pkan.dcatapde" title="Github Repositorium">
+          <a class="footerelementlink" href="https://github.com/BB-Open/pkan.dcatapde"><span class="hidden_help_text">Github Repositorium: </span>
             PKAN <i class="fa fa-github"></i>
           </a>
           <hr class="hidesmallscreen"/>
-          <a class="footerelementlink" href="http://plone.com/" title="Plone Content-Management">
+          <a class="footerelementlink" href="http://plone.com/"><span
+            class="hidden_help_text">Dokumentation zum </span>
             Plone CMS
           </a>
         </div>
         <div class="footerelement">
-          <p class="footerelementtitle">Service</p>
+          <h3 class="footerelementtitle">Service</h3>
           <hr/>
           <a class="footerelementlink" href="http://www.brandenburg.de" target="_blank"
-             title="Link zum Landesportal Brandenburg">
+          ><span class="hidden_help_text">Link zum </span>
             Landesportal Brandenburg
           </a>
           <hr class="hidesmallscreen"/>
           <a class="footerelementlink" href="http://service.brandenburg.de" target="_blank"
-             title="Link zum Serviceportal Brandenburg">
+          ><span class="hidden_help_text">Link zum </span>
             Serviceportal Brandenburg
           </a>
 
@@ -119,6 +121,11 @@
     padding-right: 15px;
     padding-left: 15px;
     padding-bottom: 16px;
+  }
+
+  .footerelementtitle {
+    margin: 0;
+    font-size: 1rem;
   }
 
   .footerelement .footerelementtitle {

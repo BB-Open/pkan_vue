@@ -1,4 +1,5 @@
 import {endOfDay, format, startOfDay, isSameDay,} from 'date-fns'
+import {EV} from "../configs/events";
 
 export const DATE_FORMAT = 'YYYY-MM-DD';
 
@@ -65,4 +66,8 @@ export function get_tag_for_namespace(obj) {
   }
   tag = tag.replace('-', '');
   return tag
+}
+
+export function set_error_message(obj, message) {
+  obj.$store.ep_commit('GlobalState', 'error_message', message);
 }

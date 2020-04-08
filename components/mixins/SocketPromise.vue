@@ -1,6 +1,6 @@
 <script>
   import {v1} from 'uuid'
-  import {get_tag_for_namespace} from "./utils";
+  import {get_tag_for_namespace, set_error_message} from "./utils";
 
   export default {
     name: 'SocketPromise',
@@ -72,7 +72,7 @@
         this.sockets.unsubscribe(response.namespace);
 
         if (response.response_code === 500) {
-          alert(response.error_message)
+          set_error_message(this, response.error_message)
         } else {
 
         // retrieve the transaction_id from the response

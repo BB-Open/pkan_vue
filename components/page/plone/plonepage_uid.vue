@@ -10,7 +10,7 @@
 <script>
   import {EV} from "../../configs/events";
   import {PLONE_URL} from "../../configs/server_settings";
-  import {format_plone_date, removeSelfClosingTags} from "../../mixins/utils";
+  import {format_plone_date, removeSelfClosingTags, set_error_message} from "../../mixins/utils";
   import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
 
   export default {
@@ -69,7 +69,7 @@
         } catch (e) {
           console.log(e.message);
           console.log(e.stack);
-          alert(PLONE_UNREACHABLE_MESSAGE);
+          set_error_message(this, PLONE_UNREACHABLE_MESSAGE);
           return
         }
         this.item = this.result.items[0];

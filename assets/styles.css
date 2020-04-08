@@ -171,6 +171,7 @@ button:focus {
 
 .main_content {
   width: 75%;
+  margin-right: 2%;
 }
 
 a, a:visited {
@@ -228,6 +229,22 @@ input {
 .nobull {
   list-style-type: none;
   padding: 0;
+}
+
+.portalMessage {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.17);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.portalMessage.error {
+  background-color: #C73C35;
+  color: rgba(255, 255, 255, 1);
+  font-weight: bold;
 }
 
 /*Pagination*/

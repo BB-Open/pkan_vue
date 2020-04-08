@@ -2,14 +2,13 @@
   <div class="category box_area">
     <div v-for="item in vocab" class="box" :key="item.id" v-if="vocab.length">
       <a
-        tabindex="0"
+        :href="url"
         @click="handle_click(item.id)"
         class="lightbutton button vocabbutton">
-        <span class="category_label">
-          <div span="category_icon"><i :aria-label="'Icon für ' + item.text" :class="item.icon_class + ' bb-ifa'" v-if="item.icon_class"/><br
-            v-if="item.icon_class" class="hidesmallscreen"/></div>
-          <div span="category_text">{{item.text}}</div>
-        </span>
+        <div class="category_label">
+          <div class="category_icon"><i :aria-labelledby="item.id" :class="item.icon_class + ' bb-ifa'" v-if="item.icon_class"></i><br v-if="item.icon_class" class="hidesmallscreen"/></div>
+          <div class="category_text" :id="item.id">{{item.text}}</div>
+        </div>
       </a>
     </div>
     <div v-if="!vocab.length" class="content_container">
@@ -22,6 +21,7 @@
   import {REQUEST_VOCAB} from "../configs/socket";
   import SocketPromise from "../mixins/SocketPromise";
   import {DETAIL_SEARCH_URL} from "../configs/routing";
+  import {MY_URL} from "../configs/server_settings";
 
   export default {
     name: "VocabBox",
@@ -29,6 +29,7 @@
       return {
         vocab: [],
         namespace: 'Vocab Boxes',
+        url: MY_URL + DETAIL_SEARCH_URL
       }
     },
     mixins: [

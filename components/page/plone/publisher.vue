@@ -20,6 +20,7 @@
   import {SEARCH_URL} from "../../configs/routing";
   import entitydetail from "../entity/entitydetail";
   import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
+  import {set_error_message} from "../../mixins/utils";
 
   export default {
     name: "publisher",
@@ -68,7 +69,7 @@
         } catch (e) {
           console.log(e.message);
           console.log(e.stack);
-          alert(PLONE_UNREACHABLE_MESSAGE);
+          set_error_message(this, PLONE_UNREACHABLE_MESSAGE);
           return
         }
         this.item = this.result.items[0];

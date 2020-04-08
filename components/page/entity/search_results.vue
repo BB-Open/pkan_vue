@@ -1,6 +1,6 @@
 <template>
   <div :class="style_class">
-    <div class="error" v-if="error">{{error}}</div>
+    <div class="portalMessage error" role="alert">{{error}}</div>
     <h2>Suchergebnisse:</h2>
     <b-pagination
       v-model="pagination_page"
@@ -143,11 +143,6 @@
 
   .element_title, .element_description {
     margin-bottom: 0;
-  }
-
-  .error {
-    color: #C73C35;
-    font-weight: bold;
   }
 
 </style>

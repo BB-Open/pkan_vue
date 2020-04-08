@@ -21,7 +21,7 @@
 
 <script>
   import {PLONE_URL} from "../../configs/server_settings";
-  import {format_plone_date} from "../../mixins/utils";
+  import {format_plone_date, set_error_message} from "../../mixins/utils";
   import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
 
   export default {
@@ -103,7 +103,7 @@
         } catch (e) {
           console.log(e.message);
           console.log(e.stack);
-          alert(PLONE_UNREACHABLE_MESSAGE);
+          set_error_message(this, PLONE_UNREACHABLE_MESSAGE);
           return
         }
         if (this.display_date) {
