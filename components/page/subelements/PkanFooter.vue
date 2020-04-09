@@ -7,42 +7,63 @@
         <div class="footerelement">
           <h3 class="footerelementtitle">Open Data</h3>
           <hr/>
-          <a class="footerelementlink" href="https://www.dcat-ap.de/"><span class="hidden_help_text">Metadatenmodell </span>
-            DCAT-AP.de
-          </a>
-          <hr class="hidesmallscreen"/>
-          <a class="footerelementlink" href="https://www.govdata.de/"><span class="hidden_help_text">Bund-Länder-Portal </span>
-            GovData.de
-          </a>
-          <hr class="hidesmallscreen"/>
-          <a class="footerelementlink" href="https://www.dcat-ap.de/"><span class="hidden_help_text">Open-Data-Portal für Europa: </span>
-            EuropeanDataportal.eu
-          </a>
+          <ul class="nobull">
+            <li>
+              <a class="footerelementlink" href="https://www.dcat-ap.de/"><span
+                class="hidden_help_text">Metadatenmodell </span>
+                DCAT-AP.de
+              </a>
+              <hr class="hidesmallscreen"/>
+            </li>
+            <li>
+              <a class="footerelementlink" href="https://www.govdata.de/"><span class="hidden_help_text">Bund-Länder-Portal </span>
+                GovData.de
+              </a>
+              <hr class="hidesmallscreen"/>
+            </li>
+            <li>
+              <a class="footerelementlink" href="https://www.dcat-ap.de/"><span class="hidden_help_text">Open-Data-Portal für Europa: </span>
+                EuropeanDataportal.eu
+              </a>
+            </li>
+          </ul>
         </div>
         <div class="footerelement">
           <h3 class="footerelementtitle">Open Source</h3>
           <hr/>
-          <a class="footerelementlink" href="https://github.com/BB-Open/pkan.dcatapde"><span class="hidden_help_text">Github Repositorium: </span>
-            PKAN <i class="fa fa-github"></i>
-          </a>
-          <hr class="hidesmallscreen"/>
-          <a class="footerelementlink" href="http://plone.com/"><span
-            class="hidden_help_text">Dokumentation zum </span>
-            Plone CMS
-          </a>
+          <ul class="nobull">
+            <li>
+              <a class="footerelementlink" href="https://github.com/BB-Open/pkan.dcatapde"><span
+                class="hidden_help_text">Github Repositorium: </span>
+                PKAN <i class="fa fa-github"></i>
+              </a>
+              <hr class="hidesmallscreen"/>
+            </li>
+            <li>
+              <a class="footerelementlink" href="http://plone.com/"><span
+                class="hidden_help_text">Dokumentation zum </span>
+                Plone CMS
+              </a>
+            </li>
+          </ul>
         </div>
         <div class="footerelement">
           <h3 class="footerelementtitle">Service</h3>
           <hr/>
-          <a class="footerelementlink" href="http://www.brandenburg.de" target="_blank"
-          ><span class="hidden_help_text">Link zum </span>
-            Landesportal Brandenburg
-          </a>
-          <hr class="hidesmallscreen"/>
-          <a class="footerelementlink" href="http://service.brandenburg.de" target="_blank"
-          ><span class="hidden_help_text">Link zum </span>
-            Serviceportal Brandenburg
-          </a>
+          <ul class="nobull">
+            <li>
+              <a class="footerelementlink" href="http://www.brandenburg.de" target="_blank"
+              ><span class="hidden_help_text">Link zum </span>
+                Landesportal Brandenburg
+              </a>
+              <hr class="hidesmallscreen"/>
+            </li>
+            <li>
+              <a class="footerelementlink" href="http://service.brandenburg.de" target="_blank"
+              ><span class="hidden_help_text">Link zum </span>
+                Serviceportal Brandenburg
+              </a></li>
+          </ul>
 
         </div>
       </div>

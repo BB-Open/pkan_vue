@@ -1,16 +1,20 @@
 <template>
-  <div class="category box_area">
-    <div v-for="item in vocab" class="box" :key="item.id" v-if="vocab.length">
-      <a
-        :href="url"
-        @click="handle_click(item.id)"
-        class="lightbutton button vocabbutton">
-        <div class="category_label">
-          <div class="category_icon"><i :aria-labelledby="item.id" :class="item.icon_class + ' bb-ifa'" v-if="item.icon_class"></i><br v-if="item.icon_class" class="hidesmallscreen"/></div>
-          <div class="category_text" :id="item.id">{{item.text}}</div>
-        </div>
-      </a>
-    </div>
+  <div>
+    <ul class="nobull category box_area" v-if="vocab.length">
+      <li v-for="item in vocab" class="box" :key="item.id">
+        <a
+          :href="url"
+          @click="handle_click(item.id)"
+          class="lightbutton button vocabbutton">
+          <div class="category_label">
+            <div class="category_icon"><i :aria-labelledby="item.id" :class="item.icon_class + ' bb-ifa'"
+                                          v-if="item.icon_class"></i><br v-if="item.icon_class"
+                                                                         class="hidesmallscreen"/></div>
+            <div class="category_text" :id="item.id">{{item.text}}</div>
+          </div>
+        </a>
+      </li>
+    </ul>
     <div v-if="!vocab.length" class="content_container">
       <p>Hier wird eine Auswahl von Verlinkungen vom Server geladen.</p>
     </div>
@@ -75,6 +79,10 @@
 
 <style scoped>
 
+  li.box {
+    display: block;
+  }
+
   .vocabbutton {
     width: 100%;
     height: 100%;
@@ -83,8 +91,8 @@
 
   a.vocabbutton {
     text-decoration: none;
-    display:block;
-    height:100%;
+    display: block;
+    height: 100%;
     width: 100%;
   }
 
