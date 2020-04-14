@@ -95,7 +95,7 @@
 
 <style scoped>
   .footer {
-    background-color: #eee;
+    background-color: #f5f5f5;
   }
 
   .footercontent {
