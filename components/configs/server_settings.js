@@ -1,4 +1,10 @@
-export const WEBSOCKET_URL = 'https://flask.datenadler.de';
-export const PLONE_URL = 'https://backend.datenadler.de';
-export const MY_URL = 'https://frontend.datenadler.de';
-export const RDF_DOWNLOAD_URL = WEBSOCKET_URL + '/download';
+var config_file;
+try {
+  // this can cause a warning if file is missing, but it is ok
+  config_file = require('./server_settings_local.js');
+} catch (err) {
+  config_file = require('./server_settings_default.js');
+}
+
+export const server_settings = config_file.server_settings;
+

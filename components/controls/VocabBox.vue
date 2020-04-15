@@ -25,7 +25,7 @@
   import {REQUEST_VOCAB} from "../configs/socket";
   import SocketPromise from "../mixins/SocketPromise";
   import {DETAIL_SEARCH_URL} from "../configs/routing";
-  import {MY_URL} from "../configs/server_settings";
+  import {server_settings} from "../configs/server_settings";
 
   export default {
     name: "VocabBox",
@@ -33,7 +33,7 @@
       return {
         vocab: [],
         namespace: 'Vocab Boxes',
-        url: MY_URL + DETAIL_SEARCH_URL
+        url: server_settings.MY_URL + DETAIL_SEARCH_URL
       }
     },
     mixins: [

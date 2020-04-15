@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import {RDF_DOWNLOAD_URL} from "../configs/server_settings";
+  import {server_settings} from "../configs/server_settings";
   import {BFormSelect} from 'bootstrap-vue/src/components/form-select/form-select';
 
   export default {
@@ -63,7 +63,7 @@
 
         },
         get() {
-          let url = RDF_DOWNLOAD_URL + '?';
+          let url = server_settings.RDF_DOWNLOAD_URL + '?';
           if (this.id !== undefined && this.id !== null && this.id !== '') {
             url += 'id=' + this.id + '&';
           }

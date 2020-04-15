@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import {PLONE_URL} from "../../configs/server_settings";
+  import {server_settings} from "../../configs/server_settings";
   import {format_plone_date, set_error_message} from "../../mixins/utils";
   import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
 
@@ -48,7 +48,7 @@
         result: {
           items: []
         },
-        base_data_url: PLONE_URL + '/@search?fullobjects=1',
+        base_data_url: server_settings.PLONE_URL + '/@search?fullobjects=1',
       }
     }
     ,
@@ -136,11 +136,13 @@
 
   .plone_listing_element {
     padding: 15px;
+    padding-left: 0px;
   }
 
   @media (max-width: 640px) {
     .plone_listing_element {
       padding: 5px;
+      padding-left: 0px;
     }
   }
 

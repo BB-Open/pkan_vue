@@ -1,11 +1,11 @@
 require("babel-polyfill");
 import VueSocketIO from "vue-socket.io";
 import Vue from "vue";
-import { WEBSOCKET_URL } from "../components/configs/server_settings";
+import { server_settings } from "../components/configs/server_settings";
 
 Vue.use(
   new VueSocketIO({
     debug: true,
-    connection: WEBSOCKET_URL
+    connection: server_settings.WEBSOCKET_URL
   })
 );

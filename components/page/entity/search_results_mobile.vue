@@ -1,6 +1,9 @@
 <template>
   <div :class="style_class">
-    <div class="portalMessage error" role="alert">{{error}}</div>
+    <div role="alert"><div class="portalMessage error" v-if="error">
+      <div>Fehler</div>
+      <div>{{error}}</div>
+    </div></div>
     <h2>Suchergebnisse:</h2>
     <div v-infinite-scroll="load_more" infinite-scroll-disabled="busy" :infinite-scroll-distance="perPage">
       <ul class="nobull">

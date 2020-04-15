@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import {PLONE_URL} from "../../configs/server_settings";
+  import {server_settings} from "../../configs/server_settings";
   import {removeSelfClosingTags, set_error_message} from "../../mixins/utils";
   import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
 
@@ -29,7 +29,7 @@
       return {
         namespace: 'Blog',
         result: {},
-        base_data_url: PLONE_URL + '/@search?fullobjects=1',
+        base_data_url: server_settings.PLONE_URL + '/@search?fullobjects=1',
         item: {
           title: 'Titel wird geladen.',
           description: 'Beschreibung wird geladen.',

@@ -22,7 +22,7 @@
 <script>
   import PkanMenu from "./PkanMenu";
   import Breadcrumb from "./Breadcrumb";
-  import {MY_URL} from "../../configs/server_settings";
+  import {server_settings} from "../../configs/server_settings";
 
   export default {
     name: "PkanHeader",
@@ -32,7 +32,7 @@
     },
     data() {
       return {
-        my_url: MY_URL,
+        my_url: server_settings.MY_URL,
       }
     },
   }
