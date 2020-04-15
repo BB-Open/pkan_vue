@@ -1,18 +1,18 @@
 <template>
   <div>
-  <div :class="style_class">
+  <ul :class="style_class + ' nobull'">
 
-    <div v-for="item in this.result.items" :class="element_style_class" v-if="result.items.length">
+    <li v-for="item in this.result.items" :class="element_style_class" v-if="result.items.length">
       <div class="plone_listing_element">
-        <div class="element_title">{{ item.title }}</div>
+        <h2 class="element_title">{{ item.title }}</h2>
         <div class="element_date" v-if="item.date_text">{{ item.date_text }}</div>
         <div class="element_logo" v-if="item.logo"><img :src="item.logo.download" :alt="item.title + ' Logo'"/></div>
         <div class="element_description">{{ item.description }}</div>
-        <NuxtLink :to="get_nuxt_link(item.UID)">Weiterlesen</NuxtLink>
+        <NuxtLink :to="get_nuxt_link(item.UID)" :aria-label="item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
       </div>
-    </div>
+    </li>
 
-  </div>
+  </ul>
   <div v-if="!result.items.length">
     <p>Es sind keine Inhalte verfügbar oder diese werden noch geladen.</p>
   </div>
@@ -124,6 +124,9 @@
 
   .element_title {
     font-weight: bold;
+    font-style: normal;
+    font-size: 1rem;
+    margin: 0;
   }
 
   .element_logo img {
@@ -136,14 +139,23 @@
 
   .plone_listing_element {
     padding: 15px;
-    padding-left: 0px;
+    padding-left: 0;
+  }
+
+  .box .plone_listing_element {
+    padding-left: 15px;
   }
 
   @media (max-width: 640px) {
     .plone_listing_element {
       padding: 5px;
-      padding-left: 0px;
+      padding-left: 0;
     }
+
+    .box .plone_listing_element {
+      padding-left: 5px;
+    }
+
   }
 
 </style>

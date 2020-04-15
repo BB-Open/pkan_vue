@@ -7,4 +7,3 @@ try {
 }
 
 export const server_settings = config_file.server_settings;
-

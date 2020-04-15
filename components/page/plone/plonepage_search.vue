@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 v-if="this.display_title">{{ item.title }}</h1>
-    <h2 v-if="item.description">{{ item.description}}</h2>
+    <div class="description" v-if="item.description">{{ item.description}}</div>
     <div v-html="removeSelfClosingTags(item.text.data)" v-if="item.text" :class="content_class"></div>
   </div>
 </template>

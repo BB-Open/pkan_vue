@@ -67,6 +67,15 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.4;
 }
 
+.publish_date, .description {
+  color: #161616;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  font-weight: normal;
+  line-height: 1.4;
+  font-size: 1.5em;
+}
+
 p {
   line-height: 1.6;
   margin-bottom: 1rem;

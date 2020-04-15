@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>{{ item.title }}</h1>
-    <h2 class="publish_date" v-if="item.date_text">{{item.date_text}}</h2>
-    <h2 v-if="item.description">{{ item.description}}</h2>
+    <div class="publish_date" v-if="item.date_text">{{item.date_text}}</div>
+    <div v-if="item.description" class="description">{{ item.description}}</div>
     <div v-html="removeSelfClosingTags(item.text.data)" v-if="item.text"></div>
   </div>
 </template>

@@ -4,7 +4,7 @@
       <div class="text_area">
         <h1>{{ item.title }}</h1>
 
-        <h2 v-if="item.description">{{ item.description}}</h2>
+        <div class="description" v-if="item.description">{{ item.description}}</div>
         <div v-html="item.text" v-if="item.text"></div>
       </div>
 
