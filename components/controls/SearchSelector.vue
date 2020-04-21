@@ -1,18 +1,19 @@
 <template>
-  <form class="SearchSelector">
+  <form class="SearchSelector" @submit.prevent="">
     <label>{{ title }}:<br/>
-      <input type="text" v-model="search_string" :placeholder="title + ' durchsuchen'" @change="filter_criteria"></label>
+      <input type="text" v-model="search_string" :placeholder="title + ' durchsuchen'"
+             @change="filter_criteria"></label>
     <div class="criteria_buttons">
       <button v-for="item in display_values" @click="button_clicked(item)"
               v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove, criteria_button_unselected: !data_store[item].check_remove && !data_store[item].check_add}"
-              v-bind:alt="get_item_alt(item)">
+              v-bind:alt="get_item_alt(item)" :id="item">
         <span v-if="data_store[item].check_add">Ausgewählt: </span><span v-if="data_store[item].check_remove">Ausgenommen: </span>{{
         data_store[item].text }}
       </button>
       <button v-for="item in additional_values" @click="button_clicked(item)"
               v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove, criteria_button_unselected: !data_store[item].check_remove && !data_store[item].check_add}"
               v-if="show_more || data_store[item].check_add || data_store[item].check_remove"
-              v-bind:alt="get_item_alt(item)">
+              v-bind:alt="get_item_alt(item)" :id="item">
         {{ data_store[item].text }}
       </button>
     </div>
@@ -110,6 +111,7 @@
 
         this.save();
         this.$forceUpdate()
+        this.refocus_button(item)
       },
       set_values_for_widget() {
         let value_neg = this.values_stored.value_neg;
@@ -215,8 +217,11 @@
           return 'Von Suche ausgenommen'
         }
         return ''
-      }
+      },
 
+      refocus_button(item) {
+        document.getElementById(item).focus()
+      }
     },
     beforeDestroy: function () {
       this.$EventBus.$off(EV.RESET_SEARCH_TERMS);
