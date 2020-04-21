@@ -1,7 +1,7 @@
 <template>
   <div :class="style_class">
     <h1>{{title}}</h1>
-    <p>{{description}}</p>
+    <p class="description">{{description}}</p>
     <a :href="id">Originallink aufrufen</a>
     <h2>Download:</h2>
     <download-control :id="id"></download-control>
