@@ -16,7 +16,7 @@
       align="fill"
     ></b-pagination>
 
-    <ul class="nobull">
+    <ul class="nobull" aria-live="polite">
       <li v-for="item in result" :class="element_style_class" v-if="result.length">
         <p class="element_title">{{ item.type}}: {{ item.title }}</p>
         <p class="element_description">{{ item.description }}</p>

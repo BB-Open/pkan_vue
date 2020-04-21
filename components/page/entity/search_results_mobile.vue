@@ -6,7 +6,7 @@
     </div></div>
     <h2>Suchergebnisse:</h2>
     <div v-infinite-scroll="load_more" infinite-scroll-disabled="busy" :infinite-scroll-distance="perPage">
-      <ul class="nobull">
+      <ul class="nobull" aria-live="polite">
         <li v-for="item in result" :class="element_style_class">
           <p class="element_title">{{ item.type}}: {{ item.title }}</p>
           <p class="element_description">{{ item.description }}</p>
