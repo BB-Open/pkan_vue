@@ -15,7 +15,8 @@
           </div>
 
           <div class="results hidesmallscreen">
-            <search_results namespace="Search" :view_url="view_url" v-if="$mq === 'screen'" :request="request"></search_results>
+            <search_results namespace="Search" :view_url="view_url" v-if="$mq === 'screen'"
+                            :request="request"></search_results>
           </div>
           <div class="results hidebigscreen">
             <search_results_mobile namespace="Search" :view_url="view_url" :request="request"

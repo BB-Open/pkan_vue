@@ -1,11 +1,15 @@
 <template>
   <div :class="style_class">
-    <div role="alert"><div class="portalMessage error" v-if="error">
-      <div>Fehler</div>
-      <div>{{error}}</div>
-    </div></div>
+    <div role="alert">
+      <div class="portalMessage error" v-if="error">
+        <div>Fehler</div>
+        <div>{{error}}</div>
+      </div>
+    </div>
     <h2>Suchergebnisse:</h2>
-    <div class="hidden_help_text" id="page_description">Für die Seitenverwaltung nutzen Sie die Pfeiltasten zum wechseln zwischen den Buttons. Bestätigen sie mit Enter. Mit Tab verlassen sie die Seitenverwaltung.</div>
+    <div class="hidden_help_text" id="page_description">Für die Seitenverwaltung nutzen Sie die Pfeiltasten zum wechseln
+      zwischen den Buttons. Bestätigen sie mit Enter. Mit Tab verlassen sie die Seitenverwaltung.
+    </div>
     <b-pagination
       v-model="pagination_page"
       :total-rows="rows"

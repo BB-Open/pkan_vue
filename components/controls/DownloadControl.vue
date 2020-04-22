@@ -8,7 +8,9 @@
         <label aria-label="Wählen sie aus, wie die Daten ausgewählt werden sollen.">Download Art:<br/>
           <b-form-select v-model="download_type" :options="vocab_type" class="mb-3" key="download_type_select"/>
         </label>
-        <label v-if="this.download_type=='graph'" aria-label="Wählen Sie aus, wie viele Unterelemente des Graphen ausgewählt werden sollen.">Anzahl der Schritte:<br/>
+        <label v-if="this.download_type==='graph'"
+               aria-label="Wählen Sie aus, wie viele Unterelemente des Graphen ausgewählt werden sollen.">Anzahl der
+          Schritte:<br/>
           <b-form-select v-model="count" :options="vocab_count" class="mb-3" key="count_select"/>
         </label>
       </form>

@@ -15,10 +15,11 @@
   import plonelisting_url from '../components/page/plone/plonelisting_url'
   import {BLOG_URL} from "../components/configs/routing";
   import {
-    PLONE_TAG_BLOG,
-    PLONE_INDEX_CREATED, PLONE_TAG_LANDING,
+    PLONE_INDEX_CREATED,
     PLONE_PT_DOCUMENT,
-    PLONE_REVERSE_ORDERING
+    PLONE_REVERSE_ORDERING,
+    PLONE_TAG_BLOG,
+    PLONE_TAG_LANDING
   } from "../components/configs/plone_keywords";
   import VocabBox from "../components/controls/VocabBox";
 

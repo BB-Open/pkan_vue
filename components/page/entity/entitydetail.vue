@@ -6,23 +6,25 @@
     <h2>Download:</h2>
     <download-control :id="id"></download-control>
     <h2>Felder:</h2>
-    <ul class="nobull"v-if="result_fields.length">
-    <li v-for="item in result_fields" :class="element_style_class" >
-      <p class="element_title">{{ get_label(item.field) }}:</p>
-      <p class="element_description">{{item.value}}</p>
-    </li></ul>
+    <ul class="nobull" v-if="result_fields.length">
+      <li v-for="item in result_fields" :class="element_style_class">
+        <p class="element_title">{{ get_label(item.field) }}:</p>
+        <p class="element_description">{{item.value}}</p>
+      </li>
+    </ul>
     <div v-if="!result_fields.length">
       <p>Es wurden keine Felder gefunden oder diese werden noch geladen.</p>
     </div>
     <h2>Vernetzung:</h2>
     <ul class="nobull" v-if="result_networking.length">
-    <li v-for="item in result_networking" :class="element_style_class" >
-      <p class="element_title">{{ get_label(item.type)}}: {{ item.title }}</p>
-      <p class="element_description">{{ item.description }}</p>
-      <p>
-        <NuxtLink :to="get_nuxt_link(item.id)" :aria-label="item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
-      </p>
-    </li></ul>
+      <li v-for="item in result_networking" :class="element_style_class">
+        <p class="element_title">{{ get_label(item.type)}}: {{ item.title }}</p>
+        <p class="element_description">{{ item.description }}</p>
+        <p>
+          <NuxtLink :to="get_nuxt_link(item.id)" :aria-label="item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
+        </p>
+      </li>
+    </ul>
     <div v-if="!result_networking.length">
       <p>Es wurden keine vernetzten Elemente gefunden oder diese werden noch geladen.</p>
     </div>

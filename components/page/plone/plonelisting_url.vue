@@ -1,21 +1,21 @@
 <template>
   <div>
-  <ul :class="style_class + ' nobull'">
+    <ul :class="style_class + ' nobull'">
 
-    <li v-for="item in this.result.items" :class="element_style_class" v-if="result.items.length">
-      <div class="plone_listing_element">
-        <h2 class="element_title">{{ item.title }}</h2>
-        <div class="element_date" v-if="item.date_text">{{ item.date_text }}</div>
-        <div class="element_logo" v-if="item.logo"><img :src="item.logo.download" :alt="item.title + ' Logo'"/></div>
-        <div class="element_description">{{ item.description }}</div>
-        <NuxtLink :to="get_nuxt_link(item.UID)" :aria-label="item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
-      </div>
-    </li>
+      <li v-for="item in this.result.items" :class="element_style_class" v-if="result.items.length">
+        <div class="plone_listing_element">
+          <h2 class="element_title">{{ item.title }}</h2>
+          <div class="element_date" v-if="item.date_text">{{ item.date_text }}</div>
+          <div class="element_logo" v-if="item.logo"><img :src="item.logo.download" :alt="item.title + ' Logo'"/></div>
+          <div class="element_description">{{ item.description }}</div>
+          <NuxtLink :to="get_nuxt_link(item.UID)" :aria-label="item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
+        </div>
+      </li>
 
-  </ul>
-  <div v-if="!result.items.length">
-    <p>Es sind keine Inhalte verfügbar oder diese werden noch geladen.</p>
-  </div>
+    </ul>
+    <div v-if="!result.items.length">
+      <p>Es sind keine Inhalte verfügbar oder diese werden noch geladen.</p>
+    </div>
   </div>
 </template>
 

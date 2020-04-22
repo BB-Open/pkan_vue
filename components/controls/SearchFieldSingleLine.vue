@@ -101,7 +101,6 @@
   }
 
 
-
   .single_line_edit {
     margin: 0;
     white-space: nowrap;

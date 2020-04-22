@@ -6,9 +6,12 @@
       <main class="twocolumncontent content_container" v-if="display_info_column" id="maincontent">
         <pkan-status></pkan-status>
         <div class="main_content ">
-          <form v-if="this.display_search" @submit.prevent=""><search-field-single-line property="textline_keywords" store_namespace="Search"
-                                    :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
-                                    rows="1" button_label="Suchen" :hidden_label="placeholder"></search-field-single-line></form>
+          <form v-if="this.display_search" @submit.prevent="">
+            <search-field-single-line property="textline_keywords" store_namespace="Search"
+                                      :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
+                                      rows="1" button_label="Suchen"
+                                      :hidden_label="placeholder"></search-field-single-line>
+          </form>
           <slot name="content"></slot>
         </div>
         <div class="info_column_right info_column">
@@ -18,9 +21,12 @@
       </main>
       <main class="content_container" v-if="!display_info_column">
         <pkan-status></pkan-status>
-        <form v-if="this.display_search" @submit.prevent=""><search-field-single-line property="textline_keywords" store_namespace="Search"
-                                  :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
-                                  rows="1" button_label="Suchen" :hidden_label="placeholder"></search-field-single-line></form>
+        <form v-if="this.display_search" @submit.prevent="">
+          <search-field-single-line property="textline_keywords" store_namespace="Search"
+                                    :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
+                                    rows="1" button_label="Suchen"
+                                    :hidden_label="placeholder"></search-field-single-line>
+        </form>
         <slot name="content"></slot>
       </main>
       <pkan-footer></pkan-footer>
@@ -39,7 +45,9 @@
     PLONE_INDEX_CREATED,
     PLONE_PT_DOCUMENT,
     PLONE_REVERSE_ORDERING,
-    PLONE_TAG_BLOG, PLONE_TAG_LANDING, PLONE_TAG_SIDETEXT
+    PLONE_TAG_BLOG,
+    PLONE_TAG_LANDING,
+    PLONE_TAG_SIDETEXT
   } from "../../configs/plone_keywords";
   import PkanStatus from "../subelements/PkanStatus";
   import {set_error_message} from "../../mixins/utils";

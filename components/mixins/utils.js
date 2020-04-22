@@ -1,5 +1,4 @@
-import {endOfDay, format, startOfDay, isSameDay,} from 'date-fns'
-import {EV} from "../configs/events";
+import {format, startOfDay,} from 'date-fns'
 
 export const DATE_FORMAT = 'YYYY-MM-DD';
 
