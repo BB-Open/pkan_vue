@@ -1,0 +1,4 @@
+pages/**/*.vue
+
+!pages/start.vue
+!pages/index.vue
