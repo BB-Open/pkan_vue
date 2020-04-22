@@ -1,10 +1,9 @@
 <template>
   <div>
     <ul class="nobull category box_area" v-if="vocab.length">
-      <li v-for="item in vocab" class="box" :key="item.id">
-        <a
-          :href="url"
-          @click="handle_click(item.id)"
+      <li v-for="item in vocab" class="box" :key="item.id" @click="handle_click(item.id)">
+        <nuxt-link
+          :to="url"
           class="lightbutton button vocabbutton">
           <div class="category_label">
             <div class="category_icon"><i :aria-labelledby="item.id" :class="item.icon_class + ' bb-ifa'"
@@ -12,7 +11,7 @@
                                                                          class="hidesmallscreen"/></div>
             <div class="category_text" :id="item.id">{{item.text}}</div>
           </div>
-        </a>
+        </nuxt-link>
       </li>
     </ul>
     <div v-if="!vocab.length" class="content_container">
@@ -33,7 +32,7 @@
       return {
         vocab: [],
         namespace: 'Vocab Boxes',
-        url: server_settings.MY_URL + DETAIL_SEARCH_URL
+        url: DETAIL_SEARCH_URL
       }
     },
     mixins: [
