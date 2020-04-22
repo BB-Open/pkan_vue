@@ -6,7 +6,7 @@
       <main class="twocolumncontent content_container" v-if="display_info_column" id="maincontent">
         <pkan-status></pkan-status>
         <div class="main_content ">
-          <form v-if="this.display_search"><search-field-single-line property="textline_keywords" store_namespace="Search"
+          <form v-if="this.display_search" @submit.prevent=""><search-field-single-line property="textline_keywords" store_namespace="Search"
                                     :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
                                     rows="1" button_label="Suchen" :hidden_label="placeholder"></search-field-single-line></form>
           <slot name="content"></slot>
@@ -18,7 +18,7 @@
       </main>
       <main class="content_container" v-if="!display_info_column">
         <pkan-status></pkan-status>
-        <form v-if="this.display_search"><search-field-single-line property="textline_keywords" store_namespace="Search"
+        <form v-if="this.display_search" @submit.prevent=""><search-field-single-line property="textline_keywords" store_namespace="Search"
                                   :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
                                   rows="1" button_label="Suchen" :hidden_label="placeholder"></search-field-single-line></form>
         <slot name="content"></slot>

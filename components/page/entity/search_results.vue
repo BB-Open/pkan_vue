@@ -5,6 +5,7 @@
       <div>{{error}}</div>
     </div></div>
     <h2>Suchergebnisse:</h2>
+    <div class="hidden_help_text" id="page_description">Für die Seitenverwaltung nutzen Sie die Pfeiltasten zum wechseln zwischen den Buttons. Bestätigen sie mit Enter. Mit Tab verlassen sie die Seitenverwaltung.</div>
     <b-pagination
       v-model="pagination_page"
       :total-rows="rows"
@@ -13,7 +14,10 @@
       prev-text="Vorherige"
       next-text="Nächste"
       last-text="Letzte"
+      label-page="Gehe zu Seite"
       align="fill"
+      aria-label="Seitenverwaltung."
+      aria-describedby="page_description"
     ></b-pagination>
 
     <ul class="nobull" aria-live="polite">
@@ -36,7 +40,10 @@
       prev-text="Vorherige"
       next-text="Nächste"
       last-text="Letzte"
+      label-page="Gehe zu Seite"
       align="fill"
+      aria-label="Seitenverwaltung."
+      aria-describedby="page_description"
     ></b-pagination>
   </div>
 </template>

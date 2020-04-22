@@ -1,7 +1,7 @@
 <template>
   <div class="download_section">
     <div class="download_controls_container">
-      <form class="file_select">
+      <form class="file_select" @submit.prevent="">
         <label aria-label="Wählen sie ein Dateiformat für den Download">Dateiformat:<br/>
           <b-form-select v-model="file_format" :options="vocab_format" class="mb-3" key="format_select"/>
         </label>

@@ -1,17 +1,17 @@
 <template>
   <div class="picker">
     <div class="DateSelector">
-      <form>
+      <form @submit.prevent="">
       <label>{{ this.label }}</label><br/>
-      <label for="start_input">Von: </label>
+      <label for="start_input" :aria-label="'Startdatum wählen ' + format">Von: </label>
       <datepicker v-model="value_start" :placeholder="'Datum wählen ' + format" :key="namespace + property + 'datepicker_start'"
                   :monday-first="true" :language="lang" input-class="date_input" calender-class="calender_input"
                   :format="format" :typeable="true" id="start_input"></datepicker>
-      <label for="end_input">Bis:</label>
+      <label for="end_input" :aria-label="'Enddatum wählen ' + format">Bis:</label>
       <datepicker v-model="value_end" :placeholder="'Datum wählen ' + format" :key="namespace + property + 'datepicker_end'"
                   :monday-first="true" :language="lang" input-class="date_input" calender-class="calender_input"
                   :format="format" :typeable="true" id="end_input"></datepicker>
-      <button type="button" class="button" @click="reset()" aria-label="Hier setzen sie die Datumsfelder zurück.">Zurück setzen</button>
+      <button type="button" class="button" @click="reset()" aria-label="Zurück setzen für die Datumsfelder">Zurück setzen</button>
       </form>
     </div>
   </div>

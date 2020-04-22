@@ -1,6 +1,6 @@
 <template>
   <div class="select">
-    <form>
+    <form @submit.prevent="">
     <label aria-label="Wählen Sie die Sortierreihenfolge der Suchergebnisse.">Sortieren nach:<br/>
       <b-form-select v-model="selected" :options="vocab_ordering" class="mb-3" :key="namespace + property + 'select'"/>
     </label>

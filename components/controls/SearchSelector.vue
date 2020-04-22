@@ -1,6 +1,7 @@
 <template>
   <form class="SearchSelector" @submit.prevent="">
     <label>{{ title }}:<br/>
+      <div class="hidden_help_text">Kriterien filtern</div>
       <input type="text" v-model="search_string" :placeholder="title + ' durchsuchen'"
              @change="filter_criteria"></label>
     <div class="criteria_buttons">
@@ -25,7 +26,7 @@
         <template v-if="show_more">ᐃ Weniger</template>
       </button>
       <br v-if="additional_values.length > 0"/>
-      <button @click="reset_button" class="selectorbutton" :aria-label="'Für ' + title">
+      <button @click="reset_button" class="selectorbutton" :aria-label="'Zurück setzen für ' + title">
         <template>Zurück setzen</template>
       </button>
     </div>
