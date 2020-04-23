@@ -2,7 +2,7 @@
   <form @submit.prevent="">
     <label class="textsearch">
       <div class="textsearch_label">{{label}}</div>
-      <textarea class="textsearch_area" v-model="search_string" :placeholder="place_holder" :rows="rows"></textarea>
+      <textarea class="textsearch_area" v-model="search_string" :placeholder="place_holder" :rows="rows" aria-describedby="help" :aria-label="label"></textarea>
       <div class="input_button">
         <button
           @click="filter_criteria()"
@@ -30,7 +30,7 @@
       </div>
 
     </label>
-    <div class="help">{{help}}</div>
+    <div class="help" id="help">{{help}}</div>
   </form>
 </template>
 
