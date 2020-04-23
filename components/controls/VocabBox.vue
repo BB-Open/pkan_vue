@@ -43,6 +43,10 @@
       'clean_value': Boolean,
       'search_field': String
     },
+    serverPrefetch() {
+      // Force the initialization
+      this.get_vocab();
+    },
     mounted() {
       // Force the initialization
       this.get_vocab();

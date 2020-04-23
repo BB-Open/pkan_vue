@@ -18,7 +18,7 @@ const logOptions = {
 };
 
 export default {
-  mode: "spa",
+  mode: "universal",
   /*
    ** Headers of the page
    */
@@ -51,12 +51,11 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    "./plugins/vue_static",
-    "./plugins/vue_socket_io",
-    "./plugins/event_bus",
-    "./plugins/infinite_scroll",
-    "./plugins/VueMQ",
-    "./plugins/datepicker"
+    {src:"./plugins/vue_static", ssr: true},
+    {src:"./plugins/vue_socket_io", ssr: false},
+    {src:"./plugins/event_bus", ssr: true},
+    {src:"./plugins/infinite_scroll", ssr: false},
+    {src:"./plugins/VueMQ", ssr: true}
   ],
 
   /*
@@ -79,7 +78,8 @@ export default {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
       }
     },
-    transpile: ["vue-socket.io", "bootstrap-vue"],
+    transpile: ["vue_static"],
+//    transpile: ["vue-socket.io", "bootstrap-vue"],
     babel: {
       presets: [
         [

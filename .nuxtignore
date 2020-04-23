@@ -1,1 +1,4 @@
+#pages/*/*.vue
 
+#!pages/index.vue
+#!pages/index_old.vue

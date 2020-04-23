@@ -1,61 +1,58 @@
 <template>
-
+  <base-view :namespace="namespace" :breadcrumb="breadcrumb" :display_search="true">
+    <template slot="content">
+      <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag"
+                        content_class="columnsgrey"></plonepage_search>
+      <h2>Unsere Kategorien:</h2>
+      <vocab-box vocab_name="category" :clean_value="true" search_field="category"></vocab-box>
+    </template>
+  </base-view>
 </template>
 
 <script>
-  import {dateStr2dateTime, str2FloatTuple} from '../components/mixins/utils';
-  import {DEFAULT_URL} from "../components/configs/routing";
+  import BaseView from '../components/page/views/BaseView';
+  import plonepage_search from '../components/page/plone/plonepage_search';
+  import plonelisting_url from '../components/page/plone/plonelisting_url'
+  import {BLOG_URL} from "../components/configs/routing";
+  import {
+    PLONE_INDEX_CREATED,
+    PLONE_PT_DOCUMENT,
+    PLONE_REVERSE_ORDERING,
+    PLONE_TAG_BLOG,
+    PLONE_TAG_LANDING
+  } from "../components/configs/plone_keywords";
+  import VocabBox from "../components/controls/VocabBox";
 
   export default {
-    name: 'Landing',
-
-    mounted: function () {
-      // Force the initialization
-      this.init_from_query()
+    name: 'Start',
+    components: {
+      BaseView,
+      plonepage_search,
+      plonelisting_url,
+      VocabBox,
     },
-    methods: {
-      init_from_query() {
-        let query = this.$route.query;
-
-        let date_fields = [];
-        let str_fields = [];
-        let int_fields = [];
-        let tuple_float_fields = [];
-
-        date_fields.forEach(function (field) {
-          let field_value = query[field];
-          if (field_value !== undefined) {
-            this.$store.ep_commit('GlobalState', field, dateStr2dateTime(field_value));
-          }
-        }, this);
-        str_fields.forEach(function (field) {
-          let field_value = query[field];
-          if (field_value !== undefined) {
-            this.$store.ep_commit('GlobalState', field, field_value);
-          }
-        }, this);
-        int_fields.forEach(function (field) {
-          let field_value = query[field];
-          if (field_value !== undefined) {
-            this.$store.ep_commit('GlobalState', field, parseInt(field_value));
-          }
-        }, this);
-        tuple_float_fields.forEach(function (field) {
-          let field_value = query[field];
-          if (field_value !== undefined) {
-            let value = str2FloatTuple(field_value);
-            this.$store.ep_commit('GlobalState', field, value);
-          }
-        }, this);
-
-        // Redirect to real view and choose default view.
-        this.$router.push(DEFAULT_URL);
-
+    data() {
+      return {
+        text: 'Text',
+        namespace: 'Start',
+        breadcrumb: null,
+        view_url: BLOG_URL,
+        sort_on: PLONE_INDEX_CREATED,
+        sort_order: PLONE_REVERSE_ORDERING,
+        tag: PLONE_TAG_BLOG,
+        pt: PLONE_PT_DOCUMENT,
+        landing_tag: PLONE_TAG_LANDING,
       }
-    }
+    },
+    mounted() {
+      // Force the initialization
+      this.$log.debug(this.namespace + ' mounted');
+    },
+
   }
 </script>
 
 <style scoped>
+
 
 </style>
