@@ -40,6 +40,12 @@
         },
       }
     },
+    serverPrefetch() {
+      // Force the initialization
+//      this.$log.debug(this.namespace + ' mounted');
+      this.generate_data_url();
+      return this.get_data();
+    },
     mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
@@ -47,8 +53,8 @@
       this.get_data();
     },
     methods: {
-      get_data() {
-        this.request_pages(this.data_url)
+      async get_data() {
+        await this.request_pages(this.data_url)
       },
       generate_data_url() {
         this.data_url = this.base_data_url;
@@ -93,12 +99,12 @@
           this.item = this.result.items[0];
         }
 
+//        this.$forceUpdate()
         if (this.display_title){
           this.$store.ep_commit('BreadCrumb', 'title', this.item.title);
           this.$EventBus.$emit(EV.PAGE_TITLE_CHANGED, {});
         }
 
-        this.$forceUpdate()
       },
     },
   }

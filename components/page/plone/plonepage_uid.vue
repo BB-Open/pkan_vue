@@ -38,6 +38,10 @@
         },
       }
     },
+    serverPrefetch() {
+      this.generate_data_url();
+      return this.get_data();
+    },
     mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
@@ -45,8 +49,8 @@
       this.get_data();
     },
     methods: {
-      get_data() {
-        this.request_pages(this.data_url)
+      async get_data() {
+        await this.request_pages(this.data_url)
       },
       removeSelfClosingTags(html) {
         return removeSelfClosingTags(html)
@@ -57,7 +61,7 @@
         if (this.uid !== undefined) {
           this.data_url += '&UID=' + this.uid
         }
-        this.$log.debug(this.data_url + ' requested');
+//        this.$log.debug(this.data_url + ' requested');
       },
       async request_pages(url) {
 

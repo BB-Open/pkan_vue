@@ -45,7 +45,7 @@
     },
     serverPrefetch() {
       // Force the initialization
-      this.get_vocab();
+//      this.get_vocab();
     },
     mounted() {
       // Force the initialization

@@ -31,7 +31,7 @@
         // return the promise
         return new Promise((function (resolve, reject) {
 
-//          this.$log.debug(this);
+          this.$log.debug(this);
           // check is namespace is already subscribed
           if (this.$static[namespace_name].has(namespace)) {
             this.$log.debug('Namespace: ' + namespace + ' already registered');

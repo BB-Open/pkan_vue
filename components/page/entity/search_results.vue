@@ -90,6 +90,10 @@
       BPagination,
 
     },
+    serverPrefetch() {
+      this.init_events();
+      return this.get_data();
+    },
     mounted() {
       // Force the initialization
       this.init_events();
@@ -99,7 +103,7 @@
       get_nuxt_link(id) {
         return this.view_url + '/' + encodeURIComponent(id)
       },
-      get_data() {
+      async get_data() {
         if (this.request === REQUEST_SEARCH_RESULTS) {
           let request = Object.assign({}, this.$store.getters[this.namespace + '/search']);
           return this.sendPromise(REQUEST_SEARCH_RESULTS, request)

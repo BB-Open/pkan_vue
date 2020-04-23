@@ -55,6 +55,10 @@
     mixins: [
       SocketPromise
     ],
+    serverPrefetch() {
+      this.get_title();
+      return this.get_data();
+    },
     mounted() {
       // Force the initialization
       this.get_title();
@@ -71,7 +75,7 @@
             this.handle_result_title.bind(this)
           )
       },
-      get_data() {
+      async get_data() {
         let request = Object.assign({}, {id: this.id});
         return this.sendPromise(REQUEST_ITEM_DETAIL, request)
           .then(
@@ -187,8 +191,6 @@
         }
         return true;
       }
-
-
     },
   }
 </script>

@@ -61,7 +61,10 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [["nuxt-log", logOptions], "@nuxtjs/axios"],
+  modules: [
+    ["nuxt-log", logOptions],
+    "@nuxtjs/axios"
+  ],
   axios: {
     // proxyHeaders: false
   },
@@ -78,18 +81,23 @@ export default {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
       }
     },
-    transpile: ["vue_static"],
-//    transpile: ["vue-socket.io", "bootstrap-vue"],
+//    transpile: ["vue_static"],
+    transpile: ["vue-static", "vue-socket.io", "bootstrap-vue"],
     babel: {
-      presets: [
-        [
-          "@babel/env",
-          {
-            // useBuiltIns: true
-            targets: { ie: 10, uglify: true }
-          }
+      presets({ envName }) {
+        const envTargets = {
+          client: { ie: 10 },
+          server: { node: "current" },
+        }
+        return [
+          [
+            "@nuxt/babel-preset-app",
+            {
+              targets: envTargets[envName]
+            }
+          ]
         ]
-      ]
+      }
     }
   }
 };

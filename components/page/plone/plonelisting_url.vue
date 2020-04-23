@@ -50,8 +50,11 @@
         },
         base_data_url: server_settings.PLONE_URL + '/@search?fullobjects=1',
       }
-    }
-    ,
+    },
+    serverPrefetch() {
+      this.generate_data_url();
+      return this.get_data();
+    },
     mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
@@ -64,8 +67,8 @@
         return this.view_url + '/' + uid
       }
       ,
-      get_data() {
-        this.request_pages(this.data_url)
+      async get_data() {
+        await this.request_pages(this.data_url)
       }
       ,
       generate_data_url() {
@@ -90,7 +93,7 @@
           this.data_url += '&Subject=' + this.tag
         }
 
-        this.$log.debug(this.data_url + ' requested');
+//        this.$log.debug(this.data_url + ' requested');
       }
       ,
       async request_pages(url) {
