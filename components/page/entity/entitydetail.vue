@@ -16,7 +16,7 @@
       <p>Es wurden keine Felder gefunden oder diese werden noch geladen.</p>
     </div>
     <h2>Vernetzung:</h2>
-    <ul class="nobull" v-if="result_networking.length">
+    <ul class="nobull" v-if="!isEmpty(result_networking)">
       <li v-for="item in result_networking" :class="element_style_class">
         <p class="element_title">{{ get_label(item.type)}}: {{ item.title }}</p>
         <p class="element_description">{{ item.description }}</p>
@@ -25,7 +25,7 @@
         </p>
       </li>
     </ul>
-    <div v-if="!result_networking.length">
+    <div v-if="isEmpty(result_networking)">
       <p>Es wurden keine vernetzten Elemente gefunden oder diese werden noch geladen.</p>
     </div>
   </div>
@@ -127,7 +127,7 @@
             } else {
               // additional sparql not directly related to our object
             }
-          }, this)
+          }, this);
       },
       handle_label(p) {
         let key = p.nominalValue;
@@ -159,7 +159,7 @@
           )
       },
       handle_result_object_title_desc(data) {
-        let id = data.id
+        let id = data.id;
         this.result_networking[id]['title'] = data.title;
         this.result_networking[id]['description'] = data.description;
         this.result_networking[id]['type'] = data.type;
@@ -175,6 +175,13 @@
         };
         // load infos from flask and replace default values
         this.get_object_title_description(id)
+      },
+      isEmpty(obj) {
+        for(var key in obj) {
+          if(obj.hasOwnProperty(key))
+            return false;
+        }
+        return true;
       }
 
 
