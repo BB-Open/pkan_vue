@@ -1,7 +1,7 @@
 <template>
   <base-view :namespace="namespace" :breadcrumb="namespace" :display_info_column="true">
     <template slot="content">
-      <h1>{{ this.namespace }}</h1>
+      <h1>{{ namespace }}</h1>
       <plonelisting_url :view_url="view_url" :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order"
                         :tag="tag" :display_date="true"></plonelisting_url>
 
@@ -19,6 +19,7 @@
     PLONE_REVERSE_ORDERING,
     PLONE_TAG_BLOG
   } from "../../components/configs/plone_keywords";
+  import {EV} from "../../components/configs/events";
 
   export default {
     name: 'Blog',
@@ -39,6 +40,12 @@
     mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
+
+
+      this.$store.ep_commit('BreadCrumb', 'title', this.namespace);
+      this.$EventBus.$emit(EV.PAGE_TITLE_CHANGED, {});
+
+
     },
     methods: {}
 

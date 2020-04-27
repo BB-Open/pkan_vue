@@ -11,6 +11,7 @@
 <script>
   import BaseView from '../../components/page/views/BaseView';
   import VocabBox from "../../components/controls/VocabBox";
+  import {EV} from "../../components/configs/events";
 
   export default {
     name: 'Search',
@@ -23,6 +24,10 @@
         namespace: 'Search',
       }
     },
+    mounted() {
+      this.$store.ep_commit('BreadCrumb', 'title', 'Einfache Suche');
+      this.$EventBus.$emit(EV.PAGE_TITLE_CHANGED, {});
+    }
 
   }
 </script>

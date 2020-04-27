@@ -41,7 +41,7 @@
   export default {
     name: "entitydetail",
     components: {DownloadControl},
-    props: ['id', 'view_url', 'element_style_class', 'style_class',],
+    props: ['id', 'view_url', 'element_style_class', 'style_class', 'alert_title'],
     data() {
       return {
         result_fields: [],
@@ -82,7 +82,11 @@
         this.title = data.title;
         this.description = data.description;
         this.$store.ep_commit('BreadCrumb', 'last_title', this.title);
-        this.$EventBus.$emit(EV.BREADCRUMB_CHANGED, {});
+        this.$EventBus.$emit(EV.PAGE_CHANGED, {});
+        if (this.alert_title) {
+          this.$store.ep_commit('BreadCrumb', 'title', this.title);
+          this.$EventBus.$emit(EV.PAGE_TITLE_CHANGED, {});
+        }
         this.$forceUpdate()
       },
       handle_result_ttl(data) {

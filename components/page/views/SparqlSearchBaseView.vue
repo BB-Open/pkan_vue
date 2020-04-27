@@ -72,6 +72,8 @@
     mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
+      this.$store.ep_commit('BreadCrumb', 'title', 'SPARQL Suche');
+      this.$EventBus.$emit(EV.PAGE_TITLE_CHANGED, {});
     },
     methods: {
       search_initial() {

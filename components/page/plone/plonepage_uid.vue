@@ -77,7 +77,9 @@
           this.item.date_text = 'Veröffentlicht am ' + format_plone_date(this.item.effective);
         }
         this.$store.ep_commit('BreadCrumb', 'last_title', this.item.title);
-        this.$EventBus.$emit(EV.BREADCRUMB_CHANGED, {});
+        this.$EventBus.$emit(EV.PAGE_CHANGED, {});
+        this.$store.ep_commit('BreadCrumb', 'title', this.item.title);
+        this.$EventBus.$emit(EV.PAGE_TITLE_CHANGED, {});
         this.$forceUpdate()
       },
     },

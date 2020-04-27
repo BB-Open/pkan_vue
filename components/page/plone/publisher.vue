@@ -10,7 +10,7 @@
 
       <div class="element_logo" v-if="item.logo"><img :src="item.logo.download" :alt="item.title + ' Logo'"/></div>
     </div>
-    <entitydetail :id="item.sparql_identifier" :view_url="view_url" v-if="item.sparql_identifier"></entitydetail>
+    <entitydetail :id="item.sparql_identifier" :view_url="view_url" v-if="item.sparql_identifier" :alert_title="alert_title"></entitydetail>
   </div>
 </template>
 
@@ -40,6 +40,7 @@
           sparql_identifier: '',
         },
         view_url: SEARCH_URL,
+        alert_title: false,
       }
     },
     mounted() {
@@ -74,7 +75,9 @@
         }
         this.item = this.result.items[0];
         this.$store.ep_commit('BreadCrumb', 'last_title', this.item.title);
-        this.$EventBus.$emit(EV.BREADCRUMB_CHANGED, {});
+        this.$EventBus.$emit(EV.PAGE_CHANGED, {});
+        this.$store.ep_commit('BreadCrumb', 'title', this.item.title);
+        this.$EventBus.$emit(EV.PAGE_TITLE_CHANGED, {});
         this.$forceUpdate()
       },
     },

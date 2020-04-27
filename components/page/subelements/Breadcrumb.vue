@@ -30,7 +30,7 @@
       this.init_events();
     },
     beforeDestroy: function () {
-      this.$EventBus.$off(EV.BREADCRUMB_CHANGED);
+      this.$EventBus.$off(EV.PAGE_CHANGED);
     },
 
     methods: {
@@ -63,7 +63,7 @@
 
       },
       init_events() {
-        this.$EventBus.$on(EV.BREADCRUMB_CHANGED, () => {
+        this.$EventBus.$on(EV.PAGE_CHANGED, () => {
           this.$log.debug('breadcrumb changed');
           this.init_breadcrumbs()
         });

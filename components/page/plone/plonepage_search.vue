@@ -10,6 +10,7 @@
   import {server_settings} from "../../configs/server_settings";
   import {removeSelfClosingTags, set_error_message} from "../../mixins/utils";
   import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
+  import {EV} from "../../configs/events";
 
   export default {
     name: "plonepage_search",
@@ -90,6 +91,11 @@
         }
         if (this.result.items[0] !== undefined) {
           this.item = this.result.items[0];
+        }
+
+        if (this.display_title){
+          this.$store.ep_commit('BreadCrumb', 'title', this.item.title);
+          this.$EventBus.$emit(EV.PAGE_TITLE_CHANGED, {});
         }
 
         this.$forceUpdate()

@@ -1,5 +1,6 @@
 <template>
   <div class="body_content">
+    <page-title-reader></page-title-reader>
     <div :class="namespace">
       <a href="#maincontent" class="hidden_help_text">Weiter zum Hauptteil der Seite</a>
       <pkan-header></pkan-header>
@@ -14,11 +15,13 @@
           </form>
           <slot name="content"></slot>
         </div>
+
+
+        <aside class="info_column_right info_column" v-if="display_info_column">
+          <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="side_tag"
+                            :display_title="false"></plonepage_search>
+        </aside>
       </main>
-      <aside class="info_column_right info_column" v-if="display_info_column">
-        <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="side_tag"
-                          :display_title="false"></plonepage_search>
-      </aside>
       <main class="content_container" v-if="!display_info_column">
         <pkan-status></pkan-status>
         <form v-if="this.display_search" @submit.prevent="">
@@ -51,10 +54,12 @@
   } from "../../configs/plone_keywords";
   import PkanStatus from "../subelements/PkanStatus";
   import {set_error_message} from "../../mixins/utils";
+  import PageTitleReader from "../../controls/PageTitleReader";
 
   export default {
     name: 'BaseView',
     components: {
+      PageTitleReader,
       PkanHeader,
       SearchFieldSingleLine,
       PkanFooter,
@@ -81,9 +86,8 @@
       this.$store.ep_commit('BreadCrumb', 'currentView', this.breadcrumb);
       if (this.ignore_last_title === undefined) {
         this.$store.ep_commit('BreadCrumb', 'last_title', null)
-      }
-      ;
-      this.$EventBus.$emit(EV.BREADCRUMB_CHANGED, {});
+      };
+      this.$EventBus.$emit(EV.PAGE_CHANGED, {});
     },
   }
 </script>

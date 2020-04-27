@@ -1,7 +1,7 @@
 <template>
   <base-view :namespace="namespace" :breadcrumb="breadcrumb" :ignore_last_title="true" :display_info_column="true">
     <template slot="content">
-      <entitydetail :id="get_data()" :view_url="view_url"></entitydetail>
+      <entitydetail :id="get_data()" :view_url="view_url" :alert_title="alert_title"></entitydetail>
     </template>
   </base-view>
 </template>
@@ -22,6 +22,7 @@
         namespace: 'Entity',
         breadcrumb: 'DetailSearch',
         view_url: SEARCH_URL,
+        alert_title: true,
       }
     },
     mounted() {
