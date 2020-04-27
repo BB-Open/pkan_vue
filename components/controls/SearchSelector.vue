@@ -1,5 +1,5 @@
 <template>
-  <form class="SearchSelector" @submit.prevent="">
+  <form class="SearchSelector boxed_selector" @submit.prevent="">
     <label>{{ title }}:<br/>
       <div class="hidden_help_text">Kriterien filtern</div>
       <input type="text" v-model="search_string" :placeholder="title + ' durchsuchen'"

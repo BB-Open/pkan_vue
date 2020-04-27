@@ -394,6 +394,13 @@ input {
   overflow: hidden !important;
 }
 
+.boxed_selector {
+  border: 2px solid;
+  border-color: #b3b3b3;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
 @media (max-width: 640px) {
 
   .info_column_right {
