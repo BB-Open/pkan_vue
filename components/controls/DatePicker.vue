@@ -1,5 +1,5 @@
 <template>
-  <div class="picker">
+  <div class="picker boxed_selector">
     <div class="DateSelector">
       <form @submit.prevent="">
         <label>{{ this.label }}</label><br/>
@@ -22,7 +22,6 @@
 </template>
 
 <script>
-  import Datepicker from 'vuejs-datepicker';
   import {DATE_DISPLAY_FORMAT} from '../mixins/utils';
   import {EV} from "../configs/events";
   import {de} from 'vuejs-datepicker/dist/locale'
@@ -30,7 +29,6 @@
   export default {
     name: 'DatePicker',
     components: {
-      Datepicker
     },
     props: ['label', 'namespace', 'property'],
     data() {

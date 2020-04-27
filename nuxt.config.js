@@ -55,7 +55,8 @@ export default {
     "./plugins/vue_socket_io",
     "./plugins/event_bus",
     "./plugins/infinite_scroll",
-    "./plugins/VueMQ"
+    "./plugins/VueMQ",
+    "./plugins/datepicker"
   ],
 
   /*
