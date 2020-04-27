@@ -14,11 +14,11 @@
           </form>
           <slot name="content"></slot>
         </div>
-        <div class="info_column_right info_column">
-          <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="side_tag"
-                            :display_title="false"></plonepage_search>
-        </div>
       </main>
+      <aside class="info_column_right info_column" v-if="display_info_column">
+        <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="side_tag"
+                          :display_title="false"></plonepage_search>
+      </aside>
       <main class="content_container" v-if="!display_info_column">
         <pkan-status></pkan-status>
         <form v-if="this.display_search" @submit.prevent="">
