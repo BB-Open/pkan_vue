@@ -42,7 +42,7 @@
     },
     serverPrefetch() {
       // Force the initialization
-//      this.$log.debug(this.namespace + ' mounted');
+      this.$log.debug(this.namespace + ' mounted');
       this.generate_data_url();
       return this.get_data();
     },

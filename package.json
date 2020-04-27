@@ -25,7 +25,8 @@
     "vue-mq": "^1.0.1",
     "vue-socket.io": "^3.0.7",
     "vue-static": "0.0.5",
-    "vuejs-datepicker": "^1.6.2"
+    "vuejs-datepicker": "^1.6.2",
+    "vuejs-logger": "^1.5.4"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"

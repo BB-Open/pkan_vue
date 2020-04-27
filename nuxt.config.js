@@ -1,22 +1,5 @@
 import pkg from "./package";
 
-const logOptions = {
-  // optional : defaults to true if not specified
-  isEnabled: true,
-  // required ['debug', 'info', 'warn', 'error', 'fatal']
-  logLevel: "debug",
-  // optional : defaults to false if not specified
-  stringifyArguments: false,
-  // optional : defaults to false if not specified
-  showLogLevel: false,
-  // optional : defaults to false if not specified
-  showMethodName: false,
-  // optional : defaults to '|' if not specified
-  separator: "|",
-  // optional : defaults to false if not specified
-  showConsoleColors: false
-};
-
 export default {
   mode: "universal",
   /*
@@ -55,14 +38,15 @@ export default {
     {src:"./plugins/vue_socket_io", ssr: false},
     {src:"./plugins/event_bus", ssr: true},
     {src:"./plugins/infinite_scroll", ssr: false},
-    {src:"./plugins/VueMQ", ssr: true}
+    {src:"./plugins/VueMQ", ssr: true},
+    {src:"./plugins/vuejs_logger", ssr: true},
+    {src:"./plugins/date_picker", ssr: false}
   ],
 
   /*
    ** Nuxt.js modules
    */
   modules: [
-    ["nuxt-log", logOptions],
     "@nuxtjs/axios"
   ],
   axios: {
