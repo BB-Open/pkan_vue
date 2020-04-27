@@ -1,9 +1,9 @@
 import Vue from 'vue';
 
-import Datepicker from 'vuejs-datepicker';
 
 if (Vue.prototype.$isServer) {
 }
 else {
+  let Datepicker = require('vuejs-datepicker').Datepicker;
   Vue.directive('Datepicker', Datepicker)
 }

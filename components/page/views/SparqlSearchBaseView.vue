@@ -33,12 +33,12 @@
   import {EV} from "../../configs/events";
   import {SEARCH_URL} from "../../configs/routing";
   import search_results_mobile from "../entity/search_results_mobile";
-  import DatePicker from "../../controls/DatePicker";
+//  import DatePicker from "../../controls/DatePicker";
   import {REQUEST_SEARCH_RESULTS_SPARQL} from "../../configs/socket";
 
   export default {
     components: {
-      DatePicker,
+//      DatePicker,
       search_results,
       search_results_mobile,
       BaseView,

@@ -26,6 +26,7 @@
 </template>
 
 <script>
+//  import Datepicker from 'vuejs-datepicker';
   import {DATE_DISPLAY_FORMAT} from '../mixins/utils';
   import {EV} from "../configs/events";
   import {de} from 'vuejs-datepicker/dist/locale'
