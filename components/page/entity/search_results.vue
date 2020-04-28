@@ -58,15 +58,14 @@
 </template>
 
 <script>
-  import SocketPromise from "../../mixins/SocketPromise";
   import {EV} from "../../configs/events";
   import {BATCH_SIZE, REQUEST_SEARCH_RESULTS, REQUEST_SEARCH_RESULTS_SPARQL} from "../../configs/socket";
   import {BPagination} from 'bootstrap-vue'
-  import {write_aria_polite} from "../../mixins/utils";
+  import {get_flask_data, write_aria_polite} from '../../mixins/utils';
 
   export default {
     name: "search_results",
-    props: ['view_url', 'element_style_class', 'style_class', 'namespace', 'request'],
+    props: ['view_url', 'element_style_class', 'style_class', 'namespace', 'request_type'],
     data() {
       return {
         result: [],
@@ -89,9 +88,6 @@
         }
       }
     },
-    mixins: [
-      SocketPromise
-    ],
     components: {
       BPagination,
 
@@ -109,22 +105,18 @@
       get_nuxt_link(id) {
         return this.view_url + '/' + encodeURIComponent(id)
       },
+
       async get_data() {
+        var request = {}
         if (this.request === REQUEST_SEARCH_RESULTS) {
-          let request = Object.assign({}, this.$store.getters[this.namespace + '/search']);
-          return this.sendPromise(REQUEST_SEARCH_RESULTS, request)
-            .then(
-              this.handle_result.bind(this)
-            )
+          request = Object.assign({}, this.$store.getters[this.namespace + '/search']);
         } else if (this.request === REQUEST_SEARCH_RESULTS_SPARQL) {
-          let request = Object.assign({}, this.$store.getters[this.namespace + '/search_sparql']);
-          return this.sendPromise(REQUEST_SEARCH_RESULTS_SPARQL, request)
-            .then(
-              this.handle_result.bind(this)
-            )
+          request = Object.assign({}, this.$store.getters[this.namespace + '/search_sparql']);
         }
+        var response = await get_flask_data(this, this.request_type, request )
+        return await this.handle_result(response)
       },
-      handle_result(data) {
+      async handle_result(data) {
         this.result = data.results;
         this.rows = data.number_results;
         if (data.response_code === 400) {

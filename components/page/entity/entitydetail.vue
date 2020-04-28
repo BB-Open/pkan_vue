@@ -32,12 +32,11 @@
 </template>
 
 <script>
-  import SocketPromise from "../../mixins/SocketPromise";
   import {EV} from "../../configs/events";
   import {REQUEST_ITEM_DETAIL, REQUEST_ITEM_TITLE_DESC, REQUEST_LABEL} from "../../configs/socket";
   import * as rdf from "rdf";
   import DownloadControl from "../../controls/DownloadControl";
-  import {write_aria_polite} from "../../mixins/utils";
+  import {get_flask_data, write_aria_polite} from '../../mixins/utils';
 
   export default {
     name: "entitydetail",
@@ -53,9 +52,6 @@
         description: 'Beschreibung wird geladen'
       }
     },
-    mixins: [
-      SocketPromise
-    ],
     serverPrefetch() {
       this.get_title();
       return this.get_data();
@@ -69,21 +65,17 @@
       get_nuxt_link(id) {
         return this.view_url + '/' + encodeURIComponent(id)
       },
-      get_title() {
-        let request = Object.assign({}, {id: this.id});
-        return this.sendPromise(REQUEST_ITEM_TITLE_DESC, request)
-          .then(
-            this.handle_result_title.bind(this)
-          )
+      async get_title() {
+        var response = await get_flask_data(this, REQUEST_ITEM_TITLE_DESC,  {id: this.id})
+        return await this.handle_result_title(response)
+
       },
       async get_data() {
-        let request = Object.assign({}, {id: this.id});
-        return this.sendPromise(REQUEST_ITEM_DETAIL, request)
-          .then(
-            this.handle_result_ttl.bind(this)
-          )
+        var response = await get_flask_data(this, REQUEST_ITEM_DETAIL,  {id: this.id})
+        return await this.handle_result_ttl(response)
+
       },
-      handle_result_title(data) {
+      async handle_result_title(data) {
         this.title = data.title;
         this.description = data.description;
         this.$store.ep_commit('BreadCrumb', 'last_title', this.title);
@@ -91,18 +83,16 @@
         if (this.alert_title) {
           write_aria_polite('Die Seite ' + this.title + ' wurde geladen.')
         }
-        this.$forceUpdate()
       },
-      handle_result_ttl(data) {
+      async handle_result_ttl(data) {
         this.result_ttl = data.rdf_ttl;
-        this.update_results();
-        this.$forceUpdate()
+        await this.update_results();
       },
-      update_results() {
+      async update_results() {
         let parse = rdf.TurtleParser.parse(this.result_ttl);
         let graph_array = parse.graph.toArray();
         graph_array.forEach(
-          function (item) {
+          async function (item) {
             let s, p, o;
             s = item['subject'];
             p = item['predicate'];
@@ -111,7 +101,7 @@
               // basic fields
 
               // get label from flask
-              this.handle_label(p);
+              await this.handle_label(p);
 
               // set field
               this.result_fields.push({
@@ -121,36 +111,34 @@
               )
             } else if (o instanceof rdf.NamedNode && s instanceof rdf.NamedNode && p instanceof rdf.NamedNode && o.nominalValue === this.id) {
               // related objects where o is our object
-              this.handle_netork_id(s.nominalValue)
+              await this.handle_network_id(s.nominalValue)
 
             } else if (o instanceof rdf.NamedNode && s instanceof rdf.NamedNode && p instanceof rdf.NamedNode && s.nominalValue === this.id) {
               // related objects where s is our objects
-              this.handle_netork_id(o.nominalValue)
+              await this.handle_network_id(o.nominalValue)
 
             } else if (o instanceof rdf.NamedNode && s instanceof rdf.NamedNode && p instanceof rdf.NamedNode && p.nominalValue === this.id) {
               // related objects where p is our objects
-              this.handle_netork_id(o.nominalValue);
-              this.handle_netork_id(s.nominalValue)
+              await this.handle_network_id(o.nominalValue);
+              await this.handle_network_id(s.nominalValue)
 
             } else {
               // additional sparql not directly related to our object
             }
           }, this);
       },
-      handle_label(p) {
+      async handle_label(p) {
         let key = p.nominalValue;
         // no need to request to often
         if (!(key in this.labels)) {
           let request = Object.assign({}, {'id': key});
-          return this.sendPromise(REQUEST_LABEL, request)
-            .then(
-              this.handle_result_label.bind(this)
-            )
+
+          var response = await get_flask_data(this, REQUEST_LABEL,  {'id': key})
+          return await this.handle_result_label(response)
         }
       },
-      handle_result_label(data) {
+      async handle_result_label(data) {
         this.labels[data.id] = data.label;
-        this.$forceUpdate()
       },
       get_label(field) {
         if (field in this.labels) {
@@ -159,21 +147,19 @@
           return field
         }
       },
-      get_object_title_description(id) {
-        let request = Object.assign({}, {'id': id});
-        return this.sendPromise(REQUEST_ITEM_TITLE_DESC, request)
-          .then(
-            this.handle_result_object_title_desc.bind(this)
-          )
+      async get_object_title_description(id) {
+
+        var response = await get_flask_data(this, REQUEST_ITEM_TITLE_DESC,  {'id': id})
+        return await this.handle_result_object_title_desc(response)
+
       },
       handle_result_object_title_desc(data) {
         let id = data.id;
         this.result_networking[id]['title'] = data.title;
         this.result_networking[id]['description'] = data.description;
         this.result_networking[id]['type'] = data.type;
-        this.$forceUpdate()
       },
-      handle_netork_id(id) {
+      async handle_network_id(id) {
         // set default values
         this.result_networking[id] = {
           'title': id,
@@ -182,7 +168,7 @@
           'id': id,
         };
         // load infos from flask and replace default values
-        this.get_object_title_description(id)
+        await this.get_object_title_description(id)
       },
       isEmpty(obj) {
         for(var key in obj) {

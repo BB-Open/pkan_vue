@@ -13,10 +13,10 @@
 
           <div class="results hidesmallscreen">
             <search_results namespace="Search" :view_url="view_url" v-if="$mq === 'screen'"
-                            :request="request"></search_results>
+                            :request="request_type"></search_results>
           </div>
           <div class="results hidebigscreen">
-            <search_results_mobile namespace="Search" :view_url="view_url" :request="request"
+            <search_results_mobile namespace="Search" :view_url="view_url" :request="request_type"
                                    v-if="$mq === 'mobile'"></search_results_mobile>
           </div>
         </div>
@@ -67,7 +67,7 @@
         },
         search_selector_fields: ['category', 'file_format', 'publisher', 'license'],
         view_url: SEARCH_URL,
-        request: REQUEST_SEARCH_RESULTS_SPARQL,
+        request_type: REQUEST_SEARCH_RESULTS_SPARQL,
       }
     },
     mounted() {

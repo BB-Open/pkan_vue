@@ -10,10 +10,10 @@
 </template>
 
 <script>
-  import SocketPromise from "../mixins/SocketPromise";
   import {BFormSelect} from 'bootstrap-vue/src/components/form-select/form-select';
   import {EV} from "../configs/events";
   import {REQUEST_VOCAB} from "../configs/socket";
+  import {get_flask_data} from '../mixins/utils';
 
   export default {
     name: "Ordering",
@@ -40,22 +40,17 @@
         }
       }
     },
-    mixins: [
-      SocketPromise
-    ],
-
+    serverPrefetch() {
+      return this.get_vocab_ordering();
+    },
     mounted() {
       // Force the initialization
       this.get_vocab_ordering();
-      this.$forceUpdate()
     },
     methods: {
-      get_vocab_ordering() {
-        let request = Object.assign({}, {vocab: 'ordering'});
-        return this.sendPromise(REQUEST_VOCAB, request)
-          .then(
-            this.handle_result_ordering.bind(this)
-          )
+      async get_vocab_ordering() {
+        var response = await get_flask_data(this,  REQUEST_VOCAB,  {vocab: 'ordering'})
+        return await this.handle_result_ordering(response)
       },
       handle_result_ordering(data) {
         // read result from request

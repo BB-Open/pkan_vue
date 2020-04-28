@@ -45,18 +45,14 @@
 </template>
 
 <script>
-  import {remove_element_from_array, write_aria_assertive, write_aria_polite} from '../mixins/utils';
+  import {get_flask_data, remove_element_from_array, write_aria_assertive, write_aria_polite} from '../mixins/utils';
   import {EV} from "../configs/events";
-  import SocketPromise from '../../components/mixins/SocketPromise';
   import {REQUEST_VOCAB} from "../configs/socket";
 
   export default {
     name: 'SearchSelector',
     props: ['title', 'options', 'property', 'store_namespace'],
     components: {},
-    mixins: [
-      SocketPromise
-    ],
     data() {
       return {
         values: [],
@@ -121,7 +117,7 @@
         this.$forceUpdate();
         this.reread_criteria_button(item)
       },
-      set_values_for_widget() {
+      async set_values_for_widget() {
         let value_neg = this.values_stored.value_neg;
         let value_pos = this.values_stored.value_pos;
 
@@ -201,21 +197,18 @@
           this.reload_widget()
         });
       },
-      get_vocab() {
-        let request = Object.assign({}, {vocab: this.options.vocab_name});
-        return this.sendPromise(REQUEST_VOCAB, request)
-          .then(
-            this.handle_result_vocab.bind(this)
-          )
+      async get_vocab() {
+        var response = await get_flask_data(this, REQUEST_VOCAB, {vocab: this.options.vocab_name})
+        return await this.handle_result_vocab(response)
       },
-      handle_result_vocab(data) {
+      async handle_result_vocab(data) {
         // read result from request
         this.vocab = {};
         data.vocab.forEach(function (field) {
           this.vocab[field.id] = field.text
         }, this);
         this.values = Object.keys(this.vocab);
-        this.set_values_for_widget();
+        await this.set_values_for_widget();
       },
       get_item_alt(item) {
         if (this.data_store[item].check_add) {

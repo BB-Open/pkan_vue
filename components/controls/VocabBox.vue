@@ -22,9 +22,9 @@
 
 <script>
   import {REQUEST_VOCAB} from "../configs/socket";
-  import SocketPromise from "../mixins/SocketPromise";
   import {DETAIL_SEARCH_URL} from "../configs/routing";
   import {server_settings} from "../configs/server_settings";
+  import {get_flask_data} from '../mixins/utils';
 
   export default {
     name: "VocabBox",
@@ -32,12 +32,10 @@
       return {
         vocab: [],
         namespace: 'Vocab Boxes',
-        url: DETAIL_SEARCH_URL
+        url: DETAIL_SEARCH_URL,
+        base_data_url: server_settings.PLONE_URL,
       }
     },
-    mixins: [
-      SocketPromise
-    ],
     props: {
       'vocab_name': String,
       'clean_value': Boolean,
@@ -45,19 +43,16 @@
     },
     serverPrefetch() {
       // Force the initialization
-//      this.get_vocab();
+        return this.get_vocab();
     },
     mounted() {
       // Force the initialization
       this.get_vocab();
     },
     methods: {
-      get_vocab() {
-        let request = Object.assign({}, {vocab: this.vocab_name});
-        return this.sendPromise(REQUEST_VOCAB, request)
-          .then(
-            this.handle_result.bind(this)
-          )
+      async get_vocab() {
+        var response = await get_flask_data(this, REQUEST_VOCAB,  {vocab: this.vocab_name})
+        return await this.handle_result(response)
       },
       handle_result(data) {
         // read result from request
