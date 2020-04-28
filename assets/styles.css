@@ -86,12 +86,55 @@ p {
 }
 
 .button, button {
-  border: none;
   padding: 0.5em 1em;
   margin: 2px;
   font-size: 1rem;
   background-color: #C73C35;
   color: #fff;
+}
+
+button {
+  border: 1px solid;
+  border-color: black;
+  border-radius: 0.7rem;
+}
+
+.textsearch_button {
+  border: none;
+}
+
+.green_box, .button_add {
+  color: #99CC66;
+  border: 1px solid #99CC66;
+  background-color: rgba(153, 204, 102, 0.1);
+}
+
+.red_box, .button_remove {
+  background-color: rgba(199, 60, 53, 0.1);
+  color: #C73C35;
+  border: 1px solid #C73C35;
+}
+
+.criteria_button_unselected {
+  background-color: rgba(192, 192, 192, 0.1);
+  color: #b4b4b4;
+  border: 1px solid #C0C0C0;
+}
+
+.criteria_button_unselected, .button_remove, .button_add {
+  width: 100%;
+  text-align: left;
+  padding: 5px;
+}
+
+.criteria_button_unselected:hover,
+.criteria_button_unselected:focus,
+.button_add:hover,
+.button_add:focus,
+.button_remove:hover,
+.button_remove:focus {
+  color: #161616;
+  background-color: #e9e9e9;
 }
 
 .lightbutton {
@@ -267,6 +310,13 @@ input {
   font-weight: bold;
 }
 
+select {
+  border-color: black;
+  background-color: #eeeeee;
+  border-radius: 0.5rem;
+  padding: 2px;
+}
+
 /*Pagination*/
 
 .pagination {
@@ -326,8 +376,16 @@ input {
 .page-item.active .page-link {
   z-index: 1;
   color: #fff;
-  background-color: #C73C35;
+  background-color: rgba(199, 60, 53);
   border-color: #C73C35;
+}
+
+.page-item.active .page-link:hover, .page-item.active .page-link:focus {
+  z-index: 1;
+  color: #C73C35;
+  background-color: #eeeeee;
+  box-shadow: 0 0 0 0 #C73C35;
+  border: 2px solid;
 }
 
 .page-item.disabled .page-link {

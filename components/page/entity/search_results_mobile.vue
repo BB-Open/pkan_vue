@@ -13,7 +13,7 @@
           <p class="element_title">{{ item.type}}: {{ item.title }}</p>
           <p class="element_description">{{ item.description }}</p>
           <p>
-            <NuxtLink :to="get_nuxt_link(item.id)" :aria-label="item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
+            <NuxtLink :to="get_nuxt_link(item.id)" :aria-label="item.type + ' ' +item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
           </p>
         </li>
         <li v-if="!result.length">

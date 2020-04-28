@@ -172,6 +172,10 @@
     .content {
       width: 65%;
     }
+
+    .controls_overview {
+      flex-wrap: wrap;
+    }
   }
 
 </style>

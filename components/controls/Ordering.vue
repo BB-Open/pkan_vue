@@ -1,5 +1,5 @@
 <template>
-  <div class="select">
+  <div class="ordering select">
     <form @submit.prevent="">
       <label aria-label="Wählen Sie die Sortierreihenfolge der Suchergebnisse.">Sortieren nach:<br/>
         <b-form-select v-model="selected" :options="vocab_ordering" class="mb-3"
@@ -76,6 +76,7 @@
   .select {
     padding-left: 10px;
     padding-right: 10px;
+    margin-top: 0.83em;
   }
 
   .select label {
@@ -84,5 +85,12 @@
 
   .select label select {
     font-size: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .select {
+      padding: 0;
+
+    }
   }
 </style>

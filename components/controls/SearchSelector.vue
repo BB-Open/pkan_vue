@@ -8,15 +8,23 @@
       <button v-for="item in display_values" @click="button_clicked(item)"
               v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove, criteria_button_unselected: !data_store[item].check_remove && !data_store[item].check_add}"
               :id="item">
-        <span v-if="data_store[item].check_add">Ausgewählt: </span><span v-if="data_store[item].check_remove">Ausgenommen: </span>{{
-        data_store[item].text }}
+        <div class="twocolumncontent">
+          <div class="search_selector_iconcontainer"><i class="fa fa-circle-o search_selector_icon" aria-label="Neutral" v-if="!data_store[item].check_remove && !data_store[item].check_add"></i>
+            <i class="fa fa-times-circle search_selector_icon" aria-label="Ausgenommen" v-if="data_store[item].check_remove"></i>
+            <i class="fa fa-check-circle search_selector_icon" aria-label="Ausgewählt" v-if="data_store[item].check_add"></i></div>
+          <div class="search_selector_label">{{data_store[item].text}}</div>
+        </div>
       </button>
       <button v-for="item in additional_values" @click="button_clicked(item)"
               v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove, criteria_button_unselected: !data_store[item].check_remove && !data_store[item].check_add}"
               v-if="show_more || data_store[item].check_add || data_store[item].check_remove"
               :id="item">
-        <span v-if="data_store[item].check_add">Ausgewählt: </span><span v-if="data_store[item].check_remove">Ausgenommen: </span>{{
-        data_store[item].text }}
+        <div class="twocolumncontent">
+          <div class="search_selector_iconcontainer"><i class="fa fa-circle-o search_selector_icon" aria-label="Neutral" v-if="!data_store[item].check_remove && !data_store[item].check_add"></i>
+            <i class="fa fa-times-circle search_selector_icon" aria-label="Ausgenommen" v-if="data_store[item].check_remove"></i>
+            <i class="fa fa-check-circle search_selector_icon" aria-label="Ausgewählt" v-if="data_store[item].check_add"></i></div>
+          <div class="search_selector_label">{{data_store[item].text}}</div>
+        </div>
       </button>
     </div>
 
@@ -113,7 +121,7 @@
 
         this.save();
         this.$forceUpdate();
-        this.reread_button(item)
+        this.reread_criteria_button(item)
       },
       set_values_for_widget() {
         let value_neg = this.values_stored.value_neg;
@@ -219,11 +227,24 @@
         }
         return ''
       },
-
       reread_button(item) {
         // make sure, html is refreched first
         this.$nextTick(function () {
           let text = document.getElementById(item).innerHTML;
+          write_aria_assertive(text)})
+      },
+      reread_criteria_button(item) {
+        // make sure, html is refreched first
+        this.$nextTick(function () {
+          let text = '';
+          if (this.data_store[item].check_remove){
+            text = 'Ausgenommen '
+          } else if (this.data_store[item].check_add){
+            text = 'Ausgewählt '
+          } else {
+            text = 'Neutral '
+          }
+          text += this.data_store[item].text;
           write_aria_assertive(text)})
       },
       more_less_clicked() {
@@ -239,17 +260,7 @@
 
 <style scoped>
 
-  .button_add {
-    background-color: #ffffff;
-    color: #161616;
-    border: 2px solid #99CC66;
-  }
 
-  .button_remove {
-    background-color: #ffffff;
-    color: #161616;
-    border: 2px solid #C73C35;
-  }
 
   .SearchSelector {
     padding-top: 8px;
@@ -267,24 +278,28 @@
   }
 
   .criteria_buttons {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    width: 100%;
   }
 
-  .criteria_button_unselected {
-    background-color: white;
-    color: #161616;
-    border: 2px solid #C0C0C0;
+  .search_selector_icon {
+    line-height: 1.5rem;
+    font-size: 1.5rem;
+    padding-right: 10px;
+  }
+  .search_selector_label{
+    color: black;
+    margin-bottom: auto;
+    margin-top: auto;
+    width: 90%;
+  }
+  .search_selector_iconcontainer {
+    width: 10%;
+    min-width: 20px;
   }
 
-  .criteria_button_unselected:hover,
-  .criteria_button_unselected:focus,
-  .button_add:hover,
-  .button_add:focus,
-  .button_remove:hover,
-  .button_remove:focus {
-    color: #161616;
-    background-color: #eeeeee;
+  .twocolumncontent {
+    margin-bottom: 0;
   }
-
 </style>

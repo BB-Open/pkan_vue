@@ -1,13 +1,22 @@
 <template>
-  <div>
+  <div class="controll_container">
     <h2>Aktuelle Suche:</h2>
-    <div class="box_area" v-if="display_green.length || display_red.length">
-      <div v-for="item in display_green" class="green search_box">Ausgewählt: {{item}}</div>
-      <div v-for="item in display_red" class="red search_box">Ausgenommen: {{item}}</div>
-    </div>
-    <div v-if="!display_red.length && !display_green.length">
+    <div class="hidden_help_text">
       <p>Hier werden Ihre Suchparameter dargestellt.</p>
     </div>
+    <div class="box_area">
+      <div class="green_box search_box">Ausgewählt:
+        <ul>
+          <li v-for="item in display_green">{{item}}</li>
+        </ul>
+      </div>
+      <div class="red_box search_box">Ausgenommen:
+        <ul>
+          <li v-for="item in display_red">{{item}}</li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -153,33 +162,28 @@
 </script>
 
 <style scoped>
-  .green {
-    background-color: #ffffff;
-    color: #161616;
-    border: 2px solid #99CC66;
-  }
-
-  .red {
-    background-color: #ffffff;
-    color: #161616;
-    border: 2px solid #C73C35;
-  }
 
   .search_box {
-    margin-left: 10px;
     padding: 5px;
+    width: 48%;
+    min-width: 200px;
+    color: black;
   }
 
   .box_area {
-    justify-content: flex-start;
-    padding-right: 0px;
-    padding-left: 0px;
+    justify-content: space-between;
+    padding-right: 0;
+    padding-left: 0;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .controll_container {
+    width: 100%
   }
 
   @media (max-width: 640px) {
-    .search_box {
-      margin-left: 5px;
-    }
+
   }
 
 </style>
