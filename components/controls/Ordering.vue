@@ -76,7 +76,7 @@
   .select {
     padding-left: 10px;
     padding-right: 10px;
-    margin-top: 0.83em;
+    margin-top: 0.2em;
   }
 
   .select label {

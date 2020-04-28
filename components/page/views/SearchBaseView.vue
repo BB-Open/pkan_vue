@@ -10,7 +10,7 @@
             <slot name="additional_widget"></slot>
           </div>
           <div class="controls_overview">
-            <controls-over-view></controls-over-view>
+            <div><h2>Suchergebnisse:</h2></div>
             <ordering></ordering>
           </div>
 
@@ -28,7 +28,7 @@
           <button
             @click="remove_all()"
             class="selectorbutton"
-            type="button">Alle zurück setzen
+            type="button">Alle zurücksetzen
           </button>
           <search-selector title="Dateiformat" store_namespace="Search" property="file_format"
                            :options="file_format_options"></search-selector>
@@ -51,7 +51,6 @@
   import search_results from "../entity/search_results";
   import BaseView from "./BaseView";
   import SearchSelector from "../../controls/SearchSelector";
-  import ControlsOverView from "../../controls/ControlsOverView";
   import {EV} from "../../configs/events";
   import {SEARCH_URL} from "../../configs/routing";
   import search_results_mobile from "../entity/search_results_mobile";
@@ -67,7 +66,6 @@
       search_results_mobile,
       BaseView,
       SearchSelector,
-      ControlsOverView,
     },
     name: 'SearchBaseView',
     props: ['namespace', 'display_info_column'],

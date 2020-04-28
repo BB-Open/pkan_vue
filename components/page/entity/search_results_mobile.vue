@@ -6,7 +6,6 @@
         <div>{{error}}</div>
       </div>
     </div>
-    <h2>Suchergebnisse:</h2>
     <div v-infinite-scroll="load_more" infinite-scroll-disabled="busy" :infinite-scroll-distance="perPage">
       <ul class="nobull">
         <li v-for="item in result" :class="element_style_class">

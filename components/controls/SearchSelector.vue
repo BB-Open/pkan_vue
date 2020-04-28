@@ -36,8 +36,8 @@
         <template v-if="show_more">ᐃ Weniger</template>
       </button>
       <br v-if="additional_values.length > 0"/>
-      <button @click="reset_button" class="selectorbutton" :aria-label="'Zurück setzen für ' + title">
-        <template>Zurück setzen</template>
+      <button @click="reset_button" class="selectorbutton" :aria-label="'Zurücksetzen für ' + title">
+        <template>Zurücksetzen</template>
       </button>
     </div>
     <!--this is just for seeing some results-->
