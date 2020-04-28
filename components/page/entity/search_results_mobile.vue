@@ -148,11 +148,13 @@
 
 <style scoped>
 
-  .element_title, .element_description {
+  .element_description {
     margin-bottom: 0;
   }
 
   .element_title {
+    font-weight: bolder;
+    margin-bottom: 10px;
   }
 
   .element_logo img {

@@ -2,7 +2,7 @@
   <div class="picker boxed_selector">
     <div class="DateSelector">
       <form @submit.prevent="">
-        <label>{{ this.label }}</label><br/>
+        <label class="biglabel">{{ this.label }}</label><br/>
         <label for="start_input" :aria-label="'Startdatum wählen ' + format">Von: </label>
         <client-only>
         <datepicker v-model="value_start" :placeholder="'Datum wählen ' + format"

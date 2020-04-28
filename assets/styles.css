@@ -325,6 +325,10 @@ select {
   padding: 2px;
 }
 
+.biglabel {
+  font-size: 1.2rem;
+}
+
 /*Pagination*/
 
 .pagination {

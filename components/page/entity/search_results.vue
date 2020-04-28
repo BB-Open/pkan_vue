@@ -159,13 +159,14 @@
 <style scoped>
 
   .element_title {
+    margin-bottom: 10px;
   }
 
   .element_logo img {
     max-width: 100px;
   }
 
-  .element_title, .element_description {
+  .element_description {
     margin-bottom: 0;
   }
 
