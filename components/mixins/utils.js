@@ -1,4 +1,5 @@
 import {format, startOfDay,} from 'date-fns'
+import Vue from 'vue';
 
 export const DATE_FORMAT = 'YYYY-MM-DD';
 
@@ -71,15 +72,24 @@ export function set_error_message(obj, message) {
   obj.$store.ep_commit('GlobalState', 'error_message', message);
 }
 
-const pkan_aria_plolite = document.getElementById('pkan_aria_polite');
-const pkan_aria_assertive = document.getElementById('pkan_aria_assertive');
+if (Vue.prototype.$isServer) {
+} else {
+  const pkan_aria_plolite = document.getElementById('pkan_aria_polite');
+  const pkan_aria_assertive = document.getElementById('pkan_aria_assertive');
+}
 
 export function write_aria_polite(message) {
-  pkan_aria_assertive.innerHTML = '';
-  pkan_aria_plolite.innerHTML = message
+  if (Vue.prototype.$isServer) {
+  } else {
+    pkan_aria_assertive.innerHTML = '';
+    pkan_aria_plolite.innerHTML = message
+  }
 }
 
 export function write_aria_assertive(message) {
-  pkan_aria_plolite.innerHTML = '';
-  pkan_aria_assertive.innerHTML = message
+  if (Vue.prototype.$isServer) {
+  } else {
+    pkan_aria_plolite.innerHTML = '';
+    pkan_aria_assertive.innerHTML = message
+  }
 }
