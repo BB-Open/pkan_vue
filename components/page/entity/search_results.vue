@@ -10,19 +10,22 @@
     <div class="hidden_help_text" id="page_description">Für die Seitenverwaltung nutzen Sie die Pfeiltasten zum wechseln
       zwischen den Buttons. Bestätigen sie mit Enter. Mit Tab verlassen sie die Seitenverwaltung.
     </div>
-    <b-pagination
-      v-model="pagination_page"
-      :total-rows="rows"
-      :per-page="perPage"
-      first-text="Erste"
-      prev-text="Vorherige"
-      next-text="Nächste"
-      last-text="Letzte"
-      label-page="Gehe zu Seite"
-      align="fill"
-      aria-label="Seitenverwaltung."
-      aria-describedby="page_description"
-    ></b-pagination>
+    <div v-bind:class="{hidden_help_text: result.length <= perPage}">
+      <b-pagination
+        v-model="pagination_page"
+        :total-rows="rows"
+        :per-page="perPage"
+        first-text="Erste"
+        prev-text="Vorherige"
+        next-text="Nächste"
+        last-text="Letzte"
+        label-page="Gehe zu Seite"
+        align="fill"
+        aria-label="Seitenverwaltung."
+        aria-describedby="page_description"
+      ></b-pagination>
+    </div>
+
 
     <ul class="nobull">
       <li v-for="item in result" :class="element_style_class" v-if="result.length">
@@ -36,19 +39,21 @@
         <p>Es wurden keine Suchergebnisse gefunden.</p>
       </li>
     </ul>
-    <b-pagination
-      v-model="pagination_page"
-      :total-rows="rows"
-      :per-page="perPage"
-      first-text="Erste"
-      prev-text="Vorherige"
-      next-text="Nächste"
-      last-text="Letzte"
-      label-page="Gehe zu Seite"
-      align="fill"
-      aria-label="Seitenverwaltung."
-      aria-describedby="page_description"
-    ></b-pagination>
+    <div v-bind:class="{hidden_help_text: result.length <= perPage}">
+      <b-pagination
+        v-model="pagination_page"
+        :total-rows="rows"
+        :per-page="perPage"
+        first-text="Erste"
+        prev-text="Vorherige"
+        next-text="Nächste"
+        last-text="Letzte"
+        label-page="Gehe zu Seite"
+        align="fill"
+        aria-label="Seitenverwaltung."
+        aria-describedby="page_description"
+      ></b-pagination>
+    </div>
   </div>
 </template>
 
