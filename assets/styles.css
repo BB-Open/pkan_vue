@@ -347,10 +347,11 @@ select {
 .page-link {
   position: relative;
   display: block;
-  padding: 10px 5px;
+  padding: 5px 5px;
   color: black;
   background-color: #fff;
   text-align: center;
+  font-size: 0.8rem;
 }
 
 .page-item{
@@ -396,7 +397,7 @@ select {
   color: #C73C35;
   background-color: #eeeeee;
   box-shadow: 0 0 0 0 #C73C35;
-  border: 2px solid;
+  border: 1px solid;
 }
 
 .page-item.disabled .page-link {
