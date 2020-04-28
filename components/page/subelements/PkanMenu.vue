@@ -25,7 +25,7 @@
       <p>DatenAdler.de</p></div>
     <ul>
       <li>
-        <nuxt-link class="router-link" to="/start">Start</nuxt-link>
+        <nuxt-link class="router-link" to="/">Start</nuxt-link>
         <hr class="hidebigscreen"/>
       </li>
       <li>

@@ -1,11 +1,11 @@
-export const DEFAULT_URL = '/start';
+export const DEFAULT_URL = '/';
 export const DETAIL_SEARCH_URL = '/search/detail_search';
 export const SPARQL_URL = '/search/sparql';
 export const BLOG_URL = '/blog';
 export const PUBLISHER_URL = '/publisher';
 export const SEARCH_URL = '/search';
 export const PATHS_FOR_BREADCRUMB = {
-  'Start': '/start',
+  'Start': '/',
   'Search': '/search',
   'Impressum': '/impressum',
   'Blog': '/blog',
