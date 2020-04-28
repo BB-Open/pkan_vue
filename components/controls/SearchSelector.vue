@@ -7,21 +7,22 @@
     <div class="criteria_buttons">
       <button v-for="item in display_values" @click="button_clicked(item)"
               v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove, criteria_button_unselected: !data_store[item].check_remove && !data_store[item].check_add}"
-              v-bind:alt="get_item_alt(item)" :id="item">
+              :id="item">
         <span v-if="data_store[item].check_add">Ausgewählt: </span><span v-if="data_store[item].check_remove">Ausgenommen: </span>{{
         data_store[item].text }}
       </button>
       <button v-for="item in additional_values" @click="button_clicked(item)"
               v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove, criteria_button_unselected: !data_store[item].check_remove && !data_store[item].check_add}"
               v-if="show_more || data_store[item].check_add || data_store[item].check_remove"
-              v-bind:alt="get_item_alt(item)" :id="item">
-        {{ data_store[item].text }}
+              :id="item">
+        <span v-if="data_store[item].check_add">Ausgewählt: </span><span v-if="data_store[item].check_remove">Ausgenommen: </span>{{
+        data_store[item].text }}
       </button>
     </div>
 
 
     <div>
-      <button @click="show_more = !show_more" v-if="additional_values.length > 0" class="selectorbutton">
+      <button @click="more_less_clicked()" v-if="additional_values.length > 0" class="selectorbutton" :id="'moreless'+title">
         <template v-if="!show_more">ᐁ Mehr</template>
         <template v-if="show_more">ᐃ Weniger</template>
       </button>
@@ -35,7 +36,7 @@
 </template>
 
 <script>
-  import {remove_element_from_array} from '../mixins/utils';
+  import {remove_element_from_array, write_aria_assertive, write_aria_polite} from '../mixins/utils';
   import {EV} from "../configs/events";
   import SocketPromise from '../../components/mixins/SocketPromise';
   import {REQUEST_VOCAB} from "../configs/socket";
@@ -111,8 +112,8 @@
         };
 
         this.save();
-        this.$forceUpdate()
-        this.refocus_button(item)
+        this.$forceUpdate();
+        this.reread_button(item)
       },
       set_values_for_widget() {
         let value_neg = this.values_stored.value_neg;
@@ -138,8 +139,6 @@
                   check_remove: false,
                 }
               }
-              ;
-
               this.data_store[item].text = this.vocab[item]
             }, this)
         }
@@ -174,7 +173,8 @@
         };
 
         this.save();
-        this.reload_widget()
+        this.reload_widget();
+        write_aria_polite(this.title + ' wurde zurück gesetzt.')
       },
       save() {
         this.$store.ep_commit(this.store_namespace, this.property, this.values_stored);
@@ -220,8 +220,15 @@
         return ''
       },
 
-      refocus_button(item) {
-        document.getElementById(item).focus()
+      reread_button(item) {
+        // make sure, html is refreched first
+        this.$nextTick(function () {
+          let text = document.getElementById(item).innerHTML;
+          write_aria_assertive(text)})
+      },
+      more_less_clicked() {
+        this.show_more = !this.show_more;
+        this.reread_button('moreless' + this.title)
       }
     },
     beforeDestroy: function () {

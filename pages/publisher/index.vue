@@ -15,6 +15,7 @@
   import {PUBLISHER_URL} from "../../components/configs/routing";
   import {PLONE_INDEX_TITLE, PLONE_PT_PUBLISHER_CARD} from "../../components/configs/plone_keywords";
   import {EV} from "../../components/configs/events";
+  import {write_aria_polite} from "../../components/mixins/utils";
 
   export default {
     name: 'Publisher',
@@ -33,8 +34,7 @@
     mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
-      this.$store.ep_commit('BreadCrumb', 'title', 'Datenbereitsteller');
-      this.$EventBus.$emit(EV.PAGE_TITLE_CHANGED, {});
+      write_aria_polite('Die Seite Datenbereitsteller wurde geladen.');
     },
 
   }
