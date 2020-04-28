@@ -375,8 +375,8 @@ select {
 
 .page-item.active .page-link {
   z-index: 1;
-  color: #fff;
-  background-color: rgba(199, 60, 53);
+  color: black;
+  background-color: rgba(199, 60, 53, 0.1);
   border-color: #C73C35;
 }
 
