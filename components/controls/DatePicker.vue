@@ -26,20 +26,27 @@
 </template>
 
 <script>
-//  import Datepicker from 'vuejs-datepicker';
+  import Vue from 'vue';
+  let Datepicker = {};
+  let locale = {};
+  if (Vue.prototype.$isServer === false) {
+      console.log('isServer');
+      Datepicker = require('vuejs-datepicker/dist/vuejs-datepicker');
+      locale = require('vuejs-datepicker/dist/locale/translations/de');
+  }
   import {DATE_DISPLAY_FORMAT} from '../mixins/utils';
   import {EV} from "../configs/events";
-  import {de} from 'vuejs-datepicker/dist/locale'
 
   export default {
     name: 'DatePicker',
     components: {
+      Datepicker
     },
     props: ['label', 'namespace', 'property'],
     data() {
       return {
         format: DATE_DISPLAY_FORMAT,
-        lang: de,
+        lang: locale,
       };
     },
     computed: {
