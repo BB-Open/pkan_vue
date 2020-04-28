@@ -19,7 +19,6 @@
     PLONE_REVERSE_ORDERING,
     PLONE_TAG_BLOG
   } from "../../components/configs/plone_keywords";
-  import {EV} from "../../components/configs/events";
   import {write_aria_polite} from "../../components/mixins/utils";
 
   export default {

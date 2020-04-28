@@ -2,6 +2,7 @@ import pkg from "./package";
 
 export default {
   mode: "spa",
+//  mode: "universal",
   /*
    ** Headers of the page
    */
@@ -40,7 +41,6 @@ export default {
     {src:"./plugins/infinite_scroll", ssr: false},
     {src:"./plugins/VueMQ", ssr: true},
     {src:"./plugins/vuejs_logger", ssr: true},
-    {src:"./plugins/date_picker", ssr: false}
   ],
 
   /*

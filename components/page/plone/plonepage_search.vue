@@ -8,9 +8,8 @@
 
 <script>
   import {server_settings} from "../../configs/server_settings";
-  import {removeSelfClosingTags, set_error_message, write_aria_polite} from "../../mixins/utils";
+  import {get_plone_data, removeSelfClosingTags, set_error_message, write_aria_polite} from '../../mixins/utils';
   import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
-  import {EV} from "../../configs/events";
 
   export default {
     name: "plonepage_search",
@@ -28,7 +27,7 @@
     },
     data() {
       return {
-        namespace: 'Blog',
+        namespace: 'plonepage_search',
         result: {},
         base_data_url: server_settings.PLONE_URL + '/@search?fullobjects=1',
         item: {
@@ -84,22 +83,12 @@
       },
       async request_pages(url) {
 
-        this.$axios.setHeader('Content-Type', 'application/json', ['get']);
-        this.$axios.setHeader('Accept', 'application/json', ['get']);
-        this.$axios.setHeader('Access-Control-Allow-Origin', '*', ['get']);
-        try {
-          this.result = await this.$axios.$get(url);
-        } catch (e) {
-          console.log(e.message);
-          console.log(e.stack);
-          set_error_message(this, PLONE_UNREACHABLE_MESSAGE);
-          return
-        }
+        this.result = await get_plone_data(this, url)
+
         if (this.result.items[0] !== undefined) {
           this.item = this.result.items[0];
         }
 
-//        this.$forceUpdate()
         if (this.display_title){
           write_aria_polite('Die Seite ' + this.item.title + ' wurde geladen.')
         }

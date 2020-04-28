@@ -14,7 +14,6 @@
   import BaseView from "../../components/page/views/BaseView";
   import {PUBLISHER_URL} from "../../components/configs/routing";
   import {PLONE_INDEX_TITLE, PLONE_PT_PUBLISHER_CARD} from "../../components/configs/plone_keywords";
-  import {EV} from "../../components/configs/events";
   import {write_aria_polite} from "../../components/mixins/utils";
 
   export default {

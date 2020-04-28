@@ -10,7 +10,13 @@
 <script>
   import {EV} from "../../configs/events";
   import {server_settings} from "../../configs/server_settings";
-  import {format_plone_date, removeSelfClosingTags, set_error_message, write_aria_polite} from "../../mixins/utils";
+  import {
+    format_plone_date,
+    get_plone_data,
+    removeSelfClosingTags,
+    set_error_message,
+    write_aria_polite
+  } from '../../mixins/utils';
   import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
 
   export default {
@@ -26,7 +32,7 @@
     },
     data() {
       return {
-        namespace: 'Blog',
+        namespace: 'plonepage_uid',
         result: {},
         base_data_url: server_settings.PLONE_URL + '/@search?fullobjects=1',
         item: {
@@ -62,29 +68,21 @@
         if (this.uid !== undefined) {
           this.data_url += '&UID=' + this.uid
         }
-//        this.$log.debug(this.data_url + ' requested');
+        this.$log.debug(this.data_url + ' requested');
       },
       async request_pages(url) {
 
-        this.$axios.setHeader('Content-Type', 'application/json', ['get']);
-        this.$axios.setHeader('Accept', 'application/json', ['get']);
-        this.$axios.setHeader('Access-Control-Allow-Origin', '*', ['get']);
-        try {
-          this.result = await this.$axios.$get(url);
-        } catch (e) {
-          console.log(e.message);
-          console.log(e.stack);
-          set_error_message(this, PLONE_UNREACHABLE_MESSAGE);
-          return
-        }
+        this.result = await get_plone_data(this, url)
+
         this.item = this.result.items[0];
+
         if (this.display_date) {
           this.item.date_text = 'Veröffentlicht am ' + format_plone_date(this.item.effective);
         }
+
         this.$store.ep_commit('BreadCrumb', 'last_title', this.item.title);
         this.$EventBus.$emit(EV.PAGE_CHANGED, {});
         write_aria_polite('Die Seite ' + this.item.title + ' wurde geladen.');
-        this.$forceUpdate()
       },
     },
   }

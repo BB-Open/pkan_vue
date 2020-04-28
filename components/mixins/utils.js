@@ -91,3 +91,18 @@ export function write_aria_assertive(message) {
     pkan_aria_assertive.innerHTML = message
   }
 }
+
+export async function get_plone_data(that, url) {
+        that.$axios.setHeader('Content-Type', 'application/json', ['get']);
+        that.$axios.setHeader('Accept', 'application/json', ['get']);
+        that.$axios.setHeader('Access-Control-Allow-Origin', '*', ['get']);
+        try {
+          var result = await that.$axios.$get(url);
+        } catch (e) {
+          console.log(e.message);
+          console.log(e.stack);
+          set_error_message(that, PLONE_UNREACHABLE_MESSAGE);
+          return
+        }
+        return result
+}

@@ -21,7 +21,7 @@
 
 <script>
   import {server_settings} from "../../configs/server_settings";
-  import {format_plone_date, set_error_message} from "../../mixins/utils";
+  import {format_plone_date, get_plone_data, set_error_message} from '../../mixins/utils';
   import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
 
   export default {
@@ -44,7 +44,7 @@
     },
     data() {
       return {
-        namespace: 'Blog',
+        namespace: 'plonenlisting_url',
         result: {
           items: []
         },
@@ -93,29 +93,18 @@
           this.data_url += '&Subject=' + this.tag
         }
 
-//        this.$log.debug(this.data_url + ' requested');
+        this.$log.debug(this.data_url + ' requested');
       }
       ,
       async request_pages(url) {
+        this.result = await get_plone_data(this, url)
 
-        this.$axios.setHeader('Content-Type', 'application/json', ['get']);
-        this.$axios.setHeader('Accept', 'application/json', ['get']);
-        this.$axios.setHeader('Access-Control-Allow-Origin', '*', ['get']);
-        try {
-          this.result = await this.$axios.$get(url);
-        } catch (e) {
-          console.log(e.message);
-          console.log(e.stack);
-          set_error_message(this, PLONE_UNREACHABLE_MESSAGE);
-          return
-        }
         if (this.display_date) {
           this.result.items.forEach(
             function (item) {
               item.date_text = 'Veröffentlicht am ' + format_plone_date(item.effective);
             }, this)
         }
-        this.$forceUpdate()
       }
       ,
     }
