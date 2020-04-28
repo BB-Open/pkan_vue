@@ -29,7 +29,7 @@
 
     <ul class="nobull">
       <li v-for="item in result" :class="element_style_class" v-if="result.length">
-        <p class="element_title">{{ item.type}}: {{ item.title }}</p>
+        <h3 class="element_title">{{ item.type}}: {{ item.title }}</h3>
         <p class="element_description">{{ item.description }}</p>
         <p>
           <NuxtLink :to="get_nuxt_link(item.id)" :aria-label="item.type + ' ' +item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
@@ -159,7 +159,6 @@
 <style scoped>
 
   .element_title {
-    font-weight: bold;
   }
 
   .element_logo img {

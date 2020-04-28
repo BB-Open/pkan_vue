@@ -36,7 +36,7 @@
                            :options="publisher_options"></search-selector>
           <search-selector title="Kategorie" store_namespace="Search" property="category"
                            :options="category_options"></search-selector>
-          <search-selector title="Lizens" store_namespace="Search" property="license"
+          <search-selector title="Lizenz" store_namespace="Search" property="license"
                            :options="license_options"></search-selector>
           <date-picker label="Letzte Änderung:" namespace="Search" property="last_change"></date-picker>
         </div>
