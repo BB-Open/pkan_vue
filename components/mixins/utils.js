@@ -70,3 +70,16 @@ export function get_tag_for_namespace(obj) {
 export function set_error_message(obj, message) {
   obj.$store.ep_commit('GlobalState', 'error_message', message);
 }
+
+const pkan_aria_plolite = document.getElementById('pkan_aria_polite');
+const pkan_aria_assertive = document.getElementById('pkan_aria_assertive');
+
+export function write_aria_polite(message) {
+  pkan_aria_assertive.innerHTML = '';
+  pkan_aria_plolite.innerHTML = message
+}
+
+export function write_aria_assertive(message) {
+  pkan_aria_plolite.innerHTML = '';
+  pkan_aria_assertive.innerHTML = message
+}

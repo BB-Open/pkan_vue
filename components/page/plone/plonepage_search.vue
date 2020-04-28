@@ -8,7 +8,7 @@
 
 <script>
   import {server_settings} from "../../configs/server_settings";
-  import {removeSelfClosingTags, set_error_message} from "../../mixins/utils";
+  import {removeSelfClosingTags, set_error_message, write_aria_polite} from "../../mixins/utils";
   import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
   import {EV} from "../../configs/events";
 
@@ -94,8 +94,7 @@
         }
 
         if (this.display_title){
-          this.$store.ep_commit('BreadCrumb', 'title', this.item.title);
-          this.$EventBus.$emit(EV.PAGE_TITLE_CHANGED, {});
+          write_aria_polite('Die Seite ' + this.item.title + ' wurde geladen.')
         }
 
         this.$forceUpdate()

@@ -35,6 +35,7 @@
   import search_results_mobile from "../entity/search_results_mobile";
   import DatePicker from "../../controls/DatePicker";
   import {REQUEST_SEARCH_RESULTS_SPARQL} from "../../configs/socket";
+  import {write_aria_polite} from "../../mixins/utils";
 
   export default {
     components: {
@@ -72,8 +73,7 @@
     mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
-      this.$store.ep_commit('BreadCrumb', 'title', 'SPARQL Suche');
-      this.$EventBus.$emit(EV.PAGE_TITLE_CHANGED, {});
+      write_aria_polite('Die Seite SPARQL Suche wurde geladen.');
     },
     methods: {
       search_initial() {

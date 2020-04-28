@@ -12,6 +12,7 @@
   import BaseView from '../../components/page/views/BaseView';
   import VocabBox from "../../components/controls/VocabBox";
   import {EV} from "../../components/configs/events";
+  import {write_aria_polite} from "../../components/mixins/utils";
 
   export default {
     name: 'Search',
@@ -25,8 +26,7 @@
       }
     },
     mounted() {
-      this.$store.ep_commit('BreadCrumb', 'title', 'Einfache Suche');
-      this.$EventBus.$emit(EV.PAGE_TITLE_CHANGED, {});
+      write_aria_polite('Die Seite einfache Suche wurde geladen.');
     }
 
   }

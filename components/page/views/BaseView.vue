@@ -1,6 +1,5 @@
 <template>
   <div class="body_content">
-    <page-title-reader></page-title-reader>
     <div :class="namespace">
       <a href="#maincontent" class="hidden_help_text">Weiter zum Hauptteil der Seite</a>
       <pkan-header></pkan-header>
@@ -54,12 +53,10 @@
   } from "../../configs/plone_keywords";
   import PkanStatus from "../subelements/PkanStatus";
   import {set_error_message} from "../../mixins/utils";
-  import PageTitleReader from "../../controls/PageTitleReader";
 
   export default {
     name: 'BaseView',
     components: {
-      PageTitleReader,
       PkanHeader,
       SearchFieldSingleLine,
       PkanFooter,

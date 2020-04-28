@@ -37,6 +37,7 @@
   import {REQUEST_ITEM_DETAIL, REQUEST_ITEM_TITLE_DESC, REQUEST_LABEL} from "../../configs/socket";
   import * as rdf from "rdf";
   import DownloadControl from "../../controls/DownloadControl";
+  import {write_aria_polite} from "../../mixins/utils";
 
   export default {
     name: "entitydetail",
@@ -84,8 +85,7 @@
         this.$store.ep_commit('BreadCrumb', 'last_title', this.title);
         this.$EventBus.$emit(EV.PAGE_CHANGED, {});
         if (this.alert_title) {
-          this.$store.ep_commit('BreadCrumb', 'title', this.title);
-          this.$EventBus.$emit(EV.PAGE_TITLE_CHANGED, {});
+          write_aria_polite('Die Seite ' + this.title + ' wurde geladen.')
         }
         this.$forceUpdate()
       },

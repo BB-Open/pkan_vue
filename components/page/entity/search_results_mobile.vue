@@ -8,7 +8,7 @@
     </div>
     <h2>Suchergebnisse:</h2>
     <div v-infinite-scroll="load_more" infinite-scroll-disabled="busy" :infinite-scroll-distance="perPage">
-      <ul class="nobull" aria-live="polite">
+      <ul class="nobull">
         <li v-for="item in result" :class="element_style_class">
           <p class="element_title">{{ item.type}}: {{ item.title }}</p>
           <p class="element_description">{{ item.description }}</p>
@@ -29,6 +29,7 @@
   import {EV} from "../../configs/events";
   import {BATCH_SIZE, REQUEST_SEARCH_RESULTS, REQUEST_SEARCH_RESULTS_SPARQL} from "../../configs/socket";
   import {BPagination} from 'bootstrap-vue'
+  import {write_aria_polite} from "../../mixins/utils";
 
   export default {
     name: "search_results_mobile",
@@ -115,6 +116,7 @@
         } else {
           this.error = ''
         }
+        write_aria_polite('Neue Suchergebnisse wurden geladen.');
         this.$forceUpdate()
       },
       init_events() {

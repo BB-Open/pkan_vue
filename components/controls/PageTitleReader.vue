@@ -1,6 +1,6 @@
 <template>
   <div class="hidden_help_text" role="status" aria-live="polite" aria-relevant="all" aria-atomic="true">
-    {{text}}
+    {{page_change_text}}
   </div>
 </template>
 
@@ -11,7 +11,7 @@
     name: "PageTitleReader",
     data() {
       return {
-        text: 'Die Seite wird geladen.',
+        page_change_text: 'Die Seite wird geladen.',
       }
     },
     computed: {
@@ -24,21 +24,20 @@
       },
     },
     beforeDestroy: function () {
-      this.$EventBus.$off(EV.PAGE_TITLE_CHANGED)
+      this.$EventBus.$off(EV.PAGE_TITLE_CHANGED,
+        this.update_text.bind(this))
     },
     mounted() {
       this.init_events();
+      this.$log.debug('Mounted Page Title Reader.')
     },
     methods: {
       update_text() {
-        this.text = 'Die Seite ' + this.title + ' wurde geladen.'
+        this.page_change_text = 'Die Seite ' + this.title + ' wurde geladen.';
       },
       init_events() {
-        this.$EventBus.$on(EV.PAGE_TITLE_CHANGED, () => {
-          this.$log.debug('Page Title Changed');
-          this.$log.debug(this.title);
-          this.update_text()
-        });
+        this.$EventBus.$on(EV.PAGE_TITLE_CHANGED,
+          this.update_text.bind(this));
       }
     }
   }
