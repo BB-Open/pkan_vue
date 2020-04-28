@@ -128,13 +128,21 @@ button {
 }
 
 .criteria_button_unselected:hover,
-.criteria_button_unselected:focus,
+.criteria_button_unselected:focus {
+  color: black;
+  background-color: #e3e3e3;
+}
 .button_add:hover,
-.button_add:focus,
+.button_add:focus {
+  color: black;
+  border: 1px solid #99CC66;
+  background-color: rgba(153, 204, 102, 0.4);
+}
 .button_remove:hover,
 .button_remove:focus {
-  color: #161616;
-  background-color: #e9e9e9;
+  background-color: rgba(199, 60, 53, 0.35);
+  color: black;
+  border: 1px solid #C73C35;
 }
 
 .lightbutton {
@@ -340,10 +348,13 @@ select {
   position: relative;
   display: block;
   padding: 10px 5px;
-  color: #C73C35;
+  color: black;
   background-color: #fff;
-  border: 1px solid #eeeeee;
   text-align: center;
+}
+
+.page-item{
+  border: 1px solid #d9d9d9;
 }
 
 .page-link:hover {
