@@ -4,7 +4,7 @@
     <label>{{ title }}:<br/>
       <div class="hidden_help_text">Kriterien filtern</div>
       <input type="text" v-model="search_string" :placeholder="title + ' durchsuchen'"
-             @change="filter_criteria"></label></form>
+             @change="filter_criteria" @keyup="filter_criteria"></label></form>
     <div class="criteria_buttons">
       <button v-for="item in display_values" @click="button_clicked(item)"
               v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove, criteria_button_unselected: !data_store[item].check_remove && !data_store[item].check_add}"
