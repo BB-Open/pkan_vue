@@ -9,7 +9,7 @@
     <div class="hidden_help_text" id="page_description">Für die Seitenverwaltung nutzen Sie die Pfeiltasten zum wechseln
       zwischen den Buttons. Bestätigen sie mit Enter. Mit Tab verlassen sie die Seitenverwaltung.
     </div>
-    <div v-bind:class="{hide: result.length <= perPage}">
+    <div v-bind:class="{hide: rows <= perPage}">
       <b-pagination
         v-model="pagination_page"
         :total-rows="rows"
@@ -24,6 +24,7 @@
         aria-describedby="page_description"
       ></b-pagination>
     </div>
+    <p v-if="rows > 0">Es wurden insgesamt {{rows}} Ergebnisse gefunden</p>
 
 
     <ul class="nobull">

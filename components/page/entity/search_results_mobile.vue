@@ -6,6 +6,7 @@
         <div>{{error}}</div>
       </div>
     </div>
+    <p v-if="rows > 0">Es wurden insgesamt {{rows}} Ergebnisse gefunden</p>
     <div v-infinite-scroll="load_more" infinite-scroll-disabled="busy" :infinite-scroll-distance="perPage">
       <ul class="nobull">
         <li v-for="item in result" :class="element_style_class">
