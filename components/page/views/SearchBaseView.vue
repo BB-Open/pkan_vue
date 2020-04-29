@@ -23,8 +23,9 @@
                                    v-if="$mq === 'mobile'"></search_results_mobile>
           </div>
         </div>
-        <div class="controls">
-          <h1>Kriterien</h1>
+        <section class="controls" aria-labelledby="controls_heading" aria-describedby="controls_description">
+          <h2 id="controls_heading">Kriterien</h2>
+          <p id="controls_description" class="hidden_help_text">TODO</p>
           <button
             @click="remove_all()"
             class="selectorbutton"
@@ -39,7 +40,7 @@
           <search-selector title="Lizenz" store_namespace="Search" property="license"
                            :options="license_options"></search-selector>
           <date-picker label="Letzte Änderung:" namespace="Search" property="last_change"></date-picker>
-        </div>
+        </section>
       </div>
     </template>
   </base-view>
@@ -159,6 +160,10 @@
 
   .results {
     width: 100%;
+  }
+
+  #controls_heading {
+    font-size: 2em;
   }
 
   @media (max-width: 640px) {

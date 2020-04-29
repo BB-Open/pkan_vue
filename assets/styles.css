@@ -225,7 +225,7 @@ button:focus {
   padding-bottom: 7px;
 }
 
-.info_column_right h2 {
+.info_column_right h2, .info_column_right h3 {
   padding-right: 15px;
   padding-left: 15px;
   padding-top: 7px;
