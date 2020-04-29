@@ -90,9 +90,9 @@
 
       async get_data() {
         var request = {}
-        if (this.request === REQUEST_SEARCH_RESULTS) {
+        if (this.request_type === REQUEST_SEARCH_RESULTS) {
           request = Object.assign({}, this.$store.getters[this.namespace + '/search']);
-        } else if (this.request === REQUEST_SEARCH_RESULTS_SPARQL) {
+        } else if (this.request_type === REQUEST_SEARCH_RESULTS_SPARQL) {
           request = Object.assign({}, this.$store.getters[this.namespace + '/search_sparql']);
         }
         var response = await get_flask_data(this, this.request_type, request )
