@@ -32,6 +32,7 @@
     },
     data() {
       return {
+        prefetched : false,
         namespace: 'plonepage_uid',
         result: {},
         base_data_url: server_settings.PLONE_URL + '/@search?fullobjects=1',
@@ -52,12 +53,15 @@
     mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
-      this.generate_data_url();
-      this.get_data();
+      if (this.prefetched === false) {
+        this.generate_data_url();
+        this.get_data();
+      }
     },
     methods: {
       async get_data() {
         await this.request_pages(this.data_url)
+        this.prefetched = await true
       },
       removeSelfClosingTags(html) {
         return removeSelfClosingTags(html)
@@ -80,7 +84,7 @@
           this.item.date_text = 'Veröffentlicht am ' + format_plone_date(this.item.effective);
         }
 
-        this.$store.ep_commit('BreadCrumb', 'last_title', this.item.title);
+        this.$store.ep_commit('breadcrumb', 'last_title', this.item.title);
         this.$EventBus.$emit(EV.PAGE_CHANGED, {});
         write_aria_polite('Die Seite ' + this.item.title + ' wurde geladen.');
       },

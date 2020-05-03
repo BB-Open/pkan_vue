@@ -30,6 +30,7 @@
     },
     data() {
       return {
+        prefetched : false,
         namespace: 'Publisher',
         result: {},
         base_data_url: server_settings.PLONE_URL + '/@search?fullobjects=1',
@@ -51,8 +52,10 @@
     mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
-      this.generate_data_url();
-      this.get_data();
+      if (this.prefetched === false) {
+        this.generate_data_url();
+        this.get_data()
+      }
     },
     methods: {
       async get_data() {
@@ -69,10 +72,11 @@
       async request_pages(url) {
 
         this.result = await get_plone_data(this, url)
-        this.item = this.result.items[0];
-        this.$store.ep_commit('BreadCrumb', 'last_title', this.item.title);
-        this.$EventBus.$emit(EV.PAGE_CHANGED, {});
-        write_aria_polite('Die Seite ' + this.item.title + ' wurde geladen.');
+        this.item = await this.result.items[0];
+        await this.$store.set('breadcrumb/last_title', this.item.title);
+        await this.$EventBus.$emit(EV.PAGE_CHANGED, {});
+        await write_aria_polite('Die Seite ' + this.item.title + ' wurde geladen.');
+        this.prefetched = true
       },
     },
   }

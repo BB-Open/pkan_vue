@@ -1,10 +1,38 @@
-require("core-js/es7/array");
-import babelPolyfill from "babel-polyfill";
-import Vuex from "vuex";
+import Vuex from 'vuex'
+import pathify from 'vuex-pathify'
 
-export const state = () => ({});
+import vocabularies from './modules/Vocabularies'
+import breadcrumb from './modules/BreadCrumb'
+import globalstate from './modules/GlobalState'
+import search from './modules/Search'
 
-export const mutations = {};
+console.log('STORE FILE LOADED!')
+
+const createStore = () => {
+
+  console.log('CREATE STORE!')
+
+  return new Vuex.Store({
+
+    plugins: [ pathify.plugin ],
+
+    modules: {
+      vocabularies,
+      breadcrumb,
+      globalstate,
+      search,
+    },
+
+    actions: {
+      nuxtServerInit(context, value) {
+        console.log('NUXT_SERVER_INIT!')
+      }
+    }
+
+  })
+}
+
+export default createStore
 
 Vuex.Store.prototype.ep_commit = function ep_commit(
   _ns,
@@ -12,6 +40,6 @@ Vuex.Store.prototype.ep_commit = function ep_commit(
   _payload,
   _options
 ) {
-  var _type = _ns + "/set_" + _property;
-  return this.commit(_type, _payload, _options);
+  var _type = _ns + "/" + _property;
+  return this.set(_type, _payload, _options);
 };

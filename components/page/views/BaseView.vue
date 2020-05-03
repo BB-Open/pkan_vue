@@ -80,10 +80,10 @@
       // Force the initialization
       set_error_message(this, '');
       this.$log.debug(this.namespace + ' mounted');
-      this.$store.ep_commit('BreadCrumb', 'currentView', this.breadcrumb);
+      this.$store.set('breadcrumb/currentView', this.breadcrumb);
       if (this.ignore_last_title === undefined) {
-        this.$store.ep_commit('BreadCrumb', 'last_title', null)
-      };
+        this.$store.set('breadcrumb/last_title', null)
+      }
       this.$EventBus.$emit(EV.PAGE_CHANGED, {});
     },
   }

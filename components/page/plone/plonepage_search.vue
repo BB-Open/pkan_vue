@@ -27,6 +27,7 @@
     },
     data() {
       return {
+        prefetched : false,
         namespace: 'plonepage_search',
         result: {},
         base_data_url: server_settings.PLONE_URL + '/@search?fullobjects=1',
@@ -48,8 +49,10 @@
     mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
-      this.generate_data_url();
-      this.get_data();
+      if (this.prefetched === false) {
+        this.generate_data_url();
+        this.get_data();
+      }
     },
     methods: {
       async get_data() {
@@ -92,7 +95,7 @@
         if (this.display_title){
           write_aria_polite('Die Seite ' + this.item.title + ' wurde geladen.')
         }
-
+        this.prefetched = true
       },
     },
   }

@@ -15,7 +15,7 @@
         set: function (value) {
         },
         get: function () {
-          return this.$store.state['GlobalState']['error_message'];
+          return this.$store.get('globalstate/error_message');
         }
       },
     },

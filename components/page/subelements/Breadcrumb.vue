@@ -20,13 +20,18 @@
     name: "Breadcrumb",
     data() {
       return {
-        breadcrumb_elements: [],
-        breadcrumb_clear: {}
+      }
+    },
+    computed: {
+      breadcrumb_elements: function () {
+        return this.get_breadcrumbs()
+      },
+      breadcrumb_clear: function () {
+        return this.get_clean_breadcrumbs()
       }
     },
     mounted() {
       // Force the initialization
-      this.init_breadcrumbs();
       this.init_events();
     },
     beforeDestroy: function () {
@@ -34,9 +39,13 @@
     },
 
     methods: {
-      init_breadcrumbs() {
-        this.breadcrumb_elements = ['Start'];
-        this.breadcrumb_elements = this.breadcrumb_elements.concat(this.$store.getters['BreadCrumb' + '/breadcrumb']);
+      get_breadcrumbs() {
+        let breadcrumbs = ['Start'];
+        breadcrumbs = breadcrumbs.concat(this.$store.getters['BreadCrumb' + '/breadcrumb']);
+        return breadcrumbs
+      },
+      get_clean_breadcrumbs() {
+        let clean_breadcrumbs = []
         this.breadcrumb_elements.forEach(
           function (item) {
             let url = null;
@@ -51,21 +60,19 @@
             }
 
             if (item !== undefined && item !== null) {
-              this.breadcrumb_clear[item] = {
+              clean_breadcrumbs[item] = {
                 'url': url,
                 'title': title
               }
             }
 
-          }, this);
-        this.$forceUpdate()
-
+          });
+          return clean_breadcrumbs
 
       },
       init_events() {
         this.$EventBus.$on(EV.PAGE_CHANGED, () => {
           this.$log.debug('breadcrumb changed');
-          this.init_breadcrumbs()
         });
       }
     },

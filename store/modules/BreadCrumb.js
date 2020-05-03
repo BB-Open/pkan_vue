@@ -1,3 +1,5 @@
+import { make } from 'vuex-pathify'
+
 export const state = () => ({
 // used in all views
   currentView: null,
@@ -6,17 +8,10 @@ export const state = () => ({
 
 });
 
-export const mutations = {
-  set_currentView(state, data) {
-    state.currentView = data
-  },
-  set_last_title(state, data) {
-    state.last_title = data
-  },
-  set_title(state, data) {
-    state.title = data
-  }
-};
+const mutations = {
+  // create SET_VALUE automatically
+  ...make.mutations(state),
+}
 
 export const getters = {
   breadcrumb: function (state) {
@@ -26,3 +21,9 @@ export const getters = {
     return state.title
   }
 };
+
+export default {
+  namespaced: true,
+  state,
+  mutations
+}

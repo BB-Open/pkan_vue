@@ -35,6 +35,7 @@
     props: ['view_url', 'element_style_class', 'style_class', 'namespace', 'request_type'],
     data() {
       return {
+        prefetched: false,
         result: [],
         result_batches: {},
         rows: 0,
@@ -64,6 +65,11 @@
     components: {
       BPagination,
 
+    },
+    serverPrefetch () {
+      // Force the initialization
+      this.init_events();
+      return this.get_data();
     },
     mounted() {
       // Force the initialization
@@ -108,7 +114,7 @@
           this.error = ''
         }
         write_aria_polite('Neue Suchergebnisse wurden geladen.');
-        this.$forceUpdate()
+        this.prefetched = true
       },
       init_events() {
         this.$EventBus.$on(EV.RESET_SEARCH_TERMS, () => {

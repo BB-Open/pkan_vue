@@ -100,17 +100,17 @@
     },
     methods: {
       search_initial() {
-        return this.$store.state['Search']['textline_keywords'];
+        return this.$store.get('search/textline_keywords');
       },
       remove_all() {
-        this.$store.ep_commit('Search', 'textline_keywords', '');
+        this.$store.set('search/textline_keywords', '');
         this.search_selector_fields.forEach(function (field) {
-          this.$store.ep_commit('Search', field, {
+          this.$store.set('search/' + field, {
             'value_pos': [],
             'value_neg': []
           },);
         }, this);
-        this.$store.ep_commit('Search', 'last_change', [null, null]);
+        this.$store.set('search/last_change', [null, null]);
 
         this.update_page()
       },
@@ -123,7 +123,9 @@
       // clear for next search when we leave search namespace
       if (!this.$router.currentRoute.fullPath.includes('search')) {
         this.remove_all();
-        this.$store.ep_commit('Search', 'sparql', 'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
+        this.$store.set(
+          'search/sparql',
+          'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
           'SELECT DISTINCT ?id WHERE {\n' +
           '  ?id a dcat:Dataset .\n' +
           '}');

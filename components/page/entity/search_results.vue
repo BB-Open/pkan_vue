@@ -79,12 +79,12 @@
     computed: {
       pagination_page: {
         set(pagination_page) {
-          this.$store.ep_commit(this.namespace, this.property_end, pagination_page);
-          this.$store.ep_commit(this.namespace, this.property_start, pagination_page - 1);
+          this.$store.set(this.namespace +'/' + this.property_end, pagination_page);
+          this.$store.set(this.namespace + '/' + this.property_start, pagination_page - 1);
           this.$EventBus.$emit(EV.CHANGED_BATCH, pagination_page);
         },
         get() {
-          return this.$store.state[this.namespace][this.property_end];
+          return this.$store.get(this.namespace + '/' + this.property_end);
         }
       }
     },

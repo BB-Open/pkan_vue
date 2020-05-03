@@ -30,11 +30,16 @@
     name: "VocabBox",
     data() {
       return {
-        vocab: [],
+        prefetched: false,
         namespace: 'Vocab Boxes',
         url: DETAIL_SEARCH_URL,
         base_data_url: server_settings.PLONE_URL,
       }
+    },
+    computed : {
+        vocab : function () {
+          return this.$store.get('vocabularies/vocabularies@' + this.vocab_name)
+        }
     },
     props: {
       'vocab_name': String,
@@ -47,7 +52,9 @@
     },
     mounted() {
       // Force the initialization
-      this.get_vocab();
+      if (this.prefetched === false) {
+        this.get_vocab();
+      }
     },
     methods: {
       async get_vocab() {
@@ -56,7 +63,8 @@
       },
       handle_result(data) {
         // read result from request
-        this.vocab = data.vocab;
+        this.$store.set('vocabularies/vocabularies@' + this.vocab_name, data.vocab)
+        this.prefetched = true;
       },
       handle_click(value) {
         let value_clean;
@@ -68,7 +76,7 @@
         } else {
           value_clean = value
         }
-        this.$store.ep_commit('Search', this.search_field, value_clean);
+        this.$store.set('search/' + this.search_field, value_clean);
         this.$router.push(DETAIL_SEARCH_URL);
       },
     }

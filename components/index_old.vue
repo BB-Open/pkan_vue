@@ -13,9 +13,9 @@
       this.init_from_query()
     },
 
-    mounted: function () {
+    mounted () {
       // Force the initialization
-      this.init_from_query()
+       this.init_from_query()
     },
     methods: {
       init_from_query() {

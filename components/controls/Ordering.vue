@@ -32,11 +32,14 @@
     computed: {
       selected: {
         set(selected) {
-          this.$store.ep_commit(this.namespace, this.property, selected);
+          this.$store.set(this.namespace + "@" + this.property, selected);
           this.$EventBus.$emit(EV.CHANGED_SEARCH_TERMS, selected);
         },
         get() {
-          return this.$store.state[this.namespace][this.property];
+          return this.$store.get(this.namespace + "@" + this.property);
+        },
+        vocab_ordering: function () {
+          return this.$store.get('vocabularies/vocabularies@' + this.namespace )
         }
       }
     },
@@ -54,13 +57,17 @@
       },
       handle_result_ordering(data) {
         // read result from request
-        this.vocab_ordering = [];
+//        this.vocab_ordering = [];
         data.vocab.forEach(function (field) {
-          this.vocab_ordering.push({
+          this.$store.set('vocabularies/vocabularies@' + this.namespace, {
             value: field.id,
             text: field.text
           })
-        }, this);
+/*          this.vocab_ordering.push({
+            value: field.id,
+            text: field.text
+          })
+*/        }, this);
 
       },
     }

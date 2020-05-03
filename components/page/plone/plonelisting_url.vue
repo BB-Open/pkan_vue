@@ -51,18 +51,18 @@
         base_data_url: server_settings.PLONE_URL + '/@search?fullobjects=1',
       }
     },
-    serverPrefetch() {
+    async fetch() {
+      this.$log.debug(this.namespace + ' mounted');
       this.generate_data_url();
-      return this.get_data();
+      await this.get_data();
     },
-    mounted() {
+/*    mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
       this.generate_data_url();
       this.get_data();
-    }
-    ,
-    methods: {
+    },
+*/    methods: {
       get_nuxt_link(uid) {
         return this.view_url + '/' + uid
       }

@@ -71,7 +71,7 @@ export function get_tag_for_namespace(obj) {
 }
 
 export function set_error_message(obj, message) {
-  obj.$store.ep_commit('GlobalState', 'error_message', message);
+  obj.$store.set('globalstate/error_message', message);
 }
 
 export function write_aria_polite(message) {
