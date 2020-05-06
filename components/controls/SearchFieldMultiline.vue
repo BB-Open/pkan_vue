@@ -43,8 +43,12 @@
     props: ['vuex_ns', 'vuex_prop', 'place_holder', 'vuex_ns', 'next_view', 'rows', 'button_label', 'label', 'help'],
     components: {},
     computed: {
-      // ToDo: find way to parametrize this with vuex_ns and vuex_prop
-      search_string : sync(':vuex_ns/:vuex_prop')
+      /* Caution! Here the value of the VUEX_store has to be hard coded since the
+      sync statement is run at compile time. There is no "this" at this time.
+      With the colon-syntax :vuex_prop pathify will generate a reference to
+      this.vuex_prop. But the name of the store to use must be hard coded as string.
+      */
+      search_string : sync('search_sparql/:vuex_prop')
     },
     mounted() {
       this.init_events();

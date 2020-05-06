@@ -28,7 +28,6 @@
         </svg>
       </button>
     </div>
-
   </label>
 </template>
 
@@ -45,7 +44,12 @@
       this.init_events();
     },
     computed: {
-      search_string : sync('search_keyword/textline_keywords')
+      /* Caution! Here the value of the VUEX_store has to be hard coded since the
+      sync statement is run at compile time. There is no "this" at this time.
+      With the colon-syntax :vuex_prop pathify will generate a reference to
+      this.vuex_prop. But the name of the store to use must be hard coded as string.
+      */
+      search_string : sync('search_keyword/:vuex_prop')
     },
     beforeDestroy: function () {
       this.$EventBus.$off(EV.RESET_SEARCH_TERMS);
