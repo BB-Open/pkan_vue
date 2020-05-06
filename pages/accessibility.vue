@@ -1,7 +1,7 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="namespace" :display_info_column="true">
+  <base-view :vuex_ns="vuex_ns" :breadcrumb="vuex_ns" :display_info_column="true">
     <template slot="content">
-      <plonepage_search :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order"
+      <plonepage_search vuex_ns='plone/plone' :vuex_prop='tag' :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order"
                         :tag="tag"></plonepage_search>
     </template>
   </base-view>
@@ -25,7 +25,7 @@
     },
     data: function () {
       return {
-        namespace: 'Accessibility',
+        vuex_ns: 'Accessibility',
         portal_type: PLONE_PT_DOCUMENT,
         sort_on: PLONE_INDEX_CREATED,
         sort_order: PLONE_REVERSE_ORDERING,
@@ -34,7 +34,7 @@
     },
     mounted() {
       // Force the initialization
-      this.$log.debug(this.namespace + ' mounted');
+      this.$log.debug(this.vuex_ns + ' mounted');
 
     },
   }

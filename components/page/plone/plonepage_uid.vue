@@ -33,7 +33,7 @@
     data() {
       return {
         prefetched : false,
-        namespace: 'plonepage_uid',
+        vuex_ns: 'plonepage_uid',
         result: {},
         base_data_url: server_settings.PLONE_URL + '/@search?fullobjects=1',
         item: {
@@ -46,13 +46,13 @@
       }
     },
     serverPrefetch() {
-      this.$log.debug(this.namespace + ' mounted');
+      this.$log.debug(this.vuex_ns + ' mounted');
       this.generate_data_url();
       return this.get_data();
     },
     mounted() {
       // Force the initialization
-      this.$log.debug(this.namespace + ' mounted');
+      this.$log.debug(this.vuex_ns + ' mounted');
       if (this.prefetched === false) {
         this.generate_data_url();
         this.get_data();
@@ -84,7 +84,7 @@
           this.item.date_text = 'Veröffentlicht am ' + format_plone_date(this.item.effective);
         }
 
-        this.$store.ep_commit('breadcrumb', 'last_title', this.item.title);
+        this.$store.ep_set('breadcrumb', 'last_title', this.item.title);
         this.$EventBus.$emit(EV.PAGE_CHANGED, {});
         write_aria_polite('Die Seite ' + this.item.title + ' wurde geladen.');
       },

@@ -1,7 +1,7 @@
 <template>
-  <sparql-search-base-view namespace="Sparql" :display_info_column="false">
+  <sparql-search-base-view vuex_ns="Sparql" :display_info_column="false">
     <template slot="additional_widget">
-      <search-field-multiline property="sparql" store_namespace="Search" :initial_value="this.search_initial()"
+      <search-field-multiline vuex_prop="sparql" vuex_ns="search_sparql"
                               :place_holder="placeholder" :next_view="next_view" rows="4" button_label="Abfrage senden"
                               label="SPARQL Abfrage:"
                               help="In diesem Feld können Sie eine Sparqlquery formulieren. Die Query muss eine Liste von ids als ?id zurückliefern. Die Query darf ein Ordering beinhalten, jedoch kein Limit oder Offset, da dieses vom Batching verwendet wird"></search-field-multiline>
@@ -24,12 +24,10 @@
       return {
         placeholder: 'SPARQL Query',
         next_view: SPARQL_URL,
+        vuex_ns : 'sparql'
       }
     },
     methods: {
-      search_initial() {
-        return this.$store.state['Search']['sparql'];
-      },
     },
   }
 </script>

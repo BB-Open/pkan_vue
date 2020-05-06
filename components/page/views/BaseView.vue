@@ -1,14 +1,14 @@
 <template>
   <div class="body_content">
-    <div :class="namespace">
+    <div :class="vuex_ns">
       <a href="#maincontent" class="hidden_help_text">Weiter zum Hauptteil der Seite</a>
       <pkan-header></pkan-header>
       <main class="twocolumncontent content_container" v-if="display_info_column" id="maincontent">
         <pkan-status></pkan-status>
         <div class="main_content ">
           <form v-if="this.display_search" @submit.prevent="">
-            <search-field-single-line property="textline_keywords" store_namespace="Search"
-                                      :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
+            <search-field-single-line vuex_prop="textline_keywords" store_vuex_ns="search_keyword"
+                                       :place_holder="placeholder" :next_view="next_view"
                                       rows="1" button_label="Suchen"
                                       :hidden_label="placeholder"></search-field-single-line>
           </form>
@@ -17,15 +17,15 @@
 
 
         <aside class="info_column_right info_column" v-if="display_info_column">
-          <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="side_tag"
+          <plonepage_search vuex_ns='plone/plone' :vuex_prop='pt' :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="side_tag"
                             :display_title="false"></plonepage_search>
         </aside>
       </main>
       <main class="content_container" v-if="!display_info_column">
         <pkan-status></pkan-status>
         <form v-if="this.display_search" @submit.prevent="">
-          <search-field-single-line property="textline_keywords" store_namespace="Search"
-                                    :initial_value="search_initial" :place_holder="placeholder" :next_view="next_view"
+          <search-field-single-line vuex_prop="textline_keywords" store_vuex_ns="search_keyword"
+                                    :place_holder="placeholder" :next_view="next_view"
                                     rows="1" button_label="Suchen"
                                     :hidden_label="placeholder"></search-field-single-line>
         </form>
@@ -63,7 +63,7 @@
       plonepage_search,
       PkanStatus,
     },
-    props: ['namespace', 'breadcrumb', 'ignore_last_title', 'search_initial', 'display_info_column', "display_search"],
+    props: ['vuex_ns', 'breadcrumb', 'ignore_last_title', 'display_info_column', "display_search"],
     data() {
       return {
         placeholder: 'In den Datensätzen suchen',
@@ -79,7 +79,7 @@
     mounted() {
       // Force the initialization
       set_error_message(this, '');
-      this.$log.debug(this.namespace + ' mounted');
+      this.$log.debug(this.vuex_ns + ' mounted');
       this.$store.set('breadcrumb/currentView', this.breadcrumb);
       if (this.ignore_last_title === undefined) {
         this.$store.set('breadcrumb/last_title', null)

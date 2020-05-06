@@ -65,7 +65,7 @@
 
   export default {
     name: "search_results",
-    props: ['view_url', 'element_style_class', 'style_class', 'namespace', 'request_type'],
+    props: ['view_url', 'element_style_class', 'style_class', 'vuex_ns', 'request_type'],
     data() {
       return {
         result: [],
@@ -79,12 +79,12 @@
     computed: {
       pagination_page: {
         set(pagination_page) {
-          this.$store.set(this.namespace +'/' + this.property_end, pagination_page);
-          this.$store.set(this.namespace + '/' + this.property_start, pagination_page - 1);
+          this.$store.ep_set(this.vuex_ns , this.property_end, pagination_page);
+          this.$store.ep_set(this.vuex_ns,  this.property_start, pagination_page - 1);
           this.$EventBus.$emit(EV.CHANGED_BATCH, pagination_page);
         },
         get() {
-          return this.$store.get(this.namespace + '/' + this.property_end);
+          return this.$store.ep_get(this.vuex_ns , this.property_end);
         }
       }
     },
@@ -99,33 +99,27 @@
     mounted() {
       // Force the initialization
       this.init_events();
-      this.get_data();
+      return this.get_data();
     },
     methods: {
       get_nuxt_link(id) {
         return this.view_url + '/' + encodeURIComponent(id)
       },
 
-      async get_data() {
-        var request = {}
-        if (this.request_type === REQUEST_SEARCH_RESULTS) {
-          request = Object.assign({}, this.$store.getters[this.namespace + '/search']);
-        } else if (this.request_type === REQUEST_SEARCH_RESULTS_SPARQL) {
-          request = Object.assign({}, this.$store.getters[this.namespace + '/search_sparql']);
-        }
-        var response = await get_flask_data(this, this.request_type, request )
-        return await this.handle_result(response)
+      get_data () {
+        var request = Object.assign({}, this.$store.get(this.vuex_ns + '/search'))
+        var response = get_flask_data(this, this.request_type, request )
+        return this.handle_result(response)
       },
       async handle_result(data) {
-        this.result = data.results;
-        this.rows = data.number_results;
-        if (data.response_code === 400) {
-          this.error = data.error_message;
+        this.$store.ep_set(this.vuex_ns, 'results', await data.results)
+        this.$store.ep_set(this.vuex_ns, 'rows', await data.number_results)
+        if (await data.response_code === 400) {
+          this.$store.ep_set(this.vuex_ns, 'error', await data.error_message)
         } else {
-          this.error = ''
+          this.$store.ep_set(this.vuex_ns, 'error', '')
         }
-        write_aria_polite('Neue Suchergebnisse wurden geladen.');
-        this.$forceUpdate()
+        await write_aria_polite('Neue Suchergebnisse wurden geladen.')
       },
       init_events() {
         this.$EventBus.$on(EV.RESET_SEARCH_TERMS, () => {
@@ -141,9 +135,9 @@
 
     },
     beforeDestroy: function () {
-      this.$EventBus.$off(EV.RESET_SEARCH_TERMS);
-      this.$EventBus.$off(EV.CHANGED_SEARCH_TERMS);
-      this.$EventBus.$off(EV.CHANGED_BATCH);
+      this.$EventBus.$off(EV.RESET_SEARCH_TERMS)
+      this.$EventBus.$off(EV.CHANGED_SEARCH_TERMS)
+      this.$EventBus.$off(EV.CHANGED_BATCH)
     },
   }
 </script>

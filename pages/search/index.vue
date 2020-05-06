@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="namespace" :display_search="true" :display_info_column="true">
+  <base-view :vuex_ns="vuex_ns" :breadcrumb="vuex_ns" :display_search="true" :display_info_column="true">
     <template slot="content">
       <h1>Einfache Suche</h1>
       <vocab-box vocab_name="ordering" :clean_value="false" search_field="order_by"></vocab-box>
@@ -22,7 +22,7 @@
     },
     data() {
       return {
-        namespace: 'Search',
+        vuex_ns: 'Search',
       }
     },
     mounted() {

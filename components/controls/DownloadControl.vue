@@ -33,7 +33,7 @@
     props: ['id'],
     data() {
       return {
-        namespace: 'Search',
+        vuex_ns: 'Search',
         vocab_format: [{
           value: 'rdf/xml',
           text: 'Nach RDF/XML exportieren'

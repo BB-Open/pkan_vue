@@ -44,7 +44,7 @@
     },
     data() {
       return {
-        namespace: 'plonenlisting_url',
+        vuex_ns: 'plonenlisting_url',
         result: {
           items: []
         },
@@ -52,17 +52,17 @@
       }
     },
     async fetch() {
-      this.$log.debug(this.namespace + ' mounted');
+      this.$log.debug(this.vuex_ns + ' mounted');
       this.generate_data_url();
       await this.get_data();
     },
-/*    mounted() {
+    mounted() {
       // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
       this.generate_data_url();
       this.get_data();
     },
-*/    methods: {
+    methods: {
       get_nuxt_link(uid) {
         return this.view_url + '/' + uid
       }

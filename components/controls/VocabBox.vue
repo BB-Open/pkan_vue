@@ -26,19 +26,22 @@
   import {server_settings} from "../configs/server_settings";
   import {get_flask_data} from '../mixins/utils';
 
+
+
   export default {
     name: "VocabBox",
     data() {
       return {
         prefetched: false,
-        namespace: 'Vocab Boxes',
+        vuex_ns: 'Vocab Boxes',
         url: DETAIL_SEARCH_URL,
         base_data_url: server_settings.PLONE_URL,
       }
     },
     computed : {
         vocab : function () {
-          return this.$store.get('vocabularies/vocabularies@' + this.vocab_name)
+
+          return this.$store.ep_get('vocabularies/vocabularies', this.vocab_name)
         }
     },
     props: {
@@ -61,9 +64,12 @@
         var response = await get_flask_data(this, REQUEST_VOCAB,  {vocab: this.vocab_name})
         return await this.handle_result(response)
       },
-      handle_result(data) {
+      handle_result(response) {
         // read result from request
-        this.$store.set('vocabularies/vocabularies@' + this.vocab_name, data.vocab)
+        var vocab = response.vocab
+        vocab.sort((a, b) => a.text.localeCompare(b.text))
+
+        this.$store.ep_set('vocabularies/vocabularies',this.vocab_name, vocab)
         this.prefetched = true;
       },
       handle_click(value) {
@@ -76,7 +82,8 @@
         } else {
           value_clean = value
         }
-        this.$store.set('search/' + this.search_field, value_clean);
+        // ToDo: This is direct coupling of components. Better fire an event.
+        this.$store.set('search_detail/' + this.search_field, value_clean);
         this.$router.push(DETAIL_SEARCH_URL);
       },
     }

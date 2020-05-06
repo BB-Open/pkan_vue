@@ -32,7 +32,7 @@
 
   export default {
     name: "search_results_mobile",
-    props: ['view_url', 'element_style_class', 'style_class', 'namespace', 'request_type'],
+    props: ['view_url', 'element_style_class', 'style_class', 'vuex_ns', 'request_type'],
     data() {
       return {
         prefetched: false,
@@ -50,15 +50,15 @@
       selected: {
         set(selected) {
           if (this.max_batch_loaded * this.perPage < this.rows) {
-            this.$store.ep_commit(this.namespace, this.property_end, selected);
-            this.$store.ep_commit(this.namespace, this.property_start, selected - 1);
+            this.$store.ep_set(this.vuex_ns, this.property_end, selected);
+            this.$store.ep_set(this.vuex_ns, this.property_start, selected - 1);
             this.max_batch_loaded = selected;
             this.$EventBus.$emit(EV.CHANGED_BATCH, selected);
           }
 
         },
         get() {
-          return this.$store.state[this.namespace][this.property_end];
+          return this.$store.state[this.vuex_ns][this.property_end];
         }
       },
     },
@@ -97,9 +97,9 @@
       async get_data() {
         var request = {}
         if (this.request_type === REQUEST_SEARCH_RESULTS) {
-          request = Object.assign({}, this.$store.getters[this.namespace + '/search']);
+          request = Object.assign({}, this.$store.getters[this.vuex_ns + '/search']);
         } else if (this.request_type === REQUEST_SEARCH_RESULTS_SPARQL) {
-          request = Object.assign({}, this.$store.getters[this.namespace + '/search_sparql']);
+          request = Object.assign({}, this.$store.getters[this.vuex_ns + '/search_sparql']);
         }
         var response = await get_flask_data(this, this.request_type, request )
         return await this.handle_result(response)

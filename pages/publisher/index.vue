@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="namespace" :display_info_column="true">
+  <base-view :vuex_ns="vuex_ns" :breadcrumb="vuex_ns" :display_info_column="true">
     <template slot="content">
       <h1>Datenbereitsteller</h1>
       <plonelisting_url :portal_type="portal_type" :view_url="view_url" :sort_on="sort_on" style_class="box_area"
@@ -24,7 +24,7 @@
     },
     data() {
       return {
-        namespace: 'Publisher',
+        vuex_ns: 'Publisher',
         view_url: PUBLISHER_URL,
         portal_type: PLONE_PT_PUBLISHER_CARD,
         sort_on: PLONE_INDEX_TITLE,
@@ -32,7 +32,7 @@
     },
     mounted() {
       // Force the initialization
-      this.$log.debug(this.namespace + ' mounted');
+      this.$log.debug(this.vuex_ns + ' mounted');
       write_aria_polite('Die Seite Datenbereitsteller wurde geladen.');
     },
 

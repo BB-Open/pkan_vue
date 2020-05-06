@@ -9,11 +9,12 @@
 <script>
   import {server_settings} from "../../configs/server_settings";
   import {get_plone_data, removeSelfClosingTags, set_error_message, write_aria_polite} from '../../mixins/utils';
-  import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
 
   export default {
     name: "plonepage_search",
     props: {
+      'vuex_ns': String,
+      'vuex_prop': String,
       'portal_type': String,
       'sort_on': String,
       'tag': String,
@@ -28,34 +29,41 @@
     data() {
       return {
         prefetched : false,
-        namespace: 'plonepage_search',
         result: {},
         base_data_url: server_settings.PLONE_URL + '/@search?fullobjects=1',
-        item: {
-          title: 'Titel wird geladen.',
-          description: 'Beschreibung wird geladen.',
-          text: {
-            data: 'Text wird geladen.'
-          }
-        },
+      }
+    },
+    computed:{
+      item : function () {
+        return this.$store.ep_get(this.vuex_ns, this.vuex_prop)
       }
     },
     serverPrefetch() {
       // Force the initialization
-      this.$log.debug(this.namespace + ' mounted');
+      this.$log.debug(this.vuex_ns + ' mounted');
       this.generate_data_url();
       return this.get_data();
     },
     mounted() {
       // Force the initialization
-      this.$log.debug(this.namespace + ' mounted');
-      if (this.prefetched === false) {
+      this.$log.debug(this.name + ' mounted');
+//      if (this.prefetched === false) {
         this.generate_data_url();
         this.get_data();
-      }
+//      }
     },
     methods: {
-      async get_data() {
+/*      init (){
+        item = {
+          title: 'Titel wird geladen.',
+          description: 'Beschreibung wird geladen.',
+          text: {
+            data: 'Text wird geladen.'
+          }
+        }
+        this.$store.ep_set(this.vuex_ns, this.vuex_prop, item)
+      },
+*/      async get_data() {
         await this.request_pages(this.data_url)
       },
       generate_data_url() {
@@ -86,16 +94,18 @@
       },
       async request_pages(url) {
 
-        this.result = await get_plone_data(this, url)
+        var result = await get_plone_data(this, url)
 
-        if (this.result.items[0] !== undefined) {
-          this.item = this.result.items[0];
-        }
+        await console.log(result)
+        if ( result.items[0] !== undefined) {
+          var item = await result.items[0];
+          await this.$store.ep_set(this.vuex_ns, this.vuex_prop, item)
 
-        if (this.display_title){
-          write_aria_polite('Die Seite ' + this.item.title + ' wurde geladen.')
+          if (this.display_title){
+              write_aria_polite('Die Seite ' + await this.item.title + ' wurde geladen.')
+          }
+//          this.prefetched = true
         }
-        this.prefetched = true
       },
     },
   }

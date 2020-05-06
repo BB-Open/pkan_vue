@@ -1,18 +1,12 @@
 import { make } from 'vuex-pathify'
 
-function state () {
+export const state = () => {
   return {
     vocabularies: {}
   }
 }
 
-const mutations = {
+export const mutations = {
   // create SET_VALUE automatically
   ...make.mutations(state),
-}
-
-export default {
-  namespaced: true,
-  state,
-  mutations
 }

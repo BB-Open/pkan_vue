@@ -31,7 +31,7 @@
     data() {
       return {
         prefetched : false,
-        namespace: 'Publisher',
+        vuex_ns: 'Publisher',
         result: {},
         base_data_url: server_settings.PLONE_URL + '/@search?fullobjects=1',
         item: {
@@ -45,13 +45,13 @@
       }
     },
     serverPrefetch() {
-      this.$log.debug(this.namespace + ' mounted');
+      this.$log.debug(this.vuex_ns + ' mounted');
       this.generate_data_url();
       return this.get_data();
     },
     mounted() {
       // Force the initialization
-      this.$log.debug(this.namespace + ' mounted');
+      this.$log.debug(this.vuex_ns + ' mounted');
       if (this.prefetched === false) {
         this.generate_data_url();
         this.get_data()

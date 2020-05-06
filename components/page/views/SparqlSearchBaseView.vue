@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="namespace" :search_initial="this.search_initial()"
+  <base-view :vuex_ns="vuex_ns" :breadcrumb="vuex_ns" :search_initial="this.search_initial()"
              :display_info_column="this.display_info_column">
     <template slot="content">
       <div class="detail_search">
@@ -12,11 +12,11 @@
 
 
           <div class="results hidesmallscreen">
-            <search_results namespace="Search" :view_url="view_url" v-if="$mq === 'screen'"
-                            :request_type="request_type"></search_results>
+            <search_results vuex_ns="search_sparql" :view_url="view_url" v-if="$mq === 'screen'"
+                            request_type=REQUEST_SEARCH_RESULTS_SPARQL></search_results>
           </div>
           <div class="results hidebigscreen">
-            <search_results_mobile namespace="Search" :view_url="view_url" :request_type="request_type"
+            <search_results_mobile vuex_ns="search_sparql" :view_url="view_url" request_type=REQUEST_SEARCH_RESULTS_SPARQL
                                    v-if="$mq === 'mobile'"></search_results_mobile>
           </div>
         </div>
@@ -46,7 +46,7 @@
       SearchSelector,
     },
     name: 'SparqlSearchBaseView',
-    props: ['namespace', 'display_info_column'],
+    props: ['vuex_ns', 'display_info_column'],
     data() {
       return {
         category_options: {
@@ -67,12 +67,11 @@
         },
         search_selector_fields: ['category', 'file_format', 'publisher', 'license'],
         view_url: SEARCH_URL,
-        request_type: REQUEST_SEARCH_RESULTS_SPARQL,
       }
     },
     mounted() {
       // Force the initialization
-      this.$log.debug(this.namespace + ' mounted');
+      this.$log.debug(this.vuex_ns + ' mounted');
       write_aria_polite('Die Seite SPARQL Suche wurde geladen.');
     },
     methods: {
@@ -80,18 +79,18 @@
         return this.$store.state['Search']['textline_keywords'];
       },
       remove_all() {
-        this.$store.ep_commit('Search', 'textline_keywords', '');
-        this.$store.ep_commit('Search', 'sparql', 'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
+        this.$store.ep_set('Search', 'textline_keywords', '');
+        this.$store.ep_set('Search', 'sparql', 'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
           'SELECT DISTINCT ?id WHERE {\n' +
           '  ?id a dcat:Dataset .\n' +
           '}');
         this.search_selector_fields.forEach(function (field) {
-          this.$store.ep_commit('Search', field, {
+          this.$store.ep_set('Search', field, {
             'value_pos': [],
             'value_neg': []
           },);
         }, this);
-        this.$store.ep_commit('Search', 'last_change', [null, null]);
+        this.$store.ep_set('Search', 'last_change', [null, null]);
 
         this.update_page()
       },

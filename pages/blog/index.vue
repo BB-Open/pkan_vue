@@ -1,7 +1,7 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="namespace" :display_info_column="true">
+  <base-view :vuex_ns="vuex_ns" :breadcrumb="vuex_ns" :display_info_column="true">
     <template slot="content">
-      <h1>{{ namespace }}</h1>
+      <h1>{{ vuex_ns }}</h1>
       <plonelisting_url :view_url="view_url" :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order"
                         :tag="tag" :display_date="true"></plonelisting_url>
 
@@ -29,7 +29,7 @@
     },
     data() {
       return {
-        namespace: 'Blog',
+        vuex_ns: 'Blog',
         view_url: BLOG_URL,
         portal_type: PLONE_PT_DOCUMENT,
         sort_on: PLONE_INDEX_CREATED,
@@ -39,9 +39,9 @@
     },
     mounted() {
       // Force the initialization
-      this.$log.debug(this.namespace + ' mounted');
+      this.$log.debug(this.vuex_ns + ' mounted');
 
-      write_aria_polite('Die Seite ' + this.namespace + ' wurde geladen.');
+      write_aria_polite('Die Seite ' + this.vuex_ns + ' wurde geladen.');
 
 
     },

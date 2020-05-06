@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="namespace" :search_initial="this.search_initial()"
+  <base-view :vuex_ns="vuex_ns" :breadcrumb="vuex_ns"
              :display_info_column="this.display_info_column">
     <template slot="content">
       <div class="detail_search">
@@ -11,15 +11,15 @@
           </div>
           <div class="controls_overview">
             <div><h2>Suchergebnisse:</h2></div>
-            <ordering></ordering>
+            <ordering vuex_ns="search_detail" vuex_prop="ordering"></ordering>
           </div>
 
           <div class="results hidesmallscreen">
-            <search_results namespace="Search" :view_url="view_url" v-if="$mq === 'screen'"
-                            :request_type="request_type"></search_results>
+            <search_results vuex_ns="search_detail" request_type=REQUEST_SEARCH_RESULTS
+                            :view_url="view_url" v-if="$mq === 'screen'"></search_results>
           </div>
           <div class="results hidebigscreen">
-            <search_results_mobile namespace="Search" :view_url="view_url" :request_type="request_type"
+            <search_results_mobile vuex_ns="search_detail" :view_url="view_url" request_type=REQUEST_SEARCH_RESULTS
                                    v-if="$mq === 'mobile'"></search_results_mobile>
           </div>
         </div>
@@ -31,15 +31,15 @@
             class="selectorbutton"
             type="button">Alle zurücksetzen
           </button>
-          <search-selector title="Dateiformat" store_namespace="Search" property="file_format"
+          <search-selector title="Dateiformat" vuex_ns="search_detail" vuex_prop="file_format"
                            :options="file_format_options"></search-selector>
-          <search-selector title="Datenbereitsteller" store_namespace="Search" property="publisher"
+          <search-selector title="Datenbereitsteller" vuex_ns="search_detail" vuex_prop="publisher"
                            :options="publisher_options"></search-selector>
-          <search-selector title="Kategorie" store_namespace="Search" property="category"
+          <search-selector title="Kategorie" vuex_ns="search_detail" vuex_prop="category"
                            :options="category_options"></search-selector>
-          <search-selector title="Lizenz" store_namespace="Search" property="license"
+          <search-selector title="Lizenz" vuex_ns="search_detail" vuex_prop="license"
                            :options="license_options"></search-selector>
-          <date-picker label="Letzte Änderung:" namespace="Search" property="last_change"></date-picker>
+          <date-picker label="Letzte Änderung:" vuex_ns="date_picker" vuex_prop="last_change"></date-picker>
         </section>
       </div>
     </template>
@@ -69,7 +69,7 @@
       SearchSelector,
     },
     name: 'SearchBaseView',
-    props: ['namespace', 'display_info_column'],
+    props: ['vuex_ns', 'display_info_column'],
     data() {
       return {
         category_options: {
@@ -89,28 +89,24 @@
           number_displayed: 3
         },
         search_selector_fields: ['category', 'file_format', 'publisher', 'license'],
-        view_url: SEARCH_URL,
-        request_type: REQUEST_SEARCH_RESULTS,
+        view_url: SEARCH_URL
       }
     },
     mounted() {
       // Force the initialization
-      this.$log.debug(this.namespace + ' mounted');
+      this.$log.debug(this.vuex_ns + ' mounted');
       write_aria_polite('Die Seite Suche wurde geladen.');
     },
     methods: {
-      search_initial() {
-        return this.$store.get('search/textline_keywords');
-      },
       remove_all() {
-        this.$store.set('search/textline_keywords', '');
+        this.$store.ep_set(this.vuex_ns,'textline_keywords', '');
         this.search_selector_fields.forEach(function (field) {
-          this.$store.set('search/' + field, {
+          this.$store.ep_set(this.vuex_ns,field, {
             'value_pos': [],
             'value_neg': []
           },);
         }, this);
-        this.$store.set('search/last_change', [null, null]);
+        this.$store.ep_set(this.vuex_ns,'last_change', [null, null]);
 
         this.update_page()
       },
@@ -123,14 +119,13 @@
       // clear for next search when we leave search namespace
       if (!this.$router.currentRoute.fullPath.includes('search')) {
         this.remove_all();
-        this.$store.set(
-          'search/sparql',
+        this.$store.ep_set(
+          this.vuex_ns,'sparql',
           'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
           'SELECT DISTINCT ?id WHERE {\n' +
           '  ?id a dcat:Dataset .\n' +
           '}');
       }
-
     },
 
   }

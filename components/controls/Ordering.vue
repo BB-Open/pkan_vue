@@ -3,7 +3,7 @@
     <form @submit.prevent="">
       <label aria-label="Wählen Sie die Sortierreihenfolge der Suchergebnisse.">Sortieren nach:<br/>
         <b-form-select v-model="selected" :options="vocab_ordering" class="mb-3"
-                       :key="namespace + property + 'select'"/>
+                       :key="vuex_ns + vuex_prop + 'select'"/>
       </label>
     </form>
   </div>
@@ -17,29 +17,28 @@
 
   export default {
     name: "Ordering",
+    props : ['vuex_ns', 'vuex_prop'],
     components: {
       BFormSelect,
 
     },
     data() {
       return {
-        namespace: 'Search',
         vocab_ordering: [],
-        property: 'order_by'
         // Ordering Select
       }
     },
     computed: {
       selected: {
         set(selected) {
-          this.$store.set(this.namespace + "@" + this.property, selected);
+          this.$store.ep_set(this.vuex_ns, this.vuex_prop, selected);
           this.$EventBus.$emit(EV.CHANGED_SEARCH_TERMS, selected);
         },
         get() {
-          return this.$store.get(this.namespace + "@" + this.property);
+          return this.$store.ep_get(this.vuex_ns , this.vuex_prop);
         },
         vocab_ordering: function () {
-          return this.$store.get('vocabularies/vocabularies@' + this.namespace )
+          return this.$store.ep_get('vocabularies/vocabularies', this.vuex_ns )
         }
       }
     },
@@ -59,7 +58,7 @@
         // read result from request
 //        this.vocab_ordering = [];
         data.vocab.forEach(function (field) {
-          this.$store.set('vocabularies/vocabularies@' + this.namespace, {
+          this.$store.ep_set('vocabularies/vocabularies', this.vuex_ns, {
             value: field.id,
             text: field.text
           })

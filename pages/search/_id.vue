@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="breadcrumb" :ignore_last_title="true" :display_info_column="true">
+  <base-view :vuex_ns="vuex_ns" :breadcrumb="breadcrumb" :ignore_last_title="true" :display_info_column="true">
     <template slot="content">
       <entitydetail :id="get_data()" :view_url="view_url" :alert_title="alert_title"></entitydetail>
     </template>
@@ -19,14 +19,14 @@
     },
     data() {
       return {
-        namespace: 'Entity',
+        vuex_ns: 'Entity',
         breadcrumb: 'DetailSearch',
         view_url: SEARCH_URL,
         alert_title: true,
       }
     },
     mounted() {
-      this.$log.debug(this.namespace + ' mounted');
+      this.$log.debug(this.vuex_ns + ' mounted');
     },
     methods: {
       get_data() {

@@ -99,14 +99,12 @@ export async function get_plone_data(that, url) {
   that.$axios.setHeader('Accept', 'application/json', ['get']);
   that.$axios.setHeader('Access-Control-Allow-Origin', '*', ['get']);
   try {
-    var result = await that.$axios.$get(url);
+    return await that.$axios.$get(url);
   } catch (e) {
     console.log(e.message);
     console.log(e.stack);
     set_error_message(that, PLONE_UNREACHABLE_MESSAGE);
-    return
   }
-  return result
 }
 
 
@@ -116,12 +114,10 @@ export async function get_flask_data(that, channel, params) {
   that.$axios.setHeader('Access-Control-Allow-Origin', '*', ['get']);
   try {
     var url = server_settings.FLASK_URL + '/' + channel
-    var result = await that.$axios.$post(url, params);
+    return await that.$axios.$post(url, params);
   } catch (e) {
     console.log(e.message);
     console.log(e.stack);
     set_error_message(that, FLASK_UNREACHABLE_MESSAGE);
-    return
   }
-  return result
 }

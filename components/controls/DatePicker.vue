@@ -5,12 +5,12 @@
         <label class="biglabel">{{ this.label }}</label><br/>
         <label for="start_input" :aria-label="'Startdatum wählen ' + format">Von: </label>
         <datepicker v-model="value_start" :placeholder="'Datum wählen ' + format"
-                    :key="namespace + property + 'datepicker_start'"
+                    :key="vuex_ns + vuex_ns + 'datepicker_start'"
                     :monday-first="true" :language="lang" input-class="date_input" calender-class="calender_input"
                     :format="format" :typeable="true" id="start_input"></datepicker>
         <label for="end_input" :aria-label="'Enddatum wählen ' + format">Bis:</label>
         <datepicker v-model="value_end" :placeholder="'Datum wählen ' + format"
-                    :key="namespace + property + 'datepicker_end'"
+                    :key="vuex_ns + vuex_ns + 'datepicker_end'"
                     :monday-first="true" :language="lang" input-class="date_input" calender-class="calender_input"
                     :format="format" :typeable="true" id="end_input"></datepicker>
         <button type="button" class="button" @click="reset()" aria-label="Zurück setzen für die Datumsfelder">Zurück
@@ -38,7 +38,7 @@
     components: {
       Datepicker
     },
-    props: ['label', 'namespace', 'property'],
+    props: ['label', 'vuex_ns', 'vuex_prop'],
     data() {
       return {
         format: DATE_DISPLAY_FORMAT,
@@ -66,13 +66,13 @@
 
     methods: {
       picked_date() {
-        return this.$store.get(this.namespace + "/" + this.property)
+        return this.$store.ep_get(this.vuex_ns + "/" + this.vuex_ns, this.vuex_prop)
       },
       set_picked_date(date_start, date_end) {
 
-        this.$store.set(this.namespace + "/" + this.property, [date_start, date_end]);
+        this.$store.ep_set(this.vuex_ns + "/" + this.vuex_ns, this.vuex_prop, [date_start, date_end]);
 
-        this.$EventBus.$emit(EV.CHANGED_SEARCH_TERMS, [date_start, date_end]);
+        this.$EventBus.$emit(EV.CHANGED_SEARCH_TERMS);
       },
       reset() {
         this.set_picked_date(null, null)

@@ -39,53 +39,32 @@
 
   export default {
     name: 'SearchFieldMulitline',
-    props: ['property', 'initial_value', 'place_holder', 'store_namespace', 'next_view', 'rows', 'button_label', 'label', 'help'],
+    props: ['vuex_prop', 'place_holder', 'vuex_ns', 'next_view', 'rows', 'button_label', 'label', 'help'],
     components: {},
-    data() {
-      return {
-        search_string: '',
-      }
+    computed: {
+      // ToDo: find way to parametrize this with vuex_ns and vuex_prop
+      search_string : sync('search_sparql/sparql')
     },
     mounted() {
-      // Force the initialization
-
-      if (this.initial_value === '' || this.initial_value === undefined) {
-        this.search_string = ''
-      } else {
-        this.search_string = this.initial_value
-      }
       this.init_events();
-    }
-    ,
+    },
     beforeDestroy: function () {
       this.$EventBus.$off(EV.RESET_SEARCH_TERMS);
     },
     methods: {
       filter_criteria() {
-        if (this.search_string === '' || this.search_string === undefined) {
-          this.search_string = '';
-          this.save();
+        if (this.search_string === '') {
         } else {
-          this.save();
           if (this.$route.path !== this.next_view) {
             this.$router.push(this.next_view);
           }
         }
       },
-      load_value_from_state() {
-        this.search_string = this.$store.state[this.store_namespace][this.property]
-      },
       init_events() {
         this.$EventBus.$on(EV.RESET_SEARCH_TERMS, () => {
           this.$log.debug('reset field from state');
-          this.load_value_from_state()
         });
       },
-      save() {
-        this.$store.ep_commit(this.store_namespace, this.property, this.search_string);
-        this.$EventBus.$emit(EV.CHANGED_SEARCH_TERMS, {});
-      }
-
     },
   }
 </script>

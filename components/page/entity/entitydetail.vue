@@ -78,7 +78,7 @@
       async handle_result_title(data) {
         this.title = data.title;
         this.description = data.description;
-        this.$store.ep_commit('breadcrumb', 'last_title', this.title);
+        this.$store.ep_set('breadcrumb', 'last_title', this.title);
         this.$EventBus.$emit(EV.PAGE_CHANGED, {});
         if (this.alert_title) {
           write_aria_polite('Die Seite ' + this.title + ' wurde geladen.')

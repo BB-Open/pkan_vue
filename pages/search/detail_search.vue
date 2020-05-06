@@ -1,9 +1,9 @@
 <template>
-  <search-base-view namespace="DetailSearch" :display_info_column="false">
+  <search-base-view vuex_ns="search_detail" :display_info_column="false">
     <template slot="additional_widget">
       <form @submit.prevent="">
-        <search-field-single-line property="textline_keywords" store_namespace="Search"
-                                  :initial_value="this.search_initial()" :place_holder="placeholder"
+        <search-field-single-line vuex_prop="textline_keywords" vuex_ns="search_keyword"
+                                  :place_holder="placeholder"
                                   :next_view="next_view" rows="1" button_label="Suchen"
                                   :hidden_label="hidden_help"></search-field-single-line>
       </form>
@@ -30,12 +30,6 @@
         hidden_help: 'In den Datensätzen '
       }
     },
-    methods: {
-      search_initial() {
-        return this.$store.state['Search']['keywords'];
-      },
-    },
-
   }
 </script>
 

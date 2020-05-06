@@ -51,13 +51,13 @@
 
   export default {
     name: 'SearchSelector',
-    props: ['title', 'options', 'property', 'store_namespace'],
+    props: ['title', 'options', 'vuex_prop', 'vuex_ns'],
     components: {},
     data() {
       return {
         values: [],
         vocab: {},
-        data_store: {},
+//        data_store: {},
         number_displayed: 8,
         values_stored:
           {
@@ -68,6 +68,11 @@
         display_values: [],
         additional_values: [],
         search_string: '',
+      }
+    },
+    computed : {
+      data_store : function () {
+        return this.$store.ep_get(this.vuex_ns, this.vuex_prop)
       }
     },
     mounted() {
@@ -179,7 +184,7 @@
         write_aria_polite(this.title + ' wurde zurück gesetzt.')
       },
       save() {
-        this.$store.ep_commit(this.store_namespace, this.property, this.values_stored);
+        this.$store.ep_set(this.vuex_ns, this.vuex_prop, this.values_stored);
         this.$EventBus.$emit(EV.CHANGED_SEARCH_TERMS, {});
       },
 
@@ -189,7 +194,7 @@
         this.set_values_for_widget()
       },
       init_values() {
-        this.values_stored = this.$store.state[this.store_namespace][this.property]
+        this.values_stored = this.$store.state[this.vuex_ns][this.vuex_prop]
       },
       init_events() {
         this.$EventBus.$on(EV.RESET_SEARCH_TERMS, () => {

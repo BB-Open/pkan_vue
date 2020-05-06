@@ -1,5 +1,5 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="breadcrumb" :ignore_last_title="true" :display_info_column="true">
+  <base-view :vuex_ns="vuex_ns" :breadcrumb="breadcrumb" :ignore_last_title="true" :display_info_column="true">
     <template slot="content">
       <publisher :uid="get_data()"></publisher>
     </template>
@@ -18,7 +18,7 @@
     },
     data() {
       return {
-        namespace: 'Publisher Detail',
+        vuex_ns: 'Publisher Detail',
         breadcrumb: 'Publisher'
       }
     },

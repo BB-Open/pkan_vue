@@ -8,7 +8,7 @@ export const state = () => ({
 
 });
 
-const mutations = {
+export const mutations = {
   // create SET_VALUE automatically
   ...make.mutations(state),
 }
@@ -22,8 +22,3 @@ export const getters = {
   }
 };
 
-export default {
-  namespaced: true,
-  state,
-  mutations
-}

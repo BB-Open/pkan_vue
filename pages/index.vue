@@ -1,7 +1,7 @@
 <template>
-  <base-view :namespace="namespace" :breadcrumb="breadcrumb" :display_search="true">
+  <base-view :vuex_ns="vuex_ns" :breadcrumb="breadcrumb" :display_search="true">
     <template slot="content">
-      <plonepage_search :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag"
+      <plonepage_search vuex_ns="plone/plone" vuex_prop="tag"  :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag"
                         content_class="columnsgrey"></plonepage_search>
       <h2>Unsere Kategorien:</h2>
       <vocab-box vocab_name="category" :clean_value="true" search_field="category"></vocab-box>
@@ -34,7 +34,7 @@
     data() {
       return {
         text: 'Text',
-        namespace: 'Start',
+        vuex_ns: 'Start',
         breadcrumb: null,
         view_url: BLOG_URL,
         sort_on: PLONE_INDEX_CREATED,
@@ -46,7 +46,7 @@
     },
     mounted() {
       // Force the initialization
-      this.$log.debug(this.namespace + ' mounted');
+      this.$log.debug(this.vuex_ns + ' mounted');
     },
 
   }
