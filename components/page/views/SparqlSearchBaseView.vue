@@ -1,5 +1,5 @@
 <template>
-  <base-view :vuex_ns="vuex_ns" :breadcrumb="vuex_ns" :search_initial="this.search_initial()"
+  <base-view :vuex_ns="vuex_ns" :breadcrumb="vuex_ns"
              :display_info_column="this.display_info_column">
     <template slot="content">
       <div class="detail_search">
@@ -12,11 +12,11 @@
 
 
           <div class="results hidesmallscreen">
-            <search_results vuex_ns="search_sparql" :view_url="view_url" v-if="$mq === 'screen'"
+            <search_results :vuex_ns="sparql_ns" :view_url="view_url" v-if="$mq === 'screen'"
                             request_type=REQUEST_SEARCH_RESULTS_SPARQL></search_results>
           </div>
           <div class="results hidebigscreen">
-            <search_results_mobile vuex_ns="search_sparql" :view_url="view_url" request_type=REQUEST_SEARCH_RESULTS_SPARQL
+            <search_results_mobile :vuex_ns="sparql_ns" :view_url="view_url" request_type=REQUEST_SEARCH_RESULTS_SPARQL
                                    v-if="$mq === 'mobile'"></search_results_mobile>
           </div>
         </div>
@@ -33,7 +33,6 @@
   import {EV} from "../../configs/events";
   import {SEARCH_URL} from "../../configs/routing";
   import search_results_mobile from "../entity/search_results_mobile";
-//  import DatePicker from "../../controls/DatePicker";
   import {write_aria_polite} from "../../mixins/utils";
   import {VUEX_NAMESPACE as SPARQL_NS} from '../../../store/search_sparql'
   import {VUEX_NAMESPACE as KEYWORD_NS} from '../../../store/search_keyword'
@@ -42,7 +41,6 @@
 
   export default {
     components: {
-//      DatePicker,
       search_results,
       search_results_mobile,
       BaseView,
@@ -77,26 +75,23 @@
     },
     mounted() {
       // Force the initialization
-      this.$log.debug(this.vuex_ns + ' mounted');
+      this.$log.debug(this.name + ' is mounted');
       write_aria_polite('Die Seite SPARQL Suche wurde geladen.');
     },
     methods: {
-      search_initial() {
-        return this.$store.state['Search']['textline_keywords'];
-      },
-      remove_all() {
-        this.$store.ep_set('Search', 'textline_keywords', '');
-        this.$store.ep_set('Search', 'sparql', 'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
+/*      remove_all() {
+        this.$store.ep_set(this.keyword_ns, 'textline_keywords', '');
+        this.$store.ep_set(this.sparql_ns, 'sparql', 'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
           'SELECT DISTINCT ?id WHERE {\n' +
           '  ?id a dcat:Dataset .\n' +
           '}');
         this.search_selector_fields.forEach(function (field) {
-          this.$store.ep_set('Search', field, {
+          this.$store.ep_set(this.sparql_ns, field, {
             'value_pos': [],
             'value_neg': []
           },);
         }, this);
-        this.$store.ep_set('Search', 'last_change', [null, null]);
+        this.$store.ep_set(this.date_ns, 'last_change', [null, null]);
 
         this.update_page()
       },
@@ -110,7 +105,7 @@
       if (!this.$router.currentRoute.fullPath.includes('search')) {
         this.remove_all()
       }
-
+*/
     },
 
   }

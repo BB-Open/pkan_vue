@@ -27,7 +27,6 @@
   import {get_flask_data} from '../mixins/utils';
 
 
-
   export default {
     name: "VocabBox",
     data() {
@@ -39,7 +38,14 @@
     },
     computed : {
         vocab : function () {
+          console.log(this.vuex_ns)
+          console.log(this.vocab_name)
           let result = this.$store.ep_get(this.vuex_ns, this.vocab_name)
+          if (result === undefined) {
+            result = []
+          }
+          console.log(result)
+
           return result
         }
     },

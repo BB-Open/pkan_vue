@@ -35,7 +35,6 @@
     },
     computed: {
       item : function () {
-//          console.log('plonepage_search')
           let result = this.$store.ep_get(this.vuex_ns, this.vuex_prop)
           if (result === undefined) {
             result = {
@@ -46,10 +45,7 @@
               }
             }
         }
-/*        console.log(this.vuex_ns)
-        console.log(this.vuex_prop)
-        console.log(result)
-*/        return result
+        return result
         }
     },
     serverPrefetch() {

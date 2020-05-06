@@ -36,14 +36,15 @@
 
 <script>
   import {EV} from "../configs/events";
+  import { sync } from "vuex-pathify";
 
   export default {
     name: 'SearchFieldMulitline',
-    props: ['vuex_prop', 'place_holder', 'vuex_ns', 'next_view', 'rows', 'button_label', 'label', 'help'],
+    props: ['vuex_ns', 'vuex_prop', 'place_holder', 'vuex_ns', 'next_view', 'rows', 'button_label', 'label', 'help'],
     components: {},
     computed: {
       // ToDo: find way to parametrize this with vuex_ns and vuex_prop
-      search_string : sync('search_sparql/sparql')
+      search_string : sync(':vuex_ns/:vuex_prop')
     },
     mounted() {
       this.init_events();
