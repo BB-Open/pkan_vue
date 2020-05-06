@@ -14,17 +14,15 @@
           </form>
           <slot name="content"></slot>
         </div>
-
-
         <aside class="info_column_right info_column" v-if="display_info_column">
-          <plonepage_search vuex_ns='plone/plone' :vuex_prop='pt' :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="side_tag"
+          <plonepage_search :vuex_ns='plone_ns' :vuex_prop='side_tag' :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="side_tag"
                             :display_title="false"></plonepage_search>
         </aside>
       </main>
       <main class="content_container" v-if="!display_info_column">
         <pkan-status></pkan-status>
         <form v-if="this.display_search" @submit.prevent="">
-          <search-field-single-line vuex_prop="textline_keywords" store_vuex_ns="search_keyword"
+          <search-field-single-line vuex_prop="textline_keywords" :vuex_ns="search_ns"
                                     :place_holder="placeholder" :next_view="next_view"
                                     rows="1" button_label="Suchen"
                                     :hidden_label="placeholder"></search-field-single-line>
@@ -53,6 +51,9 @@
   } from "../../configs/plone_keywords";
   import PkanStatus from "../subelements/PkanStatus";
   import {set_error_message} from "../../mixins/utils";
+  import {VUEX_NAMESPACE as PLONE_NS} from '../../../store/plone'
+  import {VUEX_NAMESPACE as SEARCH_NS} from '../../../store/search_keyword'
+  import {VUEX_NAMESPACE as BC_NS} from '../../../store/breadcrumb'
 
   export default {
     name: 'BaseView',
@@ -67,6 +68,9 @@
     data() {
       return {
         placeholder: 'In den Datensätzen suchen',
+        plone_ns: PLONE_NS,
+        search_ns: SEARCH_NS,
+        breadcrumb_ns: BC_NS,
         next_view: DETAIL_SEARCH_URL,
         sort_on: PLONE_INDEX_CREATED,
         sort_order: PLONE_REVERSE_ORDERING,
@@ -79,10 +83,10 @@
     mounted() {
       // Force the initialization
       set_error_message(this, '');
-      this.$log.debug(this.vuex_ns + ' mounted');
-      this.$store.set('breadcrumb/currentView', this.breadcrumb);
+      this.$log.debug(this.name + ' mounted');
+      this.$store.ep_set(this.breadcrumb_ns, 'currentView', this.breadcrumb);
       if (this.ignore_last_title === undefined) {
-        this.$store.set('breadcrumb/last_title', null)
+        this.$store.ep_set(this.breadcrumb_ns,'last_title', null)
       }
       this.$EventBus.$emit(EV.PAGE_CHANGED, {});
     },

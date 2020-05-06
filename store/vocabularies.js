@@ -1,5 +1,7 @@
 import { make } from 'vuex-pathify'
 
+export const VUEX_NAMESPACE = "vocabularies/vocabularies"
+
 export const state = () => {
   return {
     vocabularies: {}

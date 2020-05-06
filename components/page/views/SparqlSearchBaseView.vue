@@ -34,8 +34,11 @@
   import {SEARCH_URL} from "../../configs/routing";
   import search_results_mobile from "../entity/search_results_mobile";
 //  import DatePicker from "../../controls/DatePicker";
-  import {REQUEST_SEARCH_RESULTS_SPARQL} from "../../configs/socket";
   import {write_aria_polite} from "../../mixins/utils";
+  import {VUEX_NAMESPACE as SPARQL_NS} from '../../../store/search_sparql'
+  import {VUEX_NAMESPACE as KEYWORD_NS} from '../../../store/search_keyword'
+  import {VUEX_NAMESPACE as DATE_NS} from '../../../store/date_picker'
+
 
   export default {
     components: {
@@ -49,6 +52,9 @@
     props: ['vuex_ns', 'display_info_column'],
     data() {
       return {
+        sparql_ns: SPARQL_NS,
+        keyword_ns: KEYWORD_NS,
+        date_ns: DATE_NS,
         category_options: {
           vocab_name: 'category',
           number_displayed: 3

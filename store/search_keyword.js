@@ -1,5 +1,7 @@
 import { make } from 'vuex-pathify'
 
+export const VUEX_NAMESPACE = "search_keywords"
+
 export const state = () => ({
 // used in all views
   textline_keywords: '',

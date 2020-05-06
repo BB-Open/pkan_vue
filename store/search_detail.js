@@ -1,5 +1,7 @@
 import { make } from 'vuex-pathify'
 
+export const VUEX_NAMESPACE = "search_detail"
+
 export const state = () => ({
 // used in all views
   category: {

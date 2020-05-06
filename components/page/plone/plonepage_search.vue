@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <h1 v-if="this.display_title">{{ item.title }}</h1>
     <div class="description" v-if="item.description">{{ item.description}}</div>
     <div v-html="removeSelfClosingTags(item.text.data)" v-if="item.text" :class="content_class"></div>
@@ -33,10 +33,24 @@
         base_data_url: server_settings.PLONE_URL + '/@search?fullobjects=1',
       }
     },
-    computed:{
+    computed: {
       item : function () {
-        return this.$store.ep_get(this.vuex_ns, this.vuex_prop)
-      }
+//          console.log('plonepage_search')
+          let result = this.$store.ep_get(this.vuex_ns, this.vuex_prop)
+          if (result === undefined) {
+            result = {
+              title: 'Titel wird geladen.',
+              description: 'Beschreibung wird geladen.',
+              text: {
+                data: 'Text wird geladen.'
+              }
+            }
+        }
+/*        console.log(this.vuex_ns)
+        console.log(this.vuex_prop)
+        console.log(result)
+*/        return result
+        }
     },
     serverPrefetch() {
       // Force the initialization
@@ -47,23 +61,13 @@
     mounted() {
       // Force the initialization
       this.$log.debug(this.name + ' mounted');
-//      if (this.prefetched === false) {
+      if (this.prefetched === false) {
         this.generate_data_url();
         this.get_data();
-//      }
+      }
     },
     methods: {
-/*      init (){
-        item = {
-          title: 'Titel wird geladen.',
-          description: 'Beschreibung wird geladen.',
-          text: {
-            data: 'Text wird geladen.'
-          }
-        }
-        this.$store.ep_set(this.vuex_ns, this.vuex_prop, item)
-      },
-*/      async get_data() {
+     async get_data() {
         await this.request_pages(this.data_url)
       },
       generate_data_url() {
@@ -96,7 +100,6 @@
 
         var result = await get_plone_data(this, url)
 
-        await console.log(result)
         if ( result.items[0] !== undefined) {
           var item = await result.items[0];
           await this.$store.ep_set(this.vuex_ns, this.vuex_prop, item)
@@ -104,7 +107,7 @@
           if (this.display_title){
               write_aria_polite('Die Seite ' + await this.item.title + ' wurde geladen.')
           }
-//          this.prefetched = true
+          this.prefetched = true
         }
       },
     },

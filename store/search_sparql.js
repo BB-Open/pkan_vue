@@ -1,7 +1,9 @@
 import { make } from 'vuex-pathify'
 
+export const VUEX_NAMESPACE = "search_sparql"
+
 export const state = () => ({
-  sparql: 'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
+  sparql_query: 'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
     'SELECT DISTINCT ?id WHERE {\n' +
     '  ?id a dcat:Dataset .\n' +
     '}',

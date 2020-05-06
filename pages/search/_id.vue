@@ -26,7 +26,7 @@
       }
     },
     mounted() {
-      this.$log.debug(this.vuex_ns + ' mounted');
+      this.$log.debug(this.name + ' mounted');
     },
     methods: {
       get_data() {

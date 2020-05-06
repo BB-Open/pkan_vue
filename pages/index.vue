@@ -1,10 +1,10 @@
 <template>
-  <base-view :vuex_ns="vuex_ns" :breadcrumb="breadcrumb" :display_search="true">
+  <base-view :vuex_ns="name" :breadcrumb="breadcrumb" :display_search="true">
     <template slot="content">
-      <plonepage_search vuex_ns="plone/plone" vuex_prop="tag"  :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag"
+      <plonepage_search :vuex_ns="plone_ns" :vuex_prop="tag"  :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag"
                         content_class="columnsgrey"></plonepage_search>
       <h2>Unsere Kategorien:</h2>
-      <vocab-box vocab_name="category" :clean_value="true" search_field="category"></vocab-box>
+      <vocab-box :vuex_ns="cat_ns" vocab_name="category" :clean_value="true" search_field="category"></vocab-box>
     </template>
   </base-view>
 </template>
@@ -21,6 +21,8 @@
     PLONE_TAG_BLOG,
     PLONE_TAG_LANDING
   } from "../components/configs/plone_keywords";
+  import {VUEX_NAMESPACE as PLONE_NS} from '../store/plone'
+  import {VUEX_NAMESPACE as CAT_NS} from '../store/vocabularies'
   import VocabBox from "../components/controls/VocabBox";
 
   export default {
@@ -34,7 +36,9 @@
     data() {
       return {
         text: 'Text',
-        vuex_ns: 'Start',
+        name: this.name,
+        plone_ns: PLONE_NS,
+        cat_ns: CAT_NS,
         breadcrumb: null,
         view_url: BLOG_URL,
         sort_on: PLONE_INDEX_CREATED,
@@ -45,8 +49,7 @@
       }
     },
     mounted() {
-      // Force the initialization
-      this.$log.debug(this.vuex_ns + ' mounted');
+      this.$log.debug(this.name + ' mounted');
     },
 
   }

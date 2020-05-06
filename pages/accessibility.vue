@@ -1,7 +1,7 @@
 <template>
   <base-view :vuex_ns="vuex_ns" :breadcrumb="vuex_ns" :display_info_column="true">
     <template slot="content">
-      <plonepage_search vuex_ns='plone/plone' :vuex_prop='tag' :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order"
+      <plonepage_search :vuex_ns='plone_ns' :vuex_prop='tag' :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order"
                         :tag="tag"></plonepage_search>
     </template>
   </base-view>
@@ -16,6 +16,7 @@
     PLONE_REVERSE_ORDERING,
     PLONE_TAG_ACCESS
   } from "../components/configs/plone_keywords";
+  import {VUEX_NAMESPACE as PLONE_NS} from '../store/plone'
 
   export default {
     name: "Accessibility",
@@ -26,6 +27,7 @@
     data: function () {
       return {
         vuex_ns: 'Accessibility',
+        plone_ns: PLONE_NS,
         portal_type: PLONE_PT_DOCUMENT,
         sort_on: PLONE_INDEX_CREATED,
         sort_order: PLONE_REVERSE_ORDERING,
@@ -33,9 +35,7 @@
       }
     },
     mounted() {
-      // Force the initialization
-      this.$log.debug(this.vuex_ns + ' mounted');
-
+      this.$log.debug(this.name + ' mounted');
     },
   }
 </script>

@@ -33,18 +33,18 @@
     data() {
       return {
         prefetched: false,
-        vuex_ns: 'Vocab Boxes',
         url: DETAIL_SEARCH_URL,
         base_data_url: server_settings.PLONE_URL,
       }
     },
     computed : {
         vocab : function () {
-
-          return this.$store.ep_get('vocabularies/vocabularies', this.vocab_name)
+          let result = this.$store.ep_get(this.vuex_ns, this.vocab_name)
+          return result
         }
     },
     props: {
+      'vuex_ns': String,
       'vocab_name': String,
       'clean_value': Boolean,
       'search_field': String

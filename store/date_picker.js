@@ -1,5 +1,8 @@
 import { make } from 'vuex-pathify'
 
+
+export const VUEX_NAMESPACE = "data_picker/date_picker"
+
 export const state = () => ({
 // used in all views
   date_picker: {
