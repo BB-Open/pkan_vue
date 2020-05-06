@@ -23,7 +23,10 @@ export const state = () => ({
   order_by: null,
 
   batch_start: 0,
-  batch_end: 1
+  batch_end: 1,
+  results: [],
+  result_count: 0,
+  error: [],
 });
 
 export const mutations = {
@@ -32,7 +35,7 @@ export const mutations = {
 }
 
 export const getters = {
-  search: function (state) {
+  search_params: function (state) {
     return {
       file_format: state.file_format,
       category: state.category,

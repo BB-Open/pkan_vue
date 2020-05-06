@@ -13,10 +13,10 @@
 
           <div class="results hidesmallscreen">
             <search_results :vuex_ns="sparql_ns" :view_url="view_url" v-if="$mq === 'screen'"
-                            request_type=REQUEST_SEARCH_RESULTS_SPARQL></search_results>
+                            :request_type="request_type"></search_results>
           </div>
           <div class="results hidebigscreen">
-            <search_results_mobile :vuex_ns="sparql_ns" :view_url="view_url" request_type=REQUEST_SEARCH_RESULTS_SPARQL
+            <search_results_mobile :vuex_ns="sparql_ns" :view_url="view_url" :request_type="request_type"
                                    v-if="$mq === 'mobile'"></search_results_mobile>
           </div>
         </div>
@@ -34,10 +34,10 @@
   import {SEARCH_URL} from "../../configs/routing";
   import search_results_mobile from "../entity/search_results_mobile";
   import {write_aria_polite} from "../../mixins/utils";
-  import {VUEX_NAMESPACE as SPARQL_NS} from '../../../store/search_sparql'
-  import {VUEX_NAMESPACE as KEYWORD_NS} from '../../../store/search_keyword'
-  import {VUEX_NAMESPACE as DATE_NS} from '../../../store/date_picker'
-
+  import {VUEX_NAMESPACE as SPARQL_NS} from '../../../store/search_sparql';
+  import {VUEX_NAMESPACE as KEYWORD_NS} from '../../../store/search_keyword';
+  import {VUEX_NAMESPACE as DATE_NS} from '../../../store/date_picker';
+  import {REQUEST_SEARCH_RESULTS_SPARQL} from '../../configs/socket';
 
   export default {
     components: {
@@ -71,6 +71,7 @@
         },
         search_selector_fields: ['category', 'file_format', 'publisher', 'license'],
         view_url: SEARCH_URL,
+        request_type: REQUEST_SEARCH_RESULTS_SPARQL,
       }
     },
     mounted() {

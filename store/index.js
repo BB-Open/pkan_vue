@@ -8,9 +8,5 @@ export const  plugins = [
   add_ep_set
 ]
 
-console.log('STORE FILE LOADED!')
 export const state = () => ({
 })
-
-
-

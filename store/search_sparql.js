@@ -8,7 +8,10 @@ export const state = () => ({
     '  ?id a dcat:Dataset .\n' +
     '}',
   batch_start: 0,
-  batch_end: 1
+  batch_end: 1,
+  results: [],
+  result_count: 0,
+  error: '',
 });
 
 export const mutations = {
@@ -17,9 +20,9 @@ export const mutations = {
 }
 
 export const getters = {
-  search: function (state) {
+  search_params: function (state) {
     return {
-      sparql: state.sparql,
+      sparql: state.sparql_query,
       batch_start: state.batch_start,
       batch_end: state.batch_end,
     }
