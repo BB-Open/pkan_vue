@@ -7,7 +7,7 @@
         <pkan-status></pkan-status>
         <div class="main_content ">
           <form v-if="this.display_search" @submit.prevent="">
-            <search-field-single-line vuex_prop="textline_keywords" store_vuex_ns="search_keyword"
+            <search-field-single-line vuex_prop="textline_keywords" vuex_ns="search_detail"
                                        :place_holder="placeholder" :next_view="next_view"
                                       rows="1" button_label="Suchen"
                                       :hidden_label="placeholder"></search-field-single-line>
@@ -52,7 +52,7 @@
   import PkanStatus from "../subelements/PkanStatus";
   import {set_error_message} from "../../mixins/utils";
   import {VUEX_NAMESPACE as PLONE_NS} from '../../../store/plone'
-  import {VUEX_NAMESPACE as SEARCH_NS} from '../../../store/search_keyword'
+  import {VUEX_NAMESPACE as SEARCH_NS} from '../../../store/search_detail'
   import {VUEX_NAMESPACE as BC_NS} from '../../../store/breadcrumb'
 
   export default {

@@ -66,11 +66,11 @@
 
     methods: {
       picked_date() {
-        return this.$store.ep_get(this.vuex_ns + "/" + this.vuex_ns, this.vuex_prop)
+        return this.$store.ep_get(this.vuex_ns, this.vuex_prop)
       },
       set_picked_date(date_start, date_end) {
 
-        this.$store.ep_set(this.vuex_ns + "/" + this.vuex_ns, this.vuex_prop, [date_start, date_end]);
+        this.$store.ep_set(this.vuex_ns, this.vuex_prop, [date_start, date_end]);
 
         this.$EventBus.$emit(EV.CHANGED_SEARCH_TERMS);
       },

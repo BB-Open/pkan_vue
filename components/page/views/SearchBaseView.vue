@@ -11,15 +11,15 @@
           </div>
           <div class="controls_overview">
             <div><h2>Suchergebnisse:</h2></div>
-            <ordering vuex_ns="search_detail" vuex_prop="ordering"></ordering>
+            <ordering vuex_ns="search_detail" vuex_prop="order_by"></ordering>
           </div>
 
           <div class="results hidesmallscreen">
-            <search_results vuex_ns="search_detail" request_type=REQUEST_SEARCH_RESULTS
+            <search_results vuex_ns="search_detail" :request_type="request_type"
                             :view_url="view_url" v-if="$mq === 'screen'"></search_results>
           </div>
           <div class="results hidebigscreen">
-            <search_results_mobile vuex_ns="search_detail" :view_url="view_url" request_type=REQUEST_SEARCH_RESULTS
+            <search_results_mobile vuex_ns="search_detail" :view_url="view_url" :request_type="request_type"
                                    v-if="$mq === 'mobile'"></search_results_mobile>
           </div>
         </div>
@@ -39,7 +39,7 @@
                            :options="category_options"></search-selector>
           <search-selector title="Lizenz" vuex_ns="search_detail" vuex_prop="license"
                            :options="license_options"></search-selector>
-          <date-picker label="Letzte Änderung:" vuex_ns="date_picker" vuex_prop="last_change"></date-picker>
+          <date-picker label="Letzte Änderung:" :vuex_ns="search_ns" vuex_prop="last_change"></date-picker>
         </section>
       </div>
     </template>
@@ -58,6 +58,8 @@
   import DatePicker from "../../controls/DatePicker";
   import {REQUEST_SEARCH_RESULTS} from "../../configs/socket";
   import {write_aria_polite} from "../../mixins/utils";
+  import {VUEX_NAMESPACE as SEARCH_DETAIL_NS} from '../../../store/search_detail';
+
 
   export default {
     components: {
@@ -89,7 +91,9 @@
           number_displayed: 3
         },
         search_selector_fields: ['category', 'file_format', 'publisher', 'license'],
-        view_url: SEARCH_URL
+        view_url: SEARCH_URL,
+        request_type: REQUEST_SEARCH_RESULTS,
+        search_ns: SEARCH_DETAIL_NS,
       }
     },
     mounted() {

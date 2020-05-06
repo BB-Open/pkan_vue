@@ -20,8 +20,9 @@ export const state = () => ({
     'value_pos': [],
     'value_neg': []
   },
+  textline_keywords: '',
   order_by: null,
-
+  last_change: [null, null],
   batch_start: 0,
   batch_end: 1,
   results: [],
@@ -44,7 +45,8 @@ export const getters = {
       order_by: state.order_by,
       batch_start: state.batch_start,
       batch_end: state.batch_end,
-      last_change: state.last_change
+      last_change: state.last_change,
+      textline_keywords:state.textline_keywords,
     }
   },
 };

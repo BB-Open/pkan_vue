@@ -2,7 +2,7 @@
   <search-base-view vuex_ns="search_detail" :display_info_column="false">
     <template slot="additional_widget">
       <form @submit.prevent="">
-        <search-field-single-line vuex_ns="search_keyword"
+        <search-field-single-line vuex_ns="search_detail"
                                   vuex_prop="textline_keywords"
                                   :place_holder="placeholder"
                                   :next_view="next_view" rows="1" button_label="Suchen"

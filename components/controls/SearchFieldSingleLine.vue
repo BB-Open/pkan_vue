@@ -49,7 +49,7 @@
       With the colon-syntax :vuex_prop pathify will generate a reference to
       this.vuex_prop. But the name of the store to use must be hard coded as string.
       */
-      search_string : sync('search_keyword/:vuex_prop')
+      search_string : sync('search_detail/:vuex_prop')
     },
     beforeDestroy: function () {
       this.$EventBus.$off(EV.RESET_SEARCH_TERMS);
