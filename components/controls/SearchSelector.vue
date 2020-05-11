@@ -121,7 +121,7 @@
         } else if (old_state === INCLUDE ){
           new_state = EXCLUDE
         } else {
-          new_state = new_state + 1
+          new_state = old_state + 1
         }
         this.$store.commit(this.search_ns + '/'+ 'SET_FILTER_STATE',
           { prop: this.search_prop, filter:item.id, new_state: new_state})
