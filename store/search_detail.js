@@ -1,25 +1,14 @@
-import { make } from 'vuex-pathify'
+import { make } from 'vuex-pathify';
+import Vue from "vue";
 
 export const VUEX_NAMESPACE = "search_detail"
 
 export const state = () => ({
 // used in all views
-  category: {
-    'value_pos': [],
-    'value_neg': []
-  },
-  file_format: {
-    'value_pos': [],
-    'value_neg': []
-  },
-  publisher: {
-    'value_pos': [],
-    'value_neg': []
-  },
-  license: {
-    'value_pos': [],
-    'value_neg': []
-  },
+  category_filter: {},
+  file_format_filter: {},
+  publisher_filter : {},
+  license_filter: {},
   textline_keywords: '',
   order_by: null,
   last_change: [null, null],
@@ -33,6 +22,13 @@ export const state = () => ({
 export const mutations = {
   // create SET_VALUE automatically
   ...make.mutations(state),
+
+  // additional increment function
+  SET_FILTER_STATE (state, {prop, filter, new_state}) {
+    let filter_prop = state[prop]
+    Vue.set( filter_prop, filter,  new_state)
+    Vue.set( state, prop, filter_prop)
+  }
 }
 
 export const getters = {

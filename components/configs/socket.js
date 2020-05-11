@@ -6,3 +6,7 @@ export const REQUEST_LABEL = 'request_label';
 export const REQUEST_ITEM_TITLE_DESC = 'request_items_title_desc';
 
 export const BATCH_SIZE = 10;
+
+export const INCLUDE = 1
+export const EXCLUDE = -1
+export const NEUTRAL = 0

@@ -53,7 +53,7 @@
             this.$store.ep_set(this.vuex_ns, this.property_end, selected);
             this.$store.ep_set(this.vuex_ns, this.property_start, selected - 1);
             this.max_batch_loaded = selected;
-            this.$EventBus.$emit(EV.CHANGED_BATCH, selected);
+//            this.$EventBus.$emit(EV.CHANGED_BATCH, selected);
           }
 
         },

@@ -32,7 +32,7 @@
       selected: {
         set(selected) {
           this.$store.ep_set(this.vuex_ns, this.vuex_prop, selected);
-          this.$EventBus.$emit(EV.CHANGED_SEARCH_TERMS, selected);
+//          this.$EventBus.$emit(EV.CHANGED_SEARCH_TERMS, selected);
         },
         get() {
           return this.$store.ep_get(this.vuex_ns , this.vuex_prop);
@@ -43,14 +43,14 @@
       }
     },
     serverPrefetch() {
-      return this.get_vocab_ordering();
+//      return this.get_vocab_ordering();
     },
     mounted() {
       // Force the initialization
-      this.get_vocab_ordering();
+//      this.get_vocab_ordering();
     },
     methods: {
-      async get_vocab_ordering() {
+/*      async get_vocab_ordering() {
         var response = await get_flask_data(this,  REQUEST_VOCAB,  {vocab: 'ordering'})
         return await this.handle_result_ordering(response)
       },
@@ -62,13 +62,13 @@
             value: field.id,
             text: field.text
           })
-/*          this.vocab_ordering.push({
+          this.vocab_ordering.push({
             value: field.id,
             text: field.text
           })
-*/        }, this);
-
+        }, this);
       },
+*/
     }
   }
 </script>

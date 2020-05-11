@@ -88,7 +88,7 @@
       if (this.ignore_last_title === undefined) {
         this.$store.ep_set(this.breadcrumb_ns,'last_title', null)
       }
-      this.$EventBus.$emit(EV.PAGE_CHANGED, {});
+//      this.$EventBus.$emit(EV.PAGE_CHANGED, {});
     },
   }
 </script>

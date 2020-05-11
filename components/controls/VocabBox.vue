@@ -1,14 +1,22 @@
 <template>
   <div>
-    <ul class="nobull category box_area" v-if="vocab.length">
-      <li v-for="item in vocab" class="box" :key="item.id" @click="handle_click(item.id)">
+    <ul v-if="vocab.length" class="nobull category box_area" >
+      <li v-for="item in vocab"
+          class="box"
+          :key="item.id"
+          @click="handle_click(item.id)">
         <nuxt-link
           :to="url"
           class="lightbutton button vocabbutton">
           <div class="category_label">
-            <div class="category_icon"><i :aria-labelledby="item.id" :class="item.icon_class + ' bb-ifa'"
-                                          v-if="item.icon_class"></i><br v-if="item.icon_class"
-                                                                         class="hidesmallscreen"/></div>
+            <div class="category_icon">
+              <i v-if="item.icon_class"
+                 :class="item.icon_class + ' bb-ifa'"
+                 :aria-labelledby="item.id"
+                 ></i>
+              <br v-if="item.icon_class"
+                  class="hidesmallscreen"/>
+            </div>
             <div class="category_text" :id="item.id">{{item.text}}</div>
           </div>
         </nuxt-link>
@@ -21,14 +29,20 @@
 </template>
 
 <script>
-  import {REQUEST_VOCAB} from "../configs/socket";
+  import {INCLUDE} from '../configs/socket';
   import {DETAIL_SEARCH_URL} from "../configs/routing";
   import {server_settings} from "../configs/server_settings";
-  import {get_flask_data} from '../mixins/utils';
-
+  import Vocab from '../mixins/Vocab';
+  import Vue from 'vue';
 
   export default {
     name: "VocabBox",
+    mixins :[Vocab],
+    props: {
+      'target_ns': String,
+      'target_prop': String,
+      'clear_state': Boolean,
+    },
     data() {
       return {
         prefetched: false,
@@ -36,60 +50,13 @@
         base_data_url: server_settings.PLONE_URL,
       }
     },
-    computed : {
-        vocab : function () {
-          console.log(this.vuex_ns)
-          console.log(this.vocab_name)
-          let result = this.$store.ep_get(this.vuex_ns, this.vocab_name)
-          if (result === undefined) {
-            result = []
-          }
-          console.log(result)
 
-          return result
-        }
-    },
-    props: {
-      'vuex_ns': String,
-      'vocab_name': String,
-      'clean_value': Boolean,
-      'search_field': String
-    },
-    serverPrefetch() {
-      // Force the initialization
-        return this.get_vocab();
-    },
-    mounted() {
-      // Force the initialization
-      if (this.prefetched === false) {
-        this.get_vocab();
-      }
-    },
     methods: {
-      async get_vocab() {
-        var response = await get_flask_data(this, REQUEST_VOCAB,  {vocab: this.vocab_name})
-        return await this.handle_result(response)
-      },
-      handle_result(response) {
-        // read result from request
-        var vocab = response.vocab
-        vocab.sort((a, b) => a.text.localeCompare(b.text))
 
-        this.$store.ep_set('vocabularies/vocabularies',this.vocab_name, vocab)
-        this.prefetched = true;
-      },
-      handle_click(value) {
-        let value_clean;
-        if (this.clean_value === true) {
-          value_clean = {
-            'value_pos': [value],
-            'value_neg': []
-          };
-        } else {
-          value_clean = value
-        }
-        // ToDo: This is direct coupling of components. Better fire an event.
-        this.$store.set('search_detail/' + this.search_field, value_clean);
+      handle_click(filter) {
+        this.$store.commit(this.target_ns + '/'+ 'SET_FILTER_STATE',
+          { prop:this.target_prop, filter:filter, new_state: INCLUDE})
+//        this.$store.set(this.target_ns + '/' + this.target_prop + '@[' + filter + ']', INCLUDE)
         this.$router.push(DETAIL_SEARCH_URL);
       },
     }
@@ -119,7 +86,6 @@
     background-color: #C73C35;
     color: #fff;
   }
-
 
   @media (max-width: 640px) {
     .category_label {

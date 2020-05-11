@@ -121,3 +121,25 @@ export async function get_flask_data(that, channel, params) {
     set_error_message(that, FLASK_UNREACHABLE_MESSAGE);
   }
 }
+
+
+export function Box() {
+    var length = 0;
+    var items = {};
+    this.add = function(k, v) {
+        if (!(k in items))
+            length++; // don't count twice
+        items[k] = v;
+    }
+    this.get = function(k) {
+        return items[k];
+    }
+    this.delete = function(k) {
+        if (k in items)
+            length--;
+        delete items[k];
+    }
+    this.__defineGetter__("length", function() {
+        return length;
+    });
+}

@@ -85,7 +85,7 @@
         }
 
         this.$store.ep_set('breadcrumb', 'last_title', this.item.title);
-        this.$EventBus.$emit(EV.PAGE_CHANGED, {});
+//        this.$EventBus.$emit(EV.PAGE_CHANGED, {});
         write_aria_polite('Die Seite ' + this.item.title + ' wurde geladen.');
       },
     },

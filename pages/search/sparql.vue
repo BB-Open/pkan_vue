@@ -1,5 +1,5 @@
 <template>
-  <sparql-search-base-view vuex_ns="Sparql" :display_info_column="false">
+  <sparql-search-base-view vuex_ns="sparql_ns" :display_info_column="false">
     <template slot="additional_widget">
       <search-field-multiline :vuex_ns="sparql_ns"
                               vuex_prop="sparql_query"
@@ -14,7 +14,7 @@
   import SparqlSearchBaseView from "../../components/page/views/SparqlSearchBaseView";
   import SearchFieldMultiline from "../../components/controls/SearchFieldMultiline";
   import {SPARQL_URL} from "../../components/configs/routing";
-    import {VUEX_NAMESPACE as SPARQL_NS} from '../../store/search_sparql'
+  import {VUEX_NAMESPACE as SPARQL_NS} from '../../store/search_sparql'
 
   export default {
     name: 'Sparql',
@@ -26,7 +26,6 @@
       return {
         placeholder: 'SPARQL Query',
         next_view: SPARQL_URL,
-        vuex_ns : 'sparql',
         sparql_ns: SPARQL_NS
       }
     },

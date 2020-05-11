@@ -2,7 +2,7 @@
   <search-base-view vuex_ns="search_detail" :display_info_column="false">
     <template slot="additional_widget">
       <form @submit.prevent="">
-        <search-field-single-line vuex_ns="search_detail"
+        <search-field-single-line :vuex_ns="search_ns"
                                   vuex_prop="textline_keywords"
                                   :place_holder="placeholder"
                                   :next_view="next_view" rows="1" button_label="Suchen"
@@ -16,6 +16,7 @@
   import SearchBaseView from "../../components/page/views/SearchBaseView";
   import SearchFieldSingleLine from "../../components/controls/SearchFieldSingleLine";
   import {DETAIL_SEARCH_URL} from "../../components/configs/routing";
+  import {VUEX_NAMESPACE as search_ns} from "../../store/search_detail";
 
 
   export default {
@@ -28,7 +29,8 @@
       return {
         placeholder: 'In den Datensätzen suchen',
         next_view: DETAIL_SEARCH_URL,
-        hidden_help: 'In den Datensätzen '
+        hidden_help: 'In den Datensätzen ',
+        search_ns: search_ns,
       }
     },
   }

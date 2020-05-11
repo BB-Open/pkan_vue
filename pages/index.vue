@@ -4,7 +4,10 @@
       <plonepage_search :vuex_ns="plone_ns" :vuex_prop="tag"  :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag"
                         content_class="columnsgrey"></plonepage_search>
       <h2>Unsere Kategorien:</h2>
-      <vocab-box :vuex_ns="cat_ns" vocab_name="category" :clean_value="true" search_field="category"></vocab-box>
+      <vocab-box
+        :vocab_ns="voc_ns" vocab_prop='category'
+        :target_ns="search_ns" target_prop='category_filter'
+      ></vocab-box>
     </template>
   </base-view>
 </template>
@@ -22,7 +25,8 @@
     PLONE_TAG_LANDING
   } from "../components/configs/plone_keywords";
   import {VUEX_NAMESPACE as PLONE_NS} from '../store/plone'
-  import {VUEX_NAMESPACE as CAT_NS} from '../store/vocabularies'
+  import {VUEX_NAMESPACE as SEARCH_NS} from '../store/search_detail'
+  import {VUEX_NAMESPACE as VOC_NS} from '../store/vocabularies'
   import VocabBox from "../components/controls/VocabBox";
 
   export default {
@@ -38,7 +42,8 @@
         text: 'Text',
         name: this.name,
         plone_ns: PLONE_NS,
-        cat_ns: CAT_NS,
+        search_ns: SEARCH_NS,
+        voc_ns: VOC_NS,
         breadcrumb: null,
         view_url: BLOG_URL,
         sort_on: PLONE_INDEX_CREATED,

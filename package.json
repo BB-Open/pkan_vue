@@ -27,7 +27,8 @@
     "vue-static": "0.0.5",
     "vuejs-datepicker": "^1.6.2",
     "vuejs-logger": "^1.5.4",
-    "vuex-pathify": "^1.4.1"
+    "vuex-pathify": "^1.4.1",
+    "vue-axios": "^2.1.5"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"

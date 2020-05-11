@@ -5,37 +5,43 @@
       <div class="hidden_help_text">Kriterien filtern</div>
       <input type="text" v-model="search_string" :placeholder="title + ' durchsuchen'"
              @change="filter_criteria" @keyup="filter_criteria"></label></form>
-    <div class="criteria_buttons">
-      <button v-for="item in display_values" @click="button_clicked(item)"
-              v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove, criteria_button_unselected: !data_store[item].check_remove && !data_store[item].check_add}"
+    <div class="visible_buttons">
+      <button v-for="item in visible_buttons" @click="button_clicked(item)"
+              v-bind:class="{ button_add: item.state === INCLUDE,
+                              button_remove: item.state === EXCLUDE,
+                              criteria_button_unselected: item.state === NEUTRAL}"
               :id="item">
         <div class="twocolumncontent">
-          <div class="search_selector_iconcontainer"><i class="fa fa-circle-o search_selector_icon" aria-label="Neutral" v-if="!data_store[item].check_remove && !data_store[item].check_add"></i>
-            <i class="fa fa-times-circle search_selector_icon" aria-label="Ausgenommen" v-if="data_store[item].check_remove"></i>
-            <i class="fa fa-check-circle search_selector_icon" aria-label="Ausgewählt" v-if="data_store[item].check_add"></i></div>
-          <div class="search_selector_label">{{data_store[item].text}}</div>
+          <div class="search_selector_iconcontainer">
+            <i class="fa fa-check-circle search_selector_icon" aria-label="Ausgewählt" v-if="item.state === INCLUDE"></i>
+            <i class="fa fa-times-circle search_selector_icon" aria-label="Ausgenommen" v-if="item.state === EXCLUDE"></i>
+            <i class="fa fa-circle-o search_selector_icon" aria-label="Neutral" v-if="item.state === NEUTRAL"></i>
+          </div>
+          <div class="search_selector_label">{{item.text}}</div>
         </div>
       </button>
-      <button v-for="item in additional_values" @click="button_clicked(item)"
-              v-bind:class="{ button_add: data_store[item].check_add, button_remove: data_store[item].check_remove, criteria_button_unselected: !data_store[item].check_remove && !data_store[item].check_add}"
-              v-if="show_more || data_store[item].check_add || data_store[item].check_remove"
+      <button v-for="item in hidden_buttons" @click="button_clicked(item)"
+              v-bind:class="{ button_add: item.state === INCLUDE,
+                              button_remove: item.state === EXCLUDE,
+                              criteria_button_unselected: item.state === NEUTRAL}"
+              v-if="show_more || item.state === INCLUDE || item.state === EXCLUDE"
               :id="item">
         <div class="twocolumncontent">
-          <div class="search_selector_iconcontainer"><i class="fa fa-circle-o search_selector_icon" aria-label="Neutral" v-if="!data_store[item].check_remove && !data_store[item].check_add"></i>
-            <i class="fa fa-times-circle search_selector_icon" aria-label="Ausgenommen" v-if="data_store[item].check_remove"></i>
-            <i class="fa fa-check-circle search_selector_icon" aria-label="Ausgewählt" v-if="data_store[item].check_add"></i></div>
-          <div class="search_selector_label">{{data_store[item].text}}</div>
+          <div class="search_selector_iconcontainer">
+            <i class="fa fa-check-circle search_selector_icon" aria-label="Ausgewählt" v-if="item.state === INCLUDE"></i>
+            <i class="fa fa-times-circle search_selector_icon" aria-label="Ausgenommen" v-if="item.state === EXCLUDE"></i>
+            <i class="fa fa-circle-o search_selector_icon" aria-label="Neutral" v-if="item.state === NEUTRAL"></i>
+          </div>
+          <div class="search_selector_label">{{item.text}}</div>
         </div>
       </button>
     </div>
-
-
     <div>
-      <button @click="more_less_clicked()" v-if="additional_values.length > 0" class="selectorbutton" :id="'moreless'+title">
+      <button @click="more_less_clicked()" v-if="hidden_buttons.length > 0" class="selectorbutton" :id="'moreless'+title">
         <template v-if="!show_more">ᐁ Mehr</template>
         <template v-if="show_more">ᐃ Weniger</template>
       </button>
-      <br v-if="additional_values.length > 0"/>
+      <br v-if="hidden_buttons.length > 0"/>
       <button @click="reset_button" class="selectorbutton" :aria-label="'Zurücksetzen für ' + title">
         <template>Zurücksetzen</template>
       </button>
@@ -47,95 +53,92 @@
 <script>
   import {get_flask_data, remove_element_from_array, write_aria_assertive, write_aria_polite} from '../mixins/utils';
   import {EV} from "../configs/events";
-  import {REQUEST_VOCAB} from "../configs/socket";
+  import {NEUTRAL, INCLUDE, EXCLUDE, REQUEST_VOCAB} from '../configs/socket';
+  import {sync} from 'vuex-pathify';
+  import {VUEX_NAMESPACE} from '../../store/vocabularies';
 
   export default {
     name: 'SearchSelector',
-    props: ['title', 'options', 'vuex_prop', 'vuex_ns'],
+    props: ['title', 'options', 'buttons_prop', 'buttons_ns', 'search_ns', 'search_prop'],
     components: {},
     data() {
       return {
-        values: [],
-        vocab: {},
-//        data_store: {},
-        number_displayed: 8,
-        values_stored:
-          {
-            'value_pos': [],
-            'value_neg': []
-          },
+        INCLUDE: INCLUDE,
+        EXCLUDE: EXCLUDE,
+        NEUTRAL: NEUTRAL,
         show_more: false,
-        display_values: [],
-        additional_values: [],
-        search_string: '',
+        number_displayed: 8,
       }
     },
-    computed : {
-      data_store : function () {
-        return this.$store.ep_get(this.vuex_ns, this.vuex_prop)
-      }
+    computed: {
+      visible_buttons: function () {
+        return this.buttons.slice(0, this.number_displayed)
+      },
+      hidden_buttons: function () {
+        return this.buttons.slice(this.number_displayed)
+      },
+      buttons: {
+        get: function () {
+          let buttons = this.$store.ep_get(this.buttons_ns, this.buttons_prop)
+          if (buttons === undefined) {
+            return []
+          }
+          let states = this.$store.ep_get(this.search_ns, this.search_prop)
+          let result = []
+          let button
+          buttons.forEach((item) => {
+              button = Object.assign({}, item)
+              if (item.id in states) {
+                button['state'] = states[item.id]
+              } else {
+                button['state'] = NEUTRAL
+              }
+              result.push(button)
+            }
+          )
+          return result
+        },
+      },
+      search_string: sync('search_detail/:search_prop'),
     },
-    mounted() {
-      this.get_vocab();
-
-      // Force the initialization
-
+    serverPrefetch() {
       if (this.options.number_displayed !== undefined) {
         this.number_displayed = this.options.number_displayed
       }
-
-
-      this.init_values();
-      this.init_events();
-
-    }
-    ,
+    },
+    mounted() {
+      if (this.options.number_displayed !== undefined) {
+        this.number_displayed = this.options.number_displayed
+      }
+    },
     methods: {
       button_clicked(item) {
-        let store = this.data_store[item];
-        let value_neg = this.values_stored.value_neg.slice();
-        let value_pos = this.values_stored.value_pos.slice();
-        if (store.check_add === false && store.check_remove === false) {
-          store.check_add = true;
-          store.check_remove = false;
-          value_neg = remove_element_from_array(value_neg, item);
-          value_pos.push(item)
-        } else if (store.check_remove === false && store.check_add === true) {
-          store.check_add = false;
-          store.check_remove = true;
-          value_pos = remove_element_from_array(value_pos, item);
-          value_neg.push(item)
-        } else if (store.check_remove === true && store.check_add === false) {
-          store.check_add = false;
-          store.check_remove = false;
-          value_pos = remove_element_from_array(value_pos, item);
-          value_neg = remove_element_from_array(value_neg, item);
+        let old_state_map = this.$store.get(this.search_ns + '/' + this.search_prop)
+        let old_state = old_state_map[item.id]
+        let new_state
+        if (old_state === undefined ){
+          new_state = INCLUDE
+        } else if (old_state === INCLUDE ){
+          new_state = EXCLUDE
+        } else {
+          new_state = new_state + 1
         }
-        this.data_store[item] = store;
-
-        this.values_stored = {
-          value_pos: value_pos,
-          value_neg: value_neg
-        };
-
-        this.save();
-        this.$forceUpdate();
-        this.reread_criteria_button(item)
+        this.$store.commit(this.search_ns + '/'+ 'SET_FILTER_STATE',
+          { prop: this.search_prop, filter:item.id, new_state: new_state})
       },
       async set_values_for_widget() {
-        let value_neg = this.values_stored.value_neg;
-        let value_pos = this.values_stored.value_pos;
-
+        /*        let do_exclude = this.values_stored.do_exclude;
+        let do_include = this.values_stored.do_include;
 
         if (this.values !== undefined) {
           this.values.forEach(
             function (item) {
-              if (value_neg.includes(item)) {
+              if (do_exclude.includes(item)) {
                 this.data_store[item] = {
                   check_add: false,
                   check_remove: true,
                 };
-              } else if (value_pos.includes(item)) {
+              } else if (do_include.includes(item)) {
                 this.data_store[item] = {
                   check_add: true,
                   check_remove: false,
@@ -151,10 +154,11 @@
         }
         this.display_values = this.values.slice(0, this.number_displayed);
         this.additional_values = this.values.slice(this.number_displayed, this.values.length)
-        this.$forceUpdate()
+*/
       },
       filter_criteria() {
-        let vocab_keys = Object.keys(this.vocab);
+        return {}
+        /*        let vocab_keys = Object.keys(this.vocab);
         if (this.search_string === '' || this.search_string === undefined) {
           this.values = vocab_keys;
         } else {
@@ -172,29 +176,34 @@
             }, this)
         }
         this.set_values_for_widget()
+*/
       },
       reset_button() {
-        this.values_stored = {
-          value_pos: [],
-          value_neg: []
+        /*        this.values_stored = {
+          do_include: [],
+          do_exclude: []
         };
 
         this.save();
         this.reload_widget();
         write_aria_polite(this.title + ' wurde zurück gesetzt.')
+*/
+        return {}
       },
       save() {
-        this.$store.ep_set(this.vuex_ns, this.vuex_prop, this.values_stored);
+        /*        this.$store.ep_set(this.buttons_ns, this.buttons_prop, this.values_stored);
         this.$EventBus.$emit(EV.CHANGED_SEARCH_TERMS, {});
+*/
       },
 
       reload_widget() {
-        this.init_values();
+        /*        this.init_values();
         this.values = Object.keys(this.vocab);
         this.set_values_for_widget()
+*/
       },
       init_values() {
-        this.values_stored = this.$store.state[this.vuex_ns][this.vuex_prop]
+//        this.values_stored = this.$store.ep_get(this.buttons_ns, this.buttons_prop)
       },
       init_events() {
         this.$EventBus.$on(EV.RESET_SEARCH_TERMS, () => {
@@ -202,37 +211,25 @@
           this.reload_widget()
         });
       },
-      async get_vocab() {
-        var response = await get_flask_data(this, REQUEST_VOCAB, {vocab: this.options.vocab_name})
-        return await this.handle_result_vocab(response)
-      },
-      async handle_result_vocab(data) {
-        // read result from request
-        this.vocab = {};
-        data.vocab.forEach(function (field) {
-          this.vocab[field.id] = field.text
-        }, this);
-        this.values = Object.keys(this.vocab);
-        await this.set_values_for_widget();
-      },
       get_item_alt(item) {
-        if (this.data_store[item].check_add) {
+        /*        if (this.data_store[item].check_add) {
           return 'In Suche aufgenommen'
         } else if (this.data_store[item].check_remove) {
           return 'Von Suche ausgenommen'
         }
         return ''
+*/
       },
       reread_button(item) {
         // make sure, html is refreched first
-        this.$nextTick(function () {
-          let text = document.getElementById(item).innerHTML;
-          write_aria_assertive(text)})
+
+        let text = document.getElementById(item).innerHTML;
+        write_aria_assertive(text)
       },
       reread_criteria_button(item) {
+        return {}
         // make sure, html is refreched first
-        this.$nextTick(function () {
-          let text = '';
+        /*          let text = '';
           if (this.data_store[item].check_remove){
             text = 'Ausgenommen '
           } else if (this.data_store[item].check_add){
@@ -241,16 +238,16 @@
             text = 'Neutral '
           }
           text += this.data_store[item].text;
-          write_aria_assertive(text)})
+          write_aria_assertive(text)
+*/
       },
       more_less_clicked() {
         this.show_more = !this.show_more;
         this.reread_button('moreless' + this.title)
+
       }
-    },
-    beforeDestroy: function () {
-      this.$EventBus.$off(EV.RESET_SEARCH_TERMS);
-    },
+
+    }
   }
 </script>
 

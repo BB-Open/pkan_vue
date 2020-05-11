@@ -75,55 +75,64 @@
     computed: {
       pagination_page: {
         set(pagination_page) {
-          this.$store.ep_set(this.vuex_ns , this.property_end, pagination_page);
-          this.$store.ep_set(this.vuex_ns,  this.property_start, pagination_page - 1);
-          this.$EventBus.$emit(EV.CHANGED_BATCH, pagination_page);
+          this.$store.ep_set(this.vuex_ns, this.property_end, pagination_page);
+          this.$store.ep_set(this.vuex_ns, this.property_start, pagination_page - 1);
+//          this.$EventBus.$emit(EV.CHANGED_BATCH, pagination_page);
         },
         get() {
-          return this.$store.ep_get(this.vuex_ns , this.property_end);
+          return this.$store.ep_get(this.vuex_ns, this.property_end);
         }
       },
-      offset : function () {
+      offset: function () {
         console.log(this.vuex_ns)
         let result = this.$store.ep_get(this.vuex_ns, this.property_start) * this.perPage + 1
         console.log(result)
         return result
       },
-      results : function () {
+      results: function () {
         console.log(this.vuex_ns)
         let result = this.$store.ep_get(this.vuex_ns, 'results')
         console.log(result)
         return result
       },
-      result_count : function () {
+      result_count: function () {
         let result = this.$store.ep_get(this.vuex_ns, 'result_count')
         console.log('result count: ' + result)
         return result
       },
-      error : function () {
+      error: function () {
         return this.$store.ep_get(this.vuex_ns, 'error')
+      },
+      search_request: {
+        get() {
+          return Object.assign({}, this.$store.get(this.vuex_ns + '/search_params'))
+        }
       }
-
+    },
+    watch: {
+      search_request: async function (value) {
+        await this.get_data()
+      }
     },
     components: {
       BPagination,
     },
     serverPrefetch() {
-      this.init_events();
+//      this.init_events();
       return this.get_data();
     },
     mounted() {
       // Force the initialization
-      this.init_events();
+//      this.init_events();
       this.get_data();
     },
     methods: {
       get_nuxt_link(id) {
         return this.view_url + '/' + encodeURIComponent(id)
       },
-      async get_data () {
-        var request = Object.assign({}, this.$store.get(this.vuex_ns + '/search_params'))
-        var response = await get_flask_data(this, this.request_type, request )
+      async get_data() {
+//        var request = Object.assign({}, this.$store.get(this.vuex_ns + '/search_params'))
+        var response = await get_flask_data(this, this.request_type, this.search_request)
         await this.$store.ep_set(this.vuex_ns, 'results', response.results)
         await this.$store.ep_set(this.vuex_ns, 'result_count', response.result_count)
         if (response.response_code === 400) {
@@ -133,7 +142,7 @@
         }
         write_aria_polite('Neue Suchergebnisse wurden geladen.')
       },
-      init_events() {
+      /*      init_events() {
         this.$EventBus.$on(EV.RESET_SEARCH_TERMS, () => {
           this.get_data()
         });
@@ -144,14 +153,16 @@
           this.get_data()
         });
       }
-
-    },
-    beforeDestroy: function () {
+*/
+    }
+  }
+/*    beforeDestroy: function () {
       this.$EventBus.$off(EV.RESET_SEARCH_TERMS)
       this.$EventBus.$off(EV.CHANGED_SEARCH_TERMS)
       this.$EventBus.$off(EV.CHANGED_BATCH)
     },
   }
+*/
 </script>
 
 <style scoped>

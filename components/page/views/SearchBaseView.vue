@@ -31,15 +31,19 @@
             class="selectorbutton"
             type="button">Alle zurücksetzen
           </button>
-          <search-selector title="Dateiformat" vuex_ns="search_detail" vuex_prop="file_format"
+          <search-selector title='Dateiformat' search_ns='search_detail' search_prop='file_format_filter'
+                           buttons_ns='vocabularies/vocabularies' buttons_prop='publisher'
                            :options="file_format_options"></search-selector>
-          <search-selector title="Datenbereitsteller" vuex_ns="search_detail" vuex_prop="publisher"
+          <search-selector title='Datenbereitsteller' search_ns='search_detail' search_prop='publisher_filter'
+                           buttons_ns='vocabularies/vocabularies' buttons_prop='publisher'
                            :options="publisher_options"></search-selector>
-          <search-selector title="Kategorie" vuex_ns="search_detail" vuex_prop="category"
-                           :options="category_options"></search-selector>
-          <search-selector title="Lizenz" vuex_ns="search_detail" vuex_prop="license"
-                           :options="license_options"></search-selector>
-          <date-picker label="Letzte Änderung:" :vuex_ns="search_ns" vuex_prop="last_change"></date-picker>
+          <search-selector title='Kategorie' search_ns='search_detail' search_prop='category_filter'
+                           buttons_ns='vocabularies/vocabularies' buttons_prop='category'
+                           :options='category_options'></search-selector>
+          <search-selector title='Lizenz' search_ns='search_detail' search_prop='license_filter'
+                           buttons_ns='vocabularies/vocabularies' buttons_prop='license'
+                           :options='license_options'></search-selector>
+          <date-picker label='Letzte Änderung:' :vuex_ns='search_ns' vuex_prop='last_change'></date-picker>
         </section>
       </div>
     </template>
@@ -115,7 +119,7 @@
         this.update_page()
       },
       update_page() {
-        this.$EventBus.$emit(EV.RESET_SEARCH_TERMS, {});
+//        this.$EventBus.$emit(EV.RESET_SEARCH_TERMS, {});
       },
 
     },

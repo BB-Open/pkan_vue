@@ -1,9 +1,14 @@
 <template>
-  <base-view :vuex_ns="vuex_ns" :breadcrumb="vuex_ns" :display_search="true" :display_info_column="true">
+  <base-view :voc_ns="voc_ns" :breadcrumb="voc_ns" :display_search="true" :display_info_column="true">
     <template slot="content">
       <h1>Einfache Suche</h1>
-      <vocab-box :vuex_ns="vuex_ns" vocab_name="ordering" :clean_value="false" search_field="order_by"></vocab-box>
-      <vocab-box :vuex_ns="vuex_ns" vocab_name="category" :clean_value="true" search_field="category"></vocab-box>
+      <vocab-box
+        :vocab_ns="voc_ns" vocab_prop='order_by'
+        :target_ns="search_ns" target_prop='order_by'
+        :clean_value="false" ></vocab-box>
+      <vocab-box :vocab_ns="voc_ns" vocab_prop='category'
+                 :target_ns="search_ns" target_prop='category_filter'
+                 :clean_value="true"></vocab-box>
     </template>
   </base-view>
 </template>
@@ -12,7 +17,8 @@
   import BaseView from '../../components/page/views/BaseView';
   import VocabBox from "../../components/controls/VocabBox";
   import {write_aria_polite} from "../../components/mixins/utils";
-  import {VUEX_NAMESPACE} from '../../store/vocabularies';
+  import {VUEX_NAMESPACE as voc_ns} from '../../store/vocabularies';
+  import {VUEX_NAMESPACE as search_ns} from '../../store/search_detail';
 
   export default {
     name: 'Search',
@@ -22,7 +28,9 @@
     },
     data() {
       return {
-        vuex_ns: VUEX_NAMESPACE
+        voc_ns: voc_ns,
+        search_ns: search_ns
+
       }
     },
     mounted() {
