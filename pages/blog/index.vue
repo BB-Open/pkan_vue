@@ -41,7 +41,7 @@
       // Force the initialization
       this.$log.debug(this.vuex_ns + ' mounted');
 
-      write_aria_polite('Die Seite ' + this.vuex_ns + ' wurde geladen.');
+      write_aria_polite(this, 'Die Seite ' + this.vuex_ns + ' wurde geladen.');
 
 
     },

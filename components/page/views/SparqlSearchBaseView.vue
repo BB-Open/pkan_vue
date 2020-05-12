@@ -75,7 +75,7 @@
     mounted() {
       // Force the initialization
       this.$log.debug(this.name + ' is mounted');
-      write_aria_polite('Die Seite SPARQL Suche wurde geladen.');
+      write_aria_polite(this, 'Die Seite SPARQL Suche wurde geladen.');
     },
     methods: {
 /*      remove_all() {

@@ -81,7 +81,7 @@
         this.$store.ep_set('breadcrumb', 'last_title', this.title);
 //        this.$EventBus.$emit(EV.PAGE_CHANGED, {});
         if (this.alert_title) {
-          write_aria_polite('Die Seite ' + this.title + ' wurde geladen.')
+          write_aria_polite(this, 'Die Seite ' + this.title + ' wurde geladen.')
         }
       },
       async handle_result_ttl(data) {

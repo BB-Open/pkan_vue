@@ -75,7 +75,7 @@
         this.item = await this.result.items[0];
         await this.$store.set('breadcrumb/last_title', this.item.title);
 //        await this.$EventBus.$emit(EV.PAGE_CHANGED, {});
-        await write_aria_polite('Die Seite ' + this.item.title + ' wurde geladen.');
+        await write_aria_polite(this, 'Die Seite ' + this.item.title + ' wurde geladen.');
         this.prefetched = true
       },
     },

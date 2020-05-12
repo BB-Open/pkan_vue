@@ -34,7 +34,7 @@
       }
     },
     mounted() {
-      write_aria_polite('Die Seite einfache Suche wurde geladen.');
+      write_aria_polite(this, 'Die Seite einfache Suche wurde geladen.');
     }
   }
 </script>

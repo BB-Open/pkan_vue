@@ -33,7 +33,7 @@
     mounted() {
       // Force the initialization
       this.$log.debug(this.vuex_ns + ' mounted');
-      write_aria_polite('Die Seite Datenbereitsteller wurde geladen.');
+      write_aria_polite(this, 'Die Seite Datenbereitsteller wurde geladen.');
     },
 
   }

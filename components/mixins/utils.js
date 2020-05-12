@@ -2,6 +2,7 @@ import {format, startOfDay,} from 'date-fns'
 import Vue from 'vue';
 import {FLASK_UNREACHABLE_MESSAGE, PLONE_UNREACHABLE_MESSAGE} from '../configs/plone_keywords';
 import {server_settings} from '../configs/server_settings'
+import {VUEX_NAMESPACE} from '../../store/globalstate';
 
 export const DATE_FORMAT = 'YYYY-MM-DD';
 
@@ -74,24 +75,26 @@ export function set_error_message(obj, message) {
   obj.$store.set('globalstate/error_message', message);
 }
 
-export function write_aria_polite(message) {
+export function write_aria_polite(that, message) {
   if (Vue.prototype.$isServer) {
   } else {
-    let pkan_aria_polite = document.getElementById('pkan_aria_polite');
+    that.$store.ep_set(VUEX_NAMESPACE, 'aria_polite', message)
+/*    let pkan_aria_polite = document.getElementById('pkan_aria_polite');
     let pkan_aria_assertive = document.getElementById('pkan_aria_assertive');
     pkan_aria_assertive.innerHTML = '';
     pkan_aria_polite.innerHTML = message
-  }
+*/  }
 }
 
-export function write_aria_assertive(message) {
+export function write_aria_assertive(that, message) {
   if (Vue.prototype.$isServer) {
   } else {
-    let pkan_aria_polite = document.getElementById('pkan_aria_polite');
+    that.$store.ep_set(VUEX_NAMESPACE, 'aria_assertive', message)
+/*    let pkan_aria_polite = document.getElementById('pkan_aria_polite');
     let pkan_aria_assertive = document.getElementById('pkan_aria_assertive');
     pkan_aria_polite.innerHTML = '';
     pkan_aria_assertive.innerHTML = message
-  }
+*/  }
 }
 
 export async function get_plone_data(that, url) {

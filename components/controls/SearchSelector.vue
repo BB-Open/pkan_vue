@@ -1,5 +1,6 @@
 <template>
   <div class="SearchSelector boxed_selector">
+<!--    <aria_active :polite='polite' :assertive='assertive'></aria_active> -->
   <form  @submit.prevent="">
     <label class="biglabel">{{ title }}:<br/>
       <div class="hidden_help_text">Kriterien filtern</div>
@@ -55,12 +56,10 @@
   import {EV} from "../configs/events";
   import {NEUTRAL, INCLUDE, EXCLUDE, REQUEST_VOCAB} from '../configs/socket';
   import {sync} from 'vuex-pathify';
-  import {VUEX_NAMESPACE} from '../../store/vocabularies';
 
   export default {
     name: 'SearchSelector',
     props: ['title', 'options', 'buttons_prop', 'buttons_ns', 'search_ns', 'search_prop'],
-    components: {},
     data() {
       return {
         INCLUDE: INCLUDE,
@@ -68,6 +67,8 @@
         NEUTRAL: NEUTRAL,
         show_more: false,
         number_displayed: 8,
+        polite: '',
+        assertive: '',
       }
     },
     computed: {
@@ -125,6 +126,7 @@
         }
         this.$store.commit(this.search_ns + '/'+ 'SET_FILTER_STATE',
           { prop: this.search_prop, filter:item.id, new_state: new_state})
+        this.$store.ep_set('globalstate', 'aria_assertive', 'huhu' + item.id)
       },
       async set_values_for_widget() {
         /*        let do_exclude = this.values_stored.do_exclude;
@@ -224,7 +226,8 @@
         // make sure, html is refreched first
 
         let text = document.getElementById(item).innerHTML;
-        write_aria_assertive(text)
+        this.$store.ep_set('gobalstate', 'aria_assertive', text)
+//        write_aria_assertive(text)
       },
       reread_criteria_button(item) {
         return {}

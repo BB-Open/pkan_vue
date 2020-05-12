@@ -113,7 +113,7 @@
         } else {
           this.error = ''
         }
-        write_aria_polite('Neue Suchergebnisse wurden geladen.');
+        write_aria_polite(this, 'Neue Suchergebnisse wurden geladen.');
         this.prefetched = true
       },
       init_events() {

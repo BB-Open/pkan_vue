@@ -101,7 +101,7 @@
           await this.$store.ep_set(this.vuex_ns, this.vuex_prop, item)
 
           if (this.display_title){
-              write_aria_polite('Die Seite ' + await this.item.title + ' wurde geladen.')
+              write_aria_polite(this, 'Die Seite ' + await this.item.title + ' wurde geladen.')
           }
           this.prefetched = true
         }

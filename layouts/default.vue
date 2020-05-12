@@ -1,5 +1,6 @@
 <template>
   <div>
+    <aria-active></aria-active>
     <nuxt/>
   </div>
 </template>
@@ -53,3 +54,9 @@
     background-color: #35495e;
   }
 </style>
+<script>
+  import Aria_active from '../components/controls/aria_active';
+  export default {
+    components: {Aria_active}
+  }
+</script>

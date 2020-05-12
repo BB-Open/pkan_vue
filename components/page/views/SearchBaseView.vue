@@ -94,7 +94,7 @@
           vocab_name: 'license',
           number_displayed: 3
         },
-        search_selector_fields: ['category', 'file_format', 'publisher', 'license'],
+        search_selector_fields: ['category_filter', 'file_format_filter', 'publisher_filter', 'license_filter'],
         view_url: SEARCH_URL,
         request_type: REQUEST_SEARCH_RESULTS,
         search_ns: SEARCH_DETAIL_NS,
@@ -103,7 +103,7 @@
     mounted() {
       // Force the initialization
       this.$log.debug(this.vuex_ns + ' mounted');
-      write_aria_polite('Die Seite Suche wurde geladen.');
+      write_aria_polite(this, 'Die Seite Suche wurde geladen.');
     },
     methods: {
       remove_all() {

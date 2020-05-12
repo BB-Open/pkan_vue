@@ -140,7 +140,7 @@
         } else {
           await this.$store.ep_set(this.vuex_ns, 'error', '')
         }
-        write_aria_polite('Neue Suchergebnisse wurden geladen.')
+        write_aria_polite(this, 'Neue Suchergebnisse wurden geladen.')
       },
       /*      init_events() {
         this.$EventBus.$on(EV.RESET_SEARCH_TERMS, () => {
