@@ -20,12 +20,12 @@
     computed:{
       aria_polite: {
         get : function () {
-          this.$store.ep_get(this.VUEX_NAMESPACE, 'aria_polite')
+          return this.$store.ep_get(this.VUEX_NAMESPACE, 'aria_polite')
         }
       },
       aria_assertive: {
         get : function () {
-          this.$store.ep_get(this.VUEX_NAMESPACE, 'aria_assertive')
+          return this.$store.ep_get(this.VUEX_NAMESPACE, 'aria_assertive')
         }
       },
     }
