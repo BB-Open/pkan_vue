@@ -32,7 +32,7 @@
             type="button">Alle zurücksetzen
           </button>
           <search-selector title='Dateiformat' search_ns='search_detail' search_prop='file_format_filter'
-                           vocab_ns='vocabularies/vocabularies' vocab_prop='publisher'
+                           vocab_ns='vocabularies/vocabularies' vocab_prop='file_format'
                            :options="file_format_options"></search-selector>
           <search-selector title='Datenbereitsteller' search_ns='search_detail' search_prop='publisher_filter'
                            vocab_ns='vocabularies/vocabularies' vocab_prop='publisher'
@@ -43,7 +43,7 @@
           <search-selector title='Lizenz' search_ns='search_detail' search_prop='license_filter'
                            vocab_ns='vocabularies/vocabularies' vocab_prop='license'
                            :options='license_options'></search-selector>
-          <date-picker label='Letzte Änderung:' :vuex_ns='search_ns' vuex_prop='last_change'></date-picker>
+          <date-picker label='Letzte Änderung:' :vuex_ns='search_ns' vuex_prop='search_date_period'></date-picker>
         </section>
       </div>
     </template>
@@ -56,7 +56,6 @@
   import search_results from "../entity/search_results";
   import BaseView from "./BaseView";
   import SearchSelector from "../../controls/SearchSelector";
-  import {EV} from "../../configs/events";
   import {SEARCH_URL} from "../../configs/routing";
   import search_results_mobile from "../entity/search_results_mobile";
   import DatePicker from "../../controls/DatePicker";
@@ -105,38 +104,8 @@
       this.$log.debug(this.vuex_ns + ' mounted');
       write_aria_polite(this, 'Die Seite Suche wurde geladen.');
     },
-    methods: {
-  /*    remove_all() {
-        this.$store.ep_set(this.vuex_ns,'textline_keywords', '');
-        this.search_selector_fields.forEach(function (field) {
-          this.$store.ep_set(this.vuex_ns,field, {
-            'value_pos': [],
-            'value_neg': []
-          },);
-        }, this);
-        this.$store.ep_set(this.vuex_ns,'last_change', [null, null]);
-
-        this.update_page()
-      },
-//      update_page() {
-//        this.$EventBus.$emit(EV.RESET_SEARCH_TERMS, {});
-      },
-
-    },
-    beforeDestroy: function () {
-      // clear for next search when we leave search namespace
-      if (!this.$router.currentRoute.fullPath.includes('search')) {
-//        this.remove_all();
-        this.$store.ep_set(
-          this.vuex_ns,'sparql',
-          'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
-          'SELECT DISTINCT ?id WHERE {\n' +
-          '  ?id a dcat:Dataset .\n' +
-          '}');
-      }
-*/    },
-
   }
+
 </script>
 
 <style scoped>

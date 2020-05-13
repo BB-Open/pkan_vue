@@ -3,7 +3,7 @@
     <template slot="additional_widget">
       <form @submit.prevent="">
         <search-field-single-line :vuex_ns="search_ns"
-                                  vuex_prop="textline_keywords"
+                                  vuex_prop="search_phrase"
                                   :place_holder="placeholder"
                                   :next_view="next_view" rows="1" button_label="Suchen"
                                   :hidden_label="hidden_help"></search-field-single-line>
@@ -32,6 +32,12 @@
         hidden_help: 'In den Datensätzen ',
         search_ns: search_ns,
       }
+    },
+    beforeRouteLeave (to, from, next) {
+      if (!to.path.includes('search')) {
+        this.$store.commit(this.search_ns + '/'+ 'RESET_ALL')
+      }
+      next()
     },
   }
 </script>

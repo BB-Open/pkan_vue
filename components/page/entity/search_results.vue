@@ -127,7 +127,6 @@
         return this.view_url + '/' + encodeURIComponent(id)
       },
       async get_data() {
-//        var request = Object.assign({}, this.$store.get(this.vuex_ns + '/search_params'))
         var response = await get_flask_data(this, this.request_type, this.search_request)
         await this.$store.ep_set(this.vuex_ns, 'results', response.results)
         await this.$store.ep_set(this.vuex_ns, 'result_count', response.result_count)
@@ -138,27 +137,8 @@
         }
         write_aria_polite(this, 'Neue Suchergebnisse wurden geladen.')
       },
-      /*      init_events() {
-        this.$EventBus.$on(EV.RESET_SEARCH_TERMS, () => {
-          this.get_data()
-        });
-        this.$EventBus.$on(EV.CHANGED_SEARCH_TERMS, () => {
-          this.get_data()
-        });
-        this.$EventBus.$on(EV.CHANGED_BATCH, () => {
-          this.get_data()
-        });
-      }
-*/
     }
   }
-/*    beforeDestroy: function () {
-      this.$EventBus.$off(EV.RESET_SEARCH_TERMS)
-      this.$EventBus.$off(EV.CHANGED_SEARCH_TERMS)
-      this.$EventBus.$off(EV.CHANGED_BATCH)
-    },
-  }
-*/
 </script>
 
 <style scoped>

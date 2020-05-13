@@ -8,7 +8,7 @@
 
 <script>
   import {server_settings} from "../../configs/server_settings";
-  import {get_plone_data, removeSelfClosingTags, set_error_message, write_aria_polite} from '../../mixins/utils';
+  import {get_plone_data, removeSelfClosingTags, write_aria_polite} from '../../mixins/utils';
 
   export default {
     name: "plonepage_search",

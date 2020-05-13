@@ -18,10 +18,6 @@
 
   export default {
     name: "Breadcrumb",
-    data() {
-      return {
-      }
-    },
     computed: {
       breadcrumb_elements: function () {
         return this.get_breadcrumbs()
@@ -70,11 +66,6 @@
           return clean_breadcrumbs
 
       },
-      init_events() {
-        this.$EventBus.$on(EV.PAGE_CHANGED, () => {
-          this.$log.debug('breadcrumb changed');
-        });
-      }
     },
   }
 </script>

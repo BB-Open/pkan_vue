@@ -7,7 +7,7 @@
         <pkan-status></pkan-status>
         <div class="main_content ">
           <form v-if="this.display_search" @submit.prevent="">
-            <search-field-single-line vuex_prop="textline_keywords" vuex_ns="search_detail"
+            <search-field-single-line vuex_prop="search_phrase" vuex_ns="search_detail"
                                        :place_holder="placeholder" :next_view="next_view"
                                       rows="1" button_label="Suchen"
                                       :hidden_label="placeholder"></search-field-single-line>
@@ -22,7 +22,7 @@
       <main class="content_container" v-if="!display_info_column">
         <pkan-status></pkan-status>
         <form v-if="this.display_search" @submit.prevent="">
-          <search-field-single-line vuex_prop="textline_keywords" :vuex_ns="search_ns"
+          <search-field-single-line vuex_prop="search_phrase" :vuex_ns="search_ns"
                                     :place_holder="placeholder" :next_view="next_view"
                                     rows="1" button_label="Suchen"
                                     :hidden_label="placeholder"></search-field-single-line>
@@ -38,7 +38,6 @@
   import SearchFieldSingleLine from "../../controls/SearchFieldSingleLine";
   import PkanFooter from "../subelements/PkanFooter";
   import PkanHeader from "../subelements/PkanHeader";
-  import {EV} from "../../configs/events";
   import {DETAIL_SEARCH_URL} from "../../configs/routing";
   import plonepage_search from "../plone/plonepage_search";
   import {
@@ -81,14 +80,12 @@
       }
     },
     mounted() {
-      // Force the initialization
       set_error_message(this, '');
       this.$log.debug(this.name + ' mounted');
       this.$store.ep_set(this.breadcrumb_ns, 'currentView', this.breadcrumb);
       if (this.ignore_last_title === undefined) {
         this.$store.ep_set(this.breadcrumb_ns,'last_title', null)
       }
-//      this.$EventBus.$emit(EV.PAGE_CHANGED, {});
     },
   }
 </script>

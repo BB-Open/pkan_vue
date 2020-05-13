@@ -21,8 +21,7 @@
 
 <script>
   import {server_settings} from "../../configs/server_settings";
-  import {format_plone_date, get_plone_data, set_error_message} from '../../mixins/utils';
-  import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
+  import {format_plone_date, get_plone_data} from '../../mixins/utils';
 
   export default {
     name: "plonelisting_url",
@@ -57,7 +56,6 @@
       await this.get_data();
     },
     mounted() {
-      // Force the initialization
       this.$log.debug(this.namespace + ' mounted');
       this.generate_data_url();
       this.get_data();

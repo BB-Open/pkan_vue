@@ -29,7 +29,11 @@
         sparql_ns: SPARQL_NS
       }
     },
-    methods: {
+    beforeRouteLeave (to, from, next) {
+      if (!to.path.includes('search')) {
+        this.$store.commit(this.sparql_ns + '/'+ 'RESET_ALL')
+      }
+      next()
     },
   }
 </script>

@@ -2,11 +2,13 @@ import { make } from 'vuex-pathify'
 
 export const VUEX_NAMESPACE = "search_sparql"
 
-export const state = () => ({
-  sparql_query: 'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
+export const DEFAULT_SPARQL_QUERY = 'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
     'SELECT DISTINCT ?id WHERE {\n' +
     '  ?id a dcat:Dataset .\n' +
-    '}',
+    '}'
+
+export const state = () => ({
+  sparql_query: DEFAULT_SPARQL_QUERY,
   batch_start: 0,
   batch_end: 1,
   results: [],
@@ -17,6 +19,10 @@ export const state = () => ({
 export const mutations = {
   // create SET_VALUE automatically
   ...make.mutations(state),
+
+  RESET_ALL (state) {
+    state['sparql_query'] = DEFAULT_SPARQL_QUERY
+  },
 }
 
 export const getters = {

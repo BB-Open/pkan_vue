@@ -100,15 +100,6 @@
         write_aria_polite(this, this.title + ' wurde zurück gesetzt.')
         return {}
       },
-/*      get_item_alt(item) {
-        /*        if (this.data_store[item].check_add) {
-          return 'In Suche aufgenommen'
-        } else if (this.data_store[item].check_remove) {
-          return 'Von Suche ausgenommen'
-        }
-        return ''
-      },
-*/
       aria_button(item) {
         let msg = document.getElementById(item).innerHTML;
         write_aria_assertive(this, msg)

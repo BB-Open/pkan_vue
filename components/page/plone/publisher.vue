@@ -15,12 +15,10 @@
 </template>
 
 <script>
-  import {EV} from "../../configs/events";
   import {server_settings} from "../../configs/server_settings";
   import {SEARCH_URL} from "../../configs/routing";
   import entitydetail from "../entity/entitydetail";
-  import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
-  import {get_plone_data, set_error_message, write_aria_polite} from '../../mixins/utils';
+  import {get_plone_data, write_aria_polite} from '../../mixins/utils';
 
   export default {
     name: "publisher",
@@ -74,7 +72,6 @@
         this.result = await get_plone_data(this, url)
         this.item = await this.result.items[0];
         await this.$store.set('breadcrumb/last_title', this.item.title);
-//        await this.$EventBus.$emit(EV.PAGE_CHANGED, {});
         await write_aria_polite(this, 'Die Seite ' + this.item.title + ' wurde geladen.');
         this.prefetched = true
       },

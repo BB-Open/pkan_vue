@@ -32,7 +32,6 @@
 </template>
 
 <script>
-  import {EV} from "../../configs/events";
   import {REQUEST_ITEM_DETAIL, REQUEST_ITEM_TITLE_DESC, REQUEST_LABEL} from "../../configs/socket";
   import * as rdf from "rdf";
   import DownloadControl from "../../controls/DownloadControl";
@@ -79,7 +78,6 @@
         this.title = data.title;
         this.description = data.description;
         this.$store.ep_set('breadcrumb', 'last_title', this.title);
-//        this.$EventBus.$emit(EV.PAGE_CHANGED, {});
         if (this.alert_title) {
           write_aria_polite(this, 'Die Seite ' + this.title + ' wurde geladen.')
         }

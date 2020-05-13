@@ -9,15 +9,17 @@ export const state = () => ({
   file_format_filter: {},
   publisher_filter : {},
   license_filter: {},
-  textline_keywords: '',
+  search_phrase: '',
   order_by: null,
-  last_change: [null, null],
+  search_date_period: [null, null],
   batch_start: 0,
   batch_end: 1,
   results: [],
   result_count: 0,
   error: [],
 });
+
+export const search_selector_fields = ['category_filter', 'file_format_filter', 'publisher_filter', 'license_filter']
 
 export const mutations = {
   // create SET_VALUE automatically
@@ -29,7 +31,14 @@ export const mutations = {
     state[filter] = Object.assign({}, new_filter)
   },
   RESET_FILTER (state, {filter}) {
-    Vue.set( state, filter, {})
+    state[filter] = {}
+  },
+  RESET_ALL (state) {
+    state['search_phrase'] = ''
+    state['search_date_period'] = ''
+    search_selector_fields.forEach(function (filter) {
+      state[filter] = {}
+    })
   }
 }
 
@@ -43,8 +52,8 @@ export const getters = {
       order_by: state.order_by,
       batch_start: state.batch_start,
       batch_end: state.batch_end,
-      last_change: state.last_change,
-      textline_keywords:state.textline_keywords,
+      search_date_period: state.search_date_period,
+      search_phrase:state.search_phrase,
     }
   },
 };

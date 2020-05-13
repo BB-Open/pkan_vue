@@ -8,16 +8,13 @@
 </template>
 
 <script>
-  import {EV} from "../../configs/events";
   import {server_settings} from "../../configs/server_settings";
   import {
     format_plone_date,
     get_plone_data,
     removeSelfClosingTags,
-    set_error_message,
     write_aria_polite
   } from '../../mixins/utils';
-  import {PLONE_UNREACHABLE_MESSAGE} from "../../configs/plone_keywords";
 
   export default {
     name: "plonepage_uid",
@@ -85,7 +82,6 @@
         }
 
         this.$store.ep_set('breadcrumb', 'last_title', this.item.title);
-//        this.$EventBus.$emit(EV.PAGE_CHANGED, {});
         write_aria_polite(this, 'Die Seite ' + this.item.title + ' wurde geladen.');
       },
     },
