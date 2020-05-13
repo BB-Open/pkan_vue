@@ -77,7 +77,6 @@
         set(pagination_page) {
           this.$store.ep_set(this.vuex_ns, this.property_end, pagination_page);
           this.$store.ep_set(this.vuex_ns, this.property_start, pagination_page - 1);
-//          this.$EventBus.$emit(EV.CHANGED_BATCH, pagination_page);
         },
         get() {
           return this.$store.ep_get(this.vuex_ns, this.property_end);
@@ -105,7 +104,7 @@
       },
       search_request: {
         get() {
-          return Object.assign({}, this.$store.get(this.vuex_ns + '/search_params'))
+          return this.$store.ep_get(this.vuex_ns,'search_params')
         }
       }
     },
@@ -118,12 +117,9 @@
       BPagination,
     },
     serverPrefetch() {
-//      this.init_events();
-      return this.get_data();
+        return this.get_data();
     },
     mounted() {
-      // Force the initialization
-//      this.init_events();
       this.get_data();
     },
     methods: {

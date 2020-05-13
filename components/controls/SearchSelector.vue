@@ -52,10 +52,10 @@
 </template>
 
 <script>
-  import {get_flask_data, remove_element_from_array, write_aria_assertive, write_aria_polite} from '../mixins/utils';
   import {EV} from "../configs/events";
   import {NEUTRAL, INCLUDE, EXCLUDE, REQUEST_VOCAB} from '../configs/socket';
   import {sync} from 'vuex-pathify';
+  import {VUEX_NAMESPACE as global_ns} from '../../store/globalstate'
 
   export default {
     name: 'SearchSelector',
@@ -70,6 +70,9 @@
         polite: '',
         assertive: '',
       }
+    },
+    created() {
+      this.global_ns = global_ns
     },
     computed: {
       visible_buttons: function () {
@@ -126,7 +129,7 @@
         }
         this.$store.commit(this.search_ns + '/'+ 'SET_FILTER_STATE',
           { prop: this.search_prop, filter:item.id, new_state: new_state})
-        this.$store.ep_set('globalstate', 'aria_assertive', 'huhu' + item.id)
+        this.$store.ep_set(this.global_ns, 'aria_assertive', item.id)
       },
       async set_values_for_widget() {
         /*        let do_exclude = this.values_stored.do_exclude;
@@ -226,7 +229,7 @@
         // make sure, html is refreched first
 
         let text = document.getElementById(item).innerHTML;
-        this.$store.ep_set('gobalstate', 'aria_assertive', text)
+        this.$store.ep_set(this.global_ns, 'aria_assertive', text)
 //        write_aria_assertive(text)
       },
       reread_criteria_button(item) {

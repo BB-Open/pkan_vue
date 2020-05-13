@@ -8,14 +8,17 @@
 </template>
 
 <script>
+  import {VUEX_NAMESPACE} from '../../../store/globalstate';
+
   export default {
     name: "PkanStatus",
+    created() {
+      this.VUEX_NAMESPACE = VUEX_NAMESPACE
+    },
     computed: {
       value: {
-        set: function (value) {
-        },
         get: function () {
-          return this.$store.get('globalstate/error_message');
+          return this.$store.ep_get(this.VUEX_NAMESPACE,'error_message');
         }
       },
     },

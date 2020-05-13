@@ -106,7 +106,7 @@
       write_aria_polite(this, 'Die Seite Suche wurde geladen.');
     },
     methods: {
-      remove_all() {
+  /*    remove_all() {
         this.$store.ep_set(this.vuex_ns,'textline_keywords', '');
         this.search_selector_fields.forEach(function (field) {
           this.$store.ep_set(this.vuex_ns,field, {
@@ -118,7 +118,7 @@
 
         this.update_page()
       },
-      update_page() {
+//      update_page() {
 //        this.$EventBus.$emit(EV.RESET_SEARCH_TERMS, {});
       },
 
@@ -126,7 +126,7 @@
     beforeDestroy: function () {
       // clear for next search when we leave search namespace
       if (!this.$router.currentRoute.fullPath.includes('search')) {
-        this.remove_all();
+//        this.remove_all();
         this.$store.ep_set(
           this.vuex_ns,'sparql',
           'prefix dcat: <http://www.w3.org/ns/dcat#>\n' +
@@ -134,7 +134,7 @@
           '  ?id a dcat:Dataset .\n' +
           '}');
       }
-    },
+*/    },
 
   }
 </script>
