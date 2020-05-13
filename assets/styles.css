@@ -159,8 +159,7 @@ button:focus {
   color: #fff;
 }
 
-.selectorbutton:hover,
-.selectorbutton:focus {
+.selectorbutton:hover {
   background-color: #eeeeee;
   color: #161616;
 }

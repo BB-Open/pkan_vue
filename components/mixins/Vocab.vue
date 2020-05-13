@@ -7,8 +7,8 @@
   export default {
     name: 'Vocab',
     props: {
-      'vocab_ns': String,
-      'vocab_prop': String,
+      'vocab_ns': { type: String, required: true},
+      'vocab_prop': { type: String, required: true},
     },
     computed : {
       vocab : function () {
