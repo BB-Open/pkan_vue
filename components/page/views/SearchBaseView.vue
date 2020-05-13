@@ -32,16 +32,16 @@
             type="button">Alle zurücksetzen
           </button>
           <search-selector title='Dateiformat' search_ns='search_detail' search_prop='file_format_filter'
-                           buttons_ns='vocabularies/vocabularies' buttons_prop='publisher'
+                           vocab_ns='vocabularies/vocabularies' vocab_prop='publisher'
                            :options="file_format_options"></search-selector>
           <search-selector title='Datenbereitsteller' search_ns='search_detail' search_prop='publisher_filter'
-                           buttons_ns='vocabularies/vocabularies' buttons_prop='publisher'
+                           vocab_ns='vocabularies/vocabularies' vocab_prop='publisher'
                            :options="publisher_options"></search-selector>
           <search-selector title='Kategorie' search_ns='search_detail' search_prop='category_filter'
-                           buttons_ns='vocabularies/vocabularies' buttons_prop='category'
+                           vocab_ns='vocabularies/vocabularies' vocab_prop='category'
                            :options='category_options'></search-selector>
           <search-selector title='Lizenz' search_ns='search_detail' search_prop='license_filter'
-                           buttons_ns='vocabularies/vocabularies' buttons_prop='license'
+                           vocab_ns='vocabularies/vocabularies' vocab_prop='license'
                            :options='license_options'></search-selector>
           <date-picker label='Letzte Änderung:' :vuex_ns='search_ns' vuex_prop='last_change'></date-picker>
         </section>

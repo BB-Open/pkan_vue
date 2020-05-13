@@ -1,11 +1,13 @@
 <template>
   <div class="SearchSelector boxed_selector">
-<!--    <aria_active :polite='polite' :assertive='assertive'></aria_active> -->
-  <form  @submit.prevent="">
-    <label class="biglabel">{{ title }}:<br/>
-      <div class="hidden_help_text">Kriterien filtern</div>
-      <input type="text" v-model="search_string" :placeholder="title + ' durchsuchen'"
-             @change="filter_criteria" @keyup="filter_criteria"></label></form>
+    <form  @submit.prevent="">
+      <label class="biglabel">{{ title }}:<br/>
+        <div class="hidden_help_text">Kriterien filtern</div>
+<!--      <input type="text" v-model="search_string" :placeholder="title + ' durchsuchen'"
+             @change="filter_criteria" @keyup="filter_criteria">
+-->
+      </label>
+    </form>
     <div class="visible_buttons">
       <button v-for="item in visible_buttons" @click="button_clicked(item)"
               v-bind:class="{ button_add: item.state === INCLUDE,
@@ -52,14 +54,18 @@
 </template>
 
 <script>
-  import {EV} from "../configs/events";
   import {NEUTRAL, INCLUDE, EXCLUDE, REQUEST_VOCAB} from '../configs/socket';
   import {sync} from 'vuex-pathify';
   import {VUEX_NAMESPACE as global_ns} from '../../store/globalstate'
+  import {write_aria_assertive, write_aria_polite} from '../mixins/utils';
+  import Vocab from '../mixins/Vocab';
 
-  export default {
+
+
+    export default {
     name: 'SearchSelector',
-    props: ['title', 'options', 'buttons_prop', 'buttons_ns', 'search_ns', 'search_prop'],
+    props: ['title', 'options', 'vocab_prop', 'vocab_ns', 'search_ns', 'search_prop'],
+    mixins :[Vocab],
     data() {
       return {
         INCLUDE: INCLUDE,
@@ -76,21 +82,36 @@
     },
     computed: {
       visible_buttons: function () {
-        return this.buttons.slice(0, this.number_displayed)
+        return this.buttons_list.slice(0, this.number_displayed)
       },
       hidden_buttons: function () {
-        return this.buttons.slice(this.number_displayed)
+        return this.buttons_list.slice(this.number_displayed)
       },
       buttons: {
         get: function () {
-          let buttons = this.$store.ep_get(this.buttons_ns, this.buttons_prop)
+          let buttons = this.$store.ep_get(this.vocab_ns, this.vocab_prop)
           if (buttons === undefined) {
             return []
           }
+          return buttons
+        }},
+      buttons_dict: {
+          get: function () {
+          let result = {}
+          this.buttons.forEach((item) => {
+            result[item.id] = item
+            }
+          )
+          return result
+          }
+      },
+      buttons_list: {
+        get: function () {
           let states = this.$store.ep_get(this.search_ns, this.search_prop)
           let result = []
           let button
-          buttons.forEach((item) => {
+//          let vocab = this.vocab
+          this.buttons.forEach((item) => {
               button = Object.assign({}, item)
               if (item.id in states) {
                 button['state'] = states[item.id]
@@ -128,131 +149,45 @@
           new_state = old_state + 1
         }
         this.$store.commit(this.search_ns + '/'+ 'SET_FILTER_STATE',
-          { prop: this.search_prop, filter:item.id, new_state: new_state})
+          { filter: this.search_prop, category:item.id, new_state: new_state})
         this.$store.ep_set(this.global_ns, 'aria_assertive', item.id)
-      },
-      async set_values_for_widget() {
-        /*        let do_exclude = this.values_stored.do_exclude;
-        let do_include = this.values_stored.do_include;
-
-        if (this.values !== undefined) {
-          this.values.forEach(
-            function (item) {
-              if (do_exclude.includes(item)) {
-                this.data_store[item] = {
-                  check_add: false,
-                  check_remove: true,
-                };
-              } else if (do_include.includes(item)) {
-                this.data_store[item] = {
-                  check_add: true,
-                  check_remove: false,
-                };
-              } else {
-                this.data_store[item] = {
-                  check_add: false,
-                  check_remove: false,
-                }
-              }
-              this.data_store[item].text = this.vocab[item]
-            }, this)
-        }
-        this.display_values = this.values.slice(0, this.number_displayed);
-        this.additional_values = this.values.slice(this.number_displayed, this.values.length)
-*/
-      },
-      filter_criteria() {
-        return {}
-        /*        let vocab_keys = Object.keys(this.vocab);
-        if (this.search_string === '' || this.search_string === undefined) {
-          this.values = vocab_keys;
-        } else {
-          let search = this.search_string.toLowerCase();
-          this.values = [];
-          vocab_keys.forEach(
-            function (item) {
-              let store = this.data_store[item];
-              let compare = store.text.toLowerCase();
-              if (compare.includes(search)) {
-                this.values.push(item)
-              } else if (store.check_remove || store.check_add) {
-                this.values.push(item)
-              }
-            }, this)
-        }
-        this.set_values_for_widget()
-*/
+        this.aria_criteria_button(item, new_state)
       },
       reset_button() {
-        /*        this.values_stored = {
-          do_include: [],
-          do_exclude: []
-        };
+        this.$store.commit(this.search_ns + '/'+ 'RESET_FILTER', {filter: this.search_prop})
+        write_aria_polite(this, this.title + ' wurde zurück gesetzt.')
 
-        this.save();
-        this.reload_widget();
-        write_aria_polite(this.title + ' wurde zurück gesetzt.')
-*/
         return {}
       },
-      save() {
-        /*        this.$store.ep_set(this.buttons_ns, this.buttons_prop, this.values_stored);
-        this.$EventBus.$emit(EV.CHANGED_SEARCH_TERMS, {});
-*/
-      },
-
-      reload_widget() {
-        /*        this.init_values();
-        this.values = Object.keys(this.vocab);
-        this.set_values_for_widget()
-*/
-      },
-      init_values() {
-//        this.values_stored = this.$store.ep_get(this.buttons_ns, this.buttons_prop)
-      },
-      init_events() {
-        this.$EventBus.$on(EV.RESET_SEARCH_TERMS, () => {
-          this.$log.debug('reset field from state');
-          this.reload_widget()
-        });
-      },
-      get_item_alt(item) {
+/*      get_item_alt(item) {
         /*        if (this.data_store[item].check_add) {
           return 'In Suche aufgenommen'
         } else if (this.data_store[item].check_remove) {
           return 'Von Suche ausgenommen'
         }
         return ''
+      },
 */
+      aria_button(item) {
+        let msg = document.getElementById(item).innerHTML;
+        write_aria_assertive(this, msg)
       },
-      reread_button(item) {
-        // make sure, html is refreched first
-
-        let text = document.getElementById(item).innerHTML;
-        this.$store.ep_set(this.global_ns, 'aria_assertive', text)
-//        write_aria_assertive(text)
-      },
-      reread_criteria_button(item) {
-        return {}
-        // make sure, html is refreched first
-        /*          let text = '';
-          if (this.data_store[item].check_remove){
-            text = 'Ausgenommen '
-          } else if (this.data_store[item].check_add){
-            text = 'Ausgewählt '
+      aria_criteria_button(item, state) {
+          let msg
+          if (state === EXCLUDE){
+            msg = 'Ausgenommen '
+          } else if (state === INCLUDE){
+            msg = 'Ausgewählt '
           } else {
-            text = 'Neutral '
+            msg = 'Neutral '
           }
-          text += this.data_store[item].text;
-          write_aria_assertive(text)
-*/
+          msg += this.buttons_dict[item.id].text ;
+          write_aria_assertive(this, msg)
       },
       more_less_clicked() {
         this.show_more = !this.show_more;
-        this.reread_button('moreless' + this.title)
-
+        this.aria_button('moreless' + this.title)
       }
-
     }
   }
 </script>

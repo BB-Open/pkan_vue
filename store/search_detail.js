@@ -23,10 +23,13 @@ export const mutations = {
   // create SET_VALUE automatically
   ...make.mutations(state),
 
-  SET_FILTER_STATE (state, {prop, filter, new_state}) {
-    let filter_prop = state[prop]
-    Vue.set( filter_prop, filter,  new_state)
-    Vue.set( state, prop, Object.assign({},filter_prop))
+  SET_FILTER_STATE (state, {filter, category, new_state}) {
+    let new_filter = state[filter]
+    new_filter[category] = new_state
+    state[filter] = Object.assign({}, new_filter)
+  },
+  RESET_FILTER (state, {filter}) {
+    Vue.set( state, filter, {})
   }
 }
 

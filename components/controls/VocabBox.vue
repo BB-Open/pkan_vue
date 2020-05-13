@@ -33,7 +33,6 @@
   import {DETAIL_SEARCH_URL} from "../configs/routing";
   import {server_settings} from "../configs/server_settings";
   import Vocab from '../mixins/Vocab';
-  import Vue from 'vue';
 
   export default {
     name: "VocabBox",
@@ -41,6 +40,8 @@
     props: {
       'target_ns': String,
       'target_prop': String,
+      'vocab_ns': String,
+      'vocab_prop': String,
       'clear_state': Boolean,
     },
     data() {
@@ -53,10 +54,9 @@
 
     methods: {
 
-      handle_click(filter) {
+      handle_click(category) {
         this.$store.commit(this.target_ns + '/'+ 'SET_FILTER_STATE',
-          { prop:this.target_prop, filter:filter, new_state: INCLUDE})
-//        this.$store.set(this.target_ns + '/' + this.target_prop + '@[' + filter + ']', INCLUDE)
+          { filter:this.target_prop, category:category, new_state: INCLUDE})
         this.$router.push(DETAIL_SEARCH_URL);
       },
     }

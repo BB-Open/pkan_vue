@@ -79,22 +79,14 @@ export function write_aria_polite(that, message) {
   if (Vue.prototype.$isServer) {
   } else {
     that.$store.ep_set(VUEX_NAMESPACE, 'aria_polite', message)
-/*    let pkan_aria_polite = document.getElementById('pkan_aria_polite');
-    let pkan_aria_assertive = document.getElementById('pkan_aria_assertive');
-    pkan_aria_assertive.innerHTML = '';
-    pkan_aria_polite.innerHTML = message
-*/  }
+  }
 }
 
 export function write_aria_assertive(that, message) {
   if (Vue.prototype.$isServer) {
   } else {
     that.$store.ep_set(VUEX_NAMESPACE, 'aria_assertive', message)
-/*    let pkan_aria_polite = document.getElementById('pkan_aria_polite');
-    let pkan_aria_assertive = document.getElementById('pkan_aria_assertive');
-    pkan_aria_polite.innerHTML = '';
-    pkan_aria_assertive.innerHTML = message
-*/  }
+  }
 }
 
 export async function get_plone_data(that, url) {
