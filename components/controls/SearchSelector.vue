@@ -46,12 +46,14 @@
     name: 'SearchSelector',
     props: ['title', 'options', 'vocab_prop', 'vocab_ns', 'search_ns', 'search_prop'],
     mixins :[Vocab],
+    created() {
+        this.INCLUDE = INCLUDE;
+        this.EXCLUDE = EXCLUDE;
+        this.NEUTRAL = NEUTRAL
+    },
     components: {SearchSelectorButton},
       data() {
       return {
-        INCLUDE: INCLUDE,
-        EXCLUDE: EXCLUDE,
-        NEUTRAL: NEUTRAL,
         show_more: false,
         number_displayed: 8,
         polite: '',
@@ -67,7 +69,7 @@
       },
       buttons: {
         get: function () {
-          let buttons = this.$store.ep_get(this.vocab_ns, this.vocab_prop)
+          let buttons = this.$store.ep_get(this.vocab_ns, this.vocab_prop);
           if (buttons === undefined) {
             return []
           }
@@ -75,12 +77,12 @@
         }},
       buttons_list: {
         get: function () {
-          let states = this.$store.ep_get(this.search_ns, this.search_prop)
-          let result = []
-          let button
+          let states = this.$store.ep_get(this.search_ns, this.search_prop);
+          let result = [];
+          let button;
 //          let vocab = this.vocab
           this.buttons.forEach((item) => {
-              button = Object.assign({}, item)
+              button = Object.assign({}, item);
               if (item.id in states) {
                 button['state'] = states[item.id]
               } else {
@@ -88,7 +90,7 @@
               }
               result.push(button)
             }
-          )
+          );
           return result
         },
       },
@@ -96,8 +98,8 @@
     },
     methods: {
       reset_button() {
-        this.$store.commit(this.search_ns + '/'+ 'RESET_FILTER', {filter: this.search_prop})
-        write_aria_polite(this, this.title + ' wurde zurück gesetzt.')
+        this.$store.commit(this.search_ns + '/'+ 'RESET_FILTER', {filter: this.search_prop});
+        write_aria_polite(this, this.title + ' wurde zurück gesetzt.');
         return {}
       },
       aria_button(item) {
