@@ -28,7 +28,7 @@
     },
     mounted() {
       // Force the initialization
-      this.init_events();
+//      this.init_events();
     },
     beforeDestroy: function () {
       this.$EventBus.$off(EV.PAGE_CHANGED);

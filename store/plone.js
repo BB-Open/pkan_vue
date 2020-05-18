@@ -16,7 +16,7 @@ export const mutations = {
 import {get_plone_data} from '../components/mixins/utils';
 
 export const actions = {
-  plone_request: ({commit}, payload) => {
+  plone_request: function ({commit}, payload) {
     get_plone_data(this, payload)
   }
 }
