@@ -33,7 +33,11 @@
   "devDependencies": {
     "ava": "^3.8.2",
     "jsdom": "^16.2.2",
-    "nodemon": "^1.19.4"
+    "jsdom-global": "^3.0.2",
+    "nodemon": "^1.19.4",
+    "require-extension-hooks": "^0.3.3",
+    "require-extension-hooks-babel": "^1.0.0-beta.1",
+    "require-extension-hooks-vue": "^3.0.0"
   },
   "browserslist": [
     "> 0.25%",
@@ -47,6 +51,9 @@
   "ava": {
     "files": [
       "test/**/*"
+    ],
+    "require": [
+      "./test/helpers/_setup.js"
     ]
   }
 }
