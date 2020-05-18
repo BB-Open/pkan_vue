@@ -29,11 +29,6 @@
       'style_class': String,
 
     },
-    data() {
-      return {
-        vuex_ns: 'plonenlisting_url',
-      }
-    },
     methods: {
       get_nuxt_link(uid) {
         return this.view_url + '/' + uid

@@ -7,8 +7,8 @@
   export default {
     name: 'Plone',
     props: {
-      'plone_ns': { type: String, required: true},
-      'plone_prop': { type: String, required: true},
+      'vuex_ns': { type: String, required: true},
+      'vuex_prop': { type: String, required: true},
       'portal_type': String,
       'max_number': String,
       'sort_on': String,
@@ -26,7 +26,7 @@
     },
     computed : {
       plone_res_raw : function () {
-        let result = this.$store.ep_get(this.plone_ns, this.plone_prop);
+        let result = this.$store.ep_get(this.vuex_ns, this.vuex_prop);
 
         if (result === undefined) {
           result = this.set_plone()
@@ -46,13 +46,16 @@
             }, this)
         }
         return result
+      },
+      plone_res_first : function () {
+        return this.plone_res.items[0]
       }
     },
     methods :{
       async set_plone () {
         let url = this.generate_data_url();
         var response = await get_plone_data(this, url);
-        this.$store.ep_set(this.plone_ns, this.plone_prop, response);
+        this.$store.ep_set(this.vuex_ns, this.vuex_prop, response);
         return response
       },
       generate_data_url() {

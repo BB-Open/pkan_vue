@@ -3,7 +3,7 @@
     <template slot="content">
       <h1>{{ vuex_ns }}</h1>
       <plonelisting_url :view_url="view_url" :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order"
-                        :tag="tag" :display_date="true" :plone_ns="PLONE_NS" :plone_prop="plone_prop"></plonelisting_url>
+                        :tag="tag" :display_date="true" :vuex_ns="PLONE_NS" :vuex_prop="plone_prop"></plonelisting_url>
 
     </template>
   </base-view>

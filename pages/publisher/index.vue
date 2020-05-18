@@ -3,7 +3,7 @@
     <template slot="content">
       <h1>Datenbereitsteller</h1>
       <plonelisting_url :portal_type="portal_type" :view_url="view_url" :sort_on="sort_on" style_class="box_area"
-                        element_style_class="box" :plone_ns="PLONE_NS" :plone_prop="plone_prop"></plonelisting_url>
+                        element_style_class="box" :vuex_ns="PLONE_NS" :vuex_prop="plone_prop"></plonelisting_url>
     </template>
   </base-view>
 </template>
@@ -25,11 +25,10 @@
       BaseView
     },
     created() {
-      
-        this.vuex_ns = 'Publisher';
-        this.view_url = PUBLISHER_URL;
-        this.portal_type = PLONE_PT_PUBLISHER_CARD;
-        this.sort_on = PLONE_INDEX_TITLE;
+      this.vuex_ns = 'Publisher';
+      this.view_url = PUBLISHER_URL;
+      this.portal_type = PLONE_PT_PUBLISHER_CARD;
+      this.sort_on = PLONE_INDEX_TITLE;
       this.PLONE_NS = PLONE_NS;
       this.plone_prop = 'publisher_listing'
     
