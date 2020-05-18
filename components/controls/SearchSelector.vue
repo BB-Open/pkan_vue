@@ -44,7 +44,7 @@
 
     export default {
     name: 'SearchSelector',
-    props: ['title', 'options', 'vocab_prop', 'vocab_ns', 'search_ns', 'search_prop'],
+    props: ['title', 'options', 'plone_prop', 'plone_ns', 'search_ns', 'search_prop'],
     mixins :[Vocab],
     created() {
         this.INCLUDE = INCLUDE;
@@ -69,7 +69,7 @@
       },
       buttons: {
         get: function () {
-          let buttons = this.$store.ep_get(this.vocab_ns, this.vocab_prop);
+          let buttons = this.$store.ep_get(this.plone_ns, this.plone_prop);
           if (buttons === undefined) {
             return []
           }

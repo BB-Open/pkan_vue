@@ -40,8 +40,8 @@
     props: {
       'target_ns': String,
       'target_prop': String,
-      'vocab_ns': String,
-      'vocab_prop': String,
+      'plone_ns': String,
+      'plone_prop': String,
       'clear_state': Boolean,
     },
     data() {

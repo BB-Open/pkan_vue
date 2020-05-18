@@ -15,7 +15,6 @@
 <script>
   import BaseView from '../components/page/views/BaseView';
   import plonepage_search from '../components/page/plone/plonepage_search';
-  import plonelisting_url from '../components/page/plone/plonelisting_url'
   import {BLOG_URL} from "../components/configs/routing";
   import {
     PLONE_INDEX_CREATED,
@@ -34,7 +33,6 @@
     components: {
       BaseView,
       plonepage_search,
-      plonelisting_url,
       VocabBox,
     },
     data() {

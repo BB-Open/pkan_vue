@@ -1,7 +1,7 @@
 import { make } from 'vuex-pathify';
 import Vue from "vue";
 
-export const VUEX_NAMESPACE = "search_detail"
+export const VUEX_NAMESPACE = "search_detail";
 
 export const state = () => ({
 // used in all views

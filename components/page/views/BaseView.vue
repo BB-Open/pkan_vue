@@ -64,20 +64,20 @@
       PkanStatus,
     },
     props: ['vuex_ns', 'breadcrumb', 'ignore_last_title', 'display_info_column', "display_search"],
-    data() {
-      return {
-        placeholder: 'In den Datensätzen suchen',
-        plone_ns: PLONE_NS,
-        search_ns: SEARCH_NS,
-        breadcrumb_ns: BC_NS,
-        next_view: DETAIL_SEARCH_URL,
-        sort_on: PLONE_INDEX_CREATED,
-        sort_order: PLONE_REVERSE_ORDERING,
-        tag: PLONE_TAG_BLOG,
-        pt: PLONE_PT_DOCUMENT,
-        landing_tag: PLONE_TAG_LANDING,
-        side_tag: PLONE_TAG_SIDETEXT,
-      }
+    created() {
+      
+        this.placeholder = 'In den Datensätzen suchen';
+      this.plone_ns = PLONE_NS;
+      this.search_ns = SEARCH_NS;
+      this.breadcrumb_ns = BC_NS;
+      this.next_view = DETAIL_SEARCH_URL;
+      this.sort_on = PLONE_INDEX_CREATED;
+      this.sort_order = PLONE_REVERSE_ORDERING;
+      this.tag = PLONE_TAG_BLOG;
+      this.pt = PLONE_PT_DOCUMENT;
+      this.landing_tag = PLONE_TAG_LANDING;
+      this.side_tag = PLONE_TAG_SIDETEXT;
+      
     },
     mounted() {
       set_error_message(this, '');

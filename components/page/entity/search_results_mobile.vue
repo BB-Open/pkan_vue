@@ -66,7 +66,6 @@
 
     },
     serverPrefetch () {
-      this.init_events();
       return this.get_data();
     },
     mounted() {
