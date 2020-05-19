@@ -66,7 +66,7 @@
     props: ['vuex_ns', 'breadcrumb', 'ignore_last_title', 'display_info_column', "display_search"],
     created() {
       
-        this.placeholder = 'In den Datensätzen suchen';
+      this.placeholder = 'In den Datensätzen suchen';
       this.plone_ns = PLONE_NS;
       this.search_ns = SEARCH_NS;
       this.breadcrumb_ns = BC_NS;

@@ -75,29 +75,28 @@
     },
     name: 'SearchBaseView',
     props: ['vuex_ns', 'display_info_column'],
-    data() {
-      return {
-        category_options: {
+    created() {
+
+        this.category_options = {
           vocab_name: 'category',
           number_displayed: 3
-        },
-        file_format_options: {
+        };
+        this.file_format_options = {
           vocab_name: 'file_format',
           number_displayed: 3
-        },
-        publisher_options: {
+        };
+        this.publisher_options = {
           vocab_name: 'publisher',
           number_displayed: 3
-        },
-        license_options: {
+        };
+        this.license_options = {
           vocab_name: 'license',
           number_displayed: 3
-        },
-        search_selector_fields: ['category_filter', 'file_format_filter', 'publisher_filter', 'license_filter'],
-        view_url: SEARCH_URL,
-        request_type: REQUEST_SEARCH_RESULTS,
-        search_ns: SEARCH_DETAIL_NS,
-      }
+        };
+        this.search_selector_fields = ['category_filter', 'file_format_filter', 'publisher_filter', 'license_filter'];
+        this.view_url = SEARCH_URL;
+        this.request_type = REQUEST_SEARCH_RESULTS;
+        this.search_ns = SEARCH_DETAIL_NS;
     },
     mounted() {
       // Force the initialization
