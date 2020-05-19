@@ -32,17 +32,12 @@
 </template>
 
 <script>
-  import {EV} from "../configs/events";
-  import { sync } from "vuex-pathify";
+  import {sync} from "vuex-pathify";
 
   export default {
     name: 'SearchFieldSingleLine',
     props: ['vuex_ns', 'vuex_prop', 'place_holder', 'vuex_ns', 'next_view', 'rows', 'button_label', 'label', 'hidden_label'],
     components: {},
-    mounted() {
-      // Force the initialization
-      this.init_events();
-    },
     computed: {
       /* Caution! Here the value of the VUEX_store has to be hard coded since the
       sync statement is run at compile time. There is no "this" at this time.
@@ -51,24 +46,16 @@
       */
       search_string : sync('search_detail/:vuex_prop')
     },
-    beforeDestroy: function () {
-      this.$EventBus.$off(EV.RESET_SEARCH_TERMS);
-    },
     methods: {
       filter_criteria() {
         if (this.search_string === '') {
           console.log('keywords sind leer')
         } else {
-          console.log('keywords gefunden ')
+          console.log('keywords gefunden')
           if (this.$route.path !== this.next_view) {
             this.$router.push(this.next_view);
           }
         }
-      },
-      init_events() {
-        this.$EventBus.$on(EV.RESET_SEARCH_TERMS, () => {
-          this.$log.debug('reset field from state');
-        });
       },
     },
   }

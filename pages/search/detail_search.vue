@@ -36,10 +36,6 @@
     },
     data() {
       return {
-        placeholder: 'In den Datensätzen suchen',
-        next_view: DETAIL_SEARCH_URL,
-
-        search_ns: search_ns,
       }
     },
     beforeRouteLeave (to, from, next) {

@@ -57,7 +57,6 @@
 </template>
 
 <script>
-  import {EV} from '../../configs/events';
   import {BATCH_SIZE} from '../../configs/socket';
   import {BPagination} from 'bootstrap-vue'
   import {get_flask_data, write_aria_polite} from '../../mixins/utils';
@@ -83,20 +82,20 @@
         }
       },
       offset: function () {
-        console.log(this.vuex_ns)
-        let result = this.$store.ep_get(this.vuex_ns, this.property_start) * this.perPage + 1
-        console.log(result)
+        console.log(this.vuex_ns);
+        let result = this.$store.ep_get(this.vuex_ns, this.property_start) * this.perPage + 1;
+        console.log(result);
         return result
       },
       results: function () {
-        console.log(this.vuex_ns)
-        let result = this.$store.ep_get(this.vuex_ns, 'results')
-        console.log(result)
+        console.log(this.vuex_ns);
+        let result = this.$store.ep_get(this.vuex_ns, 'results');
+        console.log(result);
         return result
       },
       result_count: function () {
-        let result = this.$store.ep_get(this.vuex_ns, 'result_count')
-        console.log('result count: ' + result)
+        let result = this.$store.ep_get(this.vuex_ns, 'result_count');
+        console.log('result count: ' + result);
         return result
       },
       error: function () {
@@ -127,9 +126,9 @@
         return this.view_url + '/' + encodeURIComponent(id)
       },
       async get_data() {
-        var response = await get_flask_data(this, this.request_type, this.search_request)
-        await this.$store.ep_set(this.vuex_ns, 'results', response.results)
-        await this.$store.ep_set(this.vuex_ns, 'result_count', response.result_count)
+        var response = await get_flask_data(this, this.request_type, this.search_request);
+        await this.$store.ep_set(this.vuex_ns, 'results', response.results);
+        await this.$store.ep_set(this.vuex_ns, 'result_count', response.result_count);
         if (response.response_code === 400) {
           await this.$store.ep_set(this.vuex_ns, 'error', response.error_message)
         } else {

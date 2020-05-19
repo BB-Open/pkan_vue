@@ -11,9 +11,6 @@
 
 <script>
   import {BFormSelect} from 'bootstrap-vue/src/components/form-select/form-select';
-  import {EV} from "../configs/events";
-  import {REQUEST_VOCAB} from "../configs/socket";
-  import {get_flask_data} from '../mixins/utils';
 
   export default {
     name: "Ordering",
@@ -25,14 +22,12 @@
     data() {
       return {
         vocab_ordering: [],
-        // Ordering Select
       }
     },
     computed: {
       selected: {
         set(selected) {
           this.$store.ep_set(this.vuex_ns, this.vuex_prop, selected);
-//          this.$EventBus.$emit(EV.CHANGED_SEARCH_TERMS, selected);
         },
         get() {
           return this.$store.ep_get(this.vuex_ns , this.vuex_prop);
@@ -42,34 +37,6 @@
         }
       }
     },
-    serverPrefetch() {
-//      return this.get_vocab_ordering();
-    },
-    mounted() {
-      // Force the initialization
-//      this.get_vocab_ordering();
-    },
-    methods: {
-/*      async get_vocab_ordering() {
-        var response = await get_flask_data(this,  REQUEST_VOCAB,  {vocab: 'ordering'})
-        return await this.handle_result_ordering(response)
-      },
-      handle_result_ordering(data) {
-        // read result from request
-//        this.vocab_ordering = [];
-        data.vocab.forEach(function (field) {
-          this.$store.ep_set('vocabularies/vocabularies', this.vuex_ns, {
-            value: field.id,
-            text: field.text
-          })
-          this.vocab_ordering.push({
-            value: field.id,
-            text: field.text
-          })
-        }, this);
-      },
-*/
-    }
   }
 </script>
 

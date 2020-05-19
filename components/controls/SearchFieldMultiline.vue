@@ -36,7 +36,7 @@
 
 <script>
   import {EV} from "../configs/events";
-  import { sync } from "vuex-pathify";
+  import {sync} from "vuex-pathify";
 
   export default {
     name: 'SearchFieldMulitline',
@@ -50,12 +50,6 @@
       */
       search_string : sync('search_sparql/:vuex_prop')
     },
-    mounted() {
-      this.init_events();
-    },
-    beforeDestroy: function () {
-      this.$EventBus.$off(EV.RESET_SEARCH_TERMS);
-    },
     methods: {
       filter_criteria() {
         if (this.search_string === '') {
@@ -64,11 +58,6 @@
             this.$router.push(this.next_view);
           }
         }
-      },
-      init_events() {
-        this.$EventBus.$on(EV.RESET_SEARCH_TERMS, () => {
-          this.$log.debug('reset field from state');
-        });
       },
     },
   }

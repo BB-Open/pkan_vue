@@ -31,7 +31,6 @@
 <script>
   import {INCLUDE} from '../configs/socket';
   import {DETAIL_SEARCH_URL} from "../configs/routing";
-  import {server_settings} from "../configs/server_settings";
   import Vocab from '../mixins/Vocab';
 
   export default {
@@ -44,19 +43,15 @@
       'plone_prop': String,
       'clear_state': Boolean,
     },
-    data() {
-      return {
-        prefetched: false,
-        url: DETAIL_SEARCH_URL,
-        base_data_url: server_settings.PLONE_URL,
-      }
+    created() {
+        this.url = DETAIL_SEARCH_URL;
     },
 
     methods: {
 
       handle_click(category) {
         this.$store.commit(this.target_ns + '/'+ 'SET_FILTER_STATE',
-          { filter:this.target_prop, category:category, new_state: INCLUDE})
+          { filter:this.target_prop, category:category, new_state: INCLUDE});
         this.$router.push(DETAIL_SEARCH_URL);
       },
     }

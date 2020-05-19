@@ -26,6 +26,8 @@
 
 <script>
   import Vue from 'vue';
+  import {DATE_DISPLAY_FORMAT} from '../mixins/utils';
+
   let Datepicker = {};
   let locale = {};
   if (Vue.prototype.$isServer === false) {
@@ -33,8 +35,6 @@
       Datepicker = require('vuejs-datepicker/dist/vuejs-datepicker');
       locale = require('vuejs-datepicker/dist/locale/translations/de');
   }
-  import {DATE_DISPLAY_FORMAT} from '../mixins/utils';
-  import {EV} from "../configs/events";
 
   export default {
     name: 'DatePicker',
@@ -42,11 +42,9 @@
       Datepicker
     },
     props: ['label', 'vuex_ns', 'vuex_prop'],
-    data() {
-      return {
-        format: DATE_DISPLAY_FORMAT,
-        lang: locale,
-      };
+    created() {
+      this.format = DATE_DISPLAY_FORMAT;
+      this.lang = locale;
     },
     computed: {
       value_start: {

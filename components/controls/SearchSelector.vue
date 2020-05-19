@@ -2,7 +2,6 @@
   <div class="SearchSelector boxed_selector">
     <form  @submit.prevent="">
       <label class="biglabel">{{ title }}:<br/>
-        <div class="hidden_help_text">Kriterien filtern</div>
       </label>
     </form>
     <div class="visible_buttons">
@@ -34,17 +33,16 @@
 </template>
 
 <script>
-  import {NEUTRAL, INCLUDE, EXCLUDE, REQUEST_VOCAB} from '../configs/socket';
+  import {EXCLUDE, INCLUDE, NEUTRAL} from '../configs/socket';
   import {sync} from 'vuex-pathify';
-  import {VUEX_NAMESPACE as global_ns} from '../../store/globalstate'
   import {write_aria_assertive, write_aria_polite} from '../mixins/utils';
   import Vocab from '../mixins/Vocab';
   import SearchSelectorButton from './SearchSelectorButton';
 
 
-    export default {
+  export default {
     name: 'SearchSelector',
-    props: ['title', 'options', 'plone_prop', 'plone_ns', 'search_ns', 'search_prop'],
+    props: ['title', 'options', 'vocab_prop', 'vocab_ns', 'search_ns', 'search_prop'],
     mixins :[Vocab],
     created() {
         this.INCLUDE = INCLUDE;
@@ -61,15 +59,9 @@
       }
     },
     computed: {
-      visible_buttons: function () {
-        return this.buttons_list.slice(0, this.number_displayed)
-      },
-      hidden_buttons: function () {
-        return this.buttons_list.slice(this.number_displayed)
-      },
       buttons: {
         get: function () {
-          let buttons = this.$store.ep_get(this.plone_ns, this.plone_prop);
+          let buttons = this.$store.ep_get(this.vocab_ns, this.vocab_prop);
           if (buttons === undefined) {
             return []
           }
@@ -86,13 +78,20 @@
               if (item.id in states) {
                 button['state'] = states[item.id]
               } else {
-                button['state'] = NEUTRAL
+                button['state'] = this.NEUTRAL
               }
               result.push(button)
             }
           );
           return result
         },
+
+      },
+      visible_buttons: function () {
+        return this.buttons_list.slice(0, this.number_displayed)
+      },
+      hidden_buttons: function () {
+        return this.buttons_list.slice(this.number_displayed)
       },
       search_string: sync('search_detail/:search_prop'),
     },
