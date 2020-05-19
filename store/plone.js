@@ -12,11 +12,3 @@ export const mutations = {
   // create SET_VALUE automatically
   ...make.mutations(state),
 }
-
-import {get_plone_data} from '../components/mixins/utils';
-
-export const actions = {
-  plone_request: ({commit}, payload) => {
-    get_plone_data(this, payload)
-  }
-}

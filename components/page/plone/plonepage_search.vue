@@ -34,6 +34,7 @@
             }
           } else {
             if (this.display_title) {
+              this.$store.ep_set('breadcrumb', 'last_title', result.title);
               write_aria_polite(this, 'Die Seite ' + result.title + ' wurde geladen.')
             }
           }

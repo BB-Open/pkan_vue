@@ -14,6 +14,7 @@
       'sort_on': String,
       'tag': String,
       'sort_order': String,
+      'uid': String,
       'display_date':
         {
           type: Boolean,
@@ -78,6 +79,10 @@
 
         if (this.tag !== undefined) {
           data_url += '&Subject=' + this.tag
+        }
+
+        if (this.uid !== undefined) {
+          data_url += '&UID=' + this.uid
         }
 
         this.$log.debug(data_url + ' generated');
