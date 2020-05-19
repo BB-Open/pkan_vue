@@ -19,62 +19,42 @@
   import {SEARCH_URL} from "../../configs/routing";
   import entitydetail from "../entity/entitydetail";
   import {get_plone_data, write_aria_polite} from '../../mixins/utils';
+  import Plone from "../../mixins/Plone";
 
   export default {
     name: "publisher",
-    props: ['uid'],
+    mixins: [Plone],
     components: {
       entitydetail,
     },
-    data() {
-      return {
-        prefetched : false,
-        vuex_ns: 'Publisher',
-        result: {},
-        base_data_url: server_settings.PLONE_URL + '/@search?fullobjects=1',
-        item: {
-          title: 'Titel wird geladen.',
-          description: 'Beschreibung wird geladen.',
-          text: 'Text wird geladen.',
-          sparql_identifier: '',
-        },
-        view_url: SEARCH_URL,
-        alert_title: false,
+    computed: {
+      item: function () {
+        let result = this.plone_res_first;
+        if (result === undefined) {
+          result = {
+            title: 'Titel wird geladen.',
+            description: 'Beschreibung wird geladen.',
+            text: 'Text wird geladen.',
+            sparql_identifier: '',
+          }
+        } else {
+          this.$store.ep_set('breadcrumb', 'last_title', result.title);
+          write_aria_polite(this, 'Die Seite ' + result.title + ' wurde geladen.')
+        }
+        return result
       }
     },
+    created () {
+      this.view_url = SEARCH_URL;
+
+    },
+
     serverPrefetch() {
       this.$log.debug(this.vuex_ns + ' mounted');
-      this.generate_data_url();
-      return this.get_data();
     },
     mounted() {
       // Force the initialization
       this.$log.debug(this.vuex_ns + ' mounted');
-      if (this.prefetched === false) {
-        this.generate_data_url();
-        this.get_data()
-      }
-    },
-    methods: {
-      async get_data() {
-        await this.request_pages(this.data_url)
-      },
-      generate_data_url() {
-        this.data_url = this.base_data_url;
-
-        if (this.uid !== undefined) {
-          this.data_url += '&UID=' + this.uid
-        }
-        this.$log.debug(this.data_url + ' requested');
-      },
-      async request_pages(url) {
-
-        this.result = await get_plone_data(this, url)
-        this.item = await this.result.items[0];
-        await this.$store.set('breadcrumb/last_title', this.item.title);
-        await write_aria_polite(this, 'Die Seite ' + this.item.title + ' wurde geladen.');
-        this.prefetched = true
-      },
     },
   }
 </script>
