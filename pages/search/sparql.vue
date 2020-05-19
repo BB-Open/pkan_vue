@@ -15,6 +15,7 @@
   import SearchFieldMultiline from "../../components/controls/SearchFieldMultiline";
   import {SPARQL_URL} from "../../components/configs/routing";
   import {VUEX_NAMESPACE as SPARQL_NS} from '../../store/search_sparql'
+  import {VUEX_NAMESPACE as SEARCH_NS} from '../../store/search_detail'
 
   export default {
     name: 'Sparql',
@@ -22,16 +23,17 @@
       SparqlSearchBaseView,
       SearchFieldMultiline,
     },
-    data() {
-      return {
-        placeholder: 'SPARQL Query',
-        next_view: SPARQL_URL,
-        sparql_ns: SPARQL_NS
-      }
+    created() {
+      
+        this.placeholder =  'SPARQL Query';
+        this.next_view =  SPARQL_URL;
+        this.sparql_ns =  SPARQL_NS;
+      this.search_ns = SEARCH_NS
     },
     beforeRouteLeave (to, from, next) {
       if (!to.path.includes('search')) {
-        this.$store.commit(this.sparql_ns + '/'+ 'RESET_ALL')
+        this.$store.commit(this.sparql_ns + '/'+ 'RESET_ALL');
+        this.$store.commit(this.search_ns + '/' + 'RESET_ALL')
       }
       next()
     },
