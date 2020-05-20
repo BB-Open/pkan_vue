@@ -35,7 +35,6 @@
 </template>
 
 <script>
-  import {EV} from "../configs/events";
   import {sync} from "vuex-pathify";
 
   export default {
