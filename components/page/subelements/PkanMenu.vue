@@ -139,10 +139,12 @@
       position: relative;
       display: block;
       background-color: #C73C35;
+      border: none;
     }
 
     .menu .icon_box button {
       background-color: #C73C35;
+      border: none
     }
 
     .menu .icon_box p {
@@ -169,6 +171,11 @@
       background-color: white;
     }
 
+    .menu.responsive ul {
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
     .menu .router-link {
       display: none;
     }
@@ -180,14 +187,16 @@
       padding: 1px;
     }
 
-    .menu.responsive .router-link {
+    .menu.responsive ul li .router-link {
       float: none;
       display: block;
       text-align: left;
       padding-left: 5px;
+      width: 100vw;
+      background-color: #f5f5f5;
     }
 
-    .menu.responsive .hidebigscreen {
+    .menu.responsive ul li .hidebigscreen {
       display: block;
     }
 
