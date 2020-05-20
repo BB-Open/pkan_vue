@@ -13,7 +13,8 @@ export const state = () => ({
   batch_end: 1,
   results: [],
   batch_results: {},
-  result_count: 0,
+  // null to differentiate between 0 results and nothing loaded
+  result_count: null,
   error: '',
 });
 

@@ -94,6 +94,9 @@
       result_count: function () {
         let result = this.$store.ep_get(this.vuex_ns, 'result_count');
         console.log('result count: ' + result);
+        if (result === null) {
+          this.get_data()
+        }
         return result
       },
       error: function () {
@@ -112,12 +115,6 @@
     },
     components: {
       BPagination,
-    },
-    serverPrefetch() {
-        return this.get_data();
-    },
-    mounted() {
-      this.get_data();
     },
     methods: {
       get_nuxt_link(id) {

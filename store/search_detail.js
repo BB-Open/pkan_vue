@@ -16,7 +16,7 @@ export const state = () => ({
   batch_end: 1,
   batch_results: {},
   results: [],
-  result_count: 0,
+  result_count: null,
   error: '',
 });
 

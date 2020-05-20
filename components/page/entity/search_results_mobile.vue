@@ -59,6 +59,9 @@
       result_count: function () {
         let result = this.$store.ep_get(this.vuex_ns, 'result_count');
         this.$log.debug('result count: ' + result);
+        if (result === null) {
+          this.get_data()
+        }
         return result
       },
       result: function () {
