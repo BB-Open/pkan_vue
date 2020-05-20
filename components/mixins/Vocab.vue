@@ -14,7 +14,8 @@
       vocab : function () {
         let result = this.$store.ep_get(this.vocab_ns, this.vocab_prop)
         if (result === undefined) {
-          return this.set_voc()
+          this.set_voc();
+          return []
         }
         return result
       }

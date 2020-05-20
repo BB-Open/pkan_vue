@@ -11,18 +11,15 @@
 
 <script>
   import {BFormSelect} from 'bootstrap-vue/src/components/form-select/form-select';
+  import Vocab from "../mixins/Vocab";
 
   export default {
     name: "Ordering",
     props : ['vuex_ns', 'vuex_prop'],
+    mixins: [Vocab],
     components: {
       BFormSelect,
 
-    },
-    data() {
-      return {
-        vocab_ordering: [],
-      }
     },
     computed: {
       selected: {
@@ -32,9 +29,19 @@
         get() {
           return this.$store.ep_get(this.vuex_ns , this.vuex_prop);
         },
-        vocab_ordering: function () {
-          return this.$store.ep_get('vocabularies/vocabularies', this.vuex_ns )
-        }
+
+      },
+      vocab_ordering: function () {
+        let vocab = this.vocab;
+        let result = [];
+        vocab.forEach(function(field){
+          result.push({
+            value: field.id,
+            text: field.text
+          })
+        }, this);
+
+        return result
       }
     },
   }

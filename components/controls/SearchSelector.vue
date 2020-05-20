@@ -61,7 +61,7 @@
     computed: {
       buttons: {
         get: function () {
-          let buttons = this.$store.ep_get(this.vocab_ns, this.vocab_prop);
+          let buttons = this.vocab;
           if (buttons === undefined) {
             return []
           }

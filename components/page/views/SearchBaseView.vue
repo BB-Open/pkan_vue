@@ -11,7 +11,7 @@
           </div>
           <div class="controls_overview">
             <div><h2>Suchergebnisse:</h2></div>
-            <ordering vuex_ns="search_detail" vuex_prop="order_by"></ordering>
+            <ordering vuex_ns="search_detail" vuex_prop="order_by" :vocab_ns="vocab_ns" vocab_prop='order_by'></ordering>
           </div>
 
           <div class="results hidesmallscreen">
@@ -62,6 +62,7 @@
   import {REQUEST_SEARCH_RESULTS} from "../../configs/socket";
   import {write_aria_polite} from "../../mixins/utils";
   import {VUEX_NAMESPACE as SEARCH_DETAIL_NS} from '../../../store/search_detail';
+  import {VUEX_NAMESPACE as VOCAB_NS} from "../../../store/vocabularies";
 
 
   export default {
@@ -76,7 +77,7 @@
     name: 'SearchBaseView',
     props: ['vuex_ns', 'display_info_column'],
     created() {
-
+        this.vocab_ns = VOCAB_NS;
         this.category_options = {
           vocab_name: 'category',
           number_displayed: 3
