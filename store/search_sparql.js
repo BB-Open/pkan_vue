@@ -12,6 +12,7 @@ export const state = () => ({
   batch_start: 0,
   batch_end: 1,
   results: [],
+  batch_results: {},
   result_count: 0,
   error: '',
 });
@@ -31,6 +32,11 @@ export const getters = {
       sparql: state.sparql_query,
       batch_start: state.batch_start,
       batch_end: state.batch_end,
+    }
+  },
+  search_params_no_batch: function (state) {
+    return {
+      sparql: state.sparql_query,
     }
   }
 };

@@ -6,7 +6,7 @@
         <div>{{error}}</div>
       </div>
     </div>
-    <p v-if="rows > 0">Es wurden insgesamt {{rows}} Ergebnisse gefunden</p>
+    <p v-if="result_count > 0">Es wurden insgesamt {{result_count}} Ergebnisse gefunden</p>
     <div v-infinite-scroll="load_more" infinite-scroll-disabled="busy" :infinite-scroll-distance="perPage">
       <ul class="nobull">
         <li v-for="item in result" :class="element_style_class">
@@ -25,117 +25,106 @@
 </template>
 
 <script>
-  import {EV} from "../../configs/events";
-  import {BATCH_SIZE, REQUEST_SEARCH_RESULTS, REQUEST_SEARCH_RESULTS_SPARQL} from "../../configs/socket";
+  import {BATCH_SIZE} from "../../configs/socket";
   import {BPagination} from 'bootstrap-vue'
   import {get_flask_data, write_aria_polite} from '../../mixins/utils';
 
   export default {
     name: "search_results_mobile",
     props: ['view_url', 'element_style_class', 'style_class', 'vuex_ns', 'request_type'],
-    data() {
-      return {
-        prefetched: false,
-        result: [],
-        result_batches: {},
-        rows: 0,
-        perPage: BATCH_SIZE,
-        max_batch_loaded: 0,
-        property_end: 'batch_end',
-        property_start: 'batch_start',
-        error: null,
-      }
-    },
-    computed: {
-      selected: {
-        set(selected) {
-          if (this.max_batch_loaded * this.perPage < this.rows) {
-            this.$store.ep_set(this.vuex_ns, this.property_end, selected);
-            this.$store.ep_set(this.vuex_ns, this.property_start, selected - 1);
-            this.max_batch_loaded = selected;
-          }
-
-        },
-        get() {
-          return this.$store.state[this.vuex_ns][this.property_end];
-        }
-      },
+    created() {
+      this.perPage = BATCH_SIZE;
+      this.property_end = 'batch_end';
+      this.property_start = 'batch_start';
     },
     components: {
-      BPagination,
+      BPagination
+    },
+    computed: {
+      pagination_page: {
+        set(pagination_page) {
+          this.$store.ep_set(this.vuex_ns, this.property_end, pagination_page);
+          this.$store.ep_set(this.vuex_ns, this.property_start, pagination_page - 1);
+        },
+        get() {
+          return this.$store.ep_get(this.vuex_ns, this.property_end);
+        }
+      },
+      batch_results: function () {
+        this.$log.debug(this.vuex_ns);
+        let result = this.$store.ep_get(this.vuex_ns, 'batch_results');
+        this.$log.debug(result);
+        return result
+      },
+      result_count: function () {
+        let result = this.$store.ep_get(this.vuex_ns, 'result_count');
+        this.$log.debug('result count: ' + result);
+        return result
+      },
+      result: function () {
+        let batch_results = this.batch_results;
+        let batch_keys = Object.keys(batch_results);
+               let data = [];
 
+               batch_keys.sort(function (a, b) {
+                 return a - b;
+               });
+               batch_keys.forEach(
+                 function (item) {
+                   data = data.concat(batch_results[item])
+                 }, this);
+               return data
+      },
+      error: function () {
+        return this.$store.ep_get(this.vuex_ns, 'error')
+      },
+      search_request_no_batch: {
+        get() {
+          return this.$store.ep_get(this.vuex_ns,'search_params_no_batch')
+        }
+      },
+      search_request: {
+        get() {
+          return this.$store.ep_get(this.vuex_ns,'search_params')
+        }
+      }
     },
-    serverPrefetch () {
-      return this.get_data();
-    },
-    mounted() {
-      this.init_events();
-      this.get_data();
+    watch: {
+      search_request_no_batch: async function (value) {
+        await this.get_initial_data()
+      }
     },
     methods: {
       get_nuxt_link(id) {
         return this.view_url + '/' + encodeURIComponent(id)
       },
-      get_display_result() {
-        let batch_keys = Object.keys(this.result_batches);
-        let data = [];
-
-        batch_keys.sort(function (a, b) {
-          return a - b;
-        });
-        batch_keys.forEach(
-          function (item) {
-            data = data.concat(this.result_batches[item])
-          }, this);
-        return data
-      },
-
       async get_data() {
-        var request = {}
-        if (this.request_type === REQUEST_SEARCH_RESULTS) {
-          request = Object.assign({}, this.$store.getters[this.vuex_ns + '/search']);
-        } else if (this.request_type === REQUEST_SEARCH_RESULTS_SPARQL) {
-          request = Object.assign({}, this.$store.getters[this.vuex_ns + '/search_sparql']);
-        }
-        var response = await get_flask_data(this, this.request_type, request )
-        return await this.handle_result(response)
-      },
-      async handle_result(data) {
-        this.result_batches[data.batch_start] = data.results;
-        this.rows = data.number_results;
-        this.result = this.get_display_result();
-        if (data.response_code === 400) {
-          this.error = data.error_message;
+        let request = this.search_request
+        var response = await get_flask_data(this, this.request_type, request);
+        await this.$store.ep_set(this.vuex_ns, 'batch_results@' + request.batch_start, response.results);
+        await this.$store.ep_set(this.vuex_ns, 'result_count', response.result_count);
+        if (response.response_code === 400) {
+          await this.$store.ep_set(this.vuex_ns, 'error', response.error_message)
         } else {
-          this.error = ''
+          await this.$store.ep_set(this.vuex_ns, 'error', '')
         }
-        write_aria_polite(this, 'Neue Suchergebnisse wurden geladen.');
-        this.prefetched = true
+        write_aria_polite(this, 'Neue Suchergebnisse wurden geladen.')
       },
-      init_events() {
-        this.$EventBus.$on(EV.RESET_SEARCH_TERMS, () => {
-          this.result_batches = {};
-          this.get_data()
-        });
-        this.$EventBus.$on(EV.CHANGED_SEARCH_TERMS, () => {
-          this.result_batches = {};
-          this.get_data()
-        });
-        this.$EventBus.$on(EV.CHANGED_BATCH, () => {
-          this.get_data()
-        });
+
+      async get_initial_data() {
+        this.pagination_page = 1;
+        await this.$store.ep_set(this.vuex_ns, 'batch_results', {});
+        await this.get_data();
       },
-      load_more() {
-        this.selected = this.max_batch_loaded + 1
+      async load_more() {
+        if (this.pagination_page * this.perPage < this.result_count) {
+          this.pagination_page += 1;
+          this.$log.debug('Load more, Page:');
+          this.$log.debug(this.pagination_page);
+          await this.get_data()
+        }
       }
-
-
-    },
-    beforeDestroy: function () {
-      this.$EventBus.$off(EV.RESET_SEARCH_TERMS);
-      this.$EventBus.$off(EV.CHANGED_SEARCH_TERMS);
-      this.$EventBus.$off(EV.CHANGED_BATCH);
-    },
+    }
   }
 </script>
 

@@ -14,9 +14,10 @@ export const state = () => ({
   search_date_period: [null, null],
   batch_start: 0,
   batch_end: 1,
+  batch_results: {},
   results: [],
   result_count: 0,
-  error: [],
+  error: '',
 });
 
 export const search_selector_fields = ['category_filter', 'file_format_filter', 'publisher_filter', 'license_filter']
@@ -52,6 +53,17 @@ export const getters = {
       order_by: state.order_by,
       batch_start: state.batch_start,
       batch_end: state.batch_end,
+      search_date_period: state.search_date_period,
+      search_phrase:state.search_phrase,
+    }
+  },
+  search_params_no_batch: function (state) {
+    return {
+      file_format: state.file_format_filter,
+      category: state.category_filter,
+      publisher: state.publisher_filter,
+      license: state.license_filter,
+      order_by: state.order_by,
       search_date_period: state.search_date_period,
       search_phrase:state.search_phrase,
     }

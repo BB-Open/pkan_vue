@@ -64,12 +64,10 @@
   export default {
     name: "search_results",
     props: ['view_url', 'element_style_class', 'style_class', 'vuex_ns', 'request_type'],
-    data() {
-      return {
-        perPage: BATCH_SIZE,
-        property_end: 'batch_end',
-        property_start: 'batch_start',
-      }
+    created() {
+        this.perPage = BATCH_SIZE;
+        this.property_end = 'batch_end';
+        this.property_start = 'batch_start';
     },
     computed: {
       pagination_page: {
