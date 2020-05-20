@@ -1,6 +1,6 @@
 import { make } from 'vuex-pathify'
 
-export const VUEX_NAMESPACE = "breadcrumb"
+export const VUEX_NAMESPACE = "breadcrumb";
 
 export const state = () => ({
 // used in all views

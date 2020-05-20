@@ -84,7 +84,7 @@
       this.$log.debug(this.name + ' mounted');
       this.$store.ep_set(this.breadcrumb_ns, 'currentView', this.breadcrumb);
       if (this.ignore_last_title === undefined) {
-        this.$store.ep_set(this.breadcrumb_ns,'last_title', null)
+        this.$store.ep_set(this.breadcrumb_ns, 'last_title', null)
       }
     },
   }

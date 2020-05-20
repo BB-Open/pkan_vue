@@ -14,29 +14,19 @@
 
 <script>
   import {PATHS_FOR_BREADCRUMB, TITLES_FOR_BREADCRUMB} from "../../configs/routing";
+  import {VUEX_NAMESPACE} from "../../../store/breadcrumb";
 
   export default {
     name: "Breadcrumb",
     computed: {
       breadcrumb_elements: function () {
-        return this.get_breadcrumbs()
-      },
-      breadcrumb_clear: function () {
-        return this.get_clean_breadcrumbs()
-      }
-    },
-    mounted() {
-      // Force the initialization
-    },
-
-    methods: {
-      get_breadcrumbs() {
         let breadcrumbs = ['Start'];
-        breadcrumbs = breadcrumbs.concat(this.$store.getters['BreadCrumb' + '/breadcrumb']);
+        let elements = this.$store.ep_get(VUEX_NAMESPACE, 'breadcrumb');
+        breadcrumbs = breadcrumbs.concat(elements);
         return breadcrumbs
       },
-      get_clean_breadcrumbs() {
-        let clean_breadcrumbs = []
+      breadcrumb_clear: function () {
+        let clean_breadcrumbs = [];
         this.breadcrumb_elements.forEach(
           function (item) {
             let url = null;
@@ -58,9 +48,8 @@
             }
 
           });
-          return clean_breadcrumbs
-
-      },
+        return clean_breadcrumbs
+      }
     },
   }
 </script>
