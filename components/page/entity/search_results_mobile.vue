@@ -9,14 +9,14 @@
     <p v-if="result_count > 0">Es wurden insgesamt {{result_count}} Ergebnisse gefunden</p>
     <div v-infinite-scroll="load_more" infinite-scroll-disabled="busy" :infinite-scroll-distance="perPage">
       <ul class="nobull">
-        <li v-for="item in result" :class="element_style_class">
+        <li v-for="item in combined_batches" :class="element_style_class">
           <h3 class="element_title">{{ item.type}}: {{ item.title }}</h3>
           <p class="element_description">{{ item.description }}</p>
           <p>
             <NuxtLink :to="get_nuxt_link(item.id)" :aria-label="item.type + ' ' +item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
           </p>
         </li>
-        <li v-if="!result.length">
+        <li v-if="!combined_batches.length">
           <p>Es wurden keine Suchergebnisse gefunden.</p>
         </li>
       </ul>
@@ -64,7 +64,7 @@
         }
         return result
       },
-      result: function () {
+      combined_batches: function () {
         let batch_results = this.batch_results;
         let batch_keys = Object.keys(batch_results);
                let data = [];
@@ -81,19 +81,19 @@
       error: function () {
         return this.$store.ep_get(this.vuex_ns, 'error')
       },
-      search_request_no_batch: {
+      search_params_no_batch: {
         get() {
           return this.$store.ep_get(this.vuex_ns,'search_params_no_batch')
         }
       },
-      search_request: {
+      search_params: {
         get() {
           return this.$store.ep_get(this.vuex_ns,'search_params')
         }
       }
     },
     watch: {
-      search_request_no_batch: async function (value) {
+      search_params_no_batch: async function (value) {
         await this.get_initial_data()
       }
     },
@@ -102,9 +102,9 @@
         return this.view_url + '/' + encodeURIComponent(id)
       },
       async get_data() {
-        let request = this.search_request
-        var response = await get_flask_data(this, this.request_type, request);
-        await this.$store.ep_set(this.vuex_ns, 'batch_results@' + request.batch_start, response.results);
+        let params = this.search_params;
+        var response = await get_flask_data(this, this.request_type, params);
+        await this.$store.ep_set(this.vuex_ns, 'batch_results@' + params.batch_start, response.results);
         await this.$store.ep_set(this.vuex_ns, 'result_count', response.result_count);
         if (response.response_code === 400) {
           await this.$store.ep_set(this.vuex_ns, 'error', response.error_message)

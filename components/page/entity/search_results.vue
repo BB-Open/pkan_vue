@@ -102,14 +102,14 @@
       error: function () {
         return this.$store.ep_get(this.vuex_ns, 'error')
       },
-      search_request: {
+      search_params: {
         get() {
           return this.$store.ep_get(this.vuex_ns,'search_params')
         }
       }
     },
     watch: {
-      search_request: async function (value) {
+      search_params: async function (value) {
         await this.get_data()
       }
     },
@@ -121,7 +121,7 @@
         return this.view_url + '/' + encodeURIComponent(id)
       },
       async get_data() {
-        var response = await get_flask_data(this, this.request_type, this.search_request);
+        var response = await get_flask_data(this, this.request_type, this.search_params);
         await this.$store.ep_set(this.vuex_ns, 'results', response.results);
         await this.$store.ep_set(this.vuex_ns, 'result_count', response.result_count);
         if (response.response_code === 400) {
