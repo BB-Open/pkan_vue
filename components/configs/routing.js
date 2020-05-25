@@ -22,10 +22,10 @@ export const TITLES_FOR_BREADCRUMB = {
   'Impressum': 'Impressum',
   'Blog': 'Blog',
   'Publisher': 'Datenbereitsteller',
-  'Sparql': 'SPARQL',
+  'sparql_ns': 'SPARQL',
   'Accessibility': 'Barrierefreiheit',
   'Contact': 'Kontakt',
   'DataProtection': 'Datenschutz',
   'FAQ': 'Antworten',
-  'DetailSearch': 'Detailsuche'
+  'search_detail': 'Detailsuche',
 };

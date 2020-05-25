@@ -50,8 +50,7 @@
     methods: {
 
       handle_click(category) {
-        this.$store.commit(this.target_ns + '/'+ 'SET_FILTER_STATE',
-          { filter:this.target_prop, category:category, new_state: INCLUDE});
+        this.$store.ep_set(this.target_ns, this.target_prop, category);
         this.$router.push(DETAIL_SEARCH_URL);
       },
     }

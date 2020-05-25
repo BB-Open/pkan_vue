@@ -25,7 +25,7 @@
       <p>DatenAdler.de</p></div>
     <ul>
       <li>
-        <nuxt-link class="router-link" to="/">Start</nuxt-link>
+        <nuxt-link class="router-link" to="/" >Start</nuxt-link>
         <hr class="hidebigscreen"/>
       </li>
       <li>
@@ -33,11 +33,11 @@
         <hr class="hidebigscreen"/>
       </li>
       <li>
-        <nuxt-link class="router-link" to="/blog">Blog</nuxt-link>
+        <nuxt-link class="router-link inexact" to="/blog">Blog</nuxt-link>
         <hr class="hidebigscreen"/>
       </li>
       <li>
-        <nuxt-link class="router-link" to="/publisher">Datenbereitsteller</nuxt-link>
+        <nuxt-link class="router-link inexact" to="/publisher">Datenbereitsteller</nuxt-link>
         <hr class="hidebigscreen"/>
       </li>
       <li>
@@ -110,7 +110,12 @@
 
   .router-link:hover,
   .router-link:focus,
-  .nuxt-link-active {
+  .nuxt-link-exact-active {
+    background-color: white;
+    color: #C73C35;
+  }
+
+  .router-link.inexact.nuxt-link-active{
     background-color: white;
     color: #C73C35;
   }
