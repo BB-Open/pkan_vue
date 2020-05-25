@@ -11,11 +11,11 @@
 </template>
 
 <script>
-  import SparqlSearchBaseView from "../../components/page/views/SparqlSearchBaseView";
-  import SearchFieldMultiline from "../../components/controls/SearchFieldMultiline";
-  import {SPARQL_URL} from "../../components/configs/routing";
-  import {VUEX_NAMESPACE as SPARQL_NS} from '../../store/search_sparql'
-  import {VUEX_NAMESPACE as SEARCH_NS} from '../../store/search_detail'
+  import SparqlSearchBaseView from "../components/page/views/SparqlSearchBaseView";
+  import SearchFieldMultiline from "../components/controls/SearchFieldMultiline";
+  import {SPARQL_URL} from "../components/configs/routing";
+  import {VUEX_NAMESPACE as SPARQL_NS} from '../store/search_sparql'
+  import {VUEX_NAMESPACE as SEARCH_NS} from '../store/search_detail'
 
   export default {
     name: 'Sparql',

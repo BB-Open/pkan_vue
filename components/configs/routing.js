@@ -10,11 +10,11 @@ export const PATHS_FOR_BREADCRUMB = {
   'Impressum': '/impressum',
   'Blog': '/blog',
   'Publisher': '/publisher',
-  'Sparql': '/search/sparql',
+  'sparql_ns': '/sparql_search',
   'Accessibility': '/accessibility',
   'DataProtection': '/data_protection',
   'FAQ': '/faq',
-  'DetailSearch': '/search/detail_search'
+  'search_detail': '/search/detail_search'
 };
 export const TITLES_FOR_BREADCRUMB = {
   'Start': 'Start',
