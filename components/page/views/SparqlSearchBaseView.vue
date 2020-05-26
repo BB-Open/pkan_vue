@@ -18,7 +18,7 @@
             <search_results_mobile :vuex_ns="sparql_ns" :view_url="view_url" :request_type="request_type"
                                    v-if="$mq === 'mobile'"></search_results_mobile>
           </div>
-          <noscript>Um die Suche zu verwenden, aktivieren Sie bitte JavaScript.</noscript>
+          <noscript><br/>Um die Suche zu verwenden, aktivieren Sie bitte JavaScript.</noscript>
         </div>
       </div>
     </template>
