@@ -129,8 +129,12 @@
         } else {
           await this.$store.ep_set(this.vuex_ns, 'error', '')
         }
-        write_aria_polite(this, 'Neue Suchergebnisse wurden geladen.')
+        write_aria_polite(this, 'Neue Suchergebnisse wurden geladen.');
+        return response;
       },
+    },
+    serverPrefetch() {
+      return this.get_data();
     }
   }
 </script>
