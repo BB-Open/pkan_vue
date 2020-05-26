@@ -17,13 +17,11 @@
       entitydetail,
       BaseView
     },
-    data() {
-      return {
-        vuex_ns: 'Entity',
-        breadcrumb: 'DetailSearch',
-        view_url: SEARCH_URL,
-        alert_title: true,
-      }
+    created() {
+        this.vuex_ns = 'Entity';
+        this.breadcrumb = 'search_detail';
+        this.view_url = SEARCH_URL;
+        this.alert_title = true;
     },
     mounted() {
       this.$log.debug(this.name + ' mounted');
