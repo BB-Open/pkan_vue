@@ -22,6 +22,7 @@
             <search_results_mobile vuex_ns="search_detail" :view_url="view_url" :request_type="request_type"
                                    v-if="$mq === 'mobile'"></search_results_mobile>
           </div>
+          <noscript>Um die Suche zu verwenden, aktivieren Sie bitte JavaScript.</noscript>
         </div>
         <section class="controls" aria-labelledby="controls_heading" aria-describedby="controls_description">
           <h2 id="controls_heading">Kriterien</h2>
