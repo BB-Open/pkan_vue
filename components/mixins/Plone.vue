@@ -92,7 +92,7 @@
       ,
     },
     serverPrefetch() {
-//      return this.set_voc()
+      return this.set_plone()
     },
     mounted() {
 //      this.set_voc()

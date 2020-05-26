@@ -22,15 +22,15 @@
     },
     methods :{
       async set_voc () {
-        var response = await get_flask_data(this, REQUEST_VOCAB,{vocab: this.vocab_prop})
-        var vocab = response.vocab
-        vocab.sort((a, b) => a.text.localeCompare(b.text))
-        this.$store.ep_set(this.vocab_ns, this.vocab_prop, vocab)
+        var response = await get_flask_data(this, REQUEST_VOCAB,{vocab: this.vocab_prop});
+        var vocab = response.vocab;
+        vocab.sort((a, b) => a.text.localeCompare(b.text));
+        this.$store.ep_set(this.vocab_ns, this.vocab_prop, vocab);
         return vocab
       }
     },
     serverPrefetch() {
-//      return this.set_voc()
+      return this.set_voc()
     },
     mounted() {
 //      this.set_voc()
