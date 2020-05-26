@@ -12,7 +12,7 @@
     },
     computed : {
       vocab : function () {
-        let result = this.$store.ep_get(this.vocab_ns, this.vocab_prop)
+        let result = this.$store.ep_get(this.vocab_ns, this.vocab_prop);
         if (result === undefined) {
           this.set_voc();
           return []
