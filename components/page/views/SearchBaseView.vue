@@ -138,7 +138,7 @@
   }
 
   #controls_heading {
-    font-size: 2em;
+    font-size: 2rem;
   }
 
   @media (max-width: 640px) {
