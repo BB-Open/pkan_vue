@@ -3,6 +3,7 @@
     <form  @submit.prevent="">
       <label class="biglabel">{{ title }}:<br/>
       </label>
+      <button class="hidden_help_text" type="submit" @click="">Speichern</button>
     </form>
     <div class="visible_buttons">
       <search-selector-button v-for="item in visible_buttons" v-bind:key="item.id"

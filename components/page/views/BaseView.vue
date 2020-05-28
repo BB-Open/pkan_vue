@@ -19,7 +19,7 @@
                             :display_title="false"></plonepage_search>
         </aside>
       </main>
-      <main class="content_container" v-if="!display_info_column">
+      <main class="content_container" v-if="!display_info_column" id="maincontent">
         <pkan-status></pkan-status>
         <form v-if="this.display_search" @submit.prevent="">
           <search-field-single-line vuex_prop="search_phrase" :vuex_ns="search_ns"

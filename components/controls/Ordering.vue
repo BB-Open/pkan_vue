@@ -4,6 +4,7 @@
       <label aria-label="Wählen Sie die Sortierreihenfolge der Suchergebnisse.">Sortieren nach:<br/>
         <b-form-select v-model="selected" :options="vocab_ordering" class="mb-3"
                        :key="vuex_ns + vuex_prop + 'select'"/>
+        <button class="hidden_help_text" type="submit" @click="">Speichern</button>
       </label>
     </form>
   </div>

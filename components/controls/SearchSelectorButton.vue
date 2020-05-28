@@ -2,7 +2,7 @@
       <button v-bind:class="{ button_add: item.state === INCLUDE,
                               button_remove: item.state === EXCLUDE,
                               criteria_button_unselected: item.state === NEUTRAL}"
-              :id="item" @click='button_clicked(item)'>
+              :id="item.id" @click='button_clicked(item)'>
         <div class="twocolumncontent">
           <div class="search_selector_iconcontainer">
             <i class="fa fa-check-circle search_selector_icon" aria-label="Ausgewählt" v-if="item.state === INCLUDE"></i>

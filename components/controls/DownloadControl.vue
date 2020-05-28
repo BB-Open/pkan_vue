@@ -13,6 +13,7 @@
           Schritte:<br/>
           <b-form-select :options="vocab_count" class="mb-3" key="count_select" v-model="count"/>
         </label>
+        <button class="hidden_help_text" type="submit" @click="">Speichern</button>
       </form>
     </div>
     <div class="download_url_container">

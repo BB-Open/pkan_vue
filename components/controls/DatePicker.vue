@@ -19,6 +19,7 @@
         <button type="button" class="button" @click="reset()" aria-label="Zurück setzen für die Datumsfelder">Zurück
           setzen
         </button>
+        <button class="hidden_help_text" type="submit" @click="">Speichern</button>
       </form>
     </div>
   </div>
