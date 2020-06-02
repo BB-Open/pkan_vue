@@ -69,7 +69,7 @@
       </div>
     </div>
     <div class="footer-line">
-      <div class="footer-line-text hidesmallscreen"><span>2019 | Land Brandenburg</span></div>
+      <div class="footer-line-text hidesmallscreen"><span>{{year}} | Land Brandenburg</span></div>
       <div class="footer-line-left">
         <nuxt-link to="/accessibility">Barrierefreiheit</nuxt-link>
         |
@@ -90,6 +90,9 @@
     components: {
       Breadcrumb,
     },
+    created() {
+      this.year = new Date().getFullYear();
+    }
   }
 </script>
 
