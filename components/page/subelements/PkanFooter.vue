@@ -40,9 +40,23 @@
               <hr class="hidesmallscreen"/>
             </li>
             <li>
-              <a class="footerelementlink" href="http://plone.com/"><span
-                class="hidden_help_text">Dokumentation zum </span>
-                Plone CMS
+              <a class="footerelementlink" href="https://nuxtjs.org/"><span
+                class="hidden_help_text">Dokumentation zu </span>
+                Nuxt JS
+              </a>
+              <hr class="hidesmallscreen"/>
+            </li>
+            <li>
+              <a class="footerelementlink" href="https://blazegraph.com/"><span
+                class="hidden_help_text">Dokumentation zur </span>
+                Blazegraph Datenbank
+              </a>
+              <hr class="hidesmallscreen"/>
+            </li>
+            <li>
+              <a class="footerelementlink" href="https://flask.palletsprojects.com/en/1.1.x/"><span
+                class="hidden_help_text">Dokumentation zu </span>
+                Flask
               </a>
             </li>
           </ul>
