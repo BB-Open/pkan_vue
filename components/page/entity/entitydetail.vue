@@ -2,14 +2,16 @@
   <div :class="style_class">
     <h1>{{title}}</h1>
     <p class="description">{{description}}</p>
-    <a :href="id">Originallink aufrufen</a>
-    <h2>Download:</h2>
+    <a :href="id">Originallink des Datensatzes aufrufen</a>
+    <a v-if="download_url" :href="download_url">Den Download der Originaldaten aufrufen</a>
+    <h2>RDF-Download:</h2>
     <download-control :id="id"></download-control>
     <h2>Felder:</h2>
     <ul class="nobull" v-if="result_fields.length">
       <li v-for="item in result_fields" :class="element_style_class">
         <p class="element_title">{{ get_label(item.field) }}:</p>
-        <p class="element_description">{{item.value}}</p>
+        <p class="element_description" v-if="!item.is_url">{{item.value}}</p>
+        <a class="element_description" :href="item.value" v-if="item.is_url">{{item.value}}</a>
       </li>
     </ul>
     <div v-if="!result_fields.length">
@@ -43,6 +45,7 @@
     props: ['id', 'view_url', 'element_style_class', 'style_class', 'alert_title'],
     data() {
       return {
+        download_url: '',
         result_fields: [],
         labels: {},
         result_networking: {},
@@ -65,12 +68,12 @@
         return this.view_url + '/' + encodeURIComponent(id)
       },
       async get_title() {
-        var response = await get_flask_data(this, REQUEST_ITEM_TITLE_DESC,  {id: this.id})
+        var response = await get_flask_data(this, REQUEST_ITEM_TITLE_DESC,  {id: this.id});
         return await this.handle_result_title(response)
 
       },
       async get_data() {
-        var response = await get_flask_data(this, REQUEST_ITEM_DETAIL,  {id: this.id})
+        var response = await get_flask_data(this, REQUEST_ITEM_DETAIL,  {id: this.id});
         return await this.handle_result_ttl(response)
 
       },
@@ -104,9 +107,13 @@
               // set field
               this.result_fields.push({
                   'field': p.nominalValue,
-                  'value': o.valueOf()
+                  'value': o.valueOf(),
+                  'is_url': o.valueOf().startsWith('http')
                 }
-              )
+              ); debugger;
+              if (p.nominalValue === 'http://www.w3.org/ns/dcat#downloadURL') {
+                this.download_url = o.valueOf()
+              }
             } else if (o instanceof rdf.NamedNode && s instanceof rdf.NamedNode && p instanceof rdf.NamedNode && o.nominalValue === this.id) {
               // related objects where o is our object
               await this.handle_network_id(s.nominalValue)
