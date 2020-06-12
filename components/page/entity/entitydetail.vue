@@ -109,10 +109,11 @@
               // set field
               this.result_fields.push({
                   'field': p.nominalValue,
-                  'value': o.valueOf(),
-                  'is_url': o.valueOf().startsWith('http')
+                  'value': o.nominalValue,
+                  'is_url': o.nominalValue.startsWith('http')
                 }
               );
+              this.$log.debug(o.nominalValue);
               if (p.nominalValue === 'http://www.w3.org/ns/dcat#downloadURL') {
                 this.download_url = o.valueOf()
               }
