@@ -1,5 +1,5 @@
 <template>
-  <base-view :voc_ns="voc_ns" :breadcrumb="breadcrumb_id" :display_search="true" :display_info_column="true">
+  <base-view :voc_ns="voc_ns" :display_search="true" :display_info_column="true">
     <template slot="content">
       <h1>Einfache Suche</h1>
       <vocab-box-order-by
@@ -31,7 +31,6 @@
     created() {
         this.voc_ns = voc_ns;
         this.search_ns = search_ns;
-        this.breadcrumb_id = 'Search'
     },
     mounted() {
       write_aria_polite(this, 'Die Seite einfache Suche wurde geladen.');

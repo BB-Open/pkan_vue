@@ -1,5 +1,5 @@
 <template>
-  <base-view :vuex_ns="name" :breadcrumb="breadcrumb" :display_search="true">
+  <base-view :vuex_ns="name" :display_search="true">
     <template slot="content">
       <plonepage_search :vuex_ns="plone_ns" :vuex_prop="tag"  :portal_type="pt" :sort_on="sort_on" :sort_order="sort_order" :tag="landing_tag"
                         content_class="columnsgrey"></plonepage_search>
@@ -42,7 +42,6 @@
         plone_ns: PLONE_NS,
         search_ns: SEARCH_NS,
         voc_ns: VOC_NS,
-        breadcrumb: null,
         view_url: BLOG_URL,
         sort_on: PLONE_INDEX_CREATED,
         sort_order: PLONE_REVERSE_ORDERING,

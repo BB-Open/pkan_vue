@@ -1,5 +1,5 @@
 <template>
-  <base-view :vuex_ns="vuex_ns" :breadcrumb="breadcrumb" :ignore_last_title="true" :display_info_column="true">
+  <base-view :vuex_ns="vuex_ns" :display_info_column="true">
     <template slot="content">
       <entitydetail :id="get_data()" :view_url="view_url" :alert_title="alert_title"></entitydetail>
     </template>
@@ -19,7 +19,6 @@
     },
     created() {
         this.vuex_ns = 'Entity';
-        this.breadcrumb = 'search_detail';
         this.view_url = SEARCH_URL;
         this.alert_title = true;
     },

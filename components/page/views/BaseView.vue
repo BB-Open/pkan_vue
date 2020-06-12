@@ -63,7 +63,7 @@
       plonepage_search,
       PkanStatus,
     },
-    props: ['vuex_ns', 'breadcrumb', 'ignore_last_title', 'display_info_column', "display_search"],
+    props: ['vuex_ns', 'display_info_column', "display_search"],
     created() {
       
       this.placeholder = 'In den Datensätzen suchen';
@@ -77,15 +77,11 @@
       this.pt = PLONE_PT_DOCUMENT;
       this.landing_tag = PLONE_TAG_LANDING;
       this.side_tag = PLONE_TAG_SIDETEXT;
-      
+      set_error_message(this, '');
     },
     mounted() {
-      set_error_message(this, '');
-      this.$log.debug(this.name + ' mounted');
-      this.$store.ep_set(this.breadcrumb_ns, 'currentView', this.breadcrumb);
-      if (this.ignore_last_title === undefined) {
-        this.$store.ep_set(this.breadcrumb_ns, 'last_title', null)
-      }
+
+
     },
   }
 </script>

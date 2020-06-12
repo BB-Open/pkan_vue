@@ -1,53 +1,63 @@
 <template>
   <div class="breadcrumb" aria-label="Pfadangabe">
-    <p><span class="describer">Sie sind hier: </span> <span v-for="item in breadcrumb_elements">
-      <span v-if="item in breadcrumb_clear">
-        <span v-if="item !== 'Start'"> <i class="fa fa-caret-right"></i> </span>
+    <p><span class="describer">Sie sind hier: </span>
+      <span v-for="item in breadcrumb_elements">
+        <span v-if="item !== '/'"> <i class="fa fa-caret-right"></i> </span>
         <span v-if="breadcrumb_clear[item].url"><nuxt-link class="" :to="breadcrumb_clear[item].url">{{breadcrumb_clear[item].title}}</nuxt-link></span>
         <span v-if="!breadcrumb_clear[item].url">{{breadcrumb_clear[item].title}}</span>
       </span>
-    </span>
 
     </p>
   </div>
 </template>
 
 <script>
-  import {PATHS_FOR_BREADCRUMB, TITLES_FOR_BREADCRUMB} from "../../configs/routing";
+  import {TITLES_FOR_BREADCRUMB} from "../../configs/routing";
+  import {remove_element_from_array} from "../../mixins/utils";
   import {VUEX_NAMESPACE} from "../../../store/breadcrumb";
 
   export default {
     name: "Breadcrumb",
+    created() {
+      this.vuex_ns = VUEX_NAMESPACE;
+      this.vuex_prop = 'titles';
+    },
     computed: {
       breadcrumb_elements: function () {
-        let breadcrumbs = ['Start'];
-        let elements = this.$store.ep_get(VUEX_NAMESPACE, 'breadcrumb');
-        breadcrumbs = breadcrumbs.concat(elements);
-        return breadcrumbs
+        let elements = this.$route.path.split('/');
+        let paths = [];
+        let path = '';
+        elements.forEach(
+          function (item) {
+            path += item;
+            path += '/';
+            paths.push(path)
+          }, this);
+        paths = remove_element_from_array(paths, '//');
+        return paths
       },
       breadcrumb_clear: function () {
-        let clean_breadcrumbs = [];
-        this.breadcrumb_elements.forEach(
-          function (item) {
-            let url = null;
-            let title = item;
+        let clean_breadcrumbs = {};
+        let elements = this.breadcrumb_elements;
 
-            if (item in PATHS_FOR_BREADCRUMB) {
-              url = PATHS_FOR_BREADCRUMB[item]
-            }
+        elements.forEach(
+          function (item) {
+            let url = item;
+            let title = null;
 
             if (item in TITLES_FOR_BREADCRUMB) {
               title = TITLES_FOR_BREADCRUMB[item]
+            } else {
+              let getter = this.vuex_ns + '/' + this.vuex_prop + '@' + item.slice(0, -1);
+              title = this.$store.get(getter);
             }
 
-            if (item !== undefined && item !== null) {
-              clean_breadcrumbs[item] = {
-                'url': url,
-                'title': title
-              }
+            clean_breadcrumbs[item] =  {
+              'url': url,
+              'title': title
             }
 
-          });
+          }, this);
         return clean_breadcrumbs
       }
     },

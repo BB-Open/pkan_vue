@@ -38,6 +38,7 @@
   import * as rdf from "rdf";
   import DownloadControl from "../../controls/DownloadControl";
   import {get_flask_data, write_aria_polite} from '../../mixins/utils';
+  import {VUEX_NAMESPACE} from "../../../store/breadcrumb";
 
   export default {
     name: "entitydetail",
@@ -80,7 +81,8 @@
       async handle_result_title(data) {
         this.title = data.title;
         this.description = data.description;
-        this.$store.ep_set('breadcrumb', 'last_title', this.title);
+        let setter = VUEX_NAMESPACE + '/titles@' + this.$route.path;
+        this.$store.set(setter, this.title);
         if (this.alert_title) {
           write_aria_polite(this, 'Die Seite ' + this.title + ' wurde geladen.')
         }
@@ -110,7 +112,7 @@
                   'value': o.valueOf(),
                   'is_url': o.valueOf().startsWith('http')
                 }
-              ); debugger;
+              );
               if (p.nominalValue === 'http://www.w3.org/ns/dcat#downloadURL') {
                 this.download_url = o.valueOf()
               }

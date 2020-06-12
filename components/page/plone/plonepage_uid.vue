@@ -10,6 +10,7 @@
 <script>
   import {removeSelfClosingTags, write_aria_polite} from '../../mixins/utils';
   import Plone from "../../mixins/Plone";
+  import {VUEX_NAMESPACE} from "../../../store/breadcrumb";
 
   export default {
     name: "plonepage_uid",
@@ -26,7 +27,8 @@
             }
           }
         } else {
-          this.$store.ep_set('breadcrumb', 'last_title', result.title);
+          let setter = VUEX_NAMESPACE + '/titles@' + this.$route.path;
+          this.$store.set(setter, result.title);
           write_aria_polite(this, 'Die Seite ' + result.title + ' wurde geladen.')
         }
         return result

@@ -1,5 +1,5 @@
 <template>
-  <base-view :vuex_ns="vuex_ns" :breadcrumb="vuex_ns" :display_info_column="true">
+  <base-view :vuex_ns="vuex_ns" :display_info_column="true">
     <template slot="content">
       <h1>{{ vuex_ns }}</h1>
       <plonelisting_url :view_url="view_url" :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order"

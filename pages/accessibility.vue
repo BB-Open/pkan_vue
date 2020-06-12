@@ -1,5 +1,5 @@
 <template>
-  <base-view :vuex_ns="vuex_ns" :breadcrumb="vuex_ns" :display_info_column="true">
+  <base-view :vuex_ns="vuex_ns" :display_info_column="true">
     <template slot="content">
       <plonepage_search :vuex_ns='plone_ns' :vuex_prop='tag' :portal_type="portal_type" :sort_on="sort_on" :sort_order="sort_order"
                         :tag="tag"></plonepage_search>

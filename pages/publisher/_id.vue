@@ -1,5 +1,5 @@
 <template>
-  <base-view :vuex_ns="vuex_ns" :breadcrumb="breadcrumb" :ignore_last_title="true" :display_info_column="true">
+  <base-view :vuex_ns="vuex_ns" :display_info_column="true">
     <template slot="content">
       <publisher :uid="get_data()" :vuex_ns="vuex_ns" :vuex_prop="get_data()"></publisher>
     </template>
@@ -19,8 +19,6 @@
     },
     created() {
         this.vuex_ns = PLONE_NS;
-        this.breadcrumb = 'Publisher'
-
     },
     methods: {
       get_data() {

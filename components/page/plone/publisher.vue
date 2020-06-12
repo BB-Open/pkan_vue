@@ -20,6 +20,7 @@
   import entitydetail from "../entity/entitydetail";
   import {get_plone_data, write_aria_polite} from '../../mixins/utils';
   import Plone from "../../mixins/Plone";
+  import {VUEX_NAMESPACE} from "../../../store/breadcrumb";
 
   export default {
     name: "publisher",
@@ -38,7 +39,8 @@
             sparql_identifier: '',
           }
         } else {
-          this.$store.ep_set('breadcrumb', 'last_title', result.title);
+          let setter = VUEX_NAMESPACE + '/titles@' + this.$route.path;
+          this.$store.set(setter, result.title);
           write_aria_polite(this, 'Die Seite ' + result.title + ' wurde geladen.')
         }
         return result

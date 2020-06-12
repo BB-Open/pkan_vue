@@ -1,5 +1,5 @@
 <template>
-  <base-view :vuex_ns="vuex_ns" :breadcrumb="breadcrumb" :ignore_last_title="true" :display_info_column="true">
+  <base-view :vuex_ns="vuex_ns" :display_info_column="true">
     <template slot="content">
       <plonepage_uid :uid="get_data()" :display_date="true" :vuex_ns="vuex_ns" :vuex_prop="get_data()"></plonepage_uid>
     </template>
@@ -19,7 +19,6 @@
       BaseView
     },
     created() {
-        this.breadcrumb = 'Blog';
         this.vuex_ns = PLONE_NS
     },
     mounted() {
