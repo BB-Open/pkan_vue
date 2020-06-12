@@ -48,7 +48,7 @@
     },
     created () {
       this.view_url = SEARCH_URL;
-
+      this.alert_title = false
     },
 
     serverPrefetch() {
