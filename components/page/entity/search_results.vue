@@ -26,9 +26,9 @@
     </div>
     <H2 v-if="result_count > 0">Es wurden insgesamt {{result_count}} Ergebnisse gefunden</H2>
 
-    <ul class="nobull">
+    <ol :start="offset">
       <li v-if="result_count > 0" v-for="(item, index) in results" :class="element_style_class" >
-        <h3 class="element_title">{{index + offset}}) {{ item.type}}: {{ item.title }}</h3>
+        <h3 class="element_title">{{ item.type}}: {{ item.title }}</h3>
         <p class="element_description">{{ item.description }}</p>
         <p>
           <NuxtLink :to="get_nuxt_link(item.id)" :aria-label="item.type + ' ' +item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
@@ -37,7 +37,7 @@
       <li v-if="result_count === 0">
         <h2>Es wurden keine Suchergebnisse gefunden.</h2>
       </li>
-    </ul>
+    </ol>
     <div v-bind:class="{hide: (result_count <= perPage || result_count === 0)}">
       <b-pagination
         v-model="pagination_page"
@@ -151,6 +151,11 @@
 
   .element_description {
     margin-bottom: 0;
+  }
+
+  ol ::marker {
+    content: counter(list-item) ")";
+    margin-right: 1ch;
   }
 
   .hide {
