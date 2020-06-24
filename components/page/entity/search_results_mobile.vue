@@ -8,7 +8,7 @@
     </div>
     <p v-if="result_count > 0">Es wurden insgesamt {{result_count}} Ergebnisse gefunden</p>
     <div v-infinite-scroll="load_more" infinite-scroll-disabled="busy" :infinite-scroll-distance="perPage">
-      <ul class="nobull">
+      <ol :strat="offset">
         <li v-for="item in combined_batches" :class="element_style_class">
           <h3 class="element_title">{{ item.type}}: {{ item.title }}</h3>
           <p class="element_description">{{ item.description }}</p>
@@ -19,7 +19,7 @@
         <li v-if="!combined_batches.length">
           <p>Es wurden keine Suchergebnisse gefunden.</p>
         </li>
-      </ul>
+      </ol>
     </div>
   </div>
 </template>
@@ -62,6 +62,12 @@
         if (result === null) {
           this.get_data()
         }
+        return result
+      },
+      offset: function () {
+        console.log(this.vuex_ns);
+        let result = this.$store.ep_get(this.vuex_ns, this.property_start) * this.perPage + 1;
+        console.log(result);
         return result
       },
       combined_batches: function () {
@@ -132,6 +138,10 @@
 </script>
 
 <style scoped>
+
+  ol ::marker {
+    content: counter(list-item) ")\00A0";
+  }
 
   .element_description {
     margin-bottom: 0;

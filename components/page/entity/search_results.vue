@@ -141,6 +141,10 @@
 
 <style scoped>
 
+  ol ::marker {
+    content: counter(list-item) ")\00A0";
+  }
+
   .element_title {
     margin-bottom: 10px;
   }
@@ -151,11 +155,6 @@
 
   .element_description {
     margin-bottom: 0;
-  }
-
-  ol ::marker {
-    content: counter(list-item) ")";
-    margin-right: 1ch;
   }
 
   .hide {
