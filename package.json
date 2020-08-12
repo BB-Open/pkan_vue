@@ -19,7 +19,7 @@
     "date-fns": "^1.30.1",
     "nuxt": "^2.12.2",
     "rdf": "^4.1.0",
-    "serialize-javascript": ">=2.1.1",
+    "serialize-javascript": ">=3.1.0",
     "uuid": "^3.3.3",
     "vue-infinite-scroll": "^2.0.2",
     "vue-mq": "^1.0.1",
