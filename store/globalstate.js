@@ -1,6 +1,6 @@
 import { make } from 'vuex-pathify'
 
-export const VUEX_NAMESPACE = "globalstate"
+export const VUEX_NAMESPACE = "globalstate";
 
 export const state = () => ({
   error_message: '',

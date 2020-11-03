@@ -10,15 +10,14 @@
 
       <div class="element_logo" v-if="item.logo"><img :src="item.logo.download" :alt="item.title + ' Logo'"/></div>
     </div>
-    <entitydetail :id="item.sparql_identifier" :view_url="view_url" v-if="item.sparql_identifier" :alert_title="alert_title"></entitydetail>
+    <entitydetail_included :id="item.sparql_identifier" :view_url="view_url" v-if="item.sparql_identifier" :alert_title="alert_title"></entitydetail_included>
   </div>
 </template>
 
 <script>
-  import {server_settings} from "../../configs/server_settings";
   import {SEARCH_URL} from "../../configs/routing";
-  import entitydetail from "../entity/entitydetail";
-  import {get_plone_data, write_aria_polite} from '../../mixins/utils';
+  import entitydetail_included from "../entity/entitydetail_included";
+  import {write_aria_polite} from '../../mixins/utils';
   import Plone from "../../mixins/Plone";
   import {VUEX_NAMESPACE} from "../../../store/breadcrumb";
 
@@ -26,7 +25,7 @@
     name: "publisher",
     mixins: [Plone],
     components: {
-      entitydetail,
+      entitydetail_included,
     },
     computed: {
       item: function () {

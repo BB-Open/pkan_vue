@@ -27,7 +27,6 @@
         let elements = this.$route.path.split('/');
         let paths = [];
         let path = '';
-        debugger;
         elements.forEach(
           function (item) {
             if (path.length > 0 && item === '') {
@@ -38,7 +37,6 @@
             paths.push(path)
           }, this);
         paths = remove_element_from_array(paths, '//');
-        debugger;
         return paths
       },
       breadcrumb_clear: function () {
