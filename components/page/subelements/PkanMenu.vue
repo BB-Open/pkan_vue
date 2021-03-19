@@ -44,11 +44,11 @@
         <nuxt-link class="router-link inexact" to="/search">Einfache Suche</nuxt-link>
         <hr class="hidebigscreen"/>
       </li>
-      <li>
+<!--      <li>
         <nuxt-link class="router-link" to="/sparql_search">SPARQL</nuxt-link>
         <hr class="hidebigscreen"/>
       </li>
-      <li>
+-->      <li>
         <nuxt-link to="/accessibility" class="router-link hidebigscreen">Barrierefreiheit</nuxt-link>
         <hr class="hidebigscreen"/>
       </li>
