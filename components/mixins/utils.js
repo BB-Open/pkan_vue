@@ -108,7 +108,7 @@ export async function get_flask_data(that, channel, params) {
   that.$axios.setHeader('Accept', 'application/json', ['get']);
   that.$axios.setHeader('Access-Control-Allow-Origin', '*', ['get']);
   try {
-    var url = server_settings.FLASK_URL + '/' + channel
+    var url = server_settings.FLASK_URL + '/' + channel;
     return await that.$axios.$post(url, params);
   } catch (e) {
     console.log(e.message);

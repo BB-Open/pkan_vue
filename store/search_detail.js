@@ -27,20 +27,24 @@ export const mutations = {
   ...make.mutations(state),
 
   SET_FILTER_STATE (state, {filter, category, new_state}) {
-    let new_filter = state[filter]
-    new_filter[category] = new_state
+    let new_filter = state[filter];
+    new_filter[category] = new_state;
     state[filter] = Object.assign({}, new_filter)
   },
   RESET_FILTER (state, {filter}) {
     state[filter] = {}
   },
   RESET_ALL (state) {
-    state['search_phrase'] = ''
-    state['search_date_period'] = ''
+    state['search_phrase'] = '';
+    state['search_date_period'] = '';
     search_selector_fields.forEach(function (filter) {
       state[filter] = {}
     })
-  }
+  },
+  RESET_SEARCH_RESULTS (state) {
+    state['result_count'] = null;
+    state['results'] = [];
+  },
 }
 
 export const getters = {

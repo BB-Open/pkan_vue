@@ -51,6 +51,7 @@
 
       handle_click(category) {
         this.$store.ep_set(this.target_ns, this.target_prop, category);
+        this.$store.commit(this.target_ns + '/' + 'RESET_SEARCH_RESULTS');
         this.$router.push(DETAIL_SEARCH_URL);
       },
     }
