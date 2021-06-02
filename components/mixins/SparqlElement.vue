@@ -132,16 +132,16 @@
               }
             } else if (o instanceof rdf.NamedNode && s instanceof rdf.NamedNode && p instanceof rdf.NamedNode && o.nominalValue === this.id) {
               // related objects where o is our object
-              await this.handle_network_id(s.nominalValue)
+              await this.handle_network_details(s.nominalValue)
 
             } else if (o instanceof rdf.NamedNode && s instanceof rdf.NamedNode && p instanceof rdf.NamedNode && s.nominalValue === this.id) {
               // related objects where s is our objects
-              await this.handle_network_id(o.nominalValue)
+              await this.handle_network_details(o.nominalValue)
 
             } else if (o instanceof rdf.NamedNode && s instanceof rdf.NamedNode && p instanceof rdf.NamedNode && p.nominalValue === this.id) {
               // related objects where p is our objects
-              await this.handle_network_id(o.nominalValue);
-              await this.handle_network_id(s.nominalValue)
+              await this.handle_network_details(o.nominalValue);
+              await this.handle_network_details(s.nominalValue)
 
             } else {
               // additional sparql not directly related to our object
@@ -166,8 +166,9 @@
         }
       },
       async handle_network_details(id) {
-
-        var data = await get_flask_data(this, REQUEST_ITEM_TITLE_DESC, {'id': id});
+        this.$log.info('fetching network details');
+        this.$log.info(id);
+        let data = await get_flask_data(this, REQUEST_ITEM_TITLE_DESC, {'id': id});
 
         let network = {
           'title': data.title,
@@ -176,19 +177,10 @@
           'id': id,
         };
         let setter = this.vuex_ns + '/networks@' + this.store_id + '.' + this.id_to_store_id(id);
+        this.$log.info('Got Response');
+        this.$log.info(data);
         await this.$store.set(setter, network);
         return data
-      },
-      async handle_network_id(id) {
-        let network = {
-          'title': id,
-          'description': '',
-          'type': 'Datentyp wird geladen',
-          'id': id,
-        };
-        let setter = this.vuex_ns + '/networks@' + this.store_id + '.' + this.id_to_store_id(id);
-        this.$store.set(setter, network);
-        return this.handle_network_details(id)
       },
       id_to_store_id(id) {
         id = id.split("/").join("");
