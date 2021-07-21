@@ -66,15 +66,22 @@
           <hr/>
           <ul class="nobull">
             <li>
+              <nuxt-link class="footerelementlink" to="/problem"
+              ><span class="hidden_help_text">Link zum Formular</span>
+                Probleme auf der Seite melden
+              </nuxt-link>
+              <hr class="hidesmallscreen"/>
+            </li>
+            <li>
               <a class="footerelementlink" href="http://www.brandenburg.de" target="_blank"
-              ><span class="hidden_help_text">Link zum </span>
+              ><span class="hidden_help_text">Link zur Seite</span>
                 Landesportal Brandenburg
               </a>
               <hr class="hidesmallscreen"/>
             </li>
             <li>
               <a class="footerelementlink" href="http://service.brandenburg.de" target="_blank"
-              ><span class="hidden_help_text">Link zum </span>
+              ><span class="hidden_help_text">Link zur Seite</span>
                 Serviceportal Brandenburg
               </a></li>
           </ul>

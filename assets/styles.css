@@ -506,6 +506,10 @@ select {
   overflow: hidden !important;
 }
 
+.textsearch_area_problem {
+  width: 100%;
+}
+
 .boxed_selector {
   border: 2px solid;
   border-color: #b3b3b3;
