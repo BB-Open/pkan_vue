@@ -2,16 +2,20 @@
   <div :class="style_class">
     <h2>OpenData: {{title}}</h2>
     <p class="description">{{description}}</p>
-    <a :href="id">Originallink des Datensatzes aufrufen</a>
-    <a v-if="download_url" :href="download_url">Den Download der Originaldaten aufrufen</a>
+    <!--    <a :href="id">Originallink des Datensatzes aufrufen</a>-->
+    <!--    <a v-if="download_url" :href="download_url">Den Download der Originaldaten aufrufen</a>-->
     <h3>RDF-Download:</h3>
     <download-control :id="id"></download-control>
     <h3>Felder:</h3>
     <ul class="nobull" v-if="result_fields.length">
+      <li :class="element_style_class">
+        <p class="element_title">Identifier:</p>
+        <p class="element_description">{{id}}</p>
+      </li>
       <li v-for="item in result_fields" :class="element_style_class">
         <p class="element_title">{{ item.field }}:</p>
-        <p class="element_description" v-if="!item.is_url">{{item.value}}</p>
-        <a class="element_description" :href="item.value" v-if="item.is_url">{{item.value}}</a>
+        <p class="element_description">{{item.value}}</p>
+        <!--        <a class="element_description" :href="item.value" v-if="item.is_url">{{item.value}}</a>-->
       </li>
     </ul>
     <div v-if="!result_fields.length">
