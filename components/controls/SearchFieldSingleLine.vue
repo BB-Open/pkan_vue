@@ -34,24 +34,30 @@
 <script>
   import {sync} from "vuex-pathify";
 
+
   export default {
     name: 'SearchFieldSingleLine',
-    props: ['vuex_ns', 'vuex_prop', 'place_holder', 'vuex_ns', 'next_view', 'rows', 'button_label', 'label', 'hidden_label'],
+    props: ['vuex_ns', 'vuex_prop', 'place_holder', 'next_view', 'rows', 'button_label', 'label', 'hidden_label'],
     components: {},
     computed: {
-      /* Caution! Here the value of the VUEX_store has to be hard coded since the
-      sync statement is run at compile time. There is no "this" at this time.
-      With the colon-syntax :vuex_prop pathify will generate a reference to
-      this.vuex_prop. But the name of the store to use must be hard coded as string.
-      */
-      search_string : sync('search_detail/:vuex_prop')
+      search_string: {
+        set(search_string) {
+          this.$log.info(search_string);
+          this.$store.ep_set(this.vuex_ns, this.vuex_prop, search_string);
+          this.$store.commit(this.vuex_ns + '/' + 'RESET_SEARCH_RESULTS')
+
+        },
+        get() {
+          return this.$store.ep_get(this.vuex_ns, this.vuex_prop);
+        }
+      },
     },
     methods: {
       filter_criteria() {
         if (this.search_string === '') {
           console.log('keywords sind leer')
         } else {
-          console.log('keywords gefunden')
+          console.log('keywords gefunden');
           if (this.$route.path !== this.next_view) {
             this.$router.push(this.next_view);
           }

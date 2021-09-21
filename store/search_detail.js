@@ -58,7 +58,7 @@ export const getters = {
       batch_start: state.batch_start,
       batch_end: state.batch_end,
       search_date_period: state.search_date_period,
-      search_phrase:state.search_phrase,
+      search_phrase: state.search_phrase,
     }
   },
   search_params_no_batch: function (state) {
