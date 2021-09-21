@@ -93,6 +93,7 @@ export async function get_plone_data(that, url) {
   that.$axios.setHeader('Content-Type', 'application/json', ['get']);
   that.$axios.setHeader('Accept', 'application/json', ['get']);
   that.$axios.setHeader('Access-Control-Allow-Origin', '*', ['get']);
+  that.$axios.setHeader('Access-Control-Request-Method', 'GET', ['get'])
   try {
     return await that.$axios.$get(url);
   } catch (e) {
