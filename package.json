@@ -29,7 +29,8 @@
     "vuejs-logger": "^1.5.4",
     "vuex-pathify": "^1.4.1",
     "vue-axios": "^2.1.5",
-    "vue": "^2.6.14"
+    "vue": "^2.6.14",
+    "axios": "^0.19.0"
   },
   "devDependencies": {
     "ava": "^3.8.2",
