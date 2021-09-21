@@ -3,7 +3,7 @@
     <h2>OpenData: {{title}}</h2>
     <p class="description">{{description}}</p>
     <!--    <a :href="id">Originallink des Datensatzes aufrufen</a>-->
-    <!--    <a v-if="download_url" :href="download_url">Den Download der Originaldaten aufrufen</a>-->
+    <a v-if="download_url" :href="download_url">Den Download der Originaldaten aufrufen</a>
     <h3>RDF-Download:</h3>
     <download-control :id="id"></download-control>
     <h3>Felder:</h3>
