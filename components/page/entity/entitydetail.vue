@@ -3,7 +3,7 @@
     <h1>{{title}}</h1>
     <p class="description">{{description}}</p>
 <!--    <a :href="id">Originallink des Datensatzes aufrufen</a>-->
-<!--    <a v-if="download_url" :href="download_url">Den Download der Originaldaten aufrufen</a>-->
+    <a v-if="download_url" :href="download_url">Den Download der Originaldaten aufrufen</a>
     <h2>RDF-Download:</h2>
     <download-control :id="id"></download-control>
     <h2>Felder:</h2>

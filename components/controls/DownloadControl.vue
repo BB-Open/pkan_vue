@@ -5,14 +5,6 @@
         <label aria-label="Wählen sie ein Dateiformat für den Download">Dateiformat:<br/>
           <b-form-select :options="vocab_format" class="mb-3" key="format_select" v-model="file_format"/>
         </label>
-        <label aria-label="Wählen sie aus, wie die Daten ausgewählt werden sollen.">Download Art:<br/>
-          <b-form-select :options="vocab_type" class="mb-3" key="download_type_select" v-model="download_type"/>
-        </label>
-        <label aria-label="Wählen Sie aus, wie viele Unterelemente des Graphen ausgewählt werden sollen."
-               v-if="this.download_type==='graph'">Anzahl der
-          Schritte:<br/>
-          <b-form-select :options="vocab_count" class="mb-3" key="count_select" v-model="count"/>
-        </label>
         <button class="hidden_help_text" type="submit" @click="">Speichern</button>
       </form>
     </div>
@@ -44,15 +36,6 @@
         value: 'rdf/ttl',
         text: 'Nach RDF/TTL exportieren'
       }];
-      this.vocab_type = [{
-        value: 'tree',
-        text: 'Baum [Unterelemente ausgehend von diesem Element]'
-      }, {
-        value: 'graph',
-        text: 'Graph [Unter- und Oberelemente von diesem Element]'
-      }
-      ];
-      this.vocab_count = ['1', '2', '3', '4', '5'];
     },
     data() {
       return {
@@ -72,8 +55,6 @@
             url += 'id=' + this.id + '&';
           }
           url += 'format=' + this.file_format + '&';
-          url += 'type=' + this.download_type + '&';
-          url += 'count=' + this.count + '&';
           return url;
         }
       }
