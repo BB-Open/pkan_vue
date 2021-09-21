@@ -28,7 +28,8 @@
     "vuejs-datepicker": "^1.6.2",
     "vuejs-logger": "^1.5.4",
     "vuex-pathify": "^1.4.1",
-    "vue-axios": "^2.1.5"
+    "vue-axios": "^2.1.5",
+    "vue": "^2.6.14"
   },
   "devDependencies": {
     "ava": "^3.8.2",
