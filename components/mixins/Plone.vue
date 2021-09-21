@@ -23,7 +23,7 @@
         }
     },
     created() {
-      this.base_data_url = server_settings.PLONE_URL + '/@@search?fullobjects=1';
+      this.base_data_url = server_settings.PLONE_URL + '/@search?fullobjects=1';
     },
     computed : {
       plone_res_raw : function () {
