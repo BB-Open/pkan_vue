@@ -3,8 +3,6 @@
     <template slot="content">
       <h1>Ausgabe: {{title}}</h1>
       <p class="description">{{description}}</p>
-      <h2>Identifier</h2>
-      <p class="element_description">{{id}}</p>
       <h2>Eigenschaften</h2>
       <ul class="nobull" v-if="!isEmpty(result_fields)">
         <li v-for="item in result_fields">
