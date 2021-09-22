@@ -1,10 +1,8 @@
 <template>
   <base-view :vuex_ns="vuex_ns" :display_info_column="true">
     <template slot="content">
-      <h1>{{title}}</h1>
+      <h1>Katalog: {{title}}</h1>
       <p class="description">{{description}}</p>
-      <h2>Identifier</h2>
-      <p class="element_description">{{id}}</p>
       <h2>Datensätze</h2>
       <ul class="nobull" v-if="!isEmpty(datasets)">
         <li v-for="item in datasets">

@@ -1,10 +1,21 @@
 <template>
   <base-view :vuex_ns="vuex_ns" :display_info_column="true">
     <template slot="content">
-      <h1>{{title}}</h1>
+      <h1>Datensatz: {{title}}</h1>
       <p class="description">{{description}}</p>
-      <h2>Identifier</h2>
-      <p class="element_description">{{id}}</p>
+      <h2>Ausgaben</h2>
+      <ul class="nobull" v-if="!isEmpty(distributions)">
+        <li v-for="item in distributions">
+          <p class="element_title">{{ item.title }}</p>
+          <p class="element_description">{{ item.description }}</p>
+          <p>
+            <NuxtLink :to="get_distribution_link(item.id)" :aria-label="item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
+          </p>
+        </li>
+      </ul>
+      <div v-if="isEmpty(distributions)">
+        <p>Es wurden keine Ausgaben gefunden oder diese werden noch geladen.</p>
+      </div>
       <h2>Katalog</h2>
       <ul class="nobull" v-if="!isEmpty(catalogs)">
         <li v-for="item in catalogs">
@@ -16,19 +27,6 @@
         </li>
       </ul>
       <div v-if="isEmpty(catalogs)">
-        <p>Es wurden keine Datensätze gefunden oder diese werden noch geladen.</p>
-      </div>
-      <h2>Distributionen</h2>
-      <ul class="nobull" v-if="!isEmpty(distributions)">
-        <li v-for="item in distributions">
-          <p class="element_title">{{ item.title }}</p>
-          <p class="element_description">{{ item.description }}</p>
-          <p>
-            <NuxtLink :to="get_distribution_link(item.id)" :aria-label="item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
-          </p>
-        </li>
-      </ul>
-      <div v-if="isEmpty(distributions)">
         <p>Es wurden keine Datensätze gefunden oder diese werden noch geladen.</p>
       </div>
       <h2>RDF-Download:</h2>

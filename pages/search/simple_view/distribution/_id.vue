@@ -1,20 +1,20 @@
 <template>
   <base-view :vuex_ns="vuex_ns" :display_info_column="true">
     <template slot="content">
-      <h1>{{title}}</h1>
+      <h1>Ausgabe: {{title}}</h1>
       <p class="description">{{description}}</p>
       <h2>Identifier</h2>
       <p class="element_description">{{id}}</p>
       <h2>Eigenschaften</h2>
-      <ul class="nobull" v-if="result_fields.length">
+      <ul class="nobull" v-if="!isEmpty(result_fields)">
         <li v-for="item in result_fields">
           <p class="element_title">{{ item.field }}:</p>
-          <p class="element_description">{{item.value}}</p>
-          <!--        <a class="element_description" :href="item.value" v-if="item.is_url">{{item.value}}</a>-->
+          <p class="element_description" v-if="!item.is_url">{{item.value}}</p>
+          <a class="element_description" :href="item.value" v-if="item.is_url">{{item.value}}</a>
         </li>
       </ul>
-      <div v-if="!result_fields.length">
-        <p>Es wurden keine Felder gefunden oder diese werden noch geladen.</p>
+      <div v-if="isEmpty(result_fields)">
+        <p>Es wurden keine Eigenschaften gefunden oder diese werden noch geladen.</p>
       </div>
       <h2>Datensatz</h2>
       <ul class="nobull" v-if="!isEmpty(datasets)">

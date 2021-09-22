@@ -2,8 +2,6 @@
   <div :class="style_class">
     <h2>OpenData für {{title}}</h2>
     <p class="description">{{description}}</p>
-    <h3>Identifier</h3>
-    <p class="element_description">{{id}}</p>
     <h3>Kataloge</h3>
     <ul class="nobull" v-if="!isEmpty(catalogs)">
       <li v-for="item in catalogs">
