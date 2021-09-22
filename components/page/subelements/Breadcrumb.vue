@@ -27,6 +27,8 @@
         let elements = this.$route.path.split('/');
         let paths = [];
         let path = '';
+        // todo
+        let hidden_elements = ['simple_view', 'catalog', 'distribution', 'dataset', 'publisher'];
         elements.forEach(
           function (item) {
             if (path.length > 0 && item === '') {
@@ -34,7 +36,12 @@
             }
             path += item;
             path += '/';
-            paths.push(path)
+            if (hidden_elements.includes(item)){
+
+            }
+            else {
+              paths.push(path)
+            }
           }, this);
         paths = remove_element_from_array(paths, '//');
         return paths

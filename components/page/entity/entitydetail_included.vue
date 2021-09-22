@@ -1,76 +1,49 @@
 <template>
   <div :class="style_class">
-    <h2>OpenData: {{title}}</h2>
+    <h2>OpenData für {{title}}</h2>
     <p class="description">{{description}}</p>
-    <!--    <a :href="id">Originallink des Datensatzes aufrufen</a>-->
-    <a v-if="download_url" :href="download_url">Den Download der Originaldaten aufrufen</a>
-    <h3>RDF-Download:</h3>
-    <download-control :id="id"></download-control>
-    <h3>Felder:</h3>
-    <ul class="nobull" v-if="result_fields.length">
-      <li :class="element_style_class">
-        <p class="element_title">Identifier:</p>
-        <p class="element_description">{{id}}</p>
-      </li>
-      <li v-for="item in result_fields" :class="element_style_class">
-        <p class="element_title">{{ item.field }}:</p>
-        <p class="element_description">{{item.value}}</p>
-        <!--        <a class="element_description" :href="item.value" v-if="item.is_url">{{item.value}}</a>-->
-      </li>
-    </ul>
-    <div v-if="!result_fields.length">
-      <p>Es wurden keine Felder gefunden oder diese werden noch geladen.</p>
-    </div>
-    <h3>Vernetzung:</h3>
-    <ul class="nobull" v-if="!isEmpty(result_networking)">
-      <li v-for="item in result_networking" :class="element_style_class">
-        <p class="element_title">{{ item.type }}: {{ item.title }}</p>
+    <h3>Identifier</h3>
+    <p class="element_description">{{id}}</p>
+    <h3>Kataloge</h3>
+    <ul class="nobull" v-if="!isEmpty(catalogs)">
+      <li v-for="item in catalogs">
+        <p class="element_title">{{ item.title }}</p>
         <p class="element_description">{{ item.description }}</p>
         <p>
-          <NuxtLink :to="get_nuxt_link(item.id)" :aria-label="item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
+          <NuxtLink :to="get_catalog_link(item.id)" :aria-label="item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
         </p>
       </li>
     </ul>
-    <div v-if="isEmpty(result_networking)">
-      <p>Es wurden keine vernetzten Elemente gefunden oder diese werden noch geladen.</p>
+    <div v-if="isEmpty(catalogs)">
+      <p>Es wurden keine Kataloge gefunden oder diese werden noch geladen.</p>
     </div>
+    <h3>RDF-Download:</h3>
+    <download-control :id="id"></download-control>
+    <h2>Detailseite</h2>
+    <NuxtLink :to="get_detail_link()" :aria-label="'Zur Detailseite von ' + this.title + ' wechseln'">Zur Detailseite wechseln</NuxtLink>
   </div>
 </template>
 
 <script>
-  import DownloadControl from "../../controls/DownloadControl";
-  import SparqlElement from "../../mixins/SparqlElement";
+  import SimpleViewElement from "../../../components/mixins/SimpleViewElement";
+  import {REQUEST_SIMPLE_VIEW_PUBLISHER} from "../../../components/configs/socket";
+  import DownloadControl from "../../../components/controls/DownloadControl";
 
   export default {
-    name: "entitydetail",
-    components: {DownloadControl},
-    mixins: [SparqlElement],
-    props: ['view_url', 'element_style_class', 'style_class'],
-
-    methods: {
-      get_nuxt_link(id) {
-        return this.view_url + '/' + encodeURIComponent(id)
-      },
-      
-      isEmpty(obj) {
-        for(var key in obj) {
-          if(obj.hasOwnProperty(key))
-            return false;
-        }
-        return true;
-      }
+    name: 'catalog_simple',
+    mixins: [SimpleViewElement],
+    components: {
+      DownloadControl,
     },
+    created() {
+      this.request = REQUEST_SIMPLE_VIEW_PUBLISHER
+    },
+    mounted() {
+      this.$log.debug(this.name + ' mounted');
+    },
+    methods: {
+
+    }
+
   }
 </script>
-
-<style scoped>
-
-  .element_title, .element_description {
-    margin-bottom: 0;
-  }
-
-  .element_title {
-    font-weight: bold;
-  }
-
-</style>

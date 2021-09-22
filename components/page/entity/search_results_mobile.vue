@@ -13,7 +13,7 @@
           <h3 class="element_title">{{ item.type}}: {{ item.title }}</h3>
           <p class="element_description">{{ item.description }}</p>
           <p>
-            <NuxtLink :to="get_nuxt_link(item.id)" :aria-label="item.type + ' ' +item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
+            <NuxtLink :to="get_nuxt_link(item)" :aria-label="item.type + ' ' +item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
           </p>
         </li>
         <li v-if="!combined_batches.length">
@@ -104,8 +104,17 @@
       }
     },
     methods: {
-      get_nuxt_link(id) {
-        return this.view_url + '/' + encodeURIComponent(id)
+      get_nuxt_link(item) {
+        let type_id = item.type_id;
+        let type_part = '';
+        if (type_id === 'http://www.w3.org/ns/dcat#Dataset') {
+          type_part = 'dataset'
+        } else if (type_id === 'http://www.w3.org/ns/dcat#Catalog') {
+          let type_part = 'catalog'
+        }
+        this.$log.debug(type_id);
+
+        return this.view_url + '/simple_view/' + type_part + '/' + encodeURIComponent(item.id)
       },
       async get_data() {
         let params = this.search_params;

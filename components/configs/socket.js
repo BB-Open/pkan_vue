@@ -5,6 +5,10 @@ export const REQUEST_ITEM_DETAIL = 'request_items_detail';
 export const REQUEST_LABEL = 'request_label';
 export const REQUEST_ITEM_TITLE_DESC = 'request_items_title_desc';
 export const REQUEST_SEND_MESSAGE = 'send_email';
+export const REQUEST_SIMPLE_VIEW_CATALOG = 'request_simple_view_catalog';
+export const REQUEST_SIMPLE_VIEW_DATASET = 'request_simple_view_dataset';
+export const REQUEST_SIMPLE_VIEW_DISTRIBUTION = 'request_simple_view_distribution';
+export const REQUEST_SIMPLE_VIEW_PUBLISHER = 'request_simple_view_publisher';
 
 export const BATCH_SIZE = 10;
 

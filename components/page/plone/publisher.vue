@@ -10,7 +10,7 @@
 
       <div class="element_logo" v-if="item.logo"><img :src="item.logo.download" :alt="item.title + ' Logo'"/></div>
     </div>
-    <entitydetail_included :id="item.sparql_identifier" :view_url="view_url" v-if="item.sparql_identifier" :alert_title="alert_title"></entitydetail_included>
+    <entitydetail_included :dcat_id="item.sparql_identifier" :view_url="view_url" v-if="item.sparql_identifier" :alert_title="alert_title"></entitydetail_included>
   </div>
 </template>
 

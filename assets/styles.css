@@ -517,6 +517,14 @@ select {
   margin-bottom: 5px;
 }
 
+.element_title, .element_description {
+  margin-bottom: 0;
+}
+
+.element_title {
+  font-weight: bold;
+}
+
 @media (max-width: 640px) {
 
   .info_column_right {

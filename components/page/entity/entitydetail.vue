@@ -65,12 +65,4 @@
 
 <style scoped>
 
-  .element_title, .element_description {
-    margin-bottom: 0;
-  }
-
-  .element_title {
-    font-weight: bold;
-  }
-
 </style>

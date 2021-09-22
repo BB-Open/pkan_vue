@@ -31,7 +31,7 @@
         <h3 class="element_title">{{ item.type}}: {{ item.title }}</h3>
         <p class="element_description">{{ item.description }}</p>
         <p>
-          <NuxtLink :to="get_nuxt_link(item.id)" :aria-label="item.type + ' ' +item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
+          <NuxtLink :to="get_nuxt_link(item)" :aria-label="item.type + ' ' +item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
         </p>
       </li>
       <li v-if="result_count === 0">
@@ -117,8 +117,16 @@
       BPagination,
     },
     methods: {
-      get_nuxt_link(id) {
-        return this.view_url + '/' + encodeURIComponent(id)
+      get_nuxt_link(item) {
+        let type_id = item.type_id;
+        let type_part = '';
+        if (type_id === 'http://www.w3.org/ns/dcat#Dataset') {
+          type_part = 'dataset'
+        } else if (type_id === 'http://www.w3.org/ns/dcat#Catalog') {
+          type_part = 'catalog'
+        }
+
+        return this.view_url + '/simple_view/' + type_part + '/' + encodeURIComponent(item.id)
       },
       async get_data() {
         var response = await get_flask_data(this, this.request_type, this.search_params);
