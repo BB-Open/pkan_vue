@@ -17,6 +17,19 @@
     <div v-if="isEmpty(catalogs)">
       <p>Es wurden keine Kataloge gefunden oder diese werden noch geladen.</p>
     </div>
+    <h3>Datensätze</h3>
+    <ul class="nobull" v-if="!isEmpty(datasets)">
+      <li v-for="item in datasets">
+        <p class="element_title">{{ item.title }}</p>
+        <p class="element_description">{{ item.description }}</p>
+        <p>
+          <NuxtLink :to="get_dataset_link(item.id)" :aria-label="item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
+        </p>
+      </li>
+    </ul>
+    <div v-if="isEmpty(datasets)">
+      <p>Es wurden keine Datensätze gefunden oder diese werden noch geladen.</p>
+    </div>
     <h3>RDF-Download:</h3>
     <download-control :id="id"></download-control>
     <h2>Detailseite</h2>
