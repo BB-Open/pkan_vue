@@ -8,6 +8,7 @@
         <li v-for="item in distributions">
           <p class="element_title">{{ item.title }}</p>
           <p class="element_description">{{ item.description }}</p>
+          <p class="element_description">Format: {{ item.formats }}</p>
           <p>
             <NuxtLink :to="get_distribution_link(item.id)" :aria-label="item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
           </p>
@@ -28,7 +29,7 @@
           </p>
         </li>
       </ul>
-      <div v-if="isEmpty(datasets)">
+      <div v-if="isEmpty(catalogs)">
         <p>Es wurde kein Katalog gefunden oder dieser wurde noch nicht geladen.</p>
       </div>
     </template>
