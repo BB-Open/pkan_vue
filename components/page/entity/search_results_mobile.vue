@@ -106,7 +106,7 @@
     methods: {
       get_nuxt_link(item) {
         let type_id = item.type_id;
-        let type_part = '';
+        let type_part = 'catalog';
         if (type_id === 'http://www.w3.org/ns/dcat#Dataset') {
           type_part = 'dataset'
         } else if (type_id === 'http://www.w3.org/ns/dcat#Catalog') {
