@@ -14,23 +14,21 @@
       <div v-if="isEmpty(result_fields)">
         <p>Es wurden keine Eigenschaften gefunden oder diese werden noch geladen.</p>
       </div>
-      <h2>Datensatz</h2>
-      <ul class="nobull" v-if="!isEmpty(datasets)">
-        <li v-for="item in datasets">
-          <p class="element_title">{{ item.title }}</p>
-          <p class="element_description">{{ item.description }}</p>
-          <p>
-            <NuxtLink :to="get_dataset_link(item.id)" :aria-label="item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
-          </p>
-        </li>
-      </ul>
-      <div v-if="isEmpty(datasets)">
-        <p>Es wurden keine Datensätze gefunden oder diese werden noch geladen.</p>
-      </div>
       <h2>RDF-Download:</h2>
       <download-control :id="id"></download-control>
       <h2>Detailseite</h2>
       <NuxtLink :to="get_detail_link()" :aria-label="'Zur Detailseite von ' + this.title + ' wechseln'">Zur Detailseite wechseln</NuxtLink>
+      <h2>Datenstruktur</h2>
+      <ul class="nobull" v-if="!isEmpty(datasets)">
+        <li v-for="item in datasets">
+          <p>
+            <NuxtLink :to="get_dataset_link(item.id)" :aria-label="'Zurück zur Datenstruktur' + item.title + ' gehen'">Zurück zur Datenstruktur {{ item.title }}</NuxtLink>
+          </p>
+        </li>
+      </ul>
+      <div v-if="isEmpty(datasets)">
+        <p>Es wurde keine Datenstruktur gefunden oder diese wird noch geladen.</p>
+      </div>
     </template>
   </base-view>
 </template>
