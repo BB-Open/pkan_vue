@@ -28,7 +28,7 @@
         let paths = [];
         let path = '';
         // todo
-        let hidden_elements = ['simple_view', 'catalog', 'distribution', 'dataset', 'publisher'];
+        let hidden_elements = ['simple_view', 'catalog', 'distribution', 'dataset'];
         elements.forEach(
           function (item) {
             if (path.length > 0 && item === '') {
