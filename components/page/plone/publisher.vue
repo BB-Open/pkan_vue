@@ -17,7 +17,7 @@
 <script>
   import {SEARCH_URL} from "../../configs/routing";
   import entitydetail_included from "../entity/entitydetail_included";
-  import {write_aria_polite} from '../../mixins/utils';
+  import {id_to_store_id, write_aria_polite} from '../../mixins/utils';
   import Plone from "../../mixins/Plone";
   import {VUEX_NAMESPACE} from "../../../store/breadcrumb";
 
@@ -38,7 +38,7 @@
             sparql_identifier: '',
           }
         } else {
-          let setter = VUEX_NAMESPACE + '/titles@' + this.$route.path;
+          let setter = VUEX_NAMESPACE + '/titles@' + id_to_store_id(this.$route.path);
           this.$store.set(setter, result.title);
           write_aria_polite(this, 'Die Seite ' + result.title + ' wurde geladen.')
         }

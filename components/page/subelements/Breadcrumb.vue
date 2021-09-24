@@ -1,5 +1,5 @@
 <template>
-  <div class="breadcrumb" aria-label="Pfadangabe">
+  <div class="breadcrumb hidesmallscreen" aria-label="Pfadangabe">
     <div><span class="describer">Sie sind hier: </span>
       <span v-for="item in breadcrumb_elements">
         <span v-if="item !== '/'"> <i class="fa fa-caret-right"></i> </span>
@@ -13,8 +13,9 @@
 
 <script>
   import {TITLES_FOR_BREADCRUMB} from "../../configs/routing";
-  import {remove_element_from_array} from "../../mixins/utils";
+  import {id_to_store_id, remove_element_from_array} from "../../mixins/utils";
   import {VUEX_NAMESPACE} from "../../../store/breadcrumb";
+  import SimpleViewElement from "../../mixins/SimpleViewElement";
 
   export default {
     name: "Breadcrumb",
@@ -22,13 +23,15 @@
       this.vuex_ns = VUEX_NAMESPACE;
       this.vuex_prop = 'titles';
     },
+    mixins: [SimpleViewElement],
     computed: {
       breadcrumb_elements: function () {
+        if (this.$route.path.includes('simple_view')){
+          return this.get_simple_view_breadcrumb_elements()
+        }
         let elements = this.$route.path.split('/');
         let paths = [];
         let path = '';
-        // todo
-        let hidden_elements = ['simple_view', 'catalog', 'distribution', 'dataset'];
         elements.forEach(
           function (item) {
             if (path.length > 0 && item === '') {
@@ -36,12 +39,9 @@
             }
             path += item;
             path += '/';
-            if (hidden_elements.includes(item)){
 
-            }
-            else {
-              paths.push(path)
-            }
+            paths.push(path)
+
           }, this);
         paths = remove_element_from_array(paths, '//');
         return paths
@@ -58,7 +58,7 @@
             if (item in TITLES_FOR_BREADCRUMB) {
               title = TITLES_FOR_BREADCRUMB[item]
             } else {
-              let getter = this.vuex_ns + '/' + this.vuex_prop + '@' + item.slice(0, -1);
+              let getter = this.vuex_ns + '/' + this.vuex_prop + '@' + id_to_store_id(item);
               title = this.$store.get(getter);
             }
 

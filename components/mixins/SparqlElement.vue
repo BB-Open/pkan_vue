@@ -4,6 +4,7 @@
   import {REQUEST_ITEM_DETAIL, REQUEST_ITEM_TITLE_DESC, REQUEST_LABEL} from "../configs/socket";
   import * as rdf from "rdf";
   import {get_flask_data, write_aria_polite} from '../mixins/utils';
+  import {id_to_store_id} from "./utils";
 
   export default {
     name: 'SparqlElement',
@@ -21,7 +22,7 @@
 
     computed: {
       store_id: function () {
-        return this.id_to_store_id(this.id)
+        return id_to_store_id(this.id)
       },
       title: function () {
         let result = this.$store.get(this.vuex_ns + '/titles@' + this.store_id);
@@ -60,8 +61,8 @@
           let new_item = {};
           new_item['value'] = item['value'];
           new_item['is_url'] = item['url'];
-          if (this.labels[this.id_to_store_id(item['field'])]) {
-            new_item['field'] = this.labels[this.id_to_store_id(item['field'])];
+          if (this.labels[id_to_store_id(item['field'])]) {
+            new_item['field'] = this.labels[id_to_store_id(item['field'])];
           } else {
             new_item['field'] = item['field']
           }
@@ -91,7 +92,7 @@
         var response = await get_flask_data(this, REQUEST_ITEM_TITLE_DESC, {id: this.id});
         await this.$store.set(this.vuex_ns + '/titles@' + this.store_id, response.title);
         await this.$store.set(this.vuex_ns + '/descriptions@' + this.store_id, response.description);
-        let setter = BR_STORE + '/titles@' + this.$route.path;
+        let setter = BR_STORE + '/titles@' + id_to_store_id(this.$route.path);
         await this.$store.set(setter, response.title);
         if (this.alert_title) {
           write_aria_polite(this, 'Die Seite ' + this.title + ' wurde geladen.')
@@ -155,11 +156,11 @@
         let request = Object.assign({}, {'id': id});
 
         var data = await get_flask_data(this, REQUEST_LABEL, request);
-        await this.$store.set(this.vuex_ns + '/labels@' + this.id_to_store_id(data.id), data.label)
+        await this.$store.set(this.vuex_ns + '/labels@' + id_to_store_id(data.id), data.label)
       },
       get_label(field) {
         if (field in this.labels) {
-          return this.labels[this.id_to_store_id(field)]
+          return this.labels[id_to_store_id(field)]
         } else {
           this.request_label(field);
           return field
@@ -176,21 +177,11 @@
           'type': data.type,
           'id': id,
         };
-        let setter = this.vuex_ns + '/networks@' + this.store_id + '.' + this.id_to_store_id(id);
+        let setter = this.vuex_ns + '/networks@' + this.store_id + '.' + id_to_store_id(id);
         this.$log.info('Got Response');
         this.$log.info(data);
         await this.$store.set(setter, network);
         return data
-      },
-      id_to_store_id(id) {
-        id = id.split("/").join("");
-        id = id.split(".").join("");
-        id = id.split(":").join("");
-        id = id.split("#").join("");
-        id = id.split("=").join("");
-        id = id.split("?").join("");
-        id = id.split("&").join("");
-        return id
       }
     },
 

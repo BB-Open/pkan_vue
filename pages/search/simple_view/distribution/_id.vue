@@ -1,5 +1,5 @@
 <template>
-  <base-view :vuex_ns="vuex_ns" :display_info_column="true">
+  <base-view :vuex_ns="simple_vue_vuex_ns" :display_info_column="true">
     <template slot="content">
       <h1>Ausgabe: {{title}}</h1>
       <p class="description">{{description}}</p>

@@ -1,5 +1,5 @@
 <template>
-  <div :class="style_class">
+  <div>
     <h2>OpenData für {{title}}</h2>
     <p class="description">{{description}}</p>
     <h3>Kataloge</h3>

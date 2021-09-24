@@ -138,3 +138,16 @@ export function Box() {
         return length;
     });
 }
+
+export function id_to_store_id(id) {
+  id = id.split("/").join("");
+  id = id.split(".").join("");
+  id = id.split(":").join("");
+  id = id.split("#").join("");
+  id = id.split("=").join("");
+  id = id.split("?").join("");
+  id = id.split("&").join("");
+  id = id.split("%").join("")
+  return id
+}
+

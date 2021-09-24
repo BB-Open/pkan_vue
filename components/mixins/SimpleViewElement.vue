@@ -2,13 +2,13 @@
   import {get_flask_data} from '../mixins/utils';
   import {VUEX_NAMESPACE} from "../../store/simple_view";
   import {VUEX_NAMESPACE as BR_STORE} from "../../store/breadcrumb";
-  import {write_aria_polite} from "./utils";
+  import {id_to_store_id, write_aria_polite} from "./utils";
   import {SEARCH_URL} from "../configs/routing";
 
   export default {
     name: 'SimpleViewElement',
     created() {
-      this.vuex_ns = VUEX_NAMESPACE;
+      this.simple_vue_vuex_ns = VUEX_NAMESPACE;
       this.view_url = SEARCH_URL;
     },
     props: ['dcat_id'],
@@ -20,10 +20,10 @@
         return this.$route.params.id;
       },
       store_id: function () {
-        return this.id_to_store_id(this.id)
+        return id_to_store_id(this.id)
       },
       title: function () {
-        let result = this.$store.get(this.vuex_ns + '/titles@' + this.store_id);
+        let result = this.$store.get(this.simple_vue_vuex_ns + '/titles@' + this.store_id);
 
         if (result === undefined) {
           result = this.get_data();
@@ -33,7 +33,7 @@
         return result
       },
       description: function () {
-        let result = this.$store.get(this.vuex_ns + '/descriptions@' + this.store_id);
+        let result = this.$store.get(this.simple_vue_vuex_ns + '/descriptions@' + this.store_id);
         if (result === undefined) {
           return 'Beschreibung wird geladen'
         }
@@ -41,16 +41,16 @@
         return result
       },
       datasets: function () {
-        return this.$store.get(this.vuex_ns + '/datasets@' + this.store_id)
+        return this.$store.get(this.simple_vue_vuex_ns + '/datasets@' + this.store_id)
       },
       catalogs: function () {
-        return this.$store.get(this.vuex_ns + '/catalogs@' + this.store_id)
+        return this.$store.get(this.simple_vue_vuex_ns + '/catalogs@' + this.store_id)
       },
       distributions: function () {
-        return this.$store.get(this.vuex_ns + '/distributions@' + this.store_id)
+        return this.$store.get(this.simple_vue_vuex_ns + '/distributions@' + this.store_id)
       },
       result_fields: function () {
-        return this.$store.get(this.vuex_ns + '/result_fields@' + this.store_id)
+        return this.$store.get(this.simple_vue_vuex_ns + '/result_fields@' + this.store_id)
       },
     },
     methods: {
@@ -61,33 +61,28 @@
 
       },
       async handle_result(data) {
-        let setter = this.vuex_ns + '/titles@' + this.store_id;
+        let setter = this.simple_vue_vuex_ns + '/titles@' + this.store_id;
         this.$store.set(setter, data.title);
-        setter = BR_STORE + '/titles@' + this.$route.path;
+        setter = BR_STORE + '/titles@' + id_to_store_id(this.$route.path);
         await this.$store.set(setter, data.title);
-        setter = this.vuex_ns + '/descriptions@' + this.store_id;
+        setter = this.simple_vue_vuex_ns + '/descriptions@' + this.store_id;
         this.$store.set(setter, data.description);
-        setter = this.vuex_ns + '/datasets@' + this.store_id;
+        setter = this.simple_vue_vuex_ns + '/datasets@' + this.store_id;
         this.$store.set(setter, data.datasets);
-        setter = this.vuex_ns + '/catalogs@' + this.store_id;
+        setter = this.simple_vue_vuex_ns + '/catalogs@' + this.store_id;
         this.$store.set(setter, data.catalogs);
-        setter = this.vuex_ns + '/distributions@' + this.store_id;
+        setter = this.simple_vue_vuex_ns + '/distributions@' + this.store_id;
         this.$store.set(setter, data.distributions);
-        setter = this.vuex_ns + '/result_fields@' + this.store_id;
+        setter = this.simple_vue_vuex_ns + '/result_fields@' + this.store_id;
         this.$store.set(setter, data.result_fields);
-        write_aria_polite(this, 'Die Seite ' + this.title + ' wurde geladen.')
+        await this.set_breadcrumb_titles(data);
+        write_aria_polite(this, 'Die Seite ' + this.title + ' wurde geladen.');
       },
-      id_to_store_id(id) {
-        id = id.split("/").join("");
-        id = id.split(".").join("");
-        id = id.split(":").join("");
-        id = id.split("#").join("");
-        id = id.split("=").join("");
-        id = id.split("?").join("");
-        id = id.split("&").join("");
-        return id
-      },
+
       isEmpty(obj) {
+        if (obj === undefined) {
+          return true
+        }
         for (var key in obj) {
           if (obj.hasOwnProperty(key))
             return false;
@@ -95,19 +90,58 @@
         return true;
       },
       get_dataset_link(id) {
-        return this.view_url + '/simple_view/dataset/' + encodeURIComponent(id)
+        return this.view_url + '/simple_view/dataset/' + encodeURIComponent(id) + '/'
       },
       get_catalog_link(id) {
-        return this.view_url + '/simple_view/catalog/' + encodeURIComponent(id)
+        return this.view_url + '/simple_view/catalog/' + encodeURIComponent(id) + '/'
       },
       get_distribution_link(id) {
-        return this.view_url + '/simple_view/distribution/' + encodeURIComponent(id)
+        return this.view_url + '/simple_view/distribution/' + encodeURIComponent(id) + '/'
       },
       get_detail_link() {
-        return this.view_url + '/' + encodeURIComponent(this.id)
-      }
+        return this.view_url + '/' + encodeURIComponent(this.id) + '/'
+      },
+      async set_breadcrumb_titles(data){
+        let path = this.$route.path;
+        if (path.includes('dataset') || path.includes('distribution')) {
+          if (!this.isEmpty(data.catalogs)) {
+            let url = this.get_catalog_link(data.catalogs[0].id);
+            let setter = BR_STORE + '/titles@' + id_to_store_id(url);
+            this.$log.info(data.catalogs[0]);
+            await this.$store.set(setter, data.catalogs[0].title);
+          }
+        }
+        if (path.includes('distribution')) {
+          if (!this.isEmpty(data.datasets)) {
+            let url = this.get_dataset_link(data.datasets[0].id);
+            let setter = BR_STORE + '/titles@' + id_to_store_id(url);
+            await this.$store.set(setter, data.datasets[0].title);
+          }
+        }
+
+      },
+      get_simple_view_breadcrumb_elements() {
+        let elements = [];
+        elements.push('/');
+        elements.push('/search/');
+        let path = this.$route.path;
+        if (path.includes('dataset') || path.includes('distribution')) {
+          if (!this.isEmpty(this.catalogs)) {
+            let url = this.get_catalog_link(this.catalogs[0].id);
+            elements.push(url);
+          }
+        }
+        if (path.includes('distribution')) {
+          if (!this.isEmpty(this.datasets)) {
+            let url = this.get_dataset_link(this.datasets[0].id);
+            elements.push(url);
+          }
+        }
+
+        elements.push(path);
+        return elements;
+      },
     }
-    ,
 
   }
 </script>
