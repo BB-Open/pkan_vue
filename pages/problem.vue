@@ -1,7 +1,7 @@
 <template>
   <base-view :vuex_ns="name" :display_search="true">
     <template slot="content">
-      <h1>Ein Problem melden</h1>
+      <h1>Fehler melden</h1>
       <div class="portalMessage info" v-if="info">
         <div>Info</div>
         <div>{{info}}</div>

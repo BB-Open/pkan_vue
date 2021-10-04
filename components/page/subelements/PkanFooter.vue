@@ -68,7 +68,7 @@
             <li>
               <nuxt-link class="footerelementlink" to="/problem"
               ><span class="hidden_help_text">Link zum Formular</span>
-                Probleme auf der Seite melden
+                Fehler melden
               </nuxt-link>
               <hr class="hidesmallscreen"/>
             </li>
