@@ -190,6 +190,10 @@
         id = id.split("=").join("");
         id = id.split("?").join("");
         id = id.split("&").join("");
+        id = id.split("%").join("");
+        id = id.split("~").join("");
+        id = id.split("-").join("");
+        id = id.split("+").join("");
         return id
       }
     },
