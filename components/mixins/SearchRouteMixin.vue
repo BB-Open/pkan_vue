@@ -19,8 +19,7 @@
     },
     async mounted() {
       this.$log.info('mounted')
-      let ns = VUEX_NAMESPACE
-      await this.$store.ep_set(ns, 'disable_get_data', false);
+      await this.$store.ep_set(VUEX_NAMESPACE, 'disable_get_data', false);
   },
   }
 </script>
