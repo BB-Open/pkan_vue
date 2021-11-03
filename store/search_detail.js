@@ -18,6 +18,7 @@ export const state = () => ({
   results: [],
   result_count: null,
   error: '',
+  disable_get_data: false,
 });
 
 export const search_selector_fields = ['category_filter', 'file_format_filter', 'publisher_filter', 'license_filter']
@@ -36,10 +37,15 @@ export const mutations = {
   },
   RESET_ALL (state) {
     state['search_phrase'] = '';
-    state['search_date_period'] = '';
+    state['search_date_period'] = [null, null];
     search_selector_fields.forEach(function (filter) {
       state[filter] = {}
     })
+    state['result_count'] = null;
+    state['results'] = [];
+    state['order_by'] = null;
+    state['batch_start'] = 0;
+    state['batch_end'] = 1;
   },
   RESET_SEARCH_RESULTS (state) {
     state['result_count'] = null;

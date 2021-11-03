@@ -102,6 +102,9 @@
       error: function () {
         return this.$store.ep_get(this.vuex_ns, 'error')
       },
+      disable_get_data: function () {
+        return this.$store.ep_get(this.vuex_ns, 'disable_get_data')
+      },
       search_params: {
         get() {
           return this.$store.ep_get(this.vuex_ns,'search_params')
@@ -129,6 +132,12 @@
         return this.view_url + '/simple_view/' + type_part + '/' + encodeURIComponent(item.id)
       },
       async get_data() {
+        this.$log.info('Params:')
+        this.$log.info(JSON.stringify(this.search_params.category))
+        if (this.disable_get_data) {
+          this.$log.info('Get Data is disabled')
+          return
+        }
         var response = await get_flask_data(this, this.request_type, this.search_params);
         await this.$store.ep_set(this.vuex_ns, 'results', response.results);
         await this.$store.ep_set(this.vuex_ns, 'result_count', response.result_count);
@@ -141,9 +150,9 @@
         return response;
       },
     },
-    serverPrefetch() {
-      return this.get_data();
-    }
+    // serverPrefetch() {
+    //   return this.get_data();
+    // }
   }
 </script>
 

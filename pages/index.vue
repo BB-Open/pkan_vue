@@ -38,7 +38,7 @@
     data() {
       return {
         text: 'Text',
-        name: this.name,
+        name: 'Startseite',
         plone_ns: PLONE_NS,
         search_ns: SEARCH_NS,
         voc_ns: VOC_NS,

@@ -18,10 +18,12 @@
   import {DETAIL_SEARCH_URL} from "../../components/configs/routing";
   import {VUEX_NAMESPACE as SPARQL_NS} from '../../store/search_sparql'
   import {VUEX_NAMESPACE as SEARCH_NS} from '../../store/search_detail'
+  import SearchRouteMixin from '../../components/mixins/SearchRouteMixin'
 
 
   export default {
     name: 'detail_search',
+    mixins: [SearchRouteMixin],
     components: {
       SearchFieldSingleLine,
       SearchBaseView,
@@ -37,13 +39,6 @@
     data() {
       return {
       }
-    },
-    beforeRouteLeave (to, from, next) {
-      if (!to.path.includes('search')) {
-        this.$store.commit(this.sparql_ns + '/'+ 'RESET_ALL');
-        this.$store.commit(this.search_ns + '/' + 'RESET_ALL')
-      }
-      next()
     },
   }
 </script>

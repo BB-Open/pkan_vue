@@ -10,9 +10,11 @@
   import BaseView from '../../components/page/views/BaseView';
   import entitydetail from "../../components/page/entity/entitydetail";
   import {SEARCH_URL} from "../../components/configs/routing";
+  import SearchRouteMixin from '../../components/mixins/SearchRouteMixin'
 
   export default {
     name: 'SearchDetail',
+    mixins: [SearchRouteMixin],
     components: {
       entitydetail,
       BaseView
@@ -29,7 +31,8 @@
       get_data() {
         return this.$route.params.id;
       },
-    }
+    },
+
 
   }
 </script>

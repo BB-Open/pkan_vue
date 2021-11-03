@@ -84,6 +84,9 @@
                  }, this);
                return data
       },
+      disable_get_data: function () {
+        return this.$store.ep_get(this.vuex_ns, 'disable_get_data')
+      },
       error: function () {
         return this.$store.ep_get(this.vuex_ns, 'error')
       },
@@ -117,6 +120,10 @@
         return this.view_url + '/simple_view/' + type_part + '/' + encodeURIComponent(item.id)
       },
       async get_data() {
+        if (this.disable_get_data) {
+          this.$log.info('Get Data is disabled')
+          return
+        }
         let params = this.search_params;
         var response = await get_flask_data(this, this.request_type, params);
         await this.$store.ep_set(this.vuex_ns, 'batch_results@' + params.batch_start, response.results);

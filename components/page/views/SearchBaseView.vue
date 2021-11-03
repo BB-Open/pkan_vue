@@ -105,6 +105,11 @@
       this.$log.debug(this.vuex_ns + ' mounted');
       write_aria_polite(this, 'Die Seite Suche wurde geladen.');
     },
+    methods: {
+      remove_all() {
+        this.$store.commit(this.search_ns + '/'+ 'RESET_ALL')
+      },
+    }
   }
 
 </script>

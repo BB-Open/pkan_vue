@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul v-if="vocab.length" class="nobull category box_area" >
+    <ul v-if="vocab.length" class="nobull category box_area">
       <li v-for="item in vocab"
           class="box"
           :key="item.id"
@@ -13,7 +13,7 @@
               <i v-if="item.icon_class"
                  :class="item.icon_class + ' bb-ifa'"
                  :aria-labelledby="item.id"
-                 ></i>
+              ></i>
               <br v-if="item.icon_class"
                   class="hidesmallscreen"/>
             </div>
@@ -29,32 +29,43 @@
 </template>
 
 <script>
-  import {INCLUDE} from '../configs/socket';
-  import {DETAIL_SEARCH_URL} from "../configs/routing";
-  import Vocab from '../mixins/Vocab';
+  import { INCLUDE } from '../configs/socket'
+  import { DETAIL_SEARCH_URL } from '../configs/routing'
+  import Vocab from '../mixins/Vocab'
 
   export default {
-    name: "VocabBox",
-    mixins :[Vocab],
+    name: 'VocabBox',
+    mixins: [Vocab],
     props: {
       'target_ns': String,
       'target_prop': String,
       'vocab_ns': String,
       'vocab_prop': String,
-      'clear_state': Boolean,
+      'clear_state': Boolean
     },
     created() {
-        this.url = DETAIL_SEARCH_URL;
+      this.url = DETAIL_SEARCH_URL
     },
 
     methods: {
 
-      handle_click(category) {
-        this.$store.commit(this.target_ns + '/'+ 'SET_FILTER_STATE',
-          { filter:this.target_prop, category:category, new_state: INCLUDE});
-        this.$store.commit(this.target_ns + '/' + 'RESET_SEARCH_RESULTS');
-        this.$router.push(DETAIL_SEARCH_URL);
+      async reset_cat(category) {
+        return this.$store.commit(this.target_ns + '/' + 'SET_FILTER_STATE',
+          { filter: this.target_prop, category: category, new_state: INCLUDE })
       },
+
+      async reset_res() {
+        return this.$store.commit(this.target_ns + '/' + 'RESET_SEARCH_RESULTS')
+      },
+
+      async handle_click(category) {
+        let res1 = await this.reset_cat(category)
+        let res2 = await this.reset_res()
+        this.$log.info('Handle Click')
+        this.$log.info(res1)
+        this.$log.info(res2)
+        this.$router.push(DETAIL_SEARCH_URL)
+      }
     }
   }
 </script>

@@ -29,10 +29,11 @@
   import SimpleViewElement from "../../../../components/mixins/SimpleViewElement";
   import {REQUEST_SIMPLE_VIEW_CATALOG} from "../../../../components/configs/socket";
   import DownloadControl from "../../../../components/controls/DownloadControl";
+  import SearchRouteMixin from '../../../../components/mixins/SearchRouteMixin'
 
   export default {
     name: 'catalog_simple',
-    mixins: [SimpleViewElement],
+    mixins: [SimpleViewElement, SearchRouteMixin],
     components: {
       DownloadControl,
       BaseView
@@ -45,7 +46,8 @@
     },
     methods: {
 
-    }
+    },
+
 
   }
 </script>

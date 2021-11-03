@@ -20,9 +20,11 @@
   import {VUEX_NAMESPACE as voc_ns} from '../../store/vocabularies';
   import {VUEX_NAMESPACE as search_ns} from '../../store/search_detail';
   import VocabBoxOrderBy from "../../components/controls/VocabBoxOrderBy";
+  import SearchRouteMixin from '../../components/mixins/SearchRouteMixin'
 
   export default {
     name: 'Search',
+    mixins: [SearchRouteMixin],
     components: {
       BaseView,
       VocabBox,
@@ -34,12 +36,6 @@
     },
     mounted() {
       write_aria_polite(this, 'Die Seite einfache Suche wurde geladen.');
-    },
-    beforeRouteLeave (to, from, next) {
-      if (!this.$router.currentRoute.fullPath.includes('search')) {
-        this.$store.commit(this.search_ns + '/'+ 'RESET_ALL')
-      }
-      next()
     },
   }
 </script>
