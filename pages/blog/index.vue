@@ -23,7 +23,7 @@
   import {VUEX_NAMESPACE as PLONE_NS} from '../../store/plone'
 
   export default {
-    name: 'Blog',
+    name: 'Aktuelles',
     created () {
         this.view_url = BLOG_URL;
         this.portal_type = PLONE_PT_DOCUMENT;
@@ -39,7 +39,7 @@
     },
     data() {
       return {
-        vuex_ns: 'Blog',
+        vuex_ns: 'Aktuelles',
         
       }
     },

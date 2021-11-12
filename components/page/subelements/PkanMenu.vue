@@ -33,7 +33,7 @@
         <hr class="hidebigscreen"/>
       </li>
       <li>
-        <nuxt-link class="router-link inexact" to="/blog">Blog</nuxt-link>
+        <nuxt-link class="router-link inexact" to="/blog">Aktuelles</nuxt-link>
         <hr class="hidebigscreen"/>
       </li>
       <li>

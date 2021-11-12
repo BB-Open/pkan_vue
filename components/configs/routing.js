@@ -9,7 +9,7 @@ export const TITLES_FOR_BREADCRUMB = {
   '/': 'Start',
   '/search/': 'Einfache Suche',
   '/impressum/': 'Impressum',
-  '/blog/': 'Blog',
+  '/blog/': 'Aktuelles',
   '/publisher/': 'Datenbereitsteller',
   '/sparql_search/': 'SPARQL',
   '/accessibility/': 'Barrierefreiheit',

@@ -8,9 +8,10 @@
 </template>
 
 <script>
-  import {removeSelfClosingTags, write_aria_polite} from '../../mixins/utils';
-  import Plone from "../../mixins/Plone";
-  import {VUEX_NAMESPACE} from "../../../store/breadcrumb";
+  import { id_to_store_id, removeSelfClosingTags, write_aria_polite } from '../../mixins/utils'
+  import Plone from '../../mixins/Plone'
+  import { VUEX_NAMESPACE } from '../../../store/breadcrumb'
+
 
   export default {
     name: "plonepage_uid",
@@ -27,7 +28,7 @@
             }
           }
         } else {
-          let setter = VUEX_NAMESPACE + '/titles@' + this.$route.path;
+          let setter = VUEX_NAMESPACE + '/titles@' + id_to_store_id(this.$route.path);
           this.$store.set(setter, result.title);
           write_aria_polite(this, 'Die Seite ' + result.title + ' wurde geladen.')
         }

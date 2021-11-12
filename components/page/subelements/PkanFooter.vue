@@ -47,9 +47,9 @@
               <hr class="hidesmallscreen"/>
             </li>
             <li>
-              <a class="footerelementlink" href="https://blazegraph.com/"><span
+              <a class="footerelementlink" href="https://rdf4j.org/"><span
                 class="hidden_help_text">Dokumentation zur </span>
-                Blazegraph Datenbank
+                RDF4J Datenbank
               </a>
               <hr class="hidesmallscreen"/>
             </li>
@@ -73,7 +73,7 @@
               <hr class="hidesmallscreen"/>
             </li>
             <li>
-              <a class="footerelementlink" href="http://www.brandenburg.de" target="_blank"
+              <a class="footerelementlink" href="http://brandenburg.de" target="_blank"
               ><span class="hidden_help_text">Link zur Seite</span>
                 Landesportal Brandenburg
               </a>
