@@ -75,14 +75,14 @@
             <li>
               <a class="footerelementlink" href="http://brandenburg.de" target="_blank"
               ><span class="hidden_help_text">Link zur Seite</span>
-                Landesportal Brandenburg
+                brandenburg.de
               </a>
               <hr class="hidesmallscreen"/>
             </li>
             <li>
               <a class="footerelementlink" href="http://service.brandenburg.de" target="_blank"
               ><span class="hidden_help_text">Link zur Seite</span>
-                Serviceportal Brandenburg
+                service.brandenburg.de
               </a></li>
           </ul>
 
