@@ -22,7 +22,7 @@
               <hr class="hidesmallscreen"/>
             </li>
             <li>
-              <a class="footerelementlink" href="https://www.dcat-ap.de/"><span class="hidden_help_text">Open-Data-Portal für Europa: </span>
+              <a class="footerelementlink" href="https://data.europa.eu/de"><span class="hidden_help_text">Open-Data-Portal für Europa: </span>
                 EuropeanDataportal.eu
               </a>
             </li>
