@@ -9,6 +9,7 @@ export const PLONE_TAG_LANDING = 'startseite';
 export const PLONE_TAG_IMPRESSUM = 'impressum';
 export const PLONE_TAG_FAQ = 'faq';
 export const PLONE_TAG_DATA_PROTECTION = 'datenschutz';
+export const PLONE_TAG_HAFTUNG = 'haftung';
 export const PLONE_TAG_ACCESS = 'barrierefreiheit';
 export const PLONE_TAG_SIDETEXT = 'seitentext';
 export const PLONE_UNREACHABLE_MESSAGE = 'Teile des dargestellten Inhalts werden aus dem Plone Backend geladen. ' +

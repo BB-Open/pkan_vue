@@ -16,4 +16,5 @@ export const TITLES_FOR_BREADCRUMB = {
   '/data_protection/': 'Datenschutz',
   '/faq/': 'Antworten',
   '/search/detail_search/': 'Detailsuche',
+  '/haftung/': 'Haftung'
 };

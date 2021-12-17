@@ -73,6 +73,13 @@
               <hr class="hidesmallscreen"/>
             </li>
             <li>
+              <nuxt-link class="footerelementlink" to="/haftung"
+              ><span class="hidden_help_text">Link zur Seite</span>
+                Haftung
+              </nuxt-link>
+              <hr class="hidesmallscreen"/>
+            </li>
+            <li>
               <a class="footerelementlink" href="http://brandenburg.de" target="_blank"
               ><span class="hidden_help_text">Link zur Seite</span>
                 brandenburg.de
