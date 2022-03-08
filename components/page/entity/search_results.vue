@@ -24,7 +24,7 @@
         aria-describedby="page_description"
       ></b-pagination>
     </div>
-    <H2 v-if="result_count > 0">Es wurden insgesamt {{result_count}} Ergebnisse gefunden</H2>
+    <H2 v-if="result_count > 0" class="results_amount">Es wurden insgesamt {{result_count}} Ergebnisse gefunden</H2>
 
     <ol :start="offset">
       <li v-if="result_count > 0" v-for="(item, index) in results" :class="element_style_class" >
@@ -34,7 +34,7 @@
           <NuxtLink :to="get_nuxt_link(item)" :aria-label="item.type + ' ' +item.title + ' weiterlesen'">Weiterlesen</NuxtLink>
         </p>
       </li>
-      <li v-if="result_count === 0">
+      <li v-if="result_count === 0" class="results_amount">
         <h2>Es wurden keine Suchergebnisse gefunden.</h2>
       </li>
     </ol>
