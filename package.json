@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "ava": "^3.8.2",
-    "jsdom": "^16.2.2",
+    "jsdom": "^16.5.0",
     "nodemon": "^1.19.4"
   },
   "browserslist": [
